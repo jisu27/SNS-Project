@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="ShortsMapper">
+  
+  <insert id = "insertShorts" parameterType = "shorts">
+  	insert into Shorts(sSeq, sTitle, id, upload, inDate)
+  	values(shorts_seq.NEXTVAL, #{sTitle}, #{id}, #{upload}, #{inDate})
+  </insert>
+  
+  <update id = "updateShorts" parameterType = "shorts">
+  	update Shorts set sTitle=#{sTitle}, id=#{id}, upload=#{upload}
+  	where sSeq=#{sSeq}
+  </update>
+  
+  <delete id="deleteShorts" parameterType="shorts">
+  	delete shorts where sSeq=#{sSeq}
+  
+  </delete>
+  
+  <select id ="getShorts" resultType="shorts">
+  	select * from shorts where sSeq=#{sSeq}
+  
+  </select>
+  
+  <select id="getShortsList" resultType="shorts">
+  	select * from shorts order by sSeq DESC
+  </select>
+  
+  
+
+</mapper>
