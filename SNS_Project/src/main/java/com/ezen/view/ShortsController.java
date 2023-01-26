@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ezen.dto.MemberVO;
 import com.ezen.dto.ShortsVO;
 import com.ezen.service.ShortsService;
 
@@ -42,14 +45,18 @@ public class ShortsController {
 		return "getShortsList";
 		
 	}
+	
 	@GetMapping("/insertShorts")
-	public String insertShortsView() {
+	public String insertShortsView(HttpSession session) {
+		MemberVO user = (MemberVO) session.getAttribute("user");
+		
 		return "insertShorts";
 	}
 	
 	
 	@RequestMapping(value= "/insertShorts", method=RequestMethod.POST )
-	public String insertShorts(ShortsVO vo) throws IOException{
+	public String insertShorts(ShortsVO vo, HttpSession session) throws IOException{
+		MemberVO user = (MemberVO) session.getAttribute("user");
 		
 		MultipartFile uploadFile = vo.getUploadFile();
 		if(!uploadFile.isEmpty()) {
@@ -65,7 +72,9 @@ public class ShortsController {
 			return "insertShorts";
 		}
 		
+		vo.setId(user.getId()); 
 		shos.insertShorts(vo);
+
 		return "getShortsList";
 		
 	}
