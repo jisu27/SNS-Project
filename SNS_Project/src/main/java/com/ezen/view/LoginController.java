@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.ezen.dto.MemberVO;
 import com.ezen.service.MemberService;
@@ -84,16 +85,22 @@ public class LoginController {
 		//System.out.println(vo);
 		
 		mvo = memberService.MemberCheck(vo);
-//		System.out.println(vo);
+		System.out.println(vo);
 		
-		
-		if(vo.getPwd().equals(mvo.getPwd())) {
-			session.setAttribute("user",mvo);
+		if (mvo!=null) {
 			
-			if(mvo.getRole()==1) {
-				url="/home";				
-			}else {
-				url="/admin";
+			
+			if(vo.getId().equals(mvo.getId()) && vo.getPwd().equals(mvo.getPwd()) ) {
+				
+				session.setAttribute("user",mvo);
+				
+				if(mvo.getRole()==1) {
+					
+					url="redirect:/home.do";
+					
+				}else {
+					url="/admin";
+				}
 			}
 			
 		}else {
@@ -152,6 +159,15 @@ public class LoginController {
 	public String goMyPage() {
 		
 		return "myPage";
+	}
+//	##############################################################################################################--myPage.do
+	@GetMapping("/logout.do")
+	public String Logout(SessionStatus sessionStatus,HttpSession session ) {
+		
+		sessionStatus.setComplete();
+		session.invalidate();
+		
+		return "redirect:/";
 	}
 }
 

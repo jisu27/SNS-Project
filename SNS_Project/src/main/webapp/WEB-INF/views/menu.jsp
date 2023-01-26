@@ -18,6 +18,7 @@ padding: 0;
 	
 	ul li a:hover{
 	color: red;
+	cursor: pointer;
 	}
 	ul li{
 		list-style: none;

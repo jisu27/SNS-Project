@@ -16,6 +16,10 @@ public class BoardDAO  {
 	
 	public List<BoardVO> BoardList(BoardVO vo) {
 		return mybatis.selectList("boardMapper.boardList", vo);
+	}
+		
+		public void insertBoard(BoardVO vo) {
+			 mybatis.selectList("boardMapper.insertBoard", vo);
 		
 	}
 }

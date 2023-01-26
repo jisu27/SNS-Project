@@ -10,6 +10,7 @@ public class BoardVO {
 	private String content;
 	private String upload;
 	private Date inDate;
+	
 	public int getbSeq() {
 		return bSeq;
 	}

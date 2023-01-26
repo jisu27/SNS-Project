@@ -5,5 +5,9 @@
   <select id="boardList" resultType="board">
   	SELECT * FROM board 
   </select>
-  
+  <!-- #################################################################################################################### -->
+  <insert id="insertBoard" >
+  	INSERT INTO board(bseq,title,id,content,upload,pay) 
+  	VALUES(board_seq.NEXTVAL, #{title}, #{id}, #{content},#{upload}, #{pay})
+  </insert>
 </mapper>
