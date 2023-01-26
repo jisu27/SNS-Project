@@ -18,6 +18,7 @@ padding: 0;
 	
 	ul li a:hover{
 	color: red;
+	cursor: pointer;
 	}
 	ul li{
 		list-style: none;
@@ -27,7 +28,7 @@ padding: 0;
 </head>
 <body>	
 	<ul>
-		<li><a href="/myPage.do">내 프로필</a> </li>
+		<li><a href="myPage.do?id=${sessionScope.user.id}">내 프로필</a> </li>
 		<li><a href="#">친구 목록</a> </li>
 		<li><a href="#">친구 추천</a></li>
 		<li><a href="#"> 쇼츠 </a></li>

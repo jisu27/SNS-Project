@@ -30,7 +30,7 @@
 		display: none;
 		height: 800px;
 		width: 175px;
-		<!--position: fixed;-->
+		position: fixed;
 		
 	}
 	#main{
@@ -52,7 +52,9 @@
 		${sessionScope.user.name}님 환영합니다.<br>
 		${sessionScope.user.id}<br>
 		<a href="#">프로필</a>
-		<a href="#">로그아웃</a>
+		<a href="logout.do">로그아웃</a>
+		<a href="goInsertBoard.do">글쓰기</a>
+		
 				
 		</div>
 		<div id="logo">
@@ -75,9 +77,11 @@
 	$(document).ready(function () {
 		$("#main").mouseover(function () {		
      		$("#menu").attr("style","display:inline-block");
+     		$("#main").attr("style","margin-left:180px");
 		})	
 		$("#main").mouseleave(function () {		
      		$("#menu").attr("style","display:none");
+     		$("#main").attr("style","margin-left:10px");
 		})	
 	})
 	</script>
