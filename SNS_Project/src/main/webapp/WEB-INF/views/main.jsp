@@ -41,6 +41,7 @@ body {
 				<%@include file="comment.jsp"%>
 			</div>
 		</div>
+		<!-- 
 		<c:if test="${board.bSeq%3==0}">
 			<c:forEach items="${adverList}" var="advertise" varStatus="status">
 			 
@@ -55,9 +56,20 @@ body {
 				</div>
 			 
 			</c:forEach>
-
-
 		</c:if>
+		 -->
+		 <c:if test="${board.bSeq%3==0}">
+		<div id="adverList">
+					<div id="advertise">
+						<h3>${adverList.id}</h3>
+						<a href="getBoard?bSeq=${adverList.aSeq}"> <img
+							src="adverimages/${adverList.img}" />
+						</a>
+						<%@include file="comment.jsp"%>
+					</div>
+				</div>
+		</c:if>
+
 	</c:forEach>
 	
 
