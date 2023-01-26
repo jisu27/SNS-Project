@@ -77,7 +77,7 @@
     <form name="list" method="post">
   
  
-    <div id = "contents">contents git push 용 업뎃1
+    <div id = "contents">contents git push 용 업뎃2
     
         <div id = "content" >content
     
