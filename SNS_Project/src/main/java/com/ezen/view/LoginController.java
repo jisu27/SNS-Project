@@ -155,12 +155,6 @@ public class LoginController {
 	}
 	
 //	##############################################################################################################--myPage.do
-	@GetMapping("/myPage.do")
-	public String goMyPage() {
-		
-		return "myPage";
-	}
-//	##############################################################################################################--myPage.do
 	@GetMapping("/logout.do")
 	public String Logout(SessionStatus sessionStatus,HttpSession session ) {
 		

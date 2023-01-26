@@ -6,6 +6,10 @@
   	SELECT * FROM board 
   </select>
   <!-- #################################################################################################################### -->
+  <select id="myBoardList" resultType="board">
+  	SELECT * FROM board WHERE id=#{id} 
+  </select>
+  <!-- #################################################################################################################### -->
   <insert id="insertBoard" >
   	INSERT INTO board(bseq,title,id,content,upload,pay) 
   	VALUES(board_seq.NEXTVAL, #{title}, #{id}, #{content},#{upload}, #{pay})

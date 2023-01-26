@@ -25,6 +25,11 @@ public class BoardServiceImpl implements BoardService {
 		bDao.insertBoard(vo);
 		
 	}
+
+	@Override
+	public List<BoardVO> myBoardList(BoardVO vo) {
+		return 	bDao.myBoardList(vo);
+	}
 	
 
 }

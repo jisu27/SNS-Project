@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,10 +29,10 @@
 	}
 	#menu{
 		background-color: yellow;
-		display: inline-block;
+		display: none;
 		height: 800px;
 		width: 175px;
-		<!--position: fixed;-->
+		position: fixed;
 		
 	}
 	#main{
@@ -40,7 +41,6 @@
 		width: 600px;
 		margin: 0;
 		padding: 0;
-		
 	}
 	#img {
 		border-radius: 50%;
@@ -59,13 +59,18 @@
 <body>
 		<div id="loginInfo">
 		<div id="info">
-			<h1>로그인 정보</h1>
+			${sessionScope.user.name}님 환영합니다.<br>
+			${sessionScope.user.id}<br>
+			<a href="#">프로필</a>
+			<a href="logout.do">로그아웃</a>
+			<a href="goInsertBoard.do">글쓰기</a>
 		</div>
 		<div id="logo">
 			<img alt="" src="">
 			<h1>로고</h1>
 		</div>
 	</div>
+	
 	<div id="menu">
 	<h1>메뉴</h1>
 	<%@ include file="menu.jsp"  %>
@@ -82,11 +87,27 @@
 			<a>회원 정보 수정</a>
 			<a>글쓰기</a>
 		</div>
-		
 		<div id="list">
 			<h1>게시글 사진</h1>
+			<c:forEach var="board" items="${myBoardList}" >
+				<img alt="" src="images/${board.upload}">	
+			</c:forEach>
+			
 		</div>
 	</div>
 	
+	<script type="text/javascript">
+	
+	$(document).ready(function () {
+		$("#main").mouseover(function () {		
+     		$("#menu").attr("style","display:inline-block");
+     		$("#main").attr("style","margin-left:180px");
+		})	
+		$("#main").mouseleave(function () {		
+     		$("#menu").attr("style","display:none");
+     		$("#main").attr("style","margin-left:10px");
+		})	
+	})
+	</script>
 </body>
 </html>

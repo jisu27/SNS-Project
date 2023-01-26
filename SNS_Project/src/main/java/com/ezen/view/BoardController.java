@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ezen.dto.BoardVO;
+import com.ezen.dto.MemberVO;
 import com.ezen.service.BoardService;
 
 @Controller
@@ -22,6 +23,7 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
+//	##############################################################################################################--home
 	@RequestMapping(value="/home.do")
 	public String BoardList(BoardVO vo ,Model model,HttpSession session) {
 		
@@ -32,13 +34,13 @@ public class BoardController {
 		
 		return "home";
 	}
-	
+//	##############################################################################################################--goInsertBoard
 	@GetMapping("goInsertBoard.do")
 	public String goInsertBoard() {
 	
 		return "insertBoard";
 	}
-	
+//	##############################################################################################################--insertBoard
 	@PostMapping("insertBoard.do")
 	public String InsertBoard(BoardVO vo) {
 		
@@ -47,6 +49,15 @@ public class BoardController {
 		boardService.InsertBoard(vo);
 		
 		return "redirect:home.do";
+	}
+//	##############################################################################################################--myPage.do
+	@GetMapping("/myPage.do")
+	public String goMyPage(BoardVO vo,Model model) {
+		
+		List<BoardVO> list	= boardService.myBoardList(vo);
+		model.addAttribute("myBoardList",list);	
+	
+		return "myPage";
 	}
 	
 }
