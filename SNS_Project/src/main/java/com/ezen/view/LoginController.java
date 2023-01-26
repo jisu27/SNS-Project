@@ -1,7 +1,7 @@
 package com.ezen.view;
 
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
+
 
 import org.aspectj.weaver.NewMemberClassTypeMunger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,7 +91,7 @@ public class LoginController {
 			session.setAttribute("user",mvo);
 			
 			if(mvo.getRole()==1) {
-				url="/home";				
+				url="redirect:home.do";				
 			}else {
 				url="/admin";
 			}
