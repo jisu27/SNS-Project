@@ -55,7 +55,7 @@ public class BoardController {
 	public String goMyPage(BoardVO vo,Model model) {
 		
 		List<BoardVO> list	= boardService.myBoardList(vo);
-		model.addAttribute("myBoardList",list);	
+		model.addAttribute("boardList",list);	
 	
 		return "myPage";
 	}
