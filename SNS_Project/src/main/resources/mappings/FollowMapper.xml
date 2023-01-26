@@ -4,7 +4,7 @@
  
  
   <insert id="insertFollow" parameterType="follow">
-  		Insert Follow(fSeq, id1, id2)
+  		Insert INTO Follow(fSeq, id1, id2)
   		Values(fSequence.NEXTVAL, #{id1}, #{id2})
   </insert>
   
@@ -18,6 +18,16 @@
  
  <select id="getFollowList" resultType="follow">
  		Select id2 Where id1 = #{id1}
+ </select>
+ <select id="countFollow" resultType="int">
+ 		Select count(*) 
+ 		FROM follow 
+ 		WHERE id2='${id2}'
+ </select>
+ <select id="countFollowing" resultType="int">
+ 		Select count(*) 
+ 		FROM follow 
+ 		WHERE id1='${id1}'
  </select>
   
 </mapper>

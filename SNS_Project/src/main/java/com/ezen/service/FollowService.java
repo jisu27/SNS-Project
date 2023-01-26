@@ -13,4 +13,8 @@ public interface FollowService {
 	public FollowVO getFollow(FollowVO vo);
 	
 	public List<FollowVO> getFollowList(FollowVO vo);
+	
+	public int getCountFollow(FollowVO vo);
+
+	public int getCountFollowing(FollowVO vo);
 }

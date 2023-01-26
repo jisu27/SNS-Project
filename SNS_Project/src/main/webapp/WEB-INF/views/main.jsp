@@ -31,6 +31,16 @@ body {
 </head>
 <body>
 
+	<c:forEach items="${boardList}" var="board">
+	<div id="boardList">
+		<div id="board">
+		<a href="profile.do?id=${board.id}"><h3>${board.id}</h3></a>
+		<a href="getBoard?bSeq=${board.bSeq}">
+			<img src="images/${board.upload}"/>
+		</a>
+		<%@include file="comment.jsp" %>
+
+
 	<c:forEach items="${boardList}" var="board" varStatus="status">
 		<div id="boardList">
 			<div id="board">
@@ -40,6 +50,7 @@ body {
 				</a>
 				<%@include file="comment.jsp"%>
 			</div>
+
 		</div>
 
 		<c:if test="${board.bSeq%3==0}">
@@ -52,38 +63,7 @@ body {
 					<%@include file="comment.jsp"%>
 				</div>
 			</div>
-			<%-- 
-		
-			<c:forEach items="${adverList}" var="advertise">
-				<div id="adverList">
-					<div id="advertise">
-						<h3>${advertise.id}</h3>
-						<a href="getBoard?aSeq=${advertise.aSeq}"> <img
-							src="adverimages/${advertise.img}" />
-						</a>
-						<%@include file="comment.jsp"%>
-					</div>
-				</div>
-			 
-			</c:forEach>
-			--%>
-		</c:if>
-	</c:forEach>
-
-	<!--
-		 <c:if test="${board.bSeq%3==0}">
-		<div id="adverList">
-					<div id="advertise">
-						<h3>${adverList.get(id)}</h3>
-						<a href="getBoard?aSeq=${adverList.get(aSeq)}"> <img
-							src="adverimages/${adverList.get(img)}" />
-						</a>
-						<%@include file="comment.jsp"%>
-					</div>
-				</div>
-
-		</c:if>
-		-->
+			
 
 
 
