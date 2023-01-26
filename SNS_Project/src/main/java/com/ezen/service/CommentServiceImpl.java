@@ -9,26 +9,40 @@ import com.ezen.dao.CommentDAO;
 import com.ezen.dto.CommentVO;
 
 @Service
-public class CommentServiceImpl implements CommentSerivce {
-
+public class CommentServiceImpl implements CommentService {
+	
 	@Autowired
 	private CommentDAO cDao;
+	
+	
 	@Override
-	public int saveComment(CommentVO vo) {
-		
-		return cDao.saveComment(vo);
+	public void insertComment(CommentVO vo) {
+		cDao.insertComment(vo);
+
 	}
 
 	@Override
-	public List<CommentVO> getcommentList(int cseq) {
-		
-		return cDao.commentList(cseq);
+	public void updateComment(CommentVO vo) {
+		cDao.updateComment(vo);
+
 	}
 
 	@Override
-	public int getcountCommentList(int cseq) {
+	public void deleteComment(CommentVO vo) {
+		cDao.deleteComment(vo);
+
+	}
+
+	@Override
+	public CommentVO getComment(CommentVO vo) {
 		
-		return cDao.countCommentList(cseq);
+		return cDao.getComment(vo);
+	}
+
+	@Override
+	public List<CommentVO> getCommentList(CommentVO vo) {
+		
+		return cDao.getCommentList(vo);
 	}
 
 }
