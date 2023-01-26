@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,34 +73,38 @@
     </head>
     <body>
     <h1>shorts 리스트</h1>
+    
+    <form name="list" method="post">
   
-    <div id = "contents">contents
+ 
+    <div id = "contents">contents 헤드
+    
         <div id = "content" >content
     
+     <c:forEach items="${getShortsList}" var="shorts">
             <div id="con">
                
                 <div id="video" class="video">
-                    <a href="getShorts/?short_seq='${shorts.shorts_seq}'">video1</a>
+                    <a href="getShorts?sSeq=${shorts.sSeq}"></a>
                 </div>      
-                
-             <!--    <div id="title"> ${shorts.sTitle}</div> --> 
-             		<div id="title"> title1</div>
+
+             		<div id="title"> ${shorts.sTitle}</div>
                     <div id="pro">
                         <div id="profile"></div> 
                     </div> 
             </div>
-
+		</c:forEach>	
+		
             <div id="con" >
                 <div id="video" class="video"> video2 </div>
                 <div id="title">title2</div>
-                    <a id="video-title" title="${sTitle}" href=""></a> 
-        
+                    <a id="video-title" title="${shorts.sTitle}" href=""></a> 
             </div>	
 
             </div>	
     
         </div>
-  
 
+</form>
     </body>
     </html>
