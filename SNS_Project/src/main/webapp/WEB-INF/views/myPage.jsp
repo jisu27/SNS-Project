@@ -81,16 +81,19 @@
 		<div id="img">
 			<img alt="프로필" src=""><br>
 			<form action="follow.do" method="post">
-				<c:if test="${!empty sessionScope.user.id && !empty member && sessionScope.user.id != member.id}" >
+			<c:choose>
+			
+				<c:when test="${!empty sessionScope.user.id && !empty member && sessionScope.user.id != member.id} &&${!fn:contains(sessionScope.follower,member.id)}" >
 					<input type="submit" value="팔로우" onclick="follow()">
 					<input type="hidden" id="id1" name="id1" value="${sessionScope.user.id}">
 					<input type="hidden" id="id2" name="id2" value="${member.id}">
-				</c:if>
+				</c:when>
 				
-				
-				<c:if test="${fn:contains(sessionScope.follower,member.id)}">
+				<c:when test="${fn:contains(sessionScope.follower,member.id)}">
 					<input type="submit" value="팔로우 취소" >					
-				</c:if>
+				</c:when>
+				
+			</c:choose>
 			</form>
 		</div>
 		
