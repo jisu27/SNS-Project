@@ -1,5 +1,7 @@
 package com.ezen.view;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 
@@ -14,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.ezen.dto.FollowVO;
 import com.ezen.dto.MemberVO;
+import com.ezen.service.FollowService;
 import com.ezen.service.MemberService;
 
 
@@ -23,6 +27,8 @@ public class LoginController {
 
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private FollowService followService;
 	
 	@GetMapping("/")
 	public String goHome() {
@@ -92,8 +98,15 @@ public class LoginController {
 
 			
 			if(vo.getId().equals(mvo.getId()) && vo.getPwd().equals(mvo.getPwd()) ) {
+							
+				FollowVO fvo = new FollowVO();
+				fvo.setId1(mvo.getId().toString());
+				
+				List<FollowVO> follower = followService.getFollowList(fvo);
 				
 				session.setAttribute("user",mvo);
+				session.setAttribute("follower", follower);
+				
 				
 				if(mvo.getRole()==1) {
 					

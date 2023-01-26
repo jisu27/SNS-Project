@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -84,6 +85,11 @@
 					<input type="submit" value="팔로우" onclick="follow()">
 					<input type="hidden" id="id1" name="id1" value="${sessionScope.user.id}">
 					<input type="hidden" id="id2" name="id2" value="${member.id}">
+				</c:if>
+				
+				
+				<c:if test="${fn:contains(sessionScope.follower,member.id)}">
+					<input type="submit" value="팔로우 취소" >					
 				</c:if>
 			</form>
 		</div>

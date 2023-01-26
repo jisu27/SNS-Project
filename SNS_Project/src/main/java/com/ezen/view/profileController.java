@@ -2,6 +2,8 @@ package com.ezen.view;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +27,7 @@ public class profileController {
 	private FollowService followService;
 	
 	@GetMapping("profile.do")
-	public String goProfile(MemberVO mvo,BoardVO bvo,Model model) {
+	public String goProfile(MemberVO mvo,BoardVO bvo,Model model,HttpSession session) {
 		
 		MemberVO member = memberService.MemberCheck(mvo);
 		List<BoardVO> list= boardService.myBoardList(bvo);
@@ -34,6 +36,10 @@ public class profileController {
 		follow.setId1(mvo.getId().toString());
 		follow.setId2(mvo.getId().toString());
 		System.out.println(follow);
+		
+		FollowVO checkFollow = new FollowVO();
+		checkFollow.setId1(mvo.getId().toString());
+		checkFollow.setId2((String)session.getAttribute("user.id"));
 		
 		int follower = followService.getCountFollow(follow);
 		int following = followService.getCountFollowing(follow);
