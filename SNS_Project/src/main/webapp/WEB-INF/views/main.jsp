@@ -52,38 +52,11 @@ body {
 					<%@include file="comment.jsp"%>
 				</div>
 			</div>
-			<%-- 
-		
-			<c:forEach items="${adverList}" var="advertise">
-				<div id="adverList">
-					<div id="advertise">
-						<h3>${advertise.id}</h3>
-						<a href="getBoard?aSeq=${advertise.aSeq}"> <img
-							src="adverimages/${advertise.img}" />
-						</a>
-						<%@include file="comment.jsp"%>
-					</div>
-				</div>
-			 
-			</c:forEach>
-			--%>
+			
 		</c:if>
 	</c:forEach>
 
-	<!--
-		 <c:if test="${board.bSeq%3==0}">
-		<div id="adverList">
-					<div id="advertise">
-						<h3>${adverList.get(id)}</h3>
-						<a href="getBoard?aSeq=${adverList.get(aSeq)}"> <img
-							src="adverimages/${adverList.get(img)}" />
-						</a>
-						<%@include file="comment.jsp"%>
-					</div>
-				</div>
-
-		</c:if>
-		-->
+	
 
 
 
