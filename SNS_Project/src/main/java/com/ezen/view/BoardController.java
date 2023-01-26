@@ -60,4 +60,6 @@ public class BoardController {
 		return "myPage";
 	}
 	
+	
+	
 }

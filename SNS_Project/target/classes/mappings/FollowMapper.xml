@@ -17,7 +17,9 @@
  </select>
  
  <select id="getFollowList" resultType="follow">
- 		Select id2 Where id1 = #{id1}
+ 		Select id2 
+ 		FROM  follow
+ 		Where id1 =#{id1}
  </select>
  <select id="countFollow" resultType="int">
  		Select count(*) 
