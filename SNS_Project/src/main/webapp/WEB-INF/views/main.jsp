@@ -31,7 +31,7 @@ body {
 </head>
 <body>
 
-	<c:forEach items="${boardList}" var="board">
+	<c:forEach items="${boardList}" var="board" varStatus="status">
 		<div id="boardList">
 			<div id="board">
 				<h3>${board.id}</h3>
@@ -41,14 +41,24 @@ body {
 				<%@include file="comment.jsp"%>
 			</div>
 		</div>
-		<!-- 
+
 		<c:if test="${board.bSeq%3==0}">
-			<c:forEach items="${adverList}" var="advertise" varStatus="status">
-			 
+			<div id="adverList">
+				<div id="advertise">
+					<h3>${adverList[status.index/3].id}</h3>
+					<a href="getBoard?aSeq=${adverList[status.index/3].aSeq}"> <img
+						src="adverimages/${adverList[status.index/3].img}" />
+					</a>
+					<%@include file="comment.jsp"%>
+				</div>
+			</div>
+			<%-- 
+		
+			<c:forEach items="${adverList}" var="advertise">
 				<div id="adverList">
 					<div id="advertise">
 						<h3>${advertise.id}</h3>
-						<a href="getBoard?bSeq=${advertise.aSeq}"> <img
+						<a href="getBoard?aSeq=${advertise.aSeq}"> <img
 							src="adverimages/${advertise.img}" />
 						</a>
 						<%@include file="comment.jsp"%>
@@ -56,22 +66,26 @@ body {
 				</div>
 			 
 			</c:forEach>
+			--%>
 		</c:if>
-		 -->
+	</c:forEach>
+
+	<!--
 		 <c:if test="${board.bSeq%3==0}">
 		<div id="adverList">
 					<div id="advertise">
-						<h3>${adverList.id}</h3>
-						<a href="getBoard?bSeq=${adverList.aSeq}"> <img
-							src="adverimages/${adverList.img}" />
+						<h3>${adverList.get(id)}</h3>
+						<a href="getBoard?aSeq=${adverList.get(aSeq)}"> <img
+							src="adverimages/${adverList.get(img)}" />
 						</a>
 						<%@include file="comment.jsp"%>
 					</div>
 				</div>
-		</c:if>
 
-	</c:forEach>
-	
+		</c:if>
+		-->
+
+
 
 </body>
 </html>
