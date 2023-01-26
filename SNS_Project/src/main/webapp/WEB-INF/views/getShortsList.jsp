@@ -77,7 +77,7 @@
     <form name="list" method="post">
   
  
-    <div id = "contents">contents 헤드
+    <div id = "contents">contents 헤드1
     
         <div id = "content" >content
     
