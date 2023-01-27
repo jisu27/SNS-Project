@@ -37,4 +37,21 @@ public class FollowServiceImpl implements FollowService {
 		return dao.getFollowList(vo);
 	}
 
+	@Override
+	public int getCountFollow(FollowVO vo) {
+		return dao.getCountFollow(vo);
+	}
+
+	@Override
+	public int getCountFollowing(FollowVO vo) {
+		
+		return dao.getCountFollowing(vo);
+	}
+
+	@Override
+	public List<FollowVO> getFollowListId1(FollowVO vo) {
+
+		return dao.getFollowListId1(vo);
+	}
+
 }

@@ -40,6 +40,7 @@ body {
 				</a>
 				<%@include file="comment.jsp"%>
 			</div>
+
 		</div>
 
 		<c:if test="${board.bSeq%3==0}">
