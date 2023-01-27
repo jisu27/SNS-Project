@@ -102,7 +102,6 @@ public class LoginController {
 				
 				List<FollowVO> follower = followService.getFollowList(fvo);
 				
-				
 				session.setAttribute("user",mvo);
 				session.setAttribute("follower", follower);
 				

@@ -34,9 +34,9 @@ body {
 	<c:forEach items="${boardList}" var="board" varStatus="status">
 		<div id="boardList">
 			<div id="board">
-				<h3>${board.id}</h3>
-				<a href="getBoard?bSeq=${board.bSeq}"> <img
-					src="images/${board.upload}" />
+				<a href="profile.do?id=${board.id}"><h3>${board.id}</h3></a>
+				<a href="getBoard?bSeq=${board.bSeq}">
+					<img src="images/${board.upload}"/>
 				</a>
 				<%@include file="comment.jsp"%>
 			</div>
