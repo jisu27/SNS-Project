@@ -94,7 +94,6 @@ public class LoginController {
 		System.out.println(vo);
 		
 		if (mvo!=null) {
-			
 
 			if(vo.getId().equals(mvo.getId()) && vo.getPwd().equals(mvo.getPwd()) ) {
 							
@@ -108,28 +107,18 @@ public class LoginController {
 				session.setAttribute("follower", follower);
 				
 				
-				if(mvo.getRole()==1) {
-					
-					url="redirect:/home.do";
-					
-				}else {
-					url="/admin";
-				}
-
-			if(mvo.getRole()==1) {
-				url="redirect:home.do";				
-			}else {
-				url="/admin";
-
-			}
+					if(mvo.getRole()==1) {
+						
+						url="redirect:/home.do";
+						
+					}else {
+						url="/admin";
+					}
 			
-		}else {
-			url="redirect:/";
-		}
-
+			}
+		}	
 		return url;
 	}
-	
 //	##############################################################################################################--goFIndId
 	
 	@GetMapping("/goFindId.do")

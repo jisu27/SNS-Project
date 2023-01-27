@@ -15,8 +15,8 @@
   	INSERT INTO board(bseq,title,id,content,upload,pay) 
   	VALUES(board_seq.NEXTVAL, #{title}, #{id}, #{content},#{upload}, #{pay})
   </insert>
-</mapper>
-
   
 </mapper>
+
+ 
 
