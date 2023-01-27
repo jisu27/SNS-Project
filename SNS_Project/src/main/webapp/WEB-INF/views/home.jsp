@@ -73,17 +73,19 @@
 	</div>
 	</div>
 	<script type="text/javascript">
+   
+   $(document).ready(function () {
+      $("#main").mouseover(function () {      
+           $("#menu").attr("style","display:inline-block");
+           $("#main").attr("style","margin-left:180px");
+      })   
+      $("#main").mouseleave(function () {      
+           $("#menu").attr("style","display:none");
+           $("#main").attr("style","margin-left:10px");
+      })   
+   })
+   </script>
 	
-	$(document).ready(function () {
-		$("#main").mouseover(function () {		
-     		$("#menu").attr("style","display:inline-block");
-     		$("#main").attr("style","margin-left:180px");
-		})	
-		$("#main").mouseleave(function () {		
-     		$("#menu").attr("style","display:none");
-     		$("#main").attr("style","margin-left:10px");
-		})	
-	})
-	</script>
+
 </body>
 </html>

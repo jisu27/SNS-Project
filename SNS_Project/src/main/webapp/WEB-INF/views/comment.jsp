@@ -8,16 +8,10 @@
 </head>
 <body>
 <form action="" method="post">
-	<table>
-		<tr>
-			<th>이름</th>
-			<th><input type="text"  placeholder="댓글을 달아주세요!"></th>
-			<th><input type="submit" value="댓글달기"></th>
-		</tr>
-		<tr>
-			<th>댓글목록</th>
-		</tr>
-	</table>
+	<hr>
+        <%@include file="insertComment.jsp" %>
+        <hr>
+        <%@include file="getCommentList.jsp" %>
 </form>
 </body>
 </html>

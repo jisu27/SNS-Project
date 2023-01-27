@@ -61,12 +61,12 @@ public class LoginController {
 	
 		if (mvo == null) {
 			
-			model.addAttribute("msg","사용가능한 아이디 입니다.");
+			model.addAttribute("msg","�궗�슜媛��뒫�븳 �븘�씠�뵒 �엯�땲�떎.");
 			model.addAttribute("id",vo.getId());
 			model.addAttribute("check",1);
 			
 		}else {
-			model.addAttribute("msg","이미 사용중인 아이디 입니다.");
+			model.addAttribute("msg","�씠誘� �궗�슜以묒씤 �븘�씠�뵒 �엯�땲�떎.");
 			model.addAttribute("id",vo.getId());
 			model.addAttribute("check",0);
 		}
@@ -115,6 +115,12 @@ public class LoginController {
 						url="/admin";
 					}
 			
+
+			if(mvo.getRole()==1) {
+				url="redirect:home.do";				
+			}else {
+				url="/admin";
+
 			}
 		}	
 		return url;
@@ -140,9 +146,9 @@ public class LoginController {
 		System.out.println(mvo);
 		
 		if(mvo != null) {
-			model.addAttribute("id","찾으시는 아이디는"+mvo.getId()+"입니다.");
+			model.addAttribute("id","李얠쑝�떆�뒗 �븘�씠�뵒�뒗"+mvo.getId()+"�엯�땲�떎.");
 		}else {
-			model.addAttribute("id","찾으시는 아이디가 없습니다.");
+			model.addAttribute("id","李얠쑝�떆�뒗 �븘�씠�뵒媛� �뾾�뒿�땲�떎.");
 		}
 		
 		return "findId";
@@ -155,9 +161,9 @@ public class LoginController {
 		System.out.println(mvo);
 		
 		if(mvo != null) {
-			model.addAttribute("pwd","찾으시는 비밀번호는"+mvo.getPwd()+"입니다.");
+			model.addAttribute("pwd","李얠쑝�떆�뒗 鍮꾨�踰덊샇�뒗"+mvo.getPwd()+"�엯�땲�떎.");
 		}else {
-			model.addAttribute("pwd","찾으시는 비밀번호가 없습니다.");
+			model.addAttribute("pwd","李얠쑝�떆�뒗 鍮꾨�踰덊샇媛� �뾾�뒿�땲�떎.");
 		}
 		
 		return "findId";

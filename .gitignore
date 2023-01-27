@@ -1,8 +1,8 @@
 /projectSns(LoginSuccess)2/
 # Created by https://www.toptal.com/developers/gitignore/api/windows,java,eclipse
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,java,eclipse
-# Window - Preferences - Team - Git - Projects에 3번째 항목에 체크해주고 이클립스를 재시작
-# .classpath, .project 추가
+# Window - Preferences - Team - Git - Projects�뿉 3踰덉㎏ �빆紐⑹뿉 泥댄겕�빐二쇨퀬 �씠�겢由쎌뒪瑜� �옱�떆�옉
+# .classpath, .project 異붽�
 
 ### Eclipse ###
 .metadata
@@ -123,6 +123,6 @@ $RECYCLE.BIN/
 *.lnk
 
 .classpath
-.MANIFEST.MF
+MANIFEST.MF
 # End of https://www.toptal.com/developers/gitignore/api/windows,java,eclipse
 /projectSns/
