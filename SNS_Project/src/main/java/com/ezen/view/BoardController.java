@@ -58,6 +58,15 @@ public class BoardController {
 	
 		return "insertBoard";
 	}
+//	##############################################################################################################--goInsertBoard
+	@GetMapping("getBoard.do")
+	public String getBoard(BoardVO vo,Model model) {
+		
+		BoardVO board= (BoardVO) boardService.myBoard(vo);
+		model.addAttribute("board",board);
+		
+		return "getBoard";
+	}
 //	##############################################################################################################--insertBoard
 	@PostMapping("insertBoard.do")
 	public String InsertBoard(BoardVO vo) {
