@@ -3,8 +3,9 @@
 <mapper namespace="boardMapper">
   
   <select id="boardList" resultType="board">
-  	SELECT * FROM board 
+  	SELECT * FROM board order by bSeq DESC
   </select>
+
   <!-- #################################################################################################################### -->
   <select id="myBoardList" resultType="board">
   	SELECT * FROM board WHERE id=#{id} 
@@ -15,3 +16,7 @@
   	VALUES(board_seq.NEXTVAL, #{title}, #{id}, #{content},#{upload}, #{pay})
   </insert>
 </mapper>
+
+  
+</mapper>
+

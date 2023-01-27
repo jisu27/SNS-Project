@@ -3,7 +3,7 @@ package com.ezen.view;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
+
 
 import org.aspectj.weaver.NewMemberClassTypeMunger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,6 +95,7 @@ public class LoginController {
 		
 		if (mvo!=null) {
 			
+
 			if(vo.getId().equals(mvo.getId()) && vo.getPwd().equals(mvo.getPwd()) ) {
 							
 				FollowVO fvo = new FollowVO();
@@ -114,6 +115,12 @@ public class LoginController {
 				}else {
 					url="/admin";
 				}
+
+			if(mvo.getRole()==1) {
+				url="redirect:home.do";				
+			}else {
+				url="/admin";
+
 			}
 			
 		}else {
