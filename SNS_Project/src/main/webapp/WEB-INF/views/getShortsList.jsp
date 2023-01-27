@@ -7,19 +7,17 @@
 <meta charset="UTF-8">
    <title>Shorts List</title>
 
-    <style>
+   <style>
         #contents {
             width : 100%;
-            height: 95%;
-            padding-top:20px;
+           position : relative;
+            padding-top:5%;
             background-color : gray;
             display : flex;
             justify-content : flex-start;
-           
         }
-        
-        #content {
-            height : 250px;
+          #content {
+          	position : absolute;
             width : 100%;
             display : flex;
             justify-content : center;
@@ -28,83 +26,62 @@
         }
         #con {
             margin : 20px;
-            width : 280px;
-            height : 210px;
-            
-            background-color: rgb(177, 141, 141);
+            width : 300px;
+            justifi-content : space-around;
+            background-color :orange;
         }
         
-        #video {
-            height : 70%;
-            border-top-left-radius:10%; 
-            border-top-right-radius: 10%;
-            border-bottom-left-radius: 10% ;
-            border-bottom-right-radius: 10%;
-            background-color: greenyellow;
-        }
-        #title {
-            background-color: aqua;
-            width: 70%;
-            align-items: flex-end;
-            padding-right: 20px;
-            margin-left: 60px;
-        }  
-        #pro {
-            width: 60px;
-            height :30%;
-            background-color:bisque;
-            position:relative;
-           top:-25px; 
-        }
-
-        #profile {
-            margin : 5px  5px;
-            width : 50px;
-            height : 50px;
-            border-radius : 50%;  
-            position:relative;
-            top:5px;
-            background-color: brown;    
-        }  
-
-
-    </style>
+      
+	</style>
     
     </head>
     <body>
     <h1>shorts 리스트</h1>
     
     <form name="list" method="post">
+  	<!--  <input type ="hidden" value={shorts.sSeq}>-->
+ 
+ <c:choose>
+ 	<c:when test= "${empty sessionScop.user}">
+ 	<a href="http://localhost:8080/">로그인</a>
+ 	</c:when>
+ 	<c:otherwise>
+ 	 <a id="link" href="insertShorts" >동영상 올리기</a>
+  </c:otherwise>
+  </c:choose>  
   
  
-    <div id = "contents">contents git push 용 업뎃2
-    
-        <div id = "content" >content
-    
-     <c:forEach items="${getShortsList}" var="shorts">
-            <div id="con">
-               
-                <div id="video" class="video">
-                    <a href="getShorts?sSeq=${shorts.sSeq}"></a>
-                </div>      
-
-             		<div id="title"> ${shorts.sTitle}</div>
-                    <div id="pro">
-                        <div id="profile"></div> 
-                    </div> 
-            </div>
-		</c:forEach>	
+   
+    <div id = "contents">contents
+    	<div id = "content" >content
+  <c:forEach items="${shortsList}" var="shorts"> 
+     	<div id="con">
+            
+        	<div id="video" class="video">비디오
+				<video controls poster="C:\Users\605-08\Desktop\다운로드.jfif" preload="metadata" width="300" height="180">
+					<source src="shorts/${shorts.upload}#t=0.5">
+				</video>
+            </div>      
+				
+			<div id="details">	
+             	<a id="title"> ${shorts.sTitle}</a>
+                <a href="" id="pro">
+                	<img id= "profile" src = "">
+                </a><br>
+                <a href="" id="name" >${shorts.id} </a>
+            </div>  
+            </div> 
+          
+          
+	
+    	  </c:forEach>  	
+   </div>
+	</div>
+	
+ 
 		
-            <div id="con" >
-                <div id="video" class="video"> video2 </div>
-                <div id="title">title2</div>
-                    <a id="video-title" title="${shorts.sTitle}" href=""></a> 
-            </div>	
-
-            </div>	
-    
-        </div>
 
 </form>
     </body>
+
     </html>

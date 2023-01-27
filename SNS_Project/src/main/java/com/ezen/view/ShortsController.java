@@ -36,13 +36,16 @@ public class ShortsController {
 		
 	}
 	
-	@RequestMapping("/getShortsList")
-	public String getShortsList(ShortsVO vo, Model model) {
+	@RequestMapping("/getShortsList.do")
+	public String getShortsList(HttpSession session, ShortsVO vo, Model model) {
+		MemberVO user = (MemberVO) session.getAttribute("user");
 		
 		List<ShortsVO> list =  shos.getShortsList(vo);
 		
+		
 		model.addAttribute("shortsList", list);
 		return "getShortsList";
+		
 		
 	}
 	
@@ -75,7 +78,7 @@ public class ShortsController {
 		vo.setId(user.getId()); 
 		shos.insertShorts(vo);
 
-		return "getShortsList";
+		return "redirect:getShortsList";
 		
 	}
 	

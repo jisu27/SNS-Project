@@ -1,14 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Shorts</title>
-
-<script type="text/javascript" src="views/shorts.js"></script>
-
 
 <style>
 #container {	
@@ -30,6 +27,16 @@
 <form action="insertShorts" method="post" enctype="multipart/form-data">
 	
 <div id = "container">
+
+ <c:choose>
+ 	<c:when test= "${empty sessionScop.user}">
+ 		<a href="http://localhost:8080/">로그인</a>
+ 	</c:when>
+ 	<c:otherwise>
+ 		 ${sessionScope.user.name} 님 로그인 중
+  </c:otherwise>
+  </c:choose>  
+
 	
 		<h2>동영상을 업로드 하세요</h2><br><br>
 			
@@ -50,11 +57,7 @@
 				<input type="file" name="uploadFile" id ="uploadFile" accept="video/*" value="동영상 파일"></td>
 			</tr>
 			
-			<!-- <tr>
-				<td colspan="2">
-				<input type="file" name="file"> 
-			</tr> -->
-					
+		
 	</table>
 		
 			<br>
@@ -68,19 +71,10 @@
 	 
 	 
 	 
-	 <!--  
-	<p id = "title">제목: <input type ="text" name="title"></p>
-	<p id = "content">내용: <textarea rows="10" cols="40"></textarea></p>
-	<input type="file" name="uploadFile" id ="uploadFile" accept="video/*"><br><br>
-	<input type="submit" value="동영상 업로드" onclick="check_file()">		
-	<hr>
-		<a href="getShortsList">되돌아가기</a>	
-	-->		
-	 
 </div>	
 
 </form>
-
+<script type="text/javascript" src="views/shorts.js"></script>
 
 </body>
 </html>

@@ -36,10 +36,13 @@
 	#main{
 		background-color: green;
 		display: inline-block;
-		width: 600px;
+		width: 810px;
 		margin: 10px;
 		padding: 0;
-	
+	}
+	#home{
+	justify-content: space-between;
+	align-items: flex-start;
 	}
 </style>
 </head>
@@ -56,6 +59,7 @@
 			<img alt="로고" src="">
 		</div>
 	</div>
+	<div id="home">
 	<div id="menu">
 	<h1>메뉴</h1>
 	<%@ include file="menu.jsp"  %>
@@ -64,6 +68,7 @@
 	<div id="main">
 	<h1>메인</h1>
 	<%@include file="main.jsp" %>
+	</div>
 	</div>
 	<script type="text/javascript">
 	

@@ -12,7 +12,7 @@ public class ShortsVO {
 	private String upload;
 	private Date inDate;
 	private MultipartFile uploadFile;
-	
+	private String sContent;
 	
 	public int getsSeq() {
 		return sSeq;
@@ -49,6 +49,12 @@ public class ShortsVO {
 	}
 	public void setUploadFile(MultipartFile uploadFile) {
 		this.uploadFile = uploadFile;
+	}
+	public String getsContent() {
+		return sContent;
+	}
+	public void setsContent(String sContent) {
+		this.sContent = sContent;
 	}
 
 	

@@ -30,7 +30,7 @@ padding: 0;
 		<li><a href="/myPage.do">내 프로필</a> </li>
 		<li><a href="#">친구 목록</a> </li>
 		<li><a href="#">친구 추천</a></li>
-		<li><a href="#"> 쇼츠 </a></li>
+		<li><a href="/getShortsList.do"> 쇼츠 </a></li>
 	</ul>
 </body>
 </html>
