@@ -29,6 +29,9 @@ public class FollowDao {
 	public List<FollowVO> getFollowList(FollowVO vo) {
 		return mybatis.selectList("followMapper.getFollowList", vo.getId1());
 	}
+	public List<FollowVO> getFollowListId1(FollowVO vo) {
+		return mybatis.selectList("followMapper.getFollowListId1", vo.getId2());
+	}
 	public int getCountFollow(FollowVO vo) {
 		return mybatis.selectOne("followMapper.countFollow", vo.getId2());
 	}

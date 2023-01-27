@@ -95,13 +95,13 @@ public class LoginController {
 		
 		if (mvo!=null) {
 			
-			
 			if(vo.getId().equals(mvo.getId()) && vo.getPwd().equals(mvo.getPwd()) ) {
 							
 				FollowVO fvo = new FollowVO();
 				fvo.setId1(mvo.getId().toString());
 				
 				List<FollowVO> follower = followService.getFollowList(fvo);
+				
 				
 				session.setAttribute("user",mvo);
 				session.setAttribute("follower", follower);

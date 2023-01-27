@@ -50,15 +50,15 @@ public class BoardController {
 		
 		return "redirect:home.do";
 	}
-//	##############################################################################################################--myPage.do
-	@GetMapping("/myPage.do")
-	public String goMyPage(BoardVO vo,Model model) {
-		
-		List<BoardVO> list	= boardService.myBoardList(vo);
-		model.addAttribute("boardList",list);	
-	
-		return "myPage";
-	}
+////	##############################################################################################################--myPage.do
+//	@GetMapping("/myPage.do")
+//	public String goMyPage(BoardVO vo,Model model) {
+//		
+//		List<BoardVO> list	= boardService.myBoardList(vo);
+//		model.addAttribute("boardList",list);	
+//	
+//		return "myPage";
+//	}
 	
 	
 	

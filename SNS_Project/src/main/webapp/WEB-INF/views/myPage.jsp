@@ -54,6 +54,7 @@
 	}
 	#list{
 		display: block;
+		
 	}
 </style>
 </head>
@@ -80,29 +81,32 @@
 	<div id="main">
 		<div id="img">
 			<img alt="프로필" src=""><br>
-			<form action="follow.do" method="post">
 			<c:choose>
+				<c:when test="${!empty sessionScope.user.id && !empty member && sessionScope.user.id != member.id && !fn:contains(sessionScope.follower,member.id)}" >
+					<form action="follow.do" method="post">
+						<input type="submit" value="팔로우" onclick="follow()">
+						<input type="hidden" id="id1" name="id1" value="${sessionScope.user.id}">
+						<input type="hidden" id="id2" name="id2" value="${member.id}">
+					</form>
+				</c:when>
 			
-				<c:when test="${!empty sessionScope.user.id && !empty member && sessionScope.user.id != member.id} &&${!fn:contains(sessionScope.follower,member.id)}" >
-					<input type="submit" value="팔로우" onclick="follow()">
-					<input type="hidden" id="id1" name="id1" value="${sessionScope.user.id}">
-					<input type="hidden" id="id2" name="id2" value="${member.id}">
-				</c:when>
-				
 				<c:when test="${fn:contains(sessionScope.follower,member.id)}">
-					<input type="submit" value="팔로우 취소" >					
+					<form action="deleteFollow.do" method="post">
+						<input type="submit" value="팔로우 취소" >					
+						<input type="hidden" id="id1" name="id1" value="${sessionScope.user.id}">
+						<input type="hidden" id="id2" name="id2" value="${member.id}">
+					</form>	
 				</c:when>
-				
 			</c:choose>
-			</form>
 		</div>
 		
 		<div id="follow">
 		<c:if test="${!empty member}">
 					${member.name}
 		</c:if>
-			팔로우 수 : ${follower}
-			팔로잉 수 : ${following}<br>
+			<button type="button" onclick="window.open('followList.do?id2=${member.id}','_blank','width:500px; height: 150px;')">팔로우 수 : ${follower}</button>
+			<button onclick="window.open('followList.do?id1=${member.id}','_blank','width:500px; height: 150px;')">팔로잉 수 : ${following}</button><br>
+			
 			<a>회원 정보 수정</a>
 			<a>글쓰기</a>
 		</div>
@@ -127,7 +131,7 @@
      		$("#menu").attr("style","display:none");
      		$("#main").attr("style","margin-left:10px");
 		})	
-	})
+	})	
 	
 	function follow() {
 		alert("팔로우 입니다.");

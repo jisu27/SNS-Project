@@ -9,7 +9,8 @@
   </insert>
   
   <delete id="deleteFollow" parameterType="follow">
-  		Delete Follow Where fSeq = #{fSeq}
+  		Delete Follow
+  		Where id1=#{id1} AND id2=#{id2}
   </delete>
  
  <select id="getFollow" resultType="follow">
@@ -20,6 +21,11 @@
  		Select id2 
  		FROM  follow
  		Where id1 =#{id1}
+ </select>
+ <select id="getFollowListId1" resultType="follow">
+ 		Select id1 
+ 		FROM  follow
+ 		Where id2 =#{id2}
  </select>
  <select id="countFollow" resultType="int">
  		Select count(*) 

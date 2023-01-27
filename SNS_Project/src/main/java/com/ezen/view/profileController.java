@@ -37,9 +37,9 @@ public class profileController {
 		follow.setId2(mvo.getId().toString());
 		System.out.println(follow);
 		
-		FollowVO checkFollow = new FollowVO();
-		checkFollow.setId1(mvo.getId().toString());
-		checkFollow.setId2((String)session.getAttribute("user.id"));
+//		FollowVO checkFollow = new FollowVO();
+//		checkFollow.setId1(mvo.getId().toString());
+//		checkFollow.setId2((String)session.getAttribute("user.id"));
 		
 		int follower = followService.getCountFollow(follow);
 		int following = followService.getCountFollowing(follow);
