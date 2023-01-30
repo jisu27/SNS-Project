@@ -31,7 +31,6 @@ public class BoardController {
 	
 	@Autowired
 	private BoardService boardService;
-	
 
 //	##############################################################################################################--home
 	
