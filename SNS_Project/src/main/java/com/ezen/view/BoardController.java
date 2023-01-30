@@ -28,11 +28,6 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
-
-//	##############################################################################################################--home
-	@RequestMapping(value="/home.do")
-	public String BoardList(BoardVO vo ,Model model,HttpSession session) {
-
 	@Autowired
 	private AdvertiseService advertiseService;
 	
