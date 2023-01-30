@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.ezen.dto.FollowVO;
+import com.ezen.dto.HeartVO;
 import com.ezen.dto.MemberVO;
 import com.ezen.service.FollowService;
+import com.ezen.service.HeartService;
 import com.ezen.service.MemberService;
 
 
@@ -29,6 +31,9 @@ public class LoginController {
 	private MemberService memberService;
 	@Autowired
 	private FollowService followService;
+	
+	@Autowired
+	private HeartService heartService;
 	
 	@GetMapping("/")
 	public String goHome() {
@@ -100,10 +105,17 @@ public class LoginController {
 				FollowVO fvo = new FollowVO();
 				fvo.setId1(mvo.getId().toString());
 				
+				HeartVO hvo = new HeartVO();
+				hvo.setId(mvo.getId().toString());
+				
+				List<HeartVO> heart = heartService.boardLike(hvo);
+				
 				List<FollowVO> follower = followService.getFollowList(fvo);
+				
 				
 				session.setAttribute("user",mvo);
 				session.setAttribute("follower", follower);
+				session.setAttribute("heart", heart);
 				
 				
 					if(mvo.getRole()==1) {

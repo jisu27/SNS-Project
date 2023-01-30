@@ -47,7 +47,7 @@ body {
 			<div id="adverList">
 				<div id="advertise">
 					<h3>${adverList[status.index/3].id}</h3>
-					<a href="getBoard?aSeq=${adverList[status.index/3].aSeq}"> <img
+					<a href="getBoard.do?aSeq=${adverList[status.index/3].aSeq}"> <img
 						src="adverimages/${adverList[status.index/3].img}" />
 					</a>
 					<%@include file="comment.jsp"%>

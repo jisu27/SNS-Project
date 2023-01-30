@@ -8,6 +8,7 @@
  		<typeAlias type="com.ezen.dto.BoardVO" alias="board"/>
  		<typeAlias type="com.ezen.dto.ShortsVO" alias="shorts"/>
  		<typeAlias type="com.ezen.dto.AdvertisementVO" alias="advertise"/>
+ 		<typeAlias type="com.ezen.dto.HeartVO" alias="heart"/>
  	</typeAliases>
  	
  	<mappers>
@@ -17,5 +18,6 @@
  		<mapper resource="mappings/BoardMapper.xml"/>
  		<mapper resource="mappings/ShortsMapper.xml"/>
  		<mapper resource="mappings/AdvertiseMapper.xml"/>
+ 		<mapper resource="mappings/HeartMapper.xml"/>
  	</mappers>
 </configuration>

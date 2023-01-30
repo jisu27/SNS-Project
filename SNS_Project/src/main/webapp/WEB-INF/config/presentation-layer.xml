@@ -24,6 +24,7 @@
 	
 
 	<mvc:resources location="/images/" mapping="/images/**"/>
+	<mvc:resources location="/icon/" mapping="/icon/**"/>
 	
 	<!-- 파일업로드설정 -->
    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

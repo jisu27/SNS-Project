@@ -15,19 +15,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ezen.dto.AdvertisementVO;
 import com.ezen.dto.BoardVO;
-
+import com.ezen.dto.HeartVO;
 import com.ezen.dto.MemberVO;
 
 import com.ezen.service.AdvertiseService;
 
 import com.ezen.service.BoardService;
+import com.ezen.service.HeartService;
 
 @Controller
 public class BoardController {
 	
 	@Autowired
 	private BoardService boardService;
-	
+	@Autowired
+	private HeartService heartService;
 
 //	##############################################################################################################--home
 	
@@ -60,9 +62,9 @@ public class BoardController {
 	}
 //	##############################################################################################################--goInsertBoard
 	@GetMapping("getBoard.do")
-	public String getBoard(BoardVO vo,Model model) {
+	public String getBoard(BoardVO bvo,Model model,HttpSession session) {
 		
-		BoardVO board= (BoardVO) boardService.myBoard(vo);
+		BoardVO board= (BoardVO) boardService.myBoard(bvo);
 		model.addAttribute("board",board);
 		
 		return "getBoard";
