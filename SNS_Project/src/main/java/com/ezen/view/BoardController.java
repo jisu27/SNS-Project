@@ -1,5 +1,9 @@
 package com.ezen.view;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.sql.Savepoint;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -59,11 +63,24 @@ public class BoardController {
 		return "insertBoard";
 	}
 //	##############################################################################################################--insertBoard
-	@PostMapping("insertBoard.do")
-	public String InsertBoard(BoardVO vo) {
+	@RequestMapping("/insertBoard.do")
+	public String InsertBoard(BoardVO vo, HttpSession session) throws IllegalStateException, IOException {
+		
+		String fileName = "";
+		
+		if(!vo.getUploadfile().isEmpty()) {
+			fileName = vo.getUploadfile().getOriginalFilename();
+			
+			System.out.println("filename=" + fileName);
+			
+			String realPath = session.getServletContext().getRealPath("WEV-INF/resources/images/");
+			vo.setUpload(fileName);
+			vo.getUploadfile().transferTo(new File(realPath+fileName));
+		}
+		
+		
 		
 		System.out.println(vo);
-		
 		boardService.InsertBoard(vo);
 		
 		return "redirect:home.do";

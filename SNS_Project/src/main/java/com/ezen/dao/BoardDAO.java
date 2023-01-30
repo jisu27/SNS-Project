@@ -22,7 +22,7 @@ public class BoardDAO  {
 	}
 		
 		public void insertBoard(BoardVO vo) {
-			 mybatis.selectList("boardMapper.insertBoard", vo);
+			 mybatis.insert("boardMapper.insertBoard", vo);
 		
 	}
 }

@@ -10,11 +10,11 @@
 <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script> 
 </head>
 <body>
-<form action="insertBoard.do" method="post">
+<form action="/insertBoard.do" method="post" enctype="multipart/form-data">
 	<input type="text" id="title" name="title" placeholder="title"><br>
 	<input type="hidden" id="id" name="id" readonly="readonly" value="${sessionScope.user.id}">
 	<input type="text" id="content" name="content" placeholder="content"><br>
-	<input type="file" id="upload" name="upload" ><br>
+	<input type="file" id="uploadfile" name="uploadfile" ><br>
 	<c:if test="${empty sessionScope.user.pay}"><input type="hidden" id="pay" name="pay" value='0'><br></c:if>
 	<c:if test="${!empty sessionScope.user.pay}"><input type="hidden" id="pay" name="pay" value='${sessionScope.user.pay}'><br></c:if>
 	
