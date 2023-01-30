@@ -78,8 +78,6 @@ public class BoardController {
 			vo.getUploadfile().transferTo(new File(realPath+fileName));
 		}
 		
-		
-		
 		System.out.println(vo);
 		boardService.InsertBoard(vo);
 		
