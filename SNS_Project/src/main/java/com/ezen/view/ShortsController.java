@@ -27,16 +27,18 @@ public class ShortsController {
 	private ShortsService shos;
 	
 	@RequestMapping("/getShorts")
-	public String getShorts(ShortsVO vo, Model model) {
+	public String getShorts(ShortsVO vo, Model model, HttpSession session) {
+		MemberVO user = (MemberVO) session.getAttribute("user");
 		
 		ShortsVO shorts = shos.getShorts(vo);
 		model.addAttribute("shorts", shorts);
 		
+		System.out.println("--getShorts controller 실행: " + shorts);
 		return "getShorts";
 		
 	}
 	
-	@RequestMapping("/getShortsList.do")
+	@RequestMapping("/getShortsList")
 	public String getShortsList(HttpSession session, ShortsVO vo, Model model) {
 		MemberVO user = (MemberVO) session.getAttribute("user");
 		
@@ -83,18 +85,32 @@ public class ShortsController {
 	}
 	
 	@PostMapping(value="updateShorts" )
-	public String updateShorts(ShortsVO vo) {
+	public String updateShorts(ShortsVO vo, HttpSession session) {
+		MemberVO user = (MemberVO) session.getAttribute("user");
 		
-		shos.updateShorts(vo);
-		
-		return "redirect:getShortsList";
-		
+		if(user == null) {
+			return "index";
+			
+		}else {
+			vo.setId(user.getId());
+			shos.updateShorts(vo);	
+			return "redirect:getShortsList";		
+		}
 	}
 	
 	@RequestMapping("/deleteShorts")
-	public String deleteShorts(ShortsVO vo) {
-		shos.deleteShorts(vo);
-		return "redirect:getShortsList";
+	public String deleteShorts(ShortsVO vo, HttpSession session) {
+		MemberVO user = (MemberVO) session.getAttribute("user");
+		
+		if(user == null) {
+			return "index";
+		}else {
+			shos.deleteShorts(vo);
+			return "redirect:getShortsList";
+			
+		}
+		
+		
 		
 	}
 }

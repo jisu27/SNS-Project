@@ -16,6 +16,7 @@ public class ShortsDAO  {
 	
 	
 	public ShortsVO getShorts(ShortsVO vo) {
+		System.out.println("--getShort() 실행: " + vo);
 		return mybatis.selectOne("ShortsMapper.getShorts",vo);
 	}
 	

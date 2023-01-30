@@ -17,7 +17,7 @@ public class ShortServiceImpl implements ShortsService {
 
 	@Override
 	public ShortsVO getShorts(ShortsVO vo) {
-		
+		System.out.println("==getShort service 실행: " + vo);
 		return sDAO.getShorts(vo);
 	}
 

@@ -11,26 +11,43 @@
         #contents {
             width : 100%;
            position : relative;
-            padding-top:5%;
+            padding-top:24px;
             background-color : gray;
             display : flex;
             justify-content : flex-start;
+            flex-wrap : wrap;
+          
+          
         }
           #content {
           	position : absolute;
             width : 100%;
-            display : flex;
+          	display : grid; 
             justify-content : center;
             background-color : pink;
-            flex-direction: row-reverse;  
+             grid-template-columns :1fr 1fr 1fr;
+            
         }
         #con {
-            margin : 20px;
-            width : 300px;
-            justifi-content : space-around;
-            background-color :orange;
+            margin : 40px;
+            width : 200%;
+            justify-content : space-between;
+                     
+        }
+  
+        #video {
+         	border-top-left-radius:10%; 
+            border-top-right-radius: 10%;
+            border-bottom-left-radius: 10% ;
+            border-bottom-right-radius: 10%;
+          	margin-right : 20px;
+          	display: inline-block;
+
         }
         
+        #details {
+        	margin-left : 20px;
+        }
       
 	</style>
     
@@ -39,7 +56,6 @@
     <h1>shorts 리스트</h1>
     
     <form name="list" method="post">
-  	<!--  <input type ="hidden" value={shorts.sSeq}>-->
  
  <c:choose>
  	<c:when test= "${empty sessionScop.user}">
@@ -52,34 +68,34 @@
   
  
    
-    <div id = "contents">contents
-    	<div id = "content" >content
+    <div id = "contents">
+    	<div id = "content" >
   <c:forEach items="${shortsList}" var="shorts"> 
+     	
      	<div id="con">
             
-        	<div id="video" class="video">비디오
-				<video controls poster="C:\Users\605-08\Desktop\다운로드.jfif" preload="metadata" width="300" height="180">
+            
+        	<div id="video" class="video">
+				<video controls poster="C:\Users\605-08\Desktop\다운로드.jfif" preload="metadata" width = "100%" height= "200px" >
 					<source src="shorts/${shorts.upload}#t=0.5">
 				</video>
             </div>      
 				
 			<div id="details">	
-             	<a id="title"> ${shorts.sTitle}</a>
+             	<a id="title" href="getShorts?sSeq=${shorts.sSeq}"><b>${shorts.sTitle}</b></a>
+             	
                 <a href="" id="pro">
                 	<img id= "profile" src = "">
                 </a><br>
                 <a href="" id="name" >${shorts.id} </a>
-            </div>  
+            </div> 
+             
             </div> 
           
-          
-	
     	  </c:forEach>  	
    </div>
 	</div>
 	
- 
-		
 
 </form>
     </body>
