@@ -74,7 +74,7 @@
 	</div>
 	<script type="text/javascript">
 	
-	$(document).ready(function () {
+	$(function () {
 		$("#main").mouseover(function () {		
      		$("#menu").attr("style","display:inline-block");
      		$("#main").attr("style","margin-left:180px");

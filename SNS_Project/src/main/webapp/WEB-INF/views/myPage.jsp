@@ -121,7 +121,7 @@
 	
 	<script type="text/javascript">
 	
-	$(document).ready(function () {
+	$(function () {
 		
 		$("#main").mouseover(function () {		
      		$("#menu").attr("style","display:inline-block");
@@ -133,6 +133,7 @@
 		})	
 	})	
 	
+	}
 	function follow() {
 		alert("팔로우 입니다.");
 	}

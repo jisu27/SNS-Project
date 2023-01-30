@@ -31,15 +31,17 @@ body {
 </head>
 <body>
 
-   <c:forEach items="${boardList}" var="board" varStatus="status">
-      <div id="boardList">
-         <div id="board">
-            <a href="profile.do?id=${board.id}"><h3>${board.id}</h3></a>
-            <a href="getBoard?bSeq=${board.bSeq}">
-               <img src="images/${board.upload}"/>
-            </a>
-            <%@include file="comment.jsp"%>
-         </div>
+
+	<c:forEach items="${boardList}" var="board" varStatus="status">
+		<div id="boardList">
+			<div id="board">
+				<a href="profile.do?id=${board.id}"><h3>${board.id}</h3></a>
+				<a href="getBoard.do?bSeq=${board.bSeq}">
+					<img src="images/${board.upload}"/>
+				</a>
+				<%@include file="comment.jsp"%>
+			</div>
+
 
       </div>
 

@@ -28,12 +28,17 @@ public class FollowController {
 	private MemberService memberService;
 	
 	@PostMapping("follow.do")
-	public String follow(FollowVO vo){
+	public String follow(FollowVO vo,HttpSession session){
+		
 		
 		followService.insertFollow(vo);
 		
+		List<FollowVO> list = followService.getFollowList(vo);
+		session.setAttribute("follower", list);
+		
 		return "redirect:profile.do?id="+vo.getId2();
 	}
+	
 	@GetMapping("followList.do")
 	public String goFolloweList(FollowVO vo,Model model) {
 		List<FollowVO> flist =new ArrayList<>();
@@ -71,9 +76,13 @@ public class FollowController {
 	}
 	
 	@PostMapping("deleteFollow.do")
-	public String deleteFollow(FollowVO vo) {
-		
+	public String deleteFollow(FollowVO vo,HttpSession session) {
+			
+			
 		followService.deleteFollow(vo);
+		
+		List<FollowVO> list = followService.getFollowList(vo);
+		session.setAttribute("follower", list);
 		
 		return "redirect:profile.do?id="+vo.getId2();
 	}

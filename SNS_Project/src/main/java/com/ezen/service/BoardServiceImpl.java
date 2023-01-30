@@ -30,6 +30,12 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardVO> myBoardList(BoardVO vo) {
 		return 	bDao.myBoardList(vo);
 	}
+
+	@Override
+	public BoardVO myBoard(BoardVO vo) {
+		
+		return bDao.myBoard(vo);
+	}
 	
 
 }

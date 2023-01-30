@@ -17,6 +17,9 @@ public class BoardDAO  {
 	public List<BoardVO> BoardList(BoardVO vo) {
 		return mybatis.selectList("boardMapper.boardList", vo);
 	}
+	public BoardVO myBoard(BoardVO vo) {
+		return mybatis.selectOne("boardMapper.myBoard", vo.getbSeq());
+	}
 	public List<BoardVO> myBoardList(BoardVO vo) {
 		return mybatis.selectList("boardMapper.myBoardList", vo.getId());
 	}

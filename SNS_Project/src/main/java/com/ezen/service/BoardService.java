@@ -7,6 +7,8 @@ import com.ezen.dto.BoardVO;
 public interface BoardService {
 
 	List<BoardVO> BoardList(BoardVO vo);
+
+	BoardVO myBoard(BoardVO vo);
 	
 	List<BoardVO> myBoardList(BoardVO vo);
 	

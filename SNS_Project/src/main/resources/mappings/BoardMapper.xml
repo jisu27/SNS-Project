@@ -5,6 +5,12 @@
   <select id="boardList" resultType="board">
   	SELECT * FROM board order by bSeq DESC
   </select>
+  
+  <select id="myBoard" resultType="board">
+  	SELECT *
+  	FROM board 
+  	WHERE bSeq=#{bSeq}
+  </select>
 
   <!-- #################################################################################################################### -->
   <select id="myBoardList" resultType="board">
