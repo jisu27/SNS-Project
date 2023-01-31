@@ -32,6 +32,7 @@ public class ShortsDAO  {
 	
 	public void updateShorts(ShortsVO vo) {
 		mybatis.update("ShortsMapper.updateShorts",vo);
+		System.out.println("--updateShorts() 실행: " + vo);
 	}
 	
 	

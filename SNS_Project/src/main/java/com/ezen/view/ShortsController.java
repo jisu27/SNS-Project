@@ -84,23 +84,56 @@ public class ShortsController {
 		
 	}
 	
-	@PostMapping(value="updateShorts" )
-	public String updateShorts(ShortsVO vo, HttpSession session) {
+	
+	
+	@GetMapping(value="/updateShorts") 
+	public String updateShortsVeiws (ShortsVO vo, HttpSession session, Model model) {
 		MemberVO user = (MemberVO) session.getAttribute("user");
 		
+		ShortsVO shorts = shos.getShorts(vo);
+		
+		model.addAttribute("shortsvo", shorts);
+		return "updateShorts";
+	
+	}
+	
+	@PostMapping(value="/updateShorts" )
+	public String updateShorts(ShortsVO vo, HttpSession session)throws IOException {
+		MemberVO user = (MemberVO) session.getAttribute("user");
+		System.out.println("updateShorts()=" + vo);
+
+		MultipartFile uploadFile = vo.getUploadFile();
+		if(!uploadFile.isEmpty()) {
+			
+			String fileName = uploadFile.getOriginalFilename();
+			
+			uploadFile.transferTo(new File("D:/shorts/" + fileName));
+			vo.setUpload(fileName);
+			System.out.println("파일이름 :" + fileName);
+			
+		} else {
+			System.out.println("파일이 없습니다");
+			return "updatetShorts";
+		}
+		
+					
 		if(user == null) {
 			return "index";
 			
 		}else {
 			vo.setId(user.getId());
 			shos.updateShorts(vo);	
+			System.out.println("update controller 실행= " +"제목: " + vo.getsTitle()+ " 내용: " + vo.getsContent());
 			return "redirect:getShortsList";		
 		}
+		
 	}
 	
 	@RequestMapping("/deleteShorts")
 	public String deleteShorts(ShortsVO vo, HttpSession session) {
 		MemberVO user = (MemberVO) session.getAttribute("user");
+		
+		System.out.println("deleteShorts()..... vo="+vo);
 		
 		if(user == null) {
 			return "index";

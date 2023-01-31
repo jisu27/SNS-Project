@@ -11,7 +11,14 @@ public class MemberVO {
 	private String email;
 	private Date reg_date;
 	private int pay;
+	private String profile;
 	
+	public String getProfile() {
+		return profile;
+	}
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
 	public String getId() {
 		return id;
 	}
@@ -60,8 +67,9 @@ public class MemberVO {
 	@Override
 	public String toString() {
 		return "MemberVO [id=" + id + ", pwd=" + pwd + ", name=" + name + ", role=" + role + ", email=" + email
-				+ ", reg_date=" + reg_date + ", pay=" + pay + "]";
+				+ ", reg_date=" + reg_date + ", pay=" + pay + ", profile=" + profile + "]";
 	}
+
 	
 	
 	

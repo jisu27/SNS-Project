@@ -55,7 +55,7 @@
     <body>
     <h1>shorts 리스트</h1>
     
-    <form name="list" method="post">
+<form name="list" method="post">
  
  <c:choose>
  	<c:when test= "${empty sessionScop.user}">

@@ -4,12 +4,12 @@
 <mapper namespace="ShortsMapper">
   
   <insert id = "insertShorts" parameterType = "shorts">
-  	insert into Shorts(sSeq, sTitle, id, upload, sContent)
+  	insert into shorts(sSeq, sTitle, id, upload, sContent)
   	values(shorts_seq.NEXTVAL, #{sTitle}, #{id}, #{upload}, #{sContent})
   </insert>
   
   <update id = "updateShorts" parameterType = "shorts">
-  	update Shorts set sTitle=#{sTitle}, upload=#{upload}, sContnet=#{sContent}
+  	update shorts set sTitle=#{sTitle}, id=#{id}, upload=#{upload}, sContent=#{sContent}
   	where sSeq=#{sSeq}
   </update>
   

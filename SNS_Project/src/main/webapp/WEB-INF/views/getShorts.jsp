@@ -22,32 +22,62 @@
 	}
 	
 	#title{
-		margin-top : 20px;
 		margin-bottom : 5px;
 		margin-left : 3px;
 		font-size : 1.8em;
-		padding : 10px;
 	}
+
 	#user {
-		background-color : pink;
+		
 		width : 40%;
-		font-size : 1.5em;
-		padding : 10px;
+		font-size : 1.4em;
+		padding-left : 10px;
+		padding-bottom : 10px;
+		
 	}
 	
 	#content {
 		background-color : rgb(233,233,233);
-		border-top-left-radius:5%; 
-        border-top-right-radius: 5%;
-        border-bottom-left-radius: 5%;
-        border-bottom-right-radius: 5%;
+		border-top-left-radius:30px 30px; 
+        border-top-right-radius: 30px 30px;
+        border-bottom-left-radius: 30px 30px;
+        border-bottom-right-radius: 30px 30px;
         width : 60%;
-        padding : 10px;
+        padding-right : 10px;
+        padding-top: 5px;
+        padding-left: 15px;
+        padding-bottom: 5px;   
 	}
+	
+	
 	#choose{
+		background-color : rgb(233,233,233);
+		border-top-left-radius:30px 30px; 
+        border-top-right-radius: 30px 30px;
+        border-bottom-left-radius: 30px 30px;
+        border-bottom-right-radius: 30px 30px;
 		font-size : 1.1em;
 		flex-direction: column;
 		display : relative;
+		float : right;
+		margin-right : 50%; 
+		margin-bottom : 100%;
+		padding : 10px;
+		padding-left : 15px;
+		padding-right : 15px;
+		margin-top : -50px;
+		
+	}
+	
+	a {
+		text-decoration-line : none;
+		color:black; 
+	}
+	
+	input, button {
+		border : none;
+		font-size : 1.1em;
+		background-color : none;
 	}
 
 </style>
@@ -55,7 +85,7 @@
 </head>
 <body>
 
-<form action="getShortsList" method="post" enctype="multipart/form-data">
+<form action="getShortsList" method="post" id="theform" enctype="multipart/form-data">
 <input name="sSeq" type="hidden" value="${shorts.sSeq}">
 
 
@@ -83,11 +113,20 @@
 	<div id = "choose">
 		<c:choose>
 			<c:when test="${empty sessionScop.user}">
-				수정하기 삭제
+				<div>
+					<label for="update"><a id="update" href="updateShorts?sSeq=${shorts.sSeq}">수정</a> &nbsp;</label> | 
+					<label for="delete">&nbsp;
+					<input type="button" value="삭제" onclick="check_delete()"></label>
+					<!--  <a id="delete" href="deleteShorts?sSeq=${shorts.sSeq}" onclick="check_delete()">삭제</a></label> -->
+				</div>
 			</c:when>
 			<c:otherwise>
-				<a href="updateShorts?sSeq=${shorts.sSeq}">수정 </a> 
-				<a href="deleteShorts?sSeq=${shorts.sSeq}"> 삭제</a>
+				 <div>
+					<label for="update"><a id="update" href="updateShorts?sSeq=${shorts.sSeq}">수정</a> &nbsp;</label> | 
+					<label for="delete">&nbsp;
+					<input type="button" value="삭제" onclick="check_delete()"></label>
+					<!--  <a id="delete" href="deleteShorts?sSeq=${shorts.sSeq}" onclick="check_delete()">삭제</a></label>-->
+				</div>
 			</c:otherwise>	
 		</c:choose>	
 	</div>
@@ -100,6 +139,7 @@
 </div>
 </div>
 
+<script type="text/javascript" src="views/shorts.js"></script>
 </form>
 </body>
 </html>

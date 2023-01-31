@@ -56,6 +56,11 @@ public class ShortsVO {
 	public void setsContent(String sContent) {
 		this.sContent = sContent;
 	}
+	@Override
+	public String toString() {
+		return "ShortsVO [sSeq=" + sSeq + ", sTitle=" + sTitle + ", id=" + id + ", upload=" + upload + ", inDate="
+				+ inDate + ", uploadFile=" + uploadFile + ", sContent=" + sContent + "]";
+	}
 
 	
 	
