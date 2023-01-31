@@ -12,10 +12,22 @@
   </select>
   <!-- #################################################################################################################### -->
   <insert id="insertBoard" >
-  	INSERT INTO board(bseq,title,id,content,upload,pay) 
+  	INSERT INTO board(bSeq,title,id,content,upload,pay) 
   	VALUES(board_seq.NEXTVAL, #{title}, #{id}, #{content},#{upload}, #{pay})
   </insert>
   
+  <select id="getBoard" resultType="board">
+  SELECT * FROM board WHERE bSeq=#{bSeq}
+  </select>
+  
+  <update id="updateBoard" parameterType="board">
+  UPDATE board
+  SET title=#{title}, 
+  	content=#{content},
+  	upload=#{upload}
+  WHERE bSeq=#{bSeq}
+  
+  </update>
 </mapper>
 
  

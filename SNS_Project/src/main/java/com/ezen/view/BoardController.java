@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ezen.dto.AdvertisementVO;
 import com.ezen.dto.BoardVO;
@@ -83,6 +84,40 @@ public class BoardController {
 		
 		return "redirect:home.do";
 	}
+	
+	@GetMapping("updateBoard_form.do")
+	public String updateBoardForm(Model model,BoardVO vo) {
+		BoardVO board = boardService.getBoard(vo);
+		
+		model.addAttribute("board",board);
+		return "updateBoard";
+	}
+	
+	@RequestMapping("/updateBoard.do")
+	public String UpdateBoard(
+			@RequestParam(value="nonImg") String org_image,
+			BoardVO vo, HttpSession session) throws IllegalStateException, IOException {
+		
+		String fileName = "";
+		
+		if(!vo.getUploadfile().isEmpty()) {
+			fileName = vo.getUploadfile().getOriginalFilename();
+			
+			System.out.println("filename=" + fileName);
+			
+			String realPath = session.getServletContext().getRealPath("WEV-INF/resources/images/");
+			vo.setUpload(fileName);
+			vo.getUploadfile().transferTo(new File(realPath+fileName));
+		} else {
+			vo.setUpload(org_image);
+		}
+		
+		
+		boardService.updateBoard(vo);
+		
+		return "redirect:home.do";
+	}
+	
 ////	##############################################################################################################--myPage.do
 //	@GetMapping("/myPage.do")
 //	public String goMyPage(BoardVO vo,Model model) {

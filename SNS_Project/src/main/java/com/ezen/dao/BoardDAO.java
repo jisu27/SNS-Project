@@ -25,4 +25,12 @@ public class BoardDAO  {
 			 mybatis.insert("boardMapper.insertBoard", vo);
 		
 	}
+		
+	public BoardVO getBoard(BoardVO vo) {
+		return mybatis.selectOne("boardMapper.getBoard",vo);
+	}
+	
+	public void updateBoard(BoardVO vo) {
+		mybatis.update("boardMapper.updateBoard",vo);
+	}
 }

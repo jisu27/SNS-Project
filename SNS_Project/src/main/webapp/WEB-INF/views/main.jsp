@@ -35,7 +35,7 @@ body {
       <div id="boardList">
          <div id="board">
             <a href="profile.do?id=${board.id}"><h3>${board.id}</h3></a>
-            <a href="getBoard?bSeq=${board.bSeq}">
+            <a href="updateBoard_form.do?bSeq=${board.bSeq}">
                <img src="images/${board.upload}"/>
             </a>
             <%@include file="comment.jsp"%>
