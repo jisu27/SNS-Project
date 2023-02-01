@@ -64,6 +64,8 @@
     
     </head>
     <body>
+
+    
     <h1>shorts 리스트</h1>
     
 <form name="list" method="post">
@@ -86,7 +88,7 @@
      	<div id="con">
             
         	<div id="video" class="video">
-				<video id="video-player" controls poster="C:\Users\605-08\Desktop\다운로드.jfif"
+				<video id="video-player" controls 
 				 preload="metadata" width = "100%" height= "200px" >
 					<source src="shorts/${shorts.upload}#t=0.5">
 				</video>

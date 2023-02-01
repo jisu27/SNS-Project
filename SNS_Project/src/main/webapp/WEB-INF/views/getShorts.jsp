@@ -96,7 +96,7 @@
 
 <div id = "video-player">
 
-	<video controls width ="500%" height="500px" preload="metadata" autoplay="autoplay">
+	<video controls width ="500%" height="500px" preload="metadata" autoplay="autoplay" muted>
 		<source src="shorts/${shorts.upload}#t=0.5" >
 	</video>
 

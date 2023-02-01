@@ -25,6 +25,7 @@
 
 </head>
 <body>
+
 <form action="insertShorts" method="post" enctype="multipart/form-data">
 	
 <div id = "container">
@@ -49,7 +50,8 @@
 			
 			<tr>
 				<th id="text">내용: </th>
-				<td> <textarea id="textarea" rows="10" cols="40" name="sContent"></textarea> </td>
+				<td> <textarea id="textarea" rows="10" cols="40" 
+				name="sContent"></textarea></td>
 			</tr>
 			
 			<tr>
@@ -76,6 +78,8 @@
 
 </form>
 <script type="text/javascript" src="views/shorts.js"></script>
+
+
 
 </body>
 </html>

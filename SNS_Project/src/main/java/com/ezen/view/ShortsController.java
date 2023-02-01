@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ezen.dto.MemberVO;
@@ -64,8 +65,13 @@ public class ShortsController {
 	
 	
 	@RequestMapping(value= "/insertShorts", method=RequestMethod.POST )
-	public String insertShorts(ShortsVO vo, HttpSession session) throws IOException{
+	public String insertShorts(
+			@RequestParam(value="sContent")String content,
+			ShortsVO vo, HttpSession session) throws IOException{
 		MemberVO user = (MemberVO) session.getAttribute("user");
+		
+		//textarea에 엔터 넣어주기
+		String sContent = content.replace("\r\n", "<br>");
 		
 				
 		MultipartFile uploadFile = vo.getUploadFile();
@@ -73,7 +79,8 @@ public class ShortsController {
 			
 			String fileName = uploadFile.getOriginalFilename();
 			
-			uploadFile.transferTo(new File("D:/shorts/" + fileName));
+			uploadFile.transferTo(new File("C:/shorts/" + fileName));
+			//uploadFile.transferTo(new File("D:/shorts/" + fileName));
 			vo.setUpload(fileName);
 			System.out.println("파일이름 :" + fileName);
 			
@@ -81,6 +88,8 @@ public class ShortsController {
 			System.out.println("파일이 없습니다");
 			return "insertShorts";
 		}
+		//textarea에 엔터 넣어주기
+		vo.setsContent(sContent);
 		
 		vo.setId(user.getId()); 
 		shos.insertShorts(vo);
