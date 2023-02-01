@@ -14,6 +14,14 @@ public class ShortsVO {
 	private MultipartFile uploadFile;
 	private String sContent;
 	
+	private String searchKeyword;
+	
+	public String getSearchKeyword() {
+		return searchKeyword;
+	}
+	public void setSearchKeyword(String searchKeyword) {
+		this.searchKeyword = searchKeyword;
+	}
 	public int getsSeq() {
 		return sSeq;
 	}

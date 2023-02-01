@@ -24,7 +24,9 @@
   </select>
   
   <select id="getShortsList" resultType="shorts">
-  	select * from shorts order by sSeq DESC
+  	select * from shorts 
+  	where sTitle like '%'||#{searchKeyword}||'%'
+  	order by sSeq DESC
   </select>
   
   

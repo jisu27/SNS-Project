@@ -1,7 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>    
 <%@ taglib uri ="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ include file="shortsSearch.jsp" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -112,12 +113,13 @@
 	
 	<div id = "choose">
 		<c:choose>
-			<c:when test="${empty sessionScop.user}">
+			<c:when test="${empty sessionScope.user}">
 				<div>
+				   <!--  
 					<label for="update"><a id="update" href="updateShorts?sSeq=${shorts.sSeq}">수정</a> &nbsp;</label> | 
 					<label for="delete">&nbsp;
 					<input type="button" value="삭제" onclick="check_delete()"></label>
-					<!--  <a id="delete" href="deleteShorts?sSeq=${shorts.sSeq}" onclick="check_delete()">삭제</a></label> -->
+					-->
 				</div>
 			</c:when>
 			<c:otherwise>

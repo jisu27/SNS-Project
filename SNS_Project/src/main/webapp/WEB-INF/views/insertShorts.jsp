@@ -14,6 +14,7 @@
 	padding:20px 50px;
 
 }
+
 #text{
 	text-align:center;
 	
@@ -29,7 +30,7 @@
 <div id = "container">
 
  <c:choose>
- 	<c:when test= "${empty sessionScop.user}">
+ 	<c:when test= "${empty sessionScope.user}">
  		<a href="http://localhost:8080/">로그인</a>
  	</c:when>
  	<c:otherwise>
@@ -39,7 +40,7 @@
 
 	
 		<h2>동영상을 업로드 하세요</h2><br><br>
-			
+		<div id = "t1">	
 		<table border="1" >
 			<tr>
 				<th id="text" width="100">제목: </th>
@@ -59,7 +60,7 @@
 			
 		
 	</table>
-		
+	</div>	
 			<br>
 			
 			<input type="submit" value="동영상 업로드" onclick="check_file()">

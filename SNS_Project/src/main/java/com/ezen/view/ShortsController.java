@@ -42,10 +42,14 @@ public class ShortsController {
 	public String getShortsList(HttpSession session, ShortsVO vo, Model model) {
 		MemberVO user = (MemberVO) session.getAttribute("user");
 		
+		if(vo.getSearchKeyword() == null) vo.setSearchKeyword("");
+			
+		
 		List<ShortsVO> list =  shos.getShortsList(vo);
 		
-		
 		model.addAttribute("shortsList", list);
+		
+		model.addAttribute("searchKeyword", vo.getSearchKeyword());
 		return "getShortsList";
 		
 		
@@ -63,6 +67,7 @@ public class ShortsController {
 	public String insertShorts(ShortsVO vo, HttpSession session) throws IOException{
 		MemberVO user = (MemberVO) session.getAttribute("user");
 		
+				
 		MultipartFile uploadFile = vo.getUploadFile();
 		if(!uploadFile.isEmpty()) {
 			
