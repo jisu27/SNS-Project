@@ -60,7 +60,13 @@ public class ShortsController {
 	public String insertShortsView(HttpSession session) {
 		MemberVO user = (MemberVO) session.getAttribute("user");
 		
-		return "insertShorts";
+		if(user == null) {
+			return "index";
+		}else {
+			return "insertShorts";
+		}
+		
+		
 	}
 	
 	
@@ -68,53 +74,66 @@ public class ShortsController {
 	public String insertShorts(
 			@RequestParam(value="sContent")String content,
 			ShortsVO vo, HttpSession session) throws IOException{
+		
 		MemberVO user = (MemberVO) session.getAttribute("user");
 		
-		//textarea에 엔터 넣어주기
-		String sContent = content.replace("\r\n", "<br>");
-		
-				
-		MultipartFile uploadFile = vo.getUploadFile();
-		if(!uploadFile.isEmpty()) {
+		if(user == null) {
 			
-			String fileName = uploadFile.getOriginalFilename();
+			return "index";
 			
-			uploadFile.transferTo(new File("C:/shorts/" + fileName));
-			//uploadFile.transferTo(new File("D:/shorts/" + fileName));
-			vo.setUpload(fileName);
-			System.out.println("파일이름 :" + fileName);
-			
-		} else {
-			System.out.println("파일이 없습니다");
-			return "insertShorts";
-		}
-		//textarea에 엔터 넣어주기
-		vo.setsContent(sContent);
-		
-		vo.setId(user.getId()); 
-		shos.insertShorts(vo);
+		}else {
 
-		return "redirect:getShortsList";
-		
+			//textarea에 엔터 넣어주기
+			String sContent = content.replace("\r\n", "<br>");
+			
+			MultipartFile uploadFile = vo.getUploadFile();
+			if(!uploadFile.isEmpty()) {
+				
+				String fileName = uploadFile.getOriginalFilename();
+				
+				uploadFile.transferTo(new File("C:/shorts/" + fileName));
+				//uploadFile.transferTo(new File("D:/shorts/" + fileName));
+				vo.setUpload(fileName);
+				System.out.println("파일이름 :" + fileName);
+				
+			} else {
+				System.out.println("파일이 없습니다");
+				return "insertShorts";
+			}
+			//textarea에 엔터 넣어주기
+			vo.setsContent(sContent);
+			
+			vo.setId(user.getId()); 
+			shos.insertShorts(vo);
+
+			return "redirect:getShortsList";
+		}
+
 	}
-	
-	
-	
+
 	@GetMapping(value="/updateShorts") 
 	public String updateShortsVeiws (ShortsVO vo, HttpSession session, Model model) {
 		MemberVO user = (MemberVO) session.getAttribute("user");
 		
-		ShortsVO shorts = shos.getShorts(vo);
-		
-		model.addAttribute("shortsvo", shorts);
-		return "updateShorts";
-	
+		if (user ==null) {
+			
+			return "index";
+		}else {
+			ShortsVO shorts = shos.getShorts(vo);
+			
+			model.addAttribute("shortsvo", shorts);
+			return "updateShorts";
+		}
+
 	}
 	
 	@PostMapping(value="/updateShorts" )
-	public String updateShorts(ShortsVO vo, HttpSession session)throws IOException {
+	public String updateShorts(
+			@RequestParam(value="sContent")String content,
+			ShortsVO vo, HttpSession session)throws IOException {
 		MemberVO user = (MemberVO) session.getAttribute("user");
-		System.out.println("updateShorts()=" + vo);
+		
+		String sContent = content.replace("\r\n", "<br>");
 
 		MultipartFile uploadFile = vo.getUploadFile();
 		if(!uploadFile.isEmpty()) {
@@ -129,13 +148,15 @@ public class ShortsController {
 			System.out.println("파일이 없습니다");
 			return "updatetShorts";
 		}
-		
 					
 		if(user == null) {
 			return "index";
 			
 		}else {
-			vo.setId(user.getId());
+			
+			//textarea 엔터
+			vo.setsContent(sContent);
+			
 			shos.updateShorts(vo);	
 			System.out.println("update controller 실행= " +"제목: " + vo.getsTitle()+ " 내용: " + vo.getsContent());
 			return "redirect:getShortsList";		

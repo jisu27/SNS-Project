@@ -16,7 +16,6 @@ function check_file() {
 	
 		return false;
 	}
-
 }
 
 //삭제하기 전 확인
@@ -26,31 +25,18 @@ function check_delete(sSeq) {
 	var formm = document.getElementById("theform");
 	if(deletecheck == true) {
 		//loaction.href="deleteShorts?sSeq=${shorts.sSeq}";
-		formm.action = "deleteShorts?sSeq="+sSeq;
-		alert("삭제했습니다")
+		formm.action = "deleteShorts?sSeq=" + sSeq;
+	
 	}else {
+		
 		return;
 	}
 	
 }
 
 /*
-function onTestChange() {
-    var key = window.event.keyCode;
-
-    // If the user has pressed enter
-    if (key === 13) {
-        document.getElementById("textarea").value = document.getElementById("textarea").value + "\n*";
-        return false;
-    }
-    else {
-        return true;
-    }
-}
-*/
-
-function check_length(area) {
-	var text =area.value();
+function check_length(sContent) {
+	var text =sContent.value();
 	var test_length = text.length;
 	
 	var max_length = 150;
@@ -58,9 +44,52 @@ function check_length(area) {
 	if(test_length > max_length) {
 		alert(max_length + "자 이상 입력할 수 없습니다")
 		text = text.substr(0, max_length);
-		area.value = text;
-		area.focus();
+		sContent.value = text;
+		sContent.focus();
 	}
-	
 }
+*/
+
+/*
+$('#text textarea').keyup(function(){
+	var content = $(this).val();
+	$('#text #count span').html(content.legth);
+	if(content.length > 1000) {
+		alert("최대 1000자 까지 입력 가능합니다");
+		$(this).val(content.substring(0, 200));
+		$('#text #count span').html(1000);
+	}
+	});
+*/
+
+$(document).ready(function(){
+	$('#sContent').on('keyup', function() {
+		$('#count').html("(" + $(this).val().length + " / 1000");
+		
+		if($(this).val().length > 100) {
+			$(this).val($(this).val().substring(0, 1000));
+			$('#count').html("(1000 / 1000)");
+		}
+		
+	});
+	
+});	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

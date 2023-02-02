@@ -54,10 +54,19 @@
 	        border-bottom-right-radius: 20px 20px;
 	       
         }
+        #details{
+        	margin-top : 10px;
+        }
         
         
-        #details {
-        	margin-left : 20px;
+      #profile {
+        	float : left;
+		    margin-right :  10px;
+		    width : 40px;
+		    height : 40px;
+		    border-radius : 50%;  
+		    position:relative;
+		    background-color: brown;
         }
       
 	</style>
@@ -96,11 +105,13 @@
 				
 			<div id="details">	
              	<a id="title" href="getShorts?sSeq=${shorts.sSeq}"><b>${shorts.sTitle}</b></a>
-             	
-                <a href="" id="pro">
-                	<img id= "profile" src = "">
-                </a><br>
+             
+             <div id="profile">
+                <a href="" id="pro"> <img id= "profile" src = ""> </a>
+             </div>	     	
+               <br>
                 <a href="" id="name" >${shorts.id} </a>
+              
             </div> 
              
             </div> 

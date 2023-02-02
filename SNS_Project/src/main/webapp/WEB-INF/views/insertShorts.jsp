@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>Shorts</title>
 
+<script src="https://code.jquery.com/qunit/qunit-2.19.4.css" integrity="sha256-qwmW00heo7d+2GZQ2eKAsTbPZ/Tw5emPGigowFrXpVk=" crossorigin="anonymous"></script>
+
 <style>
 #container {	
 	height : 20cm;
@@ -44,14 +46,18 @@
 		<div id = "t1">	
 		<table border="1" >
 			<tr>
-				<th id="text" width="100">제목: </th>
-					<td><input type ="text" name="sTitle"></td>
+				<th id="text" width="150">제목: </th>
+					<td><input type ="text" name="sTitle" maxlength="20"></td>
 			</tr>
 			
 			<tr>
 				<th id="text">내용: </th>
-				<td> <textarea id="textarea" rows="10" cols="40" 
-				name="sContent"></textarea></td>
+				<td> <textarea id="sContent" rows="10" cols="40" 
+				name="sContent"></textarea>
+				<div id="count">(0 / 1000) </div>
+				
+			</td>
+				
 			</tr>
 			
 			<tr>

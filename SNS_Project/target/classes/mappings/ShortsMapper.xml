@@ -9,7 +9,7 @@
   </insert>
   
   <update id = "updateShorts" parameterType = "shorts">
-  	update shorts set sTitle=#{sTitle}, id=#{id}, upload=#{upload}, sContent=#{sContent}
+  	update shorts set sTitle=#{sTitle}, upload=#{upload}, sContent=#{sContent}
   	where sSeq=#{sSeq}
   </update>
   

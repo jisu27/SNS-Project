@@ -114,13 +114,7 @@
 	<div id = "choose">
 		<c:choose>
 			<c:when test="${empty sessionScope.user}">
-				<div>
-				   <!--  
-					<label for="update"><a id="update" href="updateShorts?sSeq=${shorts.sSeq}">수정</a> &nbsp;</label> | 
-					<label for="delete">&nbsp;
-					<input type="button" value="삭제" onclick="check_delete()"></label>
-					-->
-				</div>
+				
 			</c:when>
 			<c:otherwise>
 				 <div>
