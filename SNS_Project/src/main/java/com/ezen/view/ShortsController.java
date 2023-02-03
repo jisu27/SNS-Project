@@ -39,7 +39,7 @@ public class ShortsController {
 		
 	}
 	
-	//@RequestMapping("/getlist")
+	
 	@RequestMapping("/getShortsList")
 	public String getShortsList(HttpSession session, ShortsVO vo, Model model) {
 		MemberVO user = (MemberVO) session.getAttribute("user");
@@ -53,9 +53,8 @@ public class ShortsController {
 		
 		model.addAttribute("searchKeyword", vo.getSearchKeyword());
 		return "getShortsList";
-		//return "getlist";
 		
-		
+
 	}
 	
 	@GetMapping("/insertShorts")
@@ -85,16 +84,12 @@ public class ShortsController {
 			
 		}else {
 
-			//textarea에 엔터 넣어주기
-			//String sContent = content.replace("<br>", "\r\n");
-			
 			MultipartFile uploadFile = vo.getUploadFile();
 			if(!uploadFile.isEmpty()) {
 				
 				String fileName = uploadFile.getOriginalFilename();
 				
 				uploadFile.transferTo(new File("C:/shorts/" + fileName));
-				//uploadFile.transferTo(new File("D:/shorts/" + fileName));
 				vo.setUpload(fileName);
 				System.out.println("파일이름 :" + fileName);
 				
@@ -102,8 +97,6 @@ public class ShortsController {
 				System.out.println("파일이 없습니다");
 				return "insertShorts";
 			}
-			//textarea에 엔터 넣어주기
-			//vo.setsContent(sContent);
 				
 			vo.setId(user.getId()); 
 			shos.insertShorts(vo);
@@ -134,15 +127,13 @@ public class ShortsController {
 			@RequestParam(value="sContent")String content,
 			ShortsVO vo, HttpSession session)throws IOException {
 		MemberVO user = (MemberVO) session.getAttribute("user");
-		
-		String sContent = content.replaceAll("<br>", "\r\n");
 
 		MultipartFile uploadFile = vo.getUploadFile();
 		if(!uploadFile.isEmpty()) {
 			
 			String fileName = uploadFile.getOriginalFilename();
 			
-			uploadFile.transferTo(new File("D:/shorts/" + fileName));
+			uploadFile.transferTo(new File("C:/shorts/" + fileName));
 			vo.setUpload(fileName);
 			System.out.println("파일이름 :" + fileName);
 			
@@ -155,9 +146,6 @@ public class ShortsController {
 			return "index";
 			
 		}else {
-			
-			//textarea 엔터
-			vo.setsContent(sContent);
 			
 			shos.updateShorts(vo);	
 			System.out.println("update controller 실행= " +"제목: " + vo.getsTitle()+ " 내용: " + vo.getsContent());

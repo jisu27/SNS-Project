@@ -30,8 +30,8 @@ public class BoardController {
 	
 
 //	##############################################################################################################--home
-	@RequestMapping(value="/home.do")
-	public String BoardList(BoardVO vo ,Model model,HttpSession session) {
+	//@RequestMapping(value="/home.do")
+	//public String BoardList(BoardVO vo ,Model model,HttpSession session) {
 
 	@Autowired
 	private AdvertiseService advertiseService;

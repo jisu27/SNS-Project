@@ -42,7 +42,7 @@
 }
 
 .contents_container.active{
-    display: flex;
+    display: flex; 
 }
 
 .contents_container .content{
@@ -51,7 +51,6 @@
     overflow:hidden;
     margin-bottom: 18px;
 
-
 }
 
 .contents_container .content video{
@@ -59,27 +58,24 @@
     height: 100%;
 }
 
-@media screen and (max-width:1000px){
+
+@media screen and (max-width:1000px){ 
 
     .contents_container {
         justify-content: center;
 
     }
 
-    .contents_container .pic{
+    .contents_container .content{
         margin:10px;
     }
 }
 
-
-
 </style>
-
 
 
 </head>
 <body>
-
 
 <section id="container">
 
@@ -155,19 +151,21 @@
                 </div>
             </div>
             
-		<c:forEach items="${shortsList}" var="shorts"> 
 		
-            <div class="mylist_contents contents_container active">      
-                <div id = "content" >
-			        <div id="video" class="video">
-						<video id="video-player" controls 
-						 preload="metadata" width = "100%" height= "200px" >
-						<source src="shorts/${shorts.upload}#t=0.5">
-						</video>
-			        </div>         	
+		
+            <div class="mylist_contents contents_container active">   
+            	<c:forEach items="${shortsList}" var="shorts">  
+                
+                <div class = "content" >   			        
+					<video id="video-player" controls 
+						preload="metadata"  >
+					<source src="shorts/${shorts.upload}#t=0.5">
+					</video>
+
            	 	</div>
+           	 	</c:forEach>  
 			</div>
-		</c:forEach>  
+		
 			<!-- 
             <div class="bookmark_contents contents_container">
                 <div class="pic">
