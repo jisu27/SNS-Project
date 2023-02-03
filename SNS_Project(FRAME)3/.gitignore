@@ -126,3 +126,4 @@ $RECYCLE.BIN/
 .MANIFEST.MF
 # End of https://www.toptal.com/developers/gitignore/api/windows,java,eclipse
 /projectSns/
+/target/

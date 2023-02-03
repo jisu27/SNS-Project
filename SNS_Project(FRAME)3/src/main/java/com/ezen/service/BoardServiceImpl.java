@@ -43,6 +43,18 @@ public class BoardServiceImpl implements BoardService {
 		bDao.updateBoard(vo);
 		
 	}
+
+	@Override
+	public List<BoardVO> getBoardList(BoardVO vo) {
+		
+		return bDao.getBoardList(vo);
+	}
+
+	@Override
+	public List<BoardVO> getAdverList(BoardVO vo) {
+		
+		return bDao.getAdverList(vo);
+	}
 	
 
 }

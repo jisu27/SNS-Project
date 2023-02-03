@@ -16,4 +16,8 @@ public interface BoardService {
 	void InsertBoard(BoardVO vo);
 	
 	void updateBoard(BoardVO vo);
+	
+	public List<BoardVO> getBoardList(BoardVO vo);
+	
+	public List<BoardVO> getAdverList(BoardVO vo);
 }

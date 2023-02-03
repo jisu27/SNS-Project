@@ -107,11 +107,18 @@
 									<!-- 이미지 upload가 있는지 없는지 -->
 									<c:if test="${board.upload=='null'}">
 										<br>
+										<div class="con">
+											<pre>${board.content }</pre>
+										</div>
 									</c:if>
 									<c:if test="${board.upload!='null'}">
 										<a
 											href="getBoard.do?bSeq=${board.bSeq}&profile=${memberList[status.index].profile}"><img
 											src="images/${board.upload}" alt="${board.id}의 이미지"></a>
+										<br>
+										<div class="con">
+											<pre>${board.content }</pre>
+										</div>
 									</c:if>
 									
 
@@ -163,8 +170,6 @@
 							<div class="likes m_text">
 								좋아요 <span id="like-count-39">${likeList[status.index]}</span> 개
 							</div>
-							<br>
-							<div class="con"><pre>${board.content }</pre></div>
 							
 							<c:forEach items="${commentList}" var="comment">
 								<c:if test="${comment.bseq == board.bSeq }">
@@ -236,13 +241,16 @@
 
 								<div class="img_section">
 									<div class="trans_inner">
-										<a href="getBoard?aSeq=${adverList[status.index/3].aSeq}">
-											<img src="adverimages/${adverList[status.index/3].img}"
+										<a href="getBoard?aSeq=${adverList[status.index/3].bSeq}">
+											<img src="images/${adverList[status.index/3].upload}"
 											alt="visual01">
 										</a>
+										
 									</div>
+									<br>
+									<div class="con">${adverList[status.index/3].content } </div>
 								</div>
-
+<br>
 								<div class="bottom_icons">
 									<div class="left_icons">
 										<div class="heart_btn">
@@ -256,8 +264,7 @@
 										<div class="sprite_bookmark_outline" data-name="bookmark"></div>
 									</div>
 								</div>
-								<br>
-								<div class="con">${board.content } </div>
+								
 	
 								<div class="likes m_text">
 									좋아요 <span id="like-count-39">2,346</span> 개

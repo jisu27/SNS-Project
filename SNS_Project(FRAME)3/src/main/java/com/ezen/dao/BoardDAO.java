@@ -30,4 +30,14 @@ public class BoardDAO  {
 	public void updateBoard(BoardVO vo) {
 			mybatis.update("boardMapper.updateBoard", vo);
 	}
+	
+	
+	//get 게시물
+	public List<BoardVO> getBoardList(BoardVO vo) {
+		return mybatis.selectList("boardMapper.getBoardList",vo);
+	}
+	//get 광고
+	public List<BoardVO> getAdverList(BoardVO vo) {
+		return mybatis.selectList("boardMapper.getAdverList",vo);
+	}
 }

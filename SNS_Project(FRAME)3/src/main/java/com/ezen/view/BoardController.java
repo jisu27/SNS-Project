@@ -23,7 +23,7 @@ import com.ezen.dto.BoardVO;
 import com.ezen.dto.CommentVO;
 import com.ezen.dto.HeartVO;
 import com.ezen.dto.MemberVO;
-import com.ezen.service.AdvertiseService;
+
 import com.ezen.service.BoardService;
 import com.ezen.service.CommentService;
 import com.ezen.service.HeartService;
@@ -35,8 +35,6 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	@Autowired
-	private AdvertiseService advertiseService;
-	@Autowired
 	private MemberService memberService;
 	@Autowired
 	private HeartService heartService;
@@ -45,10 +43,12 @@ public class BoardController {
 //	##############################################################################################################--home
 
 	@RequestMapping(value = "/home.do")
-	public String BoardList(AdvertisementVO aVo, BoardVO bVo, CommentVO cVo, Model model) {
+	public String BoardList(BoardVO bVo, CommentVO cVo, Model model) {
 
 		List<BoardVO> boardList = boardService.BoardList(bVo);
-		List<AdvertisementVO> adverList = advertiseService.AdverList(aVo);
+		
+		List<BoardVO> getboardList = boardService.getBoardList(bVo);
+		List<BoardVO> getadverList = boardService.getAdverList(bVo);
 		List<MemberVO> memberList = new ArrayList<>();
 		List<Integer> likeList = new ArrayList<>();
 		List<CommentVO> commentList = new ArrayList<CommentVO>();
@@ -93,10 +93,10 @@ public class BoardController {
 
 		model.addAttribute("likeList", likeList);
 
-		model.addAttribute("boardList", boardList);
-		//System.out.println(boardList);
+		model.addAttribute("boardList", getboardList);
+		System.out.println(getboardList);
 
-		model.addAttribute("adverList", adverList);
+		model.addAttribute("adverList", getadverList);
 		//System.out.println(adverList);
 
 		model.addAttribute("commentList", commentList);
