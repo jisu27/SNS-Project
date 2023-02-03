@@ -12,8 +12,16 @@ public class ShortsVO {
 	private String upload;
 	private Date inDate;
 	private MultipartFile uploadFile;
+	private String sContent;
 	
+	private String searchKeyword;
 	
+	public String getSearchKeyword() {
+		return searchKeyword;
+	}
+	public void setSearchKeyword(String searchKeyword) {
+		this.searchKeyword = searchKeyword;
+	}
 	public int getsSeq() {
 		return sSeq;
 	}
@@ -49,6 +57,17 @@ public class ShortsVO {
 	}
 	public void setUploadFile(MultipartFile uploadFile) {
 		this.uploadFile = uploadFile;
+	}
+	public String getsContent() {
+		return sContent;
+	}
+	public void setsContent(String sContent) {
+		this.sContent = sContent;
+	}
+	@Override
+	public String toString() {
+		return "ShortsVO [sSeq=" + sSeq + ", sTitle=" + sTitle + ", id=" + id + ", upload=" + upload + ", inDate="
+				+ inDate + ", uploadFile=" + uploadFile + ", sContent=" + sContent + "]";
 	}
 
 	
