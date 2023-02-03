@@ -48,7 +48,10 @@
 			
 			<tr>
 				<th id="text">내용: </th>
-				<td> <textarea id="textarea"  rows="10" cols="40" name="sContent" >${shortsvo.sContent}</textarea> </td>
+				<td>
+				<!--  <pre><textarea id="textarea"  rows="10" cols="40" name="sContent" >${shortsvo.sContent}</textarea></pre> -->
+				<textarea id="textarea"  rows="10" cols="40" name="sContent" >${shortsvo.sContent}</textarea>
+				</td>
 			</tr>
 			
 			<tr>

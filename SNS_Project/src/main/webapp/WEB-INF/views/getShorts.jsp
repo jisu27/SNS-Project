@@ -119,8 +119,9 @@
 			<c:otherwise>
 				 <div>
 					<label for="update"><a id="update" href="updateShorts?sSeq=${shorts.sSeq}">수정</a> &nbsp;</label> | 
-					<label for="delete">&nbsp;
-					<input type="button" value="삭제" onclick="check_delete()"></label>
+					&nbsp;
+					<a href="deleteShorts?sSeq=${shorts.sSeq}" onclick="return confirm('삭제하시겠습니까?');">삭제</a>
+					<!-- <input type="button" value="삭제" onclick="check_delete()">  -->
 					<!--  <a id="delete" href="deleteShorts?sSeq=${shorts.sSeq}" onclick="check_delete()">삭제</a></label>-->
 				</div>
 			</c:otherwise>	
@@ -129,7 +130,7 @@
 	
 	<div id = "content">
 		<p><fmt:formatDate value="${shorts.inDate}" type="date"/> </p>
-		<p>${shorts.sContent}</p>
+		<pre><p>${shorts.sContent}</p></pre>
 	</div>
 	
 </div>

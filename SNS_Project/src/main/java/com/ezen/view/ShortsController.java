@@ -39,6 +39,7 @@ public class ShortsController {
 		
 	}
 	
+	//@RequestMapping("/getlist")
 	@RequestMapping("/getShortsList")
 	public String getShortsList(HttpSession session, ShortsVO vo, Model model) {
 		MemberVO user = (MemberVO) session.getAttribute("user");
@@ -52,6 +53,7 @@ public class ShortsController {
 		
 		model.addAttribute("searchKeyword", vo.getSearchKeyword());
 		return "getShortsList";
+		//return "getlist";
 		
 		
 	}
@@ -73,7 +75,7 @@ public class ShortsController {
 	@RequestMapping(value= "/insertShorts", method=RequestMethod.POST )
 	public String insertShorts(
 			@RequestParam(value="sContent")String content,
-			ShortsVO vo, HttpSession session) throws IOException{
+			ShortsVO vo, Model model, HttpSession session) throws IOException{
 		
 		MemberVO user = (MemberVO) session.getAttribute("user");
 		
@@ -84,7 +86,7 @@ public class ShortsController {
 		}else {
 
 			//textarea에 엔터 넣어주기
-			String sContent = content.replace("\r\n", "<br>");
+			//String sContent = content.replace("<br>", "\r\n");
 			
 			MultipartFile uploadFile = vo.getUploadFile();
 			if(!uploadFile.isEmpty()) {
@@ -101,8 +103,8 @@ public class ShortsController {
 				return "insertShorts";
 			}
 			//textarea에 엔터 넣어주기
-			vo.setsContent(sContent);
-			
+			//vo.setsContent(sContent);
+				
 			vo.setId(user.getId()); 
 			shos.insertShorts(vo);
 
@@ -133,7 +135,7 @@ public class ShortsController {
 			ShortsVO vo, HttpSession session)throws IOException {
 		MemberVO user = (MemberVO) session.getAttribute("user");
 		
-		String sContent = content.replace("\r\n", "<br>");
+		String sContent = content.replaceAll("<br>", "\r\n");
 
 		MultipartFile uploadFile = vo.getUploadFile();
 		if(!uploadFile.isEmpty()) {

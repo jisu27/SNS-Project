@@ -7,8 +7,7 @@
  		<typeAlias type="com.ezen.dto.FollowVO" alias="comment"/>
  		<typeAlias type="com.ezen.dto.BoardVO" alias="board"/>
  		<typeAlias type="com.ezen.dto.ShortsVO" alias="shorts"/>
- 		<typeAlias type="com.ezen.dto.ShortsCommentVO" alias="shortsComment"/>
- 	</typeAliases>
+  	</typeAliases>
  	
  	<mappers>
  		<mapper resource="mappings/MemberMapper.xml"/>
@@ -16,6 +15,5 @@
  		<mapper resource="mappings/CommentMapper.xml"/>
  		<mapper resource="mappings/BoardMapper.xml"/>
  		<mapper resource="mappings/ShortsMapper.xml"/>
- 		<mapper resource="mappings/shortsCommentMapper.xml"/>
  	</mappers>
 </configuration>

@@ -54,31 +54,38 @@ function check_length(sContent) {
 $('#text textarea').keyup(function(){
 	var content = $(this).val();
 	$('#text #count span').html(content.legth);
-	if(content.length > 1000) {
-		alert("최대 1000자 까지 입력 가능합니다");
-		$(this).val(content.substring(0, 200));
-		$('#text #count span').html(1000);
+	if(content.length > 500) {
+		alert("최대 500자 까지 입력 가능합니다");
+		$(this).val(content.substring(0, 500));
+		$('#text #count span').html(500);
 	}
 	});
 */
 
+
+/*
 $(document).ready(function(){
 	$('#sContent').on('keyup', function() {
-		$('#count').html("(" + $(this).val().length + " / 1000");
+		$('#count').html("(" + $(this).val().length + " / 500");
 		
 		if($(this).val().length > 100) {
-			$(this).val($(this).val().substring(0, 1000));
-			$('#count').html("(1000 / 1000)");
+			$(this).val($(this).val().substring(0, 500));
+			$('#count').html("(500 / 500)");
 		}
-		
 	});
-	
 });	
 
+*/
 
 
-
-
+function length_check() {
+	var desc = $("#sContent").val();
+	
+	if( desc.length > 500) {	
+		alert("500자를 초과할 수 없습니다");
+		$("#sContent").val(desc.substring(0, 500));
+	}
+}
 
 
 

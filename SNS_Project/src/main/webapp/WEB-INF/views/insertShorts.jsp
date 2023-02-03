@@ -7,7 +7,8 @@
 <meta charset="UTF-8">
 <title>Shorts</title>
 
-<script src="https://code.jquery.com/qunit/qunit-2.19.4.css" integrity="sha256-qwmW00heo7d+2GZQ2eKAsTbPZ/Tw5emPGigowFrXpVk=" crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
 <style>
 #container {	
@@ -52,12 +53,11 @@
 			
 			<tr>
 				<th id="text">내용: </th>
-				<td> <textarea id="sContent" rows="10" cols="40" 
-				name="sContent"></textarea>
-				<div id="count">(0 / 1000) </div>
-				
+				<td>
+				<textarea id="sContent" rows="10" cols="40" name="sContent"
+				onkeyup = "length_check()"></textarea>
+				<div id="count">(0 / 500) </div>	
 			</td>
-				
 			</tr>
 			
 			<tr>
@@ -65,21 +65,15 @@
 				동영상 선택(동영상 파일만 업로드 할 수 있습니다)<br>
 				<input type="file" name="uploadFile" id ="uploadFile" accept="video/*" value="동영상 파일"></td>
 			</tr>
-			
-		
+	
 	</table>
 	</div>	
-			<br>
-			
+			<br>		
 			<input type="submit" value="동영상 업로드" onclick="check_file()">
-			
-	
+
 	<br><hr>
 		<a href="getShortsList">되돌아가기</a>	
-	 
-	 
-	 
-	 
+
 </div>	
 
 </form>
