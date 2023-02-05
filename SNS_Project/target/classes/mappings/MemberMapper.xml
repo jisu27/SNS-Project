@@ -9,8 +9,8 @@
   </select>
   <!-- ########################################################################################################################## -->
   <insert id="insertMember">
-		INSERT INTO member(id, pwd ,name , email)
-		VALUES  (#{id},#{pwd}, #{name}, #{email})
+		INSERT INTO member(id, pwd ,name , email, profile)
+		VALUES  (#{id},#{pwd}, #{name}, #{email},#{profile})
   </insert>
   <!-- ########################################################################################################################## -->
   <select id="findId" resultType="member">

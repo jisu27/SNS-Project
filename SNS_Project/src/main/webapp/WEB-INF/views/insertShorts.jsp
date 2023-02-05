@@ -1,85 +1,157 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+    pageEncoding="UTF-8" %>
+    
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Shorts</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+    <!-- Facebook Meta Tags / 페이스북 오픈 그래프 -->
+    <meta property="og:url" content="http://kindtiger.dothome.co.kr/insta">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="instagram">
+    <meta property="og:description" content="instagram clone">
+    <meta property="og:image" content="http://kindtiger.dothome.co.kr/insta/imgs/instagram.jpeg">
+    .
+    <!-- Twitter Meta Tags / 트위터 -->
+    <meta name="twitter:card" content="instagram clone">
+    <meta name="twitter:title" content="instagram">
+    <meta name="twitter:description" content="instagram clone">
+    <meta name="twitter:image" content="http://kindtiger.dothome.co.kr/insta/imgs/instagram.jpeg">
+
+    <!-- Google / Search Engine Tags / 구글 검색 엔진 -->
+    <meta itemprop="name" content="instagram">
+    <meta itemprop="description" content="instagram clone">
+    <meta itemprop="image" content="http://kindtiger.dothome.co.kr/insta/imgs/instagram.jpeg">
 
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
-<style>
-#container {	
-	height : 20cm;
-	width : 40cm;
-	padding:20px 50px;
-
-}
-
-#text{
-	text-align:center;
-	
-}
-
-
-</style>
+    <title>instagram</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/new_post.css">
+    <link rel="shortcut icon" href="imgs/instagram.png">
 
 </head>
 <body>
 
-<form action="insertShorts" method="post" enctype="multipart/form-data">
-	
-<div id = "container">
 
- <c:choose>
- 	<c:when test= "${empty sessionScope.user}">
- 		<a href="http://localhost:8080/">로그인</a>
- 	</c:when>
- 	<c:otherwise>
- 		 ${sessionScope.user.name} 님 로그인 중
-  </c:otherwise>
-  </c:choose>  
+<section id="container">
 
-	
-		<h2>동영상을 업로드 하세요</h2><br><br>
-		<div id = "t1">	
-		<table border="1" >
-			<tr>
-				<th id="text" width="150">제목: </th>
-					<td><input type ="text" name="sTitle" maxlength="20"></td>
-			</tr>
-			
-			<tr>
-				<th id="text">내용: </th>
-				<td>
-				<textarea id="sContent" rows="10" cols="40" name="sContent"
-				onkeyup = "length_check()"></textarea>
-				<div id="count">(0 / 500) </div>	
-			</td>
-			</tr>
-			
-			<tr>
-				<td colspan="2">
-				동영상 선택(동영상 파일만 업로드 할 수 있습니다)<br>
-				<input type="file" name="uploadFile" id ="uploadFile" accept="video/*" value="동영상 파일"></td>
-			</tr>
-	
-	</table>
-	</div>	
-			<br>		
-			<input type="submit" value="동영상 업로드" onclick="check_file()">
 
-	<br><hr>
-		<a href="getShortsList">되돌아가기</a>	
+    <header id="header">
+        <section class="h_inner">
 
-</div>	
+            <h1 class="logo">
+                <a href="index.html">
+                    <div class="sprite_insta_icon"></div>
+                    <div>
+                        <div class="sprite_write_logo"></div>
+                    </div>
+                </a>
+            </h1>
 
-</form>
-<script type="text/javascript" src="views/shorts.js"></script>
+            <div class="search_field">
+                <input type="text" placeholder="검색" tabindex="0">
+
+                <div class="fake_field">
+                    <span class=sprite_small_search_icon></span>
+                    <span>검색</span>
+                </div>
+            </div>
+
+
+            <div class="right_icons">
+                <a href="new_post.html"><div class="sprite_camera_icon"></div></a>
+                <a href="login.html"><div class="sprite_compass_icon"></div></a>
+                <a href="follow.html"><div class="sprite_heart_icon_outline"></div></a>
+                <a href="profile.html"><div class="sprite_user_icon_outline"></div></a>
+            </div>
+        </section>
+    </header>
 
 
 
+    <div id="main_container">
+
+        <div class="post_form_container">
+            <form action="insertShorts" method="post" class="post_form" enctype="multipart/form-data">
+                <div class="title">
+                    NEW POST
+                </div>
+                <div class="preview">
+                    <div class="upload">
+                        <div class="post_btn">
+                            <div class="plus_icon">
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <p>포스트 동영상 추가</p>
+                            <canvas id="imageCanvas"></canvas>
+                            <!--<p><img id="img_id" src="#" style="width: 300px; height: 300px; object-fit: cover" alt="thumbnail"></p>-->
+                        </div>
+                    </div>
+                </div>
+                <p>
+                    <input type="file" name="uploadFile" id="id_photo" required="required" accept="video/*">
+                </p>
+                <p>
+                    <textarea name="sContent" id="text_field" cols="50" rows="5" placeholder="140자 까지 등록 가능합니다.
+						#태그명 을 통해서 검색 태그를 등록할 수 있습니다.
+						예시 : I # love # insta!"></textarea>
+
+                </p>
+                <input class="submit_btn" type="submit" value="저장">
+            </form>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+<script src="js/insta.js"></script>
+
+<script>
+       var fileInput  = document.querySelector( "#id_photo" ),
+           button     = document.querySelector( ".input-file-trigger" ),
+           the_return = document.querySelector(".file-return");
+
+       // Show image
+       fileInput.addEventListener('change', handleImage, false);
+       var canvas = document.getElementById('imageCanvas');
+       var ctx = canvas.getContext('2d');
+
+
+        function handleImage(e){
+           var reader = new FileReader();
+           reader.onload = function(event){
+               //var img = new Image();
+               var video = new Video();
+               
+               // var imgWidth =
+             //  img.onload = function(){
+            	 video.onload = function(){   
+                   canvas.width = 300;
+                   canvas.height = 300;
+                   //ctx.drawImage(img,0,0,300,300);
+                   ctx.drawImage(video,0,0,300,300);
+
+               };
+               
+              // img.src = event.target.result;
+               video.src = event.target.result;
+
+               // img.width = img.width*0.5
+               // canvas.height = img.height;
+           };
+           reader.readAsDataURL(e.target.files[0]);
+       }
+
+
+</script>
 </body>
 </html>

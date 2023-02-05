@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -157,8 +159,8 @@
             	<c:forEach items="${shortsList}" var="shorts">  
                 
                 <div class = "content" >   			        
-					<video id="video-player" controls 
-						preload="metadata"  >
+					<video id="video-player" onmouseover="this.play()" onmouseout="this.pause()"
+					preload="metadata" onclick="getShorts?sSeq=${shorts.sSeq}">
 					<source src="shorts/${shorts.upload}#t=0.5">
 					</video>
 

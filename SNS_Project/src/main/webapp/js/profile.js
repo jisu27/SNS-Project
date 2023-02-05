@@ -26,4 +26,5 @@ function openCity(e){
 }
 
 
+
 tapContainer.addEventListener('click', openCity);
