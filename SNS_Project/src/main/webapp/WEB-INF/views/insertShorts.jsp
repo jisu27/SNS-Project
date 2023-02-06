@@ -89,7 +89,11 @@
                                 <span></span>
                             </div>
                             <p>포스트 동영상 추가</p>
-                            <canvas id="imageCanvas"></canvas>
+                            <video controls id="video-tag" style="width: 300px; height: 250px; object-fit: cover">
+							  <source id="video-source" src="splashVideo">
+							  Your browser does not support the video tag.
+							</video>
+                            <!--  <canvas id="imageCanvas"></canvas>-->
                             <!--<p><img id="img_id" src="#" style="width: 300px; height: 300px; object-fit: cover" alt="thumbnail"></p>-->
                         </div>
                     </div>
@@ -98,9 +102,8 @@
                     <input type="file" name="uploadFile" id="id_photo" required="required" accept="video/*">
                 </p>
                 <p>
-                    <textarea name="sContent" id="text_field" cols="50" rows="5" placeholder="140자 까지 등록 가능합니다.
-						#태그명 을 통해서 검색 태그를 등록할 수 있습니다.
-						예시 : I # love # insta!"></textarea>
+                    <textarea name="sContent" id="text_field" cols="50" rows="5" 
+                    placeholder="140자 까지 등록 가능합니다."></textarea>
 
                 </p>
                 <input class="submit_btn" type="submit" value="저장">
@@ -116,40 +119,35 @@
 <script src="js/insta.js"></script>
 
 <script>
-       var fileInput  = document.querySelector( "#id_photo" ),
-           button     = document.querySelector( ".input-file-trigger" ),
-           the_return = document.querySelector(".file-return");
-
+	var fileInput  = document.querySelector( "#id_photo" ),
+	button     = document.querySelector( ".input-file-trigger" ),
+	the_return = document.querySelector(".file-return");
+	const videoSrc = document.querySelector("#video-source");
+	const videoTag = document.querySelector("#video-tag")
+	
+	// window.onload => HTML이 브라우저에 표시 완료되었을 때 실행
+	window.onload = function() {
        // Show image
-       fileInput.addEventListener('change', handleImage, false);
+       fileInput.addEventListener('change', handleVideo, false);
        var canvas = document.getElementById('imageCanvas');
        var ctx = canvas.getContext('2d');
+	}
 
-
-        function handleImage(e){
-           var reader = new FileReader();
-           reader.onload = function(event){
-               //var img = new Image();
-               var video = new Video();
-               
-               // var imgWidth =
-             //  img.onload = function(){
-            	 video.onload = function(){   
-                   canvas.width = 300;
-                   canvas.height = 300;
-                   //ctx.drawImage(img,0,0,300,300);
-                   ctx.drawImage(video,0,0,300,300);
-
-               };
-               
-              // img.src = event.target.result;
-               video.src = event.target.result;
-
-               // img.width = img.width*0.5
-               // canvas.height = img.height;
-           };
-           reader.readAsDataURL(e.target.files[0]);
-       }
+    function handleVideo(event){
+    	console.log(event.target.files);
+		
+        if (event.target.files && event.target.files[0]) {
+            var reader = new FileReader();
+            
+            reader.onload = function(e) {
+            	console.log('loaded');
+            	videoSrc.src = e.target.result;
+            	videoTag.load()
+            }.bind(this)
+            
+            reader.readAsDataURL(event.target.files[0]);
+        }
+   }
 
 
 </script>

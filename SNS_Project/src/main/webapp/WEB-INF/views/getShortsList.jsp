@@ -159,14 +159,20 @@
             	<c:forEach items="${shortsList}" var="shorts">  
                 
                 <div class = "content" >   			        
-					<video id="video-player" onmouseover="this.play()" onmouseout="this.pause()"
-					preload="metadata" onclick="getShorts?sSeq=${shorts.sSeq}">
-					<source src="shorts/${shorts.upload}#t=0.5">
+					<a href="getShorts?sSeq=${shorts.sSeq}">
+						<video id="video-player" onmouseover="this.play()" onmouseout="this.pause()"
+						preload="metadata">
+						<source src="shorts/${shorts.upload}#t=0.5">
 					</video>
+					</a>
 
            	 	</div>
            	 	</c:forEach>  
 			</div>
+			
+			
+			
+			
 		
 			<!-- 
             <div class="bookmark_contents contents_container">

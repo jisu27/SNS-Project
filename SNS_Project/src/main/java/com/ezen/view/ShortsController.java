@@ -72,9 +72,7 @@ public class ShortsController {
 	
 	
 	@RequestMapping(value= "/insertShorts", method=RequestMethod.POST )
-	public String insertShorts(
-			@RequestParam(value="sContent")String content,
-			ShortsVO vo, Model model, HttpSession session) throws IOException{
+	public String insertShorts(ShortsVO vo, Model model, HttpSession session) throws IOException{
 		
 		MemberVO user = (MemberVO) session.getAttribute("user");
 		
@@ -123,9 +121,7 @@ public class ShortsController {
 	}
 	
 	@PostMapping(value="/updateShorts" )
-	public String updateShorts(
-			@RequestParam(value="sContent")String content,
-			ShortsVO vo, HttpSession session)throws IOException {
+	public String updateShorts(ShortsVO vo, HttpSession session)throws IOException {
 		MemberVO user = (MemberVO) session.getAttribute("user");
 
 		MultipartFile uploadFile = vo.getUploadFile();
