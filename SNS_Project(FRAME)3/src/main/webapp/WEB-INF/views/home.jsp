@@ -95,9 +95,10 @@
 									<ul class="toggle_box" id="toggle_box${status.count}">
 										<li><input type="submit" class="follow" value="팔로우"
 											data-name="follow"></li>
-										<li><a href="goUpdateBoard.do?bSeq=${board.bSeq}">수정</a></li>
+										<li><a href="goUpdateBoard.do?bSeq=${board.bSeq}">
+										<input type="button" value="수정"></a></li>
 										
-										<li><form action="deleteBoard.do" method="post">
+										<li><form action="deleteBoard.do?bSeq=${board.bSeq}" method="post">
 										<c:if test="${sessionScope.user.id == board.id }">
 												<input type="submit" value="삭제" >
 											</c:if>
