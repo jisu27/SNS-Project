@@ -16,5 +16,4 @@ public interface ShortsService {
 	
 	List<ShortsVO> getShortsList(ShortsVO vo);
 
-	List<ShortsVO> shortList();
 }

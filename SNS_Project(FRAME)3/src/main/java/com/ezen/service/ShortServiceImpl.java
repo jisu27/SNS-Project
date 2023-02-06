@@ -44,9 +44,4 @@ public class ShortServiceImpl implements ShortsService {
 		return sDAO.getShortsList(vo);
 	}
 
-	@Override
-	public List<ShortsVO> shortList() {
-		return sDAO.shortList();
-	}
-
 }

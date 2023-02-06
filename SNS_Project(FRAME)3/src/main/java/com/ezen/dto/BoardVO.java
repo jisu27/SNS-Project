@@ -2,8 +2,6 @@ package com.ezen.dto;
 
 import java.util.Date;
 
-import org.springframework.web.multipart.MultipartFile;
-
 public class BoardVO {
 	private int bSeq;
 	private String title;
@@ -12,15 +10,7 @@ public class BoardVO {
 	private String content;
 	private String upload;
 	private Date inDate;
-	private MultipartFile uploadfile;
 	
-	
-	public MultipartFile getUploadfile() {
-		return uploadfile;
-	}
-	public void setUploadfile(MultipartFile uploadfile) {
-		this.uploadfile = uploadfile;
-	}
 	public int getbSeq() {
 		return bSeq;
 	}
@@ -66,7 +56,7 @@ public class BoardVO {
 	@Override
 	public String toString() {
 		return "BoardVO [bSeq=" + bSeq + ", title=" + title + ", id=" + id + ", pay=" + pay + ", content=" + content
-				+ ", upload=" + upload + ", inDate=" + inDate + ", uploadfile=" + uploadfile + "]";
+				+ ", upload=" + upload + ", inDate=" + inDate + "]";
 	}
 	
 	

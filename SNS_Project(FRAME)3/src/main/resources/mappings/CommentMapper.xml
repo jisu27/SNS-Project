@@ -1,34 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="commentMapper">
+<mapper namespace="CommentMapper">
 
-    <insert id="insertComment" parameterType="comment">
+    <insert id="saveComment" parameterType="comment">
 		INSERT INTO
 		SNS_COMMENT(cseq, bseq, id, ccontent)
 		VALUES
-		(sns_comment_seq.NEXTVAL, #{bSeq}, #{id}, #{ccontent})
+		(sns_comment_seq.NEXTVAL, #{bseq}, #{id}, #{ccontent})
 	</insert>
 	
-	<delete id="deleteComment" parameterType="comment">
-		DELETE SNS_COMMENT WHERE cseq=#{cseq}
-	</delete>
-	
-	<update id="updateComment" parameterType="comment">
-		UPDATE SNS_COMMENT SET ccontent=#{ccontent}
-		WHERE cseq=#{cseq}
-	</update>
-	
-	<select id="getComment" resultType="comment">
-		SELECT * FROM SNS_COMMENT 
+	<select id="commentList" resultType="comment">
+		SELECT *
+		FROM SNS_COMMENT
+		WHERE cseq = #{cseq}
+		ORDER BY indate DESC
+	</select>
+
+	<select id="countcommentList" resultType="int">
+		SELECT count(*)
+		FROM SNS_COMMENT
+		WHERE cseq = #{cseq}
 	</select>
 	
-	<select id="getCommentList" resultType="comment">
-		SELECT s.* 
-	  	FROM SNS_COMMENT s
-	    join board  b
-	    on b.bseq = s.bseq
-	    where b.bseq = #{bseq}
-	  	order by s.indate DESC
+	<!--  
+	<select id="commentListWithPaging" parameterType="hashMap" resultType="comment">
+		<![CDATA[
+		SELECT comment_seq, pseq,content, writer, regdate, modifydate
+		FROM (SELECT row_number() OVER (ORDER BY regdate DESC) rn,comment_seq, pseq,
+     			 content, writer, regdate, modifydate
+		FROM product_comment
+		WHERE pseq = #{pseq})
+		WHERE rn <= #{criteria.pageNum} * #{criteria.rowsPerPage}
+		AND rn > (#{criteria.pageNum}-1) * #{criteria.rowsPerPage}
+		]]>
 	</select>
+	-->
 	
 </mapper>

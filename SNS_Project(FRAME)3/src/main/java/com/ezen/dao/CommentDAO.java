@@ -9,41 +9,36 @@ import org.springframework.stereotype.Repository;
 
 import com.ezen.dto.CommentVO;
 
-@Repository("commentDAO")
-public class CommentDAO {
+@Repository("SnsCommentDAO")
+public class CommentDAO   {
 	
 	@Autowired
 	private SqlSessionTemplate mybatis;
 	
 	// 게시글 등록
-	public void insertComment(CommentVO vo) {
-		System.out.println("===> Mybatis로 insertComment() 기능 처리");
-		mybatis.insert("commentMapper.insertComment", vo);
+	public int saveComment(CommentVO vo) {
+		System.out.println("===> Mybatis로 saveComment() 기능 처리");
+		return mybatis.insert("CommentMapper.saveComment", vo);
 		
 	}
 	
-	// 게시글 수정
-	public void updateComment(CommentVO vo) {
-		System.out.println("===> Mybatis로 updateComment() 기능 처리");
-		mybatis.update("commentMapper.updateComment", vo);
-	
+	public List<CommentVO> commentList(int cseq){
+		
+		return mybatis.selectList("CommentMapper.commentList", cseq);
 	}
 	
-	// 게시글 삭제
-	
-	public void deleteComment(CommentVO vo) {
-		System.out.println("===> Mybatis로 deleteComment() 기능 처리");
-		mybatis.delete("commentMapper.deleteComment", vo);
+	public int countCommentList(int cseq) {
+		return mybatis.selectOne("CommentMapper.countcommentList", cseq);
 	}
 	
-	public CommentVO getComment(CommentVO vo) {
-		System.out.println("===> Mybatis로 getComment() 기능 처리");
-		return mybatis.selectOne("commentMapper.getComment", vo);
+	/*
+	public List<CommentVO>  commentListWithPaging(Criteria criteria, int cseq){
+		HashMap<String,Object> map = new HashMap<>();
+		
+		map.put("criteria", criteria);
+		map.put("cseq", cseq);
+		
+		return mybatis.selectList("CommentMapper.commentListWithPaging", map);
 	}
-	
-	public List<CommentVO> getCommentList(CommentVO vo){
-		System.out.println("===> Mybatis로 getCommentList() 기능 처리");
-		return mybatis.selectList("commentMapper.getCommentList", vo);
-	}
-	
+	*/
 }

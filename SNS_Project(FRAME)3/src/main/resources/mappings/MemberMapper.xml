@@ -3,7 +3,7 @@
 <mapper namespace="memberMapper">
  <!-- ########################################################################################################################## -->
   <select id="memberCheck" resultType="member">
-  		SELECT id,pwd,name,role,email,pay,profile 
+  		SELECT id,pwd,name,role,email,pay 
   		FROM member
   		WHERE id='${id}'
   </select>

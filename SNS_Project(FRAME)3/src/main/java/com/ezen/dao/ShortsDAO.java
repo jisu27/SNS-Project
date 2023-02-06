@@ -39,9 +39,5 @@ public class ShortsDAO  {
 	public void deleteShorts(ShortsVO vo) {
 		mybatis.delete("ShortsMapper.deleteShorts",vo);
 	}
-	
-	public List<ShortsVO> shortList() {
-		return mybatis.selectList("ShortsMapper.shorstList");
-	}
 
 }

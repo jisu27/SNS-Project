@@ -3,15 +3,7 @@
 <mapper namespace="boardMapper">
   
   <select id="boardList" resultType="board">
-        SELECT *
-      	FROM board 
-        ORDER BY INDATE DESC
-  </select>
-  
-  <select id="myBoard" resultType="board">
-  	SELECT *
-  	FROM board 
-  	WHERE bSeq=#{bSeq}
+  	SELECT * FROM board order by bSeq DESC
   </select>
 
   <!-- #################################################################################################################### -->
@@ -23,13 +15,5 @@
   	INSERT INTO board(bseq,title,id,content,upload,pay) 
   	VALUES(board_seq.NEXTVAL, #{title}, #{id}, #{content},#{upload}, #{pay})
   </insert>
-  <!-- #################################################################################################################### -->
-  <update id="updateBoard" parameterType="board"> 
-  		UPDATE board 
-  		SET title=#{title},content=#{content},upload=#{upload}
-  		WHERE bSeq=#{bSeq} 
-  </update>
 </mapper>
-
- 
 

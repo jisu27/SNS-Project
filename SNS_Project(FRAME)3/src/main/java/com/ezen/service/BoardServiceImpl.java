@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.ezen.dao.BoardDAO;
 import com.ezen.dto.BoardVO;
-import com.ezen.dto.JoinBoardVO;
 
 @Service("BoardService")
 public class BoardServiceImpl implements BoardService {
@@ -30,18 +29,6 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<BoardVO> myBoardList(BoardVO vo) {
 		return 	bDao.myBoardList(vo);
-	}
-
-	@Override
-	public BoardVO myBoard(BoardVO vo) {
-		
-		return bDao.myBoard(vo);
-	}
-
-	@Override
-	public void updateBoard(BoardVO vo) {
-		bDao.updateBoard(vo);
-		
 	}
 	
 

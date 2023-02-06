@@ -14,6 +14,7 @@ public class MemberVO {
 	private String email;
 	private Date reg_date;
 	private int pay;
+	
 	private MultipartFile file;
 	
 	public MultipartFile getFile() {
@@ -78,6 +79,8 @@ public class MemberVO {
 		return "MemberVO [id=" + id + ", pwd=" + pwd + ", name=" + name + ", role=" + role + ", email=" + email
 				+ ", reg_date=" + reg_date + ", pay=" + pay + ", profile=" + profile + "]";
 	}
+	
+	
 	
 	
 	

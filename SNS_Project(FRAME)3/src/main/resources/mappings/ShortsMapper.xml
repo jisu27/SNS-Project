@@ -3,15 +3,29 @@
 
 <mapper namespace="ShortsMapper">
   
+ <!-- 
   <insert id = "insertShorts" parameterType = "shorts">
-  	insert into shorts(sSeq, sTitle, id, upload, sContent)
-  	values(shorts_seq.NEXTVAL, #{sTitle}, #{id}, #{upload}, #{sContent})
+  	insert into Shorts(sSeq, sTitle, id, upload)
+  	values(shorts_seq.NEXTVAL, #{sTitle}, #{sContent}, #{id}, #{upload})
+  </insert>
+   -->
+   
+   <insert id = "insertShorts" parameterType = "shorts">
+  	insert into Shorts(sSeq, id, sContent, upload)
+  	values(shorts_seq.NEXTVAL, #{id}, #{sContent}, #{upload})
   </insert>
   
+ <!--  
   <update id = "updateShorts" parameterType = "shorts">
-  	update shorts set sTitle=#{sTitle}, id=#{id}, upload=#{upload}, sContent=#{sContent}
+  	update Shorts set sTitle=#{sTitle}, id=#{id}, upload=#{upload}
   	where sSeq=#{sSeq}
   </update>
+  -->
+  <update id = "updateShorts" parameterType = "shorts">
+  	update Shorts set id=#{id}, sContent=#{sContent}, upload=#{upload}
+  	where sSeq=#{sSeq}
+  </update>
+  
   
   <delete id="deleteShorts" parameterType="shorts">
   	delete shorts where sSeq=#{sSeq}
@@ -24,15 +38,7 @@
   </select>
   
   <select id="getShortsList" resultType="shorts">
-  	SELECT  * 
-  	FROM shorts 
-  	WHERE sTitle like '%'||#{searchKeyword}||'%'
-  	ORDER BY sSeq DESC
-  </select>
-  
-  <select id="shorstList" resultType="shorts">
-  	SELECT  * 
-  	FROM shorts 
+  	select * from shorts order by sSeq DESC
   </select>
   
   

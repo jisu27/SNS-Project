@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class CommentVO {
 	private int cseq;
-	private int bSeq;
+	private int bseq;
 	private String id;
 	private String ccontent;
 	private Date indate;
@@ -15,10 +15,10 @@ public class CommentVO {
 		this.cseq = cseq;
 	}
 	public int getBseq() {
-		return bSeq;
+		return bseq;
 	}
-	public void setBseq(int bSeq) {
-		this.bSeq = bSeq;
+	public void setBseq(int bseq) {
+		this.bseq = bseq;
 	}
 	public String getId() {
 		return id;
@@ -40,7 +40,7 @@ public class CommentVO {
 	}
 	@Override
 	public String toString() {
-		return "SnsCommentVO [cseq=" + cseq + ", bseq=" + bSeq + ", id=" + id + ", ccontent=" + ccontent + ", indate="
+		return "SnsCommentVO [cseq=" + cseq + ", bseq=" + bseq + ", id=" + id + ", ccontent=" + ccontent + ", indate="
 				+ indate + "]";
 	}
 	

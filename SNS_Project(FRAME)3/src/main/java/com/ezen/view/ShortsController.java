@@ -29,102 +29,107 @@ public class ShortsController {
 	
 	@RequestMapping("/getShorts")
 	public String getShorts(ShortsVO vo, Model model, HttpSession session) {
-		
+		MemberVO user = (MemberVO) session.getAttribute("user");
 		
 		ShortsVO shorts = shos.getShorts(vo);
 		model.addAttribute("shorts", shorts);
 		
 		System.out.println("--getShorts controller 실행: " + shorts);
-		
 		return "getShorts";
 		
 	}
 	
+	
 	@RequestMapping("/getShortsList")
-	public String getShortsList(ShortsVO vo, Model model) {
+	public String getShortsList(HttpSession session, ShortsVO vo, Model model) {
+		MemberVO user = (MemberVO) session.getAttribute("user");
 		
-		if(vo.getSearchKeyword() == null) {
-			vo.setSearchKeyword("");
-		}
+		if(vo.getSearchKeyword() == null) vo.setSearchKeyword("");
+			
 		
 		List<ShortsVO> list =  shos.getShortsList(vo);
 		
 		model.addAttribute("shortsList", list);
+		
 		model.addAttribute("searchKeyword", vo.getSearchKeyword());
 		return "getShortsList";
 		
-		
+
 	}
 	
 	@GetMapping("/insertShorts")
 	public String insertShortsView(HttpSession session) {
 		MemberVO user = (MemberVO) session.getAttribute("user");
 		
-		return "insertShorts";
+		if(user == null) {
+			return "index";
+		}else {
+			return "insertShorts";
+		}
+		
+		
 	}
 	
 	
 	@RequestMapping(value= "/insertShorts", method=RequestMethod.POST )
-	public String insertShorts(
-			@RequestParam(value="sContent")String content,
-			ShortsVO vo, HttpSession session) throws IOException{
+	public String insertShorts(ShortsVO vo, Model model, HttpSession session) throws IOException{
+		
 		MemberVO user = (MemberVO) session.getAttribute("user");
 		
-		//textarea에 엔터 넣어주기
-		String sContent = content.replace("\r\n", "<br>");
-		
+		if(user == null) {
+			
+			return "index";
+			
+		}else {
+
+			MultipartFile uploadFile = vo.getUploadFile();
+			if(!uploadFile.isEmpty()) {
 				
+				String fileName = uploadFile.getOriginalFilename();
+				
+				uploadFile.transferTo(new File("C:/shorts/" + fileName));
+				vo.setUpload(fileName);
+				System.out.println("파일이름 :" + fileName);
+				
+			} else {
+				System.out.println("파일이 없습니다");
+				return "insertShorts";
+			}
+				
+			vo.setId(user.getId()); 
+			shos.insertShorts(vo);
+
+			return "redirect:getShortsList";
+		}
+
+	}
+
+	@GetMapping(value="/updateShorts") 
+	public String updateShortsVeiws (ShortsVO vo, HttpSession session, Model model) {
+		MemberVO user = (MemberVO) session.getAttribute("user");
+		
+		if (user ==null) {
+			
+			return "index";
+		}else {
+			ShortsVO shorts = shos.getShorts(vo);
+			
+			model.addAttribute("shortsvo", shorts);
+			return "updateShorts";
+		}
+
+	}
+	
+	@PostMapping(value="/updateShorts" )
+	public String updateShorts(ShortsVO vo, HttpSession session)throws IOException {
+		MemberVO user = (MemberVO) session.getAttribute("user");
+
 		MultipartFile uploadFile = vo.getUploadFile();
 		if(!uploadFile.isEmpty()) {
 			
 			String fileName = uploadFile.getOriginalFilename();
 			
 			uploadFile.transferTo(new File("C:/shorts/" + fileName));
-			//uploadFile.transferTo(new File("D:/shorts/" + fileName));
-			vo.setUpload(fileName);
-			System.out.println("파일이름 :" + fileName);
-			
-		} else {
-			System.out.println("파일이 없습니다");
-			return "insertShorts";
-		}
-		//textarea에 엔터 넣어주기
-		vo.setsContent(sContent);
-		
-		vo.setId(user.getId()); 
-		shos.insertShorts(vo);
-
-		return "redirect:getShortsList";
-		
-	}
-	
-	
-	
-	@GetMapping(value="/updateShorts") 
-	public String updateShortsVeiws (ShortsVO vo, HttpSession session, Model model) {
-		MemberVO user = (MemberVO) session.getAttribute("user");
-		
-		ShortsVO shorts = shos.getShorts(vo);
-		
-		model.addAttribute("shortsvo", shorts);
-		return "updateShorts";
-	
-	}
-	
-	@PostMapping(value="/updateShorts" )
-	public String updateShorts(
-			@RequestParam(value="sContent")String content,
-			ShortsVO vo, HttpSession session)throws IOException {
-		MemberVO user = (MemberVO) session.getAttribute("user");
-		
-		String sContent = content.replace("\r\n", "<br>");
-
-		MultipartFile uploadFile = vo.getUploadFile();
-		if(!uploadFile.isEmpty()) {
-			
-			String fileName = uploadFile.getOriginalFilename();
-			
-			uploadFile.transferTo(new File("D:/shorts/" + fileName));
 			vo.setUpload(fileName);
 			System.out.println("파일이름 :" + fileName);
 			
@@ -138,12 +143,9 @@ public class ShortsController {
 			
 		}else {
 			
-			//textarea 엔터
-			vo.setsContent(sContent);
-			
 			shos.updateShorts(vo);	
 			System.out.println("update controller 실행= " +"제목: " + vo.getsTitle()+ " 내용: " + vo.getsContent());
-			return "updateShorts";		
+			return "redirect:getShortsList";		
 		}
 		
 	}

@@ -4,12 +4,10 @@
  	<typeAliases>
  		<typeAlias type="com.ezen.dto.MemberVO" alias="member"/>
  		<typeAlias type="com.ezen.dto.FollowVO" alias="follow"/>
- 		<typeAlias type="com.ezen.dto.CommentVO" alias="comment"/>
+ 		<typeAlias type="com.ezen.dto.FollowVO" alias="comment"/>
  		<typeAlias type="com.ezen.dto.BoardVO" alias="board"/>
- 		<typeAlias type="com.ezen.dto.JoinBoardVO" alias="joinBoard"/>
  		<typeAlias type="com.ezen.dto.ShortsVO" alias="shorts"/>
  		<typeAlias type="com.ezen.dto.AdvertisementVO" alias="advertise"/>
- 		<typeAlias type="com.ezen.dto.HeartVO" alias="heart"/>
  	</typeAliases>
  	
  	<mappers>
@@ -19,6 +17,5 @@
  		<mapper resource="mappings/BoardMapper.xml"/>
  		<mapper resource="mappings/ShortsMapper.xml"/>
  		<mapper resource="mappings/AdvertiseMapper.xml"/>
- 		<mapper resource="mappings/HeartMapper.xml"/>
  	</mappers>
 </configuration>
