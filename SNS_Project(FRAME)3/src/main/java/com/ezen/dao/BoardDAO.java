@@ -40,4 +40,10 @@ public class BoardDAO  {
 	public List<BoardVO> getAdverList(BoardVO vo) {
 		return mybatis.selectList("boardMapper.getAdverList",vo);
 	}
+	
+	//삭제
+	public void deleteBoard(BoardVO vo) {
+		
+		mybatis.delete("boardMapper.deleteBoard",vo);
+	}
 }

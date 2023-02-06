@@ -96,7 +96,12 @@
 										<li><input type="submit" class="follow" value="팔로우"
 											data-name="follow"></li>
 										<li><a href="goUpdateBoard.do?bSeq=${board.bSeq}">수정</a></li>
-										<li><a href="#">삭제</a></li>
+										
+										<li><form action="deleteBoard.do" method="post">
+										<c:if test="${sessionScope.user.id == board.id }">
+												<input type="submit" value="삭제" >
+											</c:if>
+										</form></li>
 									</ul>
 								</div>
 								

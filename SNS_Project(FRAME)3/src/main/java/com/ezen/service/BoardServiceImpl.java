@@ -55,6 +55,12 @@ public class BoardServiceImpl implements BoardService {
 		
 		return bDao.getAdverList(vo);
 	}
+
+	@Override
+	public void deleteBoard(BoardVO vo) {
+		bDao.deleteBoard(vo);
+		
+	}
 	
 
 }

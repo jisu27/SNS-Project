@@ -15,34 +15,34 @@ public class CommentDAO {
 	@Autowired
 	private SqlSessionTemplate mybatis;
 	
-	// °Ô½Ã±Û µî·Ï
+	// ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½
 	public void insertComment(CommentVO vo) {
-		System.out.println("===> Mybatis·Î insertComment() ±â´É Ã³¸®");
+		//System.out.println("===> Mybatisï¿½ï¿½ insertComment() ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½");
 		mybatis.insert("commentMapper.insertComment", vo);
 		
 	}
 	
-	// °Ô½Ã±Û ¼öÁ¤
+	// ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void updateComment(CommentVO vo) {
-		System.out.println("===> Mybatis·Î updateComment() ±â´É Ã³¸®");
+		//System.out.println("===> Mybatisï¿½ï¿½ updateComment() ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½");
 		mybatis.update("commentMapper.updateComment", vo);
 	
 	}
 	
-	// °Ô½Ã±Û »èÁ¦
+	// ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½
 	
 	public void deleteComment(CommentVO vo) {
-		System.out.println("===> Mybatis·Î deleteComment() ±â´É Ã³¸®");
+		//System.out.println("===> Mybatisï¿½ï¿½ deleteComment() ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½");
 		mybatis.delete("commentMapper.deleteComment", vo);
 	}
 	
 	public CommentVO getComment(CommentVO vo) {
-		System.out.println("===> Mybatis·Î getComment() ±â´É Ã³¸®");
+		//System.out.println("===> Mybatisï¿½ï¿½ getComment() ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½");
 		return mybatis.selectOne("commentMapper.getComment", vo);
 	}
 	
 	public List<CommentVO> getCommentList(CommentVO vo){
-		System.out.println("===> Mybatis·Î getCommentList() ±â´É Ã³¸®");
+		//System.out.println("===> Mybatisï¿½ï¿½ getCommentList() ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½");
 		return mybatis.selectList("commentMapper.getCommentList", vo);
 	}
 	

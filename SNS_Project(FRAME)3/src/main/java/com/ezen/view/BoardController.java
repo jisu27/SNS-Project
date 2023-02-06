@@ -8,6 +8,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -186,6 +187,14 @@ public class BoardController {
 
 		return "redirect:home.do";
 	}
+	
+	@RequestMapping("deleteBoard.do")
+	public String DeleteBoard(BoardVO vo, HttpSession session) throws IllegalStateException, IOException {
+		boardService.deleteBoard(vo);
+		System.out.println("딜리트:"+vo);
+		
+		return "redirect:home.do";
+	}
 ////	##############################################################################################################--myPage.do
 //	@GetMapping("/myPage.do")
 //	public String goMyPage(BoardVO vo,Model model) {
@@ -195,5 +204,7 @@ public class BoardController {
 //	
 //		return "myPage";
 //	}
+	
+	
 
 }

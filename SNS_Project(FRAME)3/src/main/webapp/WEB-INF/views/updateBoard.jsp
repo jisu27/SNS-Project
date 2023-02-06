@@ -46,7 +46,7 @@
         <section class="h_inner">
 
             <h1 class="logo">
-                <a href="index.html">
+                <a href="home.do">
                     <div class="sprite_insta_icon"></div>
                     <div>
                         <div class="sprite_write_logo"></div>

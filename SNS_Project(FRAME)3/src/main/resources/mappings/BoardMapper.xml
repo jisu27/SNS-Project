@@ -41,6 +41,10 @@
   	WHERE pay = 1
   	ORDER BY INDATE DESC
   </select>
+  
+  <delete id="deleteBoard" >
+		DELETE board WHERE bSeq=#{bSeq}
+	</delete>
 </mapper>
 
  

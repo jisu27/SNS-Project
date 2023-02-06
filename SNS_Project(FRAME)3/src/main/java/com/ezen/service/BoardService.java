@@ -20,4 +20,6 @@ public interface BoardService {
 	public List<BoardVO> getBoardList(BoardVO vo);
 	
 	public List<BoardVO> getAdverList(BoardVO vo);
+	
+	public void deleteBoard(BoardVO vo);
 }
