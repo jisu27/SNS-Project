@@ -186,22 +186,32 @@
 												<div>${comment.ccontent}</div>
 											</div>
 										</div>
-										<form action="deleteComment.do">
-											<c:if test="${sessionScope.user.id == comment.id }">
-												<input type="submit" value="삭제" name="">
-												<input type="hidden" id="cseq" name="cseq"
-													value="${comment.cseq}">
-											</c:if>
-										</form>
+										<div class="sprite_more_icon" data-name="more"
+											onclick="toggle_c(this.children[0])">
+											<ul class="toggle_box_c" id="toggle_box${comment.cseq}">
+												<li><a href="updateComment.do?cseq=${comment.cseq}">
+														<input type="button" value="수정">
+												</a></li>
+
+												<li><form
+														action="deleteComment.do?cseq=${comment.cseq}"
+														method="post">
+														<c:if test="${sessionScope.user.id == comment.id }">
+															<input type="submit" value="삭제">
+														</c:if>
+													</form></li>
+											</ul>
+										</div>
 										<div class="small_heart">
 											<div class="sprite_small_heart_icon_outline"></div>
 										</div>
 									</div>
 								</c:if>
-								<br>
 							</c:forEach>
 
 							<div class="timer">${time[status.index]}</div>
+
+							<br> <br>
 
 							<div class="comment_field" id="add-comment-post37">
 								<form action="insertComment.do" method="post">
@@ -273,6 +283,7 @@
 									<div class="left_icons">
 										<div class="heart_btn">
 											<c:choose>
+
 											<c:when test="${fn:contains(sessionScope.heart,adverList[status.index/3].bSeq)}">
 												<div onclick="deleteLike(deleteLike${status.count})"
 													class="sprite_heart_icon_outline" id="heart" name="39"
@@ -301,6 +312,8 @@
 												</div>
 											</c:otherwise>
 										</c:choose>
+											
+
 										</div>
 										<div class="sprite_bubble_icon"></div>
 										<div class="sprite_share_icon" data-name="share"></div>
@@ -324,37 +337,47 @@
 													<div>${comment.ccontent}</div>
 												</div>
 											</div>
-											<form action="deleteComment.do">
-												<c:if test="${sessionScope.user.id == comment.id }">
-													<input type="submit" value="삭제" name="">
-													<input type="hidden" id="cseq" name="cseq"
-														value="${comment.cseq}">
-												</c:if>
-											</form>
+											<div class="sprite_more_icon" data-name="more"
+												onclick="toggle_c(this.children[0])">
+												<ul class="toggle_box_c" id="toggle_box${comment.cseq}">
+													<li><a href="updateComment.do?cseq=${comment.cseq}">
+															<input type="button" value="수정">
+													</a></li>
+													<li><form
+															action="deleteComment.do?cseq=${comment.cseq}"
+															method="post">
+															<c:if test="${sessionScope.user.id == comment.id }">
+																<input type="submit" value="삭제">
+															</c:if>
+														</form></li>
+												</ul>
+											</div>
 											<div class="small_heart">
 												<div class="sprite_small_heart_icon_outline"></div>
 											</div>
 										</div>
 									</c:if>
-									<br>
 								</c:forEach>
 
 								<div class="timer">
 									<fmt:formatDate value="${adverList[status.index/3].inDate}"
 										pattern="yyyy-MM-dd" />
 								</div>
+									<br>
+									<br>
 
 								<div class="comment_field" id="add-comment-post37">
-								<form action="insertComment.do" method="post">
-									<input type="hidden" name="id" value="${sessionScope.user.id}">
-									<input type="hidden" name="bseq" value="${adverList[status.index/3].bSeq}">
-									<input type="text" name="ccontent" id="ccontent"
-										placeholder="댓글달기...">
-									<div class="upload_btn m_text" data-name="comment">
-										<input type="submit" value="게시">
-									</div>
-								</form>
-							</div>
+									<form action="insertComment.do" method="post">
+										<input type="hidden" name="id" value="${sessionScope.user.id}">
+										<input type="hidden" name="bseq"
+											value="${adverList[status.index/3].bSeq}"> <input
+											type="text" name="ccontent" id="ccontent"
+											placeholder="댓글달기...">
+										<div class="upload_btn m_text" data-name="comment">
+											<input type="submit" value="게시">
+										</div>
+									</form>
+								</div>
 							</article>
 						</c:if>
 
@@ -430,6 +453,8 @@
 
 	</section>
 	<script type="text/javascript">
+	var prev_element = null;
+	
 function check_id() {	
 	if ($("#check").val()=='' || $("#check").val()==null) {
 		alert("로그인을 해주세요");
@@ -451,15 +476,34 @@ function like(form_id) {
 }
 
 function toggle(element){
+	
+	if (prev_element != null) {
+		prev_element.style.display = 'none';
+	}
 	var con = document.getElementById(element.getAttribute("id"));
 	if(con.style.display=='none'){
 		con.style.display = 'block';
 	}else{
 		con.style.display = 'none';
 	}
+	prev_element = element;
+}
+
+function toggle_c(element){
+	if (prev_element != null) {
+		prev_element.style.display = 'none';
+	}
+	
+	var con_c = document.getElementById(element.getAttribute("id"));
+	if(con_c.style.display=='none'){
+		con_c.style.display = 'block';
+	}else{
+		con_c.style.display = 'none';
+	}
+	prev_element = element;
 }
 </script>
 
-	<script src="js/main.js"></script>
+
 </body>
 </html>

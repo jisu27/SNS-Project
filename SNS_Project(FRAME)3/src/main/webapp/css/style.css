@@ -206,7 +206,17 @@ body{
 .contents .toggle_box{
     text-align: center;
     position: absolute;
-    right: 0;
+    right: 0px;
+    top: 20px;
+    border: 1px solid rgba(0,0,0,0.09);
+    border-radius: 3px;
+    display: none;
+}
+
+.contents .toggle_box_c{
+    text-align: center;
+    position: absolute;
+    right: -90px;
     top: 20px;
     border: 1px solid rgba(0,0,0,0.09);
     border-radius: 3px;
@@ -217,9 +227,10 @@ body{
     display: block;
 }
 
-.contents .toggle_box > li{
+.contents .toggle_box > li {
     padding: 5px 10px;
     background: white;
+    
 }
 
 .contents .toggle_box > li input{
@@ -231,7 +242,7 @@ body{
     overflow:hidden;
     
 }
-/* 이미지 중앙정렬*/
+/* �씠誘몄� 以묒븰�젙�젹*/
 .contents .trans_inner{
 	text-align: center;
 }

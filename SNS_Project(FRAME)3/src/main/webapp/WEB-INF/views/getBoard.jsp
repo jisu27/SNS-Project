@@ -177,22 +177,31 @@
 											<div>${comment.ccontent}</div>
 										</div>
 									</div>
-									<form action="deleteComment.do">
-										<c:if test="${sessionScope.user.id == comment.id }">
-											<input type="submit" value="삭제" name="">
-											<input type="hidden" id="cseq" name="cseq"
-												value="${comment.cseq}">
-										</c:if>
-									</form>
-									<div class="small_heart">
-										<div class="sprite_small_heart_icon_outline"></div>
-									</div>
-								</div>
-							</c:if>
-							<br>
-						</c:forEach>
+									<div class="sprite_more_icon" data-name="more"
+												onclick="toggle_c(this.children[0])">
+												<ul class="toggle_box_c" id="toggle_box${comment.cseq}">
+													<li><a href="updateComment.do?cseq=${comment.cseq}">
+															<input type="button" value="수정">
+													</a></li>
+													<li><form
+															action="deleteComment.do?cseq=${comment.cseq}"
+															method="post">
+															<c:if test="${sessionScope.user.id == comment.id }">
+																<input type="submit" value="삭제">
+															</c:if>
+														</form></li>
+												</ul>
+											</div>
+											<div class="small_heart">
+												<div class="sprite_small_heart_icon_outline"></div>
+											</div>
+										</div>
+									</c:if>
+								</c:forEach>
 
 						<div class="timer">1시간 전</div>
+						<br>
+						<br>
 
 						<div class="comment_field" id="add-comment-post37">
 							<form action="insertComment.do" method="post">
@@ -278,6 +287,9 @@
 
 	</section>
 	<script type="text/javascript">
+		
+	var prev_element = null;
+		
 		function check_id() {
 			if ($("#check").val() == '' || $("#check").val() == null) {
 				alert("로그인을 해주세요");
@@ -297,6 +309,20 @@
 			} else {
 				con.style.display = 'none';
 			}
+		}
+		
+		function toggle_c(element){
+			if (prev_element != null) {
+				prev_element.style.display = 'none';
+			}
+			
+			var con_c = document.getElementById(element.getAttribute("id"));
+			if(con_c.style.display=='none'){
+				con_c.style.display = 'block';
+			}else{
+				con_c.style.display = 'none';
+			}
+			prev_element = element;
 		}
 	</script>
 
