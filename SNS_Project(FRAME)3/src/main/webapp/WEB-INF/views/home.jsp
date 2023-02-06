@@ -174,7 +174,7 @@
 							</div>
 
 							<div class="likes m_text">
-								좋아요 <span id="like-count-39">${likeList[status.index]}</span> 개
+								좋아요 <span id="like-count-39">${board.count}</span> 개
 							</div>
 
 							<c:forEach items="${commentList}" var="comment">
@@ -288,11 +288,11 @@
 											</c:when>
 
 											<c:otherwise>
-												<div onclick="like(like${status.count})"
+												<div onclick="like(like2${status.count})"
 													class="sprite_heart_icon_outline" id="heart" name="39"
 													data-name="heartbeat"
 													style="background: url('../../imgs/background01.png') no-repeat -52px -261px;">
-													<form id="like${status.count}" method="post">
+													<form id="like2${status.count}" method="post">
 														<input type="hidden" id="bseq" name="bSeq"
 															value="${adverList[status.index/3].bSeq}"> <input type="hidden"
 															id="id" name="id" value="${sessionScope.user.id}">
@@ -312,7 +312,7 @@
 
 
 								<div class="likes m_text">
-									좋아요 <span id="like-count-39">${likeList[status.index]}</span> 개
+									좋아요 <span id="like-count-39">${adverList[status.index/3].count}</span> 개
 								</div>
 
 								<c:forEach items="${commentList}" var="comment">

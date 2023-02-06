@@ -81,7 +81,8 @@ public class BoardController {
 			hvo.setBseq(vo.getbSeq());
 
 			int like = heartService.likeCount(hvo);
-			likeList.add(like);
+			vo.setCount(like);
+			
 
 			cVo.setBseq(vo.getbSeq());
 			List<CommentVO> cvo = commentService.getCommentList(cVo);
@@ -92,7 +93,7 @@ public class BoardController {
 		model.addAttribute("time", time);
 		model.addAttribute("memberList", memberList);
 
-		model.addAttribute("likeList", likeList);
+		model.addAttribute("likeList", boardList);
 
 		model.addAttribute("boardList", getboardList);
 		System.out.println(getboardList);

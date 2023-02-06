@@ -13,8 +13,14 @@ public class BoardVO {
 	private String upload;
 	private Date inDate;
 	private MultipartFile uploadfile;
+	private int count;
 	
-	
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
 	public MultipartFile getUploadfile() {
 		return uploadfile;
 	}
@@ -66,7 +72,7 @@ public class BoardVO {
 	@Override
 	public String toString() {
 		return "BoardVO [bSeq=" + bSeq + ", title=" + title + ", id=" + id + ", pay=" + pay + ", content=" + content
-				+ ", upload=" + upload + ", inDate=" + inDate + ", uploadfile=" + uploadfile + "]";
+				+ ", upload=" + upload + ", inDate=" + inDate + ", uploadfile=" + uploadfile + ", count=" + count + "]";
 	}
 	
 	

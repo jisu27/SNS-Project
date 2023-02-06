@@ -30,6 +30,9 @@ public class BoardDAO  {
 	public void updateBoard(BoardVO vo) {
 			mybatis.update("boardMapper.updateBoard", vo);
 	}
+	public void updateCount(BoardVO vo) {
+        mybatis.update("boardMapper.updateCount",vo);
+  }
 	
 	
 	//get 게시물
