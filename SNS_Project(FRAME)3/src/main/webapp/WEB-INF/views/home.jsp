@@ -79,10 +79,8 @@
 							<header class="top">
 								<div class="user_container">
 									<div class="profile_img">
-
 										<a><img src="profile/${memberList[status.index].profile}"
 											alt="프로필이미지"></a>
-
 									</div>
 									<div class="user_name">
 										<div class="nick_name m_text">${board.id}</div>
@@ -90,22 +88,24 @@
 									</div>
 
 								</div>
-								
-								<div class="sprite_more_icon" data-name="more"  onclick="toggle(this.children[0])">
+
+								<div class="sprite_more_icon" data-name="more"
+									onclick="toggle(this.children[0])">
 									<ul class="toggle_box" id="toggle_box${status.count}">
 										<li><input type="submit" class="follow" value="팔로우"
 											data-name="follow"></li>
-										<li><a href="goUpdateBoard.do?bSeq=${board.bSeq}">
-										<input type="button" value="수정"></a></li>
-										
-										<li><form action="deleteBoard.do?bSeq=${board.bSeq}" method="post">
-										<c:if test="${sessionScope.user.id == board.id }">
-												<input type="submit" value="삭제" >
-											</c:if>
-										</form></li>
+										<li><a href="goUpdateBoard.do?bSeq=${board.bSeq}"> <input
+												type="button" value="수정"></a></li>
+
+										<li><form action="deleteBoard.do?bSeq=${board.bSeq}"
+												method="post">
+												<c:if test="${sessionScope.user.id == board.id }">
+													<input type="submit" value="삭제">
+												</c:if>
+											</form></li>
 									</ul>
 								</div>
-								
+
 							</header>
 
 							<div class="img_section">
@@ -126,7 +126,7 @@
 											<pre>${board.content }</pre>
 										</div>
 									</c:if>
-									
+
 
 								</div>
 							</div>
@@ -174,9 +174,9 @@
 							</div>
 
 							<div class="likes m_text">
-								좋아요 <span id="like-count-39">${likeList[status.index]}</span> 개
+								좋아요 <span id="like-count-39">${board.count}</span> 개
 							</div>
-							
+
 							<c:forEach items="${commentList}" var="comment">
 								<c:if test="${comment.bseq == board.bSeq }">
 									<div class="comment_container">
@@ -231,37 +231,76 @@
 										</div>
 
 									</div>
-									
-									<div class="sprite_more_icon" data-name="more"  onclick="toggle(this.children[0])">
-									<ul class="toggle_box" id="toggle_box2${status.count}">
-										<li><input type="submit" class="follow" value="팔로우"
-											data-name="follow"></li>
-										<li><a href="goUpdateBoard.do">수정</a></li>
-										<li><a href="#">삭제</a></li>
-									</ul>
-								</div>
-									
+
+									<div class="sprite_more_icon" data-name="more"
+										onclick="toggle(this.children[0])">
+										<ul class="toggle_box" id="toggle_box2${status.count}">
+											<li><input type="submit" class="follow" value="팔로우"
+												data-name="follow"></li>
+											<li><a
+												href="goUpdateBoard.do?bSeq=${adverList[status.index/3].bSeq}">
+													<input type="button" value="수정">
+											</a></li>
+
+											<li><form
+													action="deleteBoard.do?bSeq=${adverList[status.index/3].bSeq}"
+													method="post">
+													<c:if test="${sessionScope.user.id == board.id }">
+														<input type="submit" value="삭제">
+													</c:if>
+												</form></li>
+										</ul>
+									</div>
+
+
 
 
 								</header>
 
 								<div class="img_section">
 									<div class="trans_inner">
-										<a href="getBoard?aSeq=${adverList[status.index/3].bSeq}">
+										<a href="getBoard.do?bSeq=${adverList[status.index/3].bSeq}">
 											<img src="images/${adverList[status.index/3].upload}"
 											alt="visual01">
 										</a>
-										
+
 									</div>
 									<br>
-									<div class="con">${adverList[status.index/3].content } </div>
+									<div class="con">${adverList[status.index/3].content }</div>
 								</div>
-<br>
+								<br>
 								<div class="bottom_icons">
 									<div class="left_icons">
 										<div class="heart_btn">
-											<div class="sprite_heart_icon_outline" name="39"
-												data-name="heartbeat"></div>
+											<c:choose>
+											<c:when test="${fn:contains(sessionScope.heart,adverList[status.index/3].bSeq)}">
+												<div onclick="deleteLike(deleteLike${status.count})"
+													class="sprite_heart_icon_outline" id="heart" name="39"
+													data-name="heartbeat"
+													style="background: url('../../imgs/background01.png') no-repeat -26px -261px;">
+													<form id="deleteLike${status.count}" method="post">
+														<input type="hidden" id="bseq" name="bSeq"
+															value="${adverList[status.index/3].bSeq}"> <input type="hidden"
+															id="id" name="id" value="${sessionScope.user.id}">
+													</form>
+												</div>
+
+											</c:when>
+
+											<c:otherwise>
+												<div onclick="like(like2${status.count})"
+													class="sprite_heart_icon_outline" id="heart" name="39"
+													data-name="heartbeat"
+													style="background: url('../../imgs/background01.png') no-repeat -52px -261px;">
+													<form id="like2${status.count}" method="post">
+														<input type="hidden" id="bseq" name="bSeq"
+															value="${adverList[status.index/3].bSeq}"> <input type="hidden"
+															id="id" name="id" value="${sessionScope.user.id}">
+
+													</form>
+												</div>
+											</c:otherwise>
+										</c:choose>
 										</div>
 										<div class="sprite_bubble_icon"></div>
 										<div class="sprite_share_icon" data-name="share"></div>
@@ -270,23 +309,35 @@
 										<div class="sprite_bookmark_outline" data-name="bookmark"></div>
 									</div>
 								</div>
-								
-	
+
+
 								<div class="likes m_text">
-									좋아요 <span id="like-count-39">2,346</span> 개
+									좋아요 <span id="like-count-39">${adverList[status.index/3].count}</span> 개
 								</div>
 
-								<div class="comment_container">
-									<div class="comment" id="comment-list-ajax-post37">
-										<div class="comment-detail">
-											<div class="nick_name m_text">dongdong2</div>
-											<div>강아지가 너무 귀여워요~!</div>
+								<c:forEach items="${commentList}" var="comment">
+									<c:if test="${comment.bseq == adverList[status.index/3].bSeq }">
+										<div class="comment_container">
+											<div class="comment" id="comment-list-ajax-post37">
+												<div class="comment-detail">
+													<div class="nick_name m_text">${comment.id}</div>
+													<div>${comment.ccontent}</div>
+												</div>
+											</div>
+											<form action="deleteComment.do">
+												<c:if test="${sessionScope.user.id == comment.id }">
+													<input type="submit" value="삭제" name="">
+													<input type="hidden" id="cseq" name="cseq"
+														value="${comment.cseq}">
+												</c:if>
+											</form>
+											<div class="small_heart">
+												<div class="sprite_small_heart_icon_outline"></div>
+											</div>
 										</div>
-									</div>
-									<div class="small_heart">
-										<div class="sprite_small_heart_icon_outline"></div>
-									</div>
-								</div>
+									</c:if>
+									<br>
+								</c:forEach>
 
 								<div class="timer">
 									<fmt:formatDate value="${adverList[status.index/3].inDate}"
@@ -294,9 +345,16 @@
 								</div>
 
 								<div class="comment_field" id="add-comment-post37">
-									<input type="text" placeholder="댓글달기...">
-									<div class="upload_btn m_text" data-name="comment">게시</div>
-								</div>
+								<form action="insertComment.do" method="post">
+									<input type="hidden" name="id" value="${sessionScope.user.id}">
+									<input type="hidden" name="bseq" value="${adverList[status.index/3].bSeq}">
+									<input type="text" name="ccontent" id="ccontent"
+										placeholder="댓글달기...">
+									<div class="upload_btn m_text" data-name="comment">
+										<input type="submit" value="게시">
+									</div>
+								</form>
+							</div>
 							</article>
 						</c:if>
 

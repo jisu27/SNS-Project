@@ -46,6 +46,13 @@
   <delete id="deleteBoard" >
 		DELETE board WHERE bSeq=#{bSeq}
 	</delete>
+	
+	<update id="updateCount" parameterType="board"> 
+        UPDATE board
+        SET count=#{count}
+        WHERE bSeq=#{bSeq} 
+  </update>
+	
 </mapper>
 
  

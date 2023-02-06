@@ -22,4 +22,5 @@ public interface BoardService {
 	public List<BoardVO> getAdverList(BoardVO vo);
 	
 	public void deleteBoard(BoardVO vo);
+	void updateCount(BoardVO vo);
 }

@@ -61,6 +61,12 @@ public class BoardServiceImpl implements BoardService {
 		bDao.deleteBoard(vo);
 		
 	}
+
+	@Override
+	public void updateCount(BoardVO vo) {
+		bDao.updateCount(vo);
+		
+	}
 	
 
 }

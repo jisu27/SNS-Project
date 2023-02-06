@@ -15,9 +15,9 @@
   </select>
   <!-- ###################################################################################################################### -->
   <select id="likeCount" resultType="Integer">
- 	SELECT count(*)
-	FROM board b , heart h 
-	WHERE b.bseq=h.bseq AND b.bseq=#{bSeq}
+    SELECT count(*)
+   FROM heart h 
+   WHERE bseq=#{bSeq}
   </select>
   <!-- ###################################################################################################################### -->
   <insert id="insertLike">

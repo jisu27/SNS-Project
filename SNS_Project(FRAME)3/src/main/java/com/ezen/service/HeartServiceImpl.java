@@ -21,6 +21,7 @@ public class HeartServiceImpl implements HeartService {
 
 	@Override
 	public void insertLike(HeartVO vo) {
+		
 		hDao.Insertlike(vo);
 		
 	}
