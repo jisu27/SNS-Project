@@ -269,8 +269,8 @@
 
     <div class="del_pop">
         <div class="btn_box">
-            <div class="del">ì­ì </div>
-            <div class="cancel">ì·¨ì</div>
+            <div class="del">삭제</div>
+            <div class="cancel">취소</div>
         </div>
    </div>
 

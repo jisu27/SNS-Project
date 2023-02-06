@@ -77,33 +77,29 @@
     <div id="main_container">
 
         <div class="post_form_container">
-            <form action="insertShorts" method="post" class="post_form" enctype="multipart/form-data">
+            <form action="insertShorts" class="post_form" method="post" enctype="multipart/form-data">
+            <input type="hidden" id="id" name="id" value = "${sessionScope.user.id}">
                 <div class="title">
-                    NEW POST
+                    NEW SHORTS
                 </div>
                 <div class="preview">
                     <div class="upload">
-                        <div class="post_btn">
-                            <div class="plus_icon">
-                                <span></span>
-                                <span></span>
-                            </div>
-                            <p>포스트 동영상 추가</p>
+                        <div class="post_btn" >
+                            <!--  <p>포스트 동영상 추가</p>  -->
                             <video controls id="video-tag" style="width: 300px; height: 250px; object-fit: cover">
-							  <source id="video-source" src="splashVideo">
-							  Your browser does not support the video tag.
+								  <source id="video-source" src="shorts/${shorts.upload}">
+								  Your browser does not support the video tag.
 							</video>
-                            <!--  <canvas id="imageCanvas"></canvas>-->
+                            
                             <!--<p><img id="img_id" src="#" style="width: 300px; height: 300px; object-fit: cover" alt="thumbnail"></p>-->
                         </div>
                     </div>
                 </div>
                 <p>
-                    <input type="file" name="uploadFile" id="id_photo" required="required" accept="video/*">
+                    <input type="file" name="uploadFile" id="id_photo" required="required">
                 </p>
                 <p>
-                    <textarea name="sContent" id="text_field" cols="50" rows="5" 
-                    placeholder="140자 까지 등록 가능합니다."></textarea>
+                    <textarea name="sContent" id="text_field" cols="50" rows="5" placeholder="140자 까지 등록 가능합니다."></textarea>
 
                 </p>
                 <input class="submit_btn" type="submit" value="저장">
@@ -129,8 +125,9 @@
 	window.onload = function() {
        // Show image
        fileInput.addEventListener('change', handleVideo, false);
-       var canvas = document.getElementById('imageCanvas');
-       var ctx = canvas.getContext('2d');
+     
+       //var canvas = document.getElementById('imageCanvas');
+       //var ctx = canvas.getContext('2d');
 	}
 
     function handleVideo(event){
@@ -148,8 +145,6 @@
             reader.readAsDataURL(event.target.files[0]);
         }
    }
-
-
 </script>
 </body>
 </html>
