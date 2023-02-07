@@ -141,6 +141,7 @@
 
 <!--<script src="js/insta.js"></script>-->
 <script src="js/profile.js"></script>
+<script src="js/common.js"></script>
 <script>
 function check_id() {	
 	if ($("#check").val()=='' || $("#check").val()==null) {

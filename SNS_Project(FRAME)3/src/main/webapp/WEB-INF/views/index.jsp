@@ -44,8 +44,8 @@
     <header id="header">
         <section class="h_inner">
 
-            <h1 class="logo">
-                <a href="index.html">
+            <h1 class="logo" onclick="check_id()">
+                <a id="goProfile5" href="/" onclick="check_id()">
                     <div class="sprite_insta_icon"></div>
                     <div>
                         <div class="sprite_write_logo"></div>
@@ -64,11 +64,11 @@
 
 
             <input type="hidden" id="check" value="${sessionScope.user.id}">
-            <div class="right_icons">
-                <a id="goProfile1" href="goInsertBoard.do" onclick="check_id()"><div class="sprite_camera_icon"></div></a>
-                <a id="goProfile2" href="login.html" onclick="check_id()"><div class="sprite_compass_icon"></div></a>
-                <a id="goProfile3" href="follow.html" onclick="check_id()"><div class="sprite_heart_icon_outline"></div></a>
-                <a id="goProfile4" href="profile.do?id=${sessionScope.user.id}" onclick="check_id()"><div class="sprite_user_icon_outline"></div></a>
+            <div class="right_icons" onclick="check_id()">
+                <a id="goProfile1" href="goInsertBoard.do" onclick="check_id()"><div  class="sprite_camera_icon"></div></a>
+                <a id="goProfile2" href="/" onclick="check_id()"><div class="sprite_compass_icon"></div></a>
+                <a id="goProfile3" href="getLikeList.do?id=${sessionScope.user.id}" onclick="check_id()"><div  class="sprite_heart_icon_outline"></div></a>
+                <a id="goProfile4" href="profile.do?id=${sessionScope.user.id}" onclick="check_id()"><div  class="sprite_user_icon_outline"></div></a>
             </div>
         </section>
     </header>
@@ -118,18 +118,19 @@
 </section>
 
 
-<script src="js/insta.js"></script>
+
 <script type="text/javascript">
-function check_id() {	
-	if ($("#check").val()=='' || $("#check").val()==null) {
-		alert("로그인을 해주세요");
-		$("#goProfile1").attr("href","/");
-		$("#goProfile2").attr("href","/");
-		$("#goProfile3").attr("href","/");
-		$("#goProfile4").attr("href","/");
-		$("#goProfile5").attr("href","/");
+
+	function check_id() {	
+		if ($("#check").val()=='') {
+			alert("로그인을 해주세요");
+			$("#goProfile1").attr("href","/");
+			$("#goProfile2").attr("href","/");
+			$("#goProfile3").attr("href","/");
+			$("#goProfile4").attr("href","/");
+			$("#goProfile5").attr("href","/");
+		}
 	}
-}
 </script>
 </body>
 </html>

@@ -50,12 +50,49 @@ public class BoardController {
 		
 		List<BoardVO> getboardList = boardService.getBoardList(bVo);
 		List<BoardVO> getadverList = boardService.getAdverList(bVo);
+		
 		List<MemberVO> memberList = new ArrayList<>();
-		List<Integer> likeList = new ArrayList<>();
+		List<MemberVO> adverMemberList = new ArrayList<>();
+		
 		List<CommentVO> commentList = new ArrayList<CommentVO>();
+		List<CommentVO> adCommentList = new ArrayList<CommentVO>();
+		
 		List<String> time = new ArrayList<>();
+		List<String> adtime = new ArrayList<>();
 
-		for (BoardVO vo : boardList) {
+		for(BoardVO vo : getadverList) {
+			LocalDate boarDate = vo.getInDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+			Period btn = Period.between(boarDate, LocalDate.now());
+			String btnTime;
+
+			if (btn.getYears() != 0) {
+				btnTime = btn.getYears() + "년" + btn.getMonths() + "월" + btn.getDays() + "일 전";
+			} else if (btn.getMonths() != 0) {
+				btnTime = btn.getMonths() + "월" + btn.getDays() + "일 전";
+			} else {
+				btnTime = btn.getDays() + "일 전";
+			}
+			adtime.add(btnTime);
+			
+			MemberVO mvo = new MemberVO();
+			mvo.setId(vo.getId());
+
+			MemberVO v1 = memberService.MemberCheck(mvo);
+			adverMemberList.add(v1);
+
+			HeartVO hvo = new HeartVO();
+			hvo.setBseq(vo.getbSeq());
+
+			int like = heartService.likeCount(hvo);
+			vo.setCount(like);
+			
+
+			cVo.setBseq(vo.getbSeq());
+			List<CommentVO> cvo = commentService.getCommentList(cVo);
+			adCommentList.addAll(cvo);
+		}
+			
+		for (BoardVO vo : getboardList) {
 
 			LocalDate boarDate = vo.getInDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 			Period btn = Period.between(boarDate, LocalDate.now());
@@ -91,18 +128,16 @@ public class BoardController {
 		}
 
 		model.addAttribute("time", time);
+		model.addAttribute("adtime", adtime);
+		
 		model.addAttribute("memberList", memberList);
-
-		model.addAttribute("likeList", boardList);
-
+		model.addAttribute("admemberList", adverMemberList);
+		
 		model.addAttribute("boardList", getboardList);
-		System.out.println(getboardList);
-
 		model.addAttribute("adverList", getadverList);
-		//System.out.println(adverList);
-
+		
 		model.addAttribute("commentList", commentList);
-		//System.out.println("commentList :" + commentList);
+		model.addAttribute("adcommentList", adCommentList);
 
 		return "home";
 	}
@@ -177,8 +212,8 @@ public class BoardController {
 			System.out.println("filename=" + fileName);
 
 			String realPath = session.getServletContext().getRealPath("/images/");
-			vo.setUpload(fileName);
 			vo.getUploadfile().transferTo(new File(realPath + fileName));
+			vo.setUpload(fileName);
 		}else {
 			vo.setUpload(no_image);
 		}
