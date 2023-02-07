@@ -44,9 +44,9 @@
 				<div class="right_icons">
 					<a id="goProfile1" href="goInsertBoard.do" onclick="check_id()"><div
 							class="sprite_camera_icon"></div></a> <a id="goProfile2"
-						href="login.html" onclick="check_id()"><div
+						href="/" onclick="check_id()"><div
 							class="sprite_compass_icon"></div></a> <a id="goProfile3"
-						href="follow.html" onclick="check_id()"><div
+						href="getLikeList.do?id=${sessionScope.user.id}" onclick="check_id()"><div
 							class="sprite_heart_icon_outline"></div></a> <a id="goProfile4"
 						href="profile.do?id=${sessionScope.user.id}" onclick="check_id()"><div
 							class="sprite_user_icon_outline"></div></a>
@@ -194,21 +194,20 @@
 											</div>
 										</div>
 										<div class="sprite_more_icon" data-name="more"
-											onclick="toggle_c(this.children[0])">
-											<ul class="toggle_box_c" id="toggle_box${comment.cseq}">
-												<li><a href="updateComment.do?cseq=${comment.cseq}">
-														<input type="button" value="수정">
-												</a></li>
-
-												<li><form
-														action="deleteComment.do?cseq=${comment.cseq}"
-														method="post">
-														<c:if test="${sessionScope.user.id == comment.id }">
-															<input type="submit" value="삭제">
-														</c:if>
-													</form></li>
-											</ul>
-										</div>
+		                                    onclick="toggle_c(this.children[0])">
+		                                    <ul class="toggle_box_c" id="toggle_box${comment.cseq}">
+		                                             <c:if test="${sessionScope.user.id == comment.id }">
+		                                       <li><a href="goUpdateComment.do?cseq=${comment.cseq}">
+		                                             <input type="button" value="수정">
+		                                       </a></li>
+		                                       <li><form
+		                                             action="deleteComment.do?cseq=${comment.cseq}"
+		                                             method="post">
+		                                                <input type="submit" value="삭제">
+		                                          </form></li>
+		                                             </c:if>
+		                                    </ul>
+                               			  </div>
 										<div class="small_heart">
 											<div class="sprite_small_heart_icon_outline"></div>
 										</div>
@@ -235,12 +234,13 @@
 
 						<!-- 광고 게시물 -->
 						<c:if test="${status.index%3==0}">
+						<c:if test="${not empty adverList[status.index/3]}">
 
 							<article class="contents">
 								<header class="top">
 									<div class="user_container">
 										<div class="profile_img">
-											<img src="imgs/thumb.jpeg" alt="프로필이미지">
+											<img src="${admemberList[status.index/3].profile}" alt="프로필이미지">
 										</div>
 										<div class="user_name">
 											<div class="nick_name m_text">${adverList[status.index/3].id}</div>
@@ -335,7 +335,7 @@
 									좋아요 <span id="like-count-39">${adverList[status.index/3].count}</span> 개
 								</div>
 
-								<c:forEach items="${commentList}" var="comment">
+								<c:forEach items="${adcommentList}" var="comment">
 									<c:if test="${comment.bseq == adverList[status.index/3].bSeq }">
 										<div class="comment_container">
 											<div class="comment" id="comment-list-ajax-post37">
@@ -367,8 +367,7 @@
 								</c:forEach>
 
 								<div class="timer">
-									<fmt:formatDate value="${adverList[status.index/3].inDate}"
-										pattern="yyyy-MM-dd" />
+									${adtime[status.index/3]}
 								</div>
 									<br>
 									<br>
@@ -387,6 +386,8 @@
 								</div>
 							</article>
 						</c:if>
+						</c:if>
+						
 
 					</c:forEach>
 
@@ -459,6 +460,7 @@
 
 
 	</section>
+	<script src="js/common.js"></script>
 	<script type="text/javascript">
 	var prev_element = null;
 	
@@ -474,16 +476,12 @@ function check_id() {
 }
 
 function deleteLike(form_id) {
-	
-	
+
 	$(form_id).attr("action","deleteHeart.do").submit();
 	
 }
 function like(form_id) {
-	
-	
-	$(form_id).attr("action","heart.do").submit();
-	
+	$(form_id).attr("action","heart.do").submit();	
 }
 
 function toggle(element){

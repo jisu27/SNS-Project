@@ -23,7 +23,6 @@ import com.ezen.dto.MemberVO;
 import com.ezen.service.CommentService;
 
 @Controller
-@SessionAttributes("comment")
 public class CommentController {
 
 	@Autowired 
@@ -35,7 +34,7 @@ public class CommentController {
 		commentService.insertComment(cvo);
 		
 		
-		// ÀÌÀü ÆäÀÌÁö·Î µ¹·Áº¸³»±â.
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 	    String referer = request.getHeader("Referer");
 	    return "redirect:"+ referer;
 		
@@ -44,31 +43,35 @@ public class CommentController {
 	
 
 	
-	@RequestMapping(value = "/updateComment.do")
-	public String updateReview(CommentVO vo,HttpSession session) throws IllegalStateException, IOException {
+	@GetMapping("goUpdateComment.do")
+	   public String goUpdateComment(Model model,CommentVO vo) {
+		
+	      CommentVO comment = commentService.getComment(vo);
+	      
+	      model.addAttribute("comment", comment);
+	      
+	      return "updateComment";
+	   }
+	   
 
-		if(session.getAttribute("id") == null) {
-			return "index";
-		} else {
-			commentService.updateComment(vo);
-		}
+	   
+	   @PostMapping(value = "/updateComment.do")
+	   public String updateReview(CommentVO vo,HttpSession session) throws IllegalStateException, IOException {
+		  
+	         
+	      System.out.println("updateComment: " + vo);
+	         commentService.updateComment(vo);
 
-		return "redirect:getBoard";
-	}
+	      return "redirect:home.do";
+	   }
 	
 	@RequestMapping(value = "/deleteComment.do")
 	public String deleteReview(CommentVO vo, HttpServletRequest request) throws IllegalStateException, IOException {
 		
-		
-		
 		commentService.deleteComment(vo);
 		
-			// ÀÌÀü ÆäÀÌÁö·Î µ¹·Áº¸³»±â.
 		    String referer = request.getHeader("Referer");
 		    return "redirect:"+ referer;
-		
-		
-		
 		
 	}
 	@RequestMapping(value = "/getCommentList.do")
