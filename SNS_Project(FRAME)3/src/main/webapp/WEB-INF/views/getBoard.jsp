@@ -166,7 +166,7 @@
 						</div>
 
 						<div class="likes m_text">
-							좋아요 <span id="like-count-39">2,346</span> 개
+							좋아요 <span id="like-count-39">${board.count }</span> 개
 						</div>
 						<c:forEach items="${commentList}" var="comment">
 							<c:if test="${comment.bseq == board.bSeq }">
@@ -178,8 +178,8 @@
 										</div>
 									</div>
 									<div class="sprite_more_icon" data-name="more"
-												onclick="toggle_c(this.children[0])">
-												<ul class="toggle_box_c" id="toggle_box${comment.cseq}">
+												onclick="toggle(this.children[0])">
+												<ul class="toggle_box" id="toggle_box2${comment.cseq}">
 													<li><a href="updateComment.do?cseq=${comment.cseq}">
 															<input type="button" value="수정">
 													</a></li>
@@ -303,27 +303,18 @@
 			$("#like").submit();
 		}
 		function toggle(element) {
+			
 			var con = document.getElementById(element.getAttribute("id"));
 			if (con.style.display == 'none') {
 				con.style.display = 'block';
 			} else {
 				con.style.display = 'none';
 			}
+			
+		
 		}
 		
-		function toggle_c(element){
-			if (prev_element != null) {
-				prev_element.style.display = 'none';
-			}
-			
-			var con_c = document.getElementById(element.getAttribute("id"));
-			if(con_c.style.display=='none'){
-				con_c.style.display = 'block';
-			}else{
-				con_c.style.display = 'none';
-			}
-			prev_element = element;
-		}
+		
 	</script>
 
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js">
