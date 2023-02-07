@@ -9,53 +9,32 @@ import org.springframework.stereotype.Repository;
 import com.ezen.dto.ShortsVO;
 
 @Repository
-public class ShortsDAO  {
-	
+public class ShortsDAO {
+
 	@Autowired
-	private SqlSessionTemplate  mybatis;
-	
-	
+	private SqlSessionTemplate mybatis;
+
 	public ShortsVO getShorts(ShortsVO vo) {
-<<<<<<< HEAD
+
 		System.out.println("--getShort() 실행: " + vo);
-		return mybatis.selectOne("ShortsMapper.getShorts",vo);
+		return mybatis.selectOne("ShortsMapper.getShorts", vo);
 	}
-	
+
 	public List<ShortsVO> getShortsList(ShortsVO vo) {
 		return mybatis.selectList("ShortsMapper.getShortsList", vo);
 	}
-	
-	
+
 	public void insertShorts(ShortsVO vo) {
 		mybatis.insert("ShortsMapper.insertShorts", vo);
 	}
-	
-	
+
 	public void updateShorts(ShortsVO vo) {
-		mybatis.update("ShortsMapper.updateShorts",vo);
+		mybatis.update("ShortsMapper.updateShorts", vo);
 		System.out.println("--updateShorts() 실행: " + vo);
-=======
-		return mybatis.selectOne("ShortsMapper.getShorts",vo);
 	}
-	
-	public List<ShortsVO> getShortsList(ShortsVO vo) {
-		return mybatis.selectList("ShortsMapper.getShortsList", vo);
-	}
-	
-	
-	public void insertShorts(ShortsVO vo) {
-		mybatis.insert("ShortsMapper.insertShorts", vo);
-	}
-	
-	
-	public void updateShorts(ShortsVO vo) {
-		mybatis.update("ShortsMapper.updateShorts",vo);
->>>>>>> refs/remotes/origin/경석님
-	}
-	
-	
+
 	public void deleteShorts(ShortsVO vo) {
-		mybatis.delete("ShortsMapper.deleteShorts",vo);
+		mybatis.delete("ShortsMapper.deleteShorts", vo);
 	}
 
 }

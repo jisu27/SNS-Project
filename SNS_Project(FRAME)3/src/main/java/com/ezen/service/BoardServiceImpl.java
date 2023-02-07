@@ -7,30 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ezen.dao.BoardDAO;
 import com.ezen.dto.BoardVO;
-<<<<<<< HEAD
 
-@Service("BoardService")
-public class BoardServiceImpl implements BoardService {
-
-	@Autowired
-	private BoardDAO bDao;
-	
-	@Override
-	public List<BoardVO> BoardList(BoardVO vo) {
-		
-		return bDao.BoardList(vo);
-	}
-
-	@Override
-	public void InsertBoard(BoardVO vo) {
-		bDao.insertBoard(vo);
-		
-	}
-
-	@Override
-	public List<BoardVO> myBoardList(BoardVO vo) {
-		return 	bDao.myBoardList(vo);
-=======
 import com.ezen.dto.JoinBoardVO;
 
 @Service("BoardService")
@@ -90,7 +67,6 @@ public class BoardServiceImpl implements BoardService {
 	public void updateCount(BoardVO vo) {
 		bDao.updateCount(vo);
 		
->>>>>>> refs/remotes/origin/경석님
 	}
 	
 

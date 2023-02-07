@@ -2,40 +2,34 @@
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="heartMapper">
 
-  <select id="like" resultType="heart">
-  	SELECT *
-  	FROM heart
-  	WHERE id=#{id},bseq=#{bSeq}
-  </select>
-  <!-- ###################################################################################################################### -->
-  <select id="likeBoard" resultType="heart">
-  	SELECT bseq
-  	FROM heart
-  	WHERE id=#{id}
-  </select>
-  <!-- ###################################################################################################################### -->
-  <select id="likeCount" resultType="Integer">
-<<<<<<< HEAD
- 	SELECT count(*)
-	FROM board b , heart h 
-	WHERE b.bseq=h.bseq AND b.bseq=#{bSeq}
-=======
-    SELECT count(*)
-   FROM heart h 
-   WHERE bseq=#{bSeq}
->>>>>>> refs/remotes/origin/경석님
-  </select>
-  <!-- ###################################################################################################################### -->
-  <insert id="insertLike">
-  	INSERT INTO heart(hseq,bseq,id,use_like) 
-  	VALUES (heart_seq.NEXTVAL,#{bSeq},#{id},#{use_like})
-  </insert>
-  <!-- ###################################################################################################################### -->
-  <delete id="deleteLike">
-  	DELETE heart 
-  	WHERE id=#{id} AND bseq=#{bSeq}
-  </delete>
-  
+	<select id="like" resultType="heart">
+		SELECT *
+		FROM heart
+		WHERE id=#{id},bseq=#{bSeq}
+	</select>
+	<!-- ###################################################################################################################### -->
+	<select id="likeBoard" resultType="heart">
+		SELECT bseq
+		FROM heart
+		WHERE id=#{id}
+	</select>
+	<!-- ###################################################################################################################### -->
+	<select id="likeCount" resultType="Integer">
+		SELECT count(*)
+		FROM heart h
+		WHERE bseq=#{bSeq}
+	</select>
+	<!-- ###################################################################################################################### -->
+	<insert id="insertLike">
+		INSERT INTO heart(hseq,bseq,id,use_like)
+		VALUES (heart_seq.NEXTVAL,#{bSeq},#{id},#{use_like})
+	</insert>
+	<!-- ###################################################################################################################### -->
+	<delete id="deleteLike">
+		DELETE heart
+		WHERE id=#{id} AND bseq=#{bSeq}
+	</delete>
+
 </mapper>
 
  

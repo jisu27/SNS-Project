@@ -1,31 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="memberMapper">
- <!-- ########################################################################################################################## -->
-  <select id="memberCheck" resultType="member">
-<<<<<<< HEAD
-  		SELECT id,pwd,name,role,email,pay 
-=======
-  		SELECT id,pwd,name,role,email,pay,profile 
->>>>>>> refs/remotes/origin/경석님
-  		FROM member
-  		WHERE id='${id}'
-  </select>
-  <!-- ########################################################################################################################## -->
-  <insert id="insertMember">
+	<!-- ########################################################################################################################## -->
+	<select id="memberCheck" resultType="member">
+		SELECT id,pwd,name,role,email,pay,profile
+		FROM member
+		WHERE id='${id}'
+	</select>
+	<!-- ########################################################################################################################## -->
+	<insert id="insertMember">
 		INSERT INTO member(id, pwd ,name , email, profile)
-		VALUES  (#{id},#{pwd}, #{name}, #{email},#{profile})
-  </insert>
-  <!-- ########################################################################################################################## -->
-  <select id="findId" resultType="member">
-		SELECT id 
+		VALUES (#{id},#{pwd}, #{name}, #{email},#{profile})
+	</insert>
+	<!-- ########################################################################################################################## -->
+	<select id="findId" resultType="member">
+		SELECT id
 		FROM member
 		WHERE name=#{name} AND email=#{email}
-  </select>
-  <!-- ########################################################################################################################## -->
-  <select id="findPwd" resultType="member">
-		SELECT pwd 
+	</select>
+	<!-- ########################################################################################################################## -->
+	<select id="findPwd" resultType="member">
+		SELECT pwd
 		FROM member
 		WHERE name=#{name} AND email=#{email} AND id=#{id}
-  </select>
+	</select>
 </mapper>

@@ -1,89 +1,5 @@
 package com.ezen.view;
 
-<<<<<<< HEAD
-import java.util.List;
-
-import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
-import com.ezen.dto.AdvertisementVO;
-import com.ezen.dto.BoardVO;
-
-import com.ezen.dto.MemberVO;
-
-import com.ezen.service.AdvertiseService;
-
-import com.ezen.service.BoardService;
-
-@Controller
-public class BoardController {
-	
-	@Autowired
-	private BoardService boardService;
-	
-
-//	##############################################################################################################--home
-	//@RequestMapping(value="/home.do")
-	//public String BoardList(BoardVO vo ,Model model,HttpSession session) {
-
-	@Autowired
-	private AdvertiseService advertiseService;
-	
-	@RequestMapping(value="/home.do")
-	public String BoardList(AdvertisementVO aVo,BoardVO bVo ,Model model) {
-
-		
-		List<BoardVO> boardList = boardService.BoardList(bVo);
-		List<AdvertisementVO> adverList = advertiseService.AdverList(aVo);
-		
-		model.addAttribute("boardList",boardList);
-
-		System.out.println(boardList);
-		
-
-		model.addAttribute("adverList",adverList);
-		
-		System.out.println(adverList);
-
-		return "home";
-	}
-//	##############################################################################################################--goInsertBoard
-	@GetMapping("goInsertBoard.do")
-	public String goInsertBoard() {
-	
-		return "insertBoard";
-	}
-//	##############################################################################################################--insertBoard
-	@PostMapping("insertBoard.do")
-	public String InsertBoard(BoardVO vo) {
-		
-		System.out.println(vo);
-		
-		boardService.InsertBoard(vo);
-		
-		return "redirect:home.do";
-	}
-////	##############################################################################################################--myPage.do
-//	@GetMapping("/myPage.do")
-//	public String goMyPage(BoardVO vo,Model model) {
-//		
-//		List<BoardVO> list	= boardService.myBoardList(vo);
-//		model.addAttribute("boardList",list);	
-//	
-//		return "myPage";
-//	}
-	
-	
-	
-=======
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -131,7 +47,7 @@ public class BoardController {
 	public String BoardList(BoardVO bVo, CommentVO cVo, Model model) {
 
 		List<BoardVO> boardList = boardService.BoardList(bVo);
-		
+
 		List<BoardVO> getboardList = boardService.getBoardList(bVo);
 		List<BoardVO> getadverList = boardService.getAdverList(bVo);
 		List<MemberVO> memberList = new ArrayList<>();
@@ -166,7 +82,6 @@ public class BoardController {
 
 			int like = heartService.likeCount(hvo);
 			vo.setCount(like);
-			
 
 			cVo.setBseq(vo.getbSeq());
 			List<CommentVO> cvo = commentService.getCommentList(cVo);
@@ -183,10 +98,10 @@ public class BoardController {
 		System.out.println(getboardList);
 
 		model.addAttribute("adverList", getadverList);
-		//System.out.println(adverList);
+		// System.out.println(adverList);
 
 		model.addAttribute("commentList", commentList);
-		//System.out.println("commentList :" + commentList);
+		// System.out.println("commentList :" + commentList);
 
 		return "home";
 	}
@@ -197,15 +112,16 @@ public class BoardController {
 
 		return "insertBoard";
 	}
-	
+
 //	##############################################################################################################--goUpdateBoard
 	@GetMapping("goUpdateBoard.do")
-	   public String updateBoardForm(Model model,BoardVO vo) {
-	      BoardVO board = boardService.myBoard(vo);
-	      
-	      model.addAttribute("board",board);
-	      return "updateBoard";
-	   }
+	public String updateBoardForm(Model model, BoardVO vo) {
+		BoardVO board = boardService.myBoard(vo);
+
+		model.addAttribute("board", board);
+		return "updateBoard";
+	}
+
 //	##############################################################################################################--updateBoard
 	@RequestMapping("/updateBoard.do")
 	public String UpdateBoard(@RequestParam(value = "nonImg") String org_image, BoardVO vo, HttpSession session)
@@ -251,7 +167,8 @@ public class BoardController {
 
 //	##############################################################################################################--insertBoard
 	@PostMapping("insertBoard.do")
-	public String InsertBoard(@RequestParam(value = "noImg") String no_image,BoardVO vo, HttpSession session) throws IllegalStateException, IOException {
+	public String InsertBoard(@RequestParam(value = "noImg") String no_image, BoardVO vo, HttpSession session)
+			throws IllegalStateException, IOException {
 
 		String fileName = "";
 
@@ -263,7 +180,7 @@ public class BoardController {
 			String realPath = session.getServletContext().getRealPath("/images/");
 			vo.setUpload(fileName);
 			vo.getUploadfile().transferTo(new File(realPath + fileName));
-		}else {
+		} else {
 			vo.setUpload(no_image);
 		}
 
@@ -272,12 +189,12 @@ public class BoardController {
 
 		return "redirect:home.do";
 	}
-	
+
 	@RequestMapping("deleteBoard.do")
 	public String DeleteBoard(BoardVO vo, HttpSession session) throws IllegalStateException, IOException {
 		boardService.deleteBoard(vo);
-		System.out.println("딜리트:"+vo);
-		
+		System.out.println("딜리트:" + vo);
+
 		return "redirect:home.do";
 	}
 ////	##############################################################################################################--myPage.do
@@ -289,8 +206,5 @@ public class BoardController {
 //	
 //		return "myPage";
 //	}
-	
-	
 
->>>>>>> refs/remotes/origin/경석님
 }

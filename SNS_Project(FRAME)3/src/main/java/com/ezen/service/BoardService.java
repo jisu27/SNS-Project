@@ -3,17 +3,6 @@ package com.ezen.service;
 import java.util.List;
 
 import com.ezen.dto.BoardVO;
-<<<<<<< HEAD
-
-public interface BoardService {
-
-	List<BoardVO> BoardList(BoardVO vo);
-	
-	List<BoardVO> myBoardList(BoardVO vo);
-	
-	void InsertBoard(BoardVO vo);
-=======
-import com.ezen.dto.JoinBoardVO;
 
 public interface BoardService {
 
@@ -33,5 +22,5 @@ public interface BoardService {
 	
 	public void deleteBoard(BoardVO vo);
 	void updateCount(BoardVO vo);
->>>>>>> refs/remotes/origin/경석님
+
 }

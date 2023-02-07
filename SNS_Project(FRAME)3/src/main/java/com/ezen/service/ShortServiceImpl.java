@@ -8,16 +8,15 @@ import org.springframework.stereotype.Service;
 import com.ezen.dao.ShortsDAO;
 import com.ezen.dto.ShortsVO;
 
-
 @Service
 public class ShortServiceImpl implements ShortsService {
-	
+
 	@Autowired
-	private ShortsDAO sDAO;		
+	private ShortsDAO sDAO;
 
 	@Override
 	public ShortsVO getShorts(ShortsVO vo) {
-<<<<<<< HEAD
+
 		System.out.println("==getShort service 실행: " + vo);
 		return sDAO.getShorts(vo);
 	}
@@ -32,22 +31,6 @@ public class ShortServiceImpl implements ShortsService {
 	public void updateShorts(ShortsVO vo) {
 		sDAO.updateShorts(vo);
 		System.out.println("--updateShortService 실행: " + vo);
-=======
-		
-		return sDAO.getShorts(vo);
-	}
-
-	@Override
-	public void insertShorts(ShortsVO vo) {
-		sDAO.insertShorts(vo);
-
-	}
-
-	@Override
-	public void updateShorts(ShortsVO vo) {
-		sDAO.updateShorts(vo);
-
->>>>>>> refs/remotes/origin/경석님
 	}
 
 	@Override
@@ -55,9 +38,9 @@ public class ShortServiceImpl implements ShortsService {
 		sDAO.deleteShorts(vo);
 
 	}
-	
+
 	@Override
-	public List<ShortsVO> getShortsList(ShortsVO vo){
+	public List<ShortsVO> getShortsList(ShortsVO vo) {
 		return sDAO.getShortsList(vo);
 	}
 
