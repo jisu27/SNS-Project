@@ -134,36 +134,43 @@
 							<div class="bottom_icons">
 								<div class="left_icons">
 									<div class="heart_btn">
+									
 										<c:choose>
 											<c:when test="${fn:contains(sessionScope.heart,board.bSeq)}">
 												<div onclick="deleteLike(deleteLike${status.count})"
 													class="sprite_heart_icon_outline" id="heart" name="39"
-													data-name="heartbeat"
+													data-name="heartbeat" 
 													style="background: url('../../imgs/background01.png') no-repeat -26px -261px;">
-													<form id="deleteLike${status.count}" method="post">
+													
+													<form id="deleteLike${status.count}" method="post" >
+												
 														<input type="hidden" id="bseq" name="bSeq"
 															value="${board.bSeq}"> <input type="hidden"
 															id="id" name="id" value="${sessionScope.user.id}">
+												
 													</form>
 												</div>
 
 											</c:when>
 
 											<c:otherwise>
+												
 												<div onclick="like(like${status.count})"
 													class="sprite_heart_icon_outline" id="heart" name="39"
 													data-name="heartbeat"
 													style="background: url('../../imgs/background01.png') no-repeat -52px -261px;">
 													<form id="like${status.count}" method="post">
+											
 														<input type="hidden" id="bseq" name="bSeq"
 															value="${board.bSeq}"> <input type="hidden"
 															id="id" name="id" value="${sessionScope.user.id}">
 
+											
 													</form>
 												</div>
 											</c:otherwise>
 										</c:choose>
-
+																														
 									</div>
 									<div class="sprite_bubble_icon"></div>
 									<div class="sprite_share_icon" data-name="share"></div>
@@ -285,11 +292,11 @@
 											<c:choose>
 
 											<c:when test="${fn:contains(sessionScope.heart,adverList[status.index/3].bSeq)}">
-												<div onclick="deleteLike(deleteLike${status.count})"
+												<div onclick="deleteLike(deleteLike2${status.count})"
 													class="sprite_heart_icon_outline" id="heart" name="39"
 													data-name="heartbeat"
 													style="background: url('../../imgs/background01.png') no-repeat -26px -261px;">
-													<form id="deleteLike${status.count}" method="post">
+													<form id="deleteLike2${status.count}" method="post"  >
 														<input type="hidden" id="bseq" name="bSeq"
 															value="${adverList[status.index/3].bSeq}"> <input type="hidden"
 															id="id" name="id" value="${sessionScope.user.id}">
@@ -303,7 +310,7 @@
 													class="sprite_heart_icon_outline" id="heart" name="39"
 													data-name="heartbeat"
 													style="background: url('../../imgs/background01.png') no-repeat -52px -261px;">
-													<form id="like2${status.count}" method="post">
+													<form id="like2${status.count}" method="post"  >
 														<input type="hidden" id="bseq" name="bSeq"
 															value="${adverList[status.index/3].bSeq}"> <input type="hidden"
 															id="id" name="id" value="${sessionScope.user.id}">
@@ -469,7 +476,9 @@ function check_id() {
 }
 
 function deleteLike(form_id) {
+
 	$(form_id).attr("action","deleteHeart.do").submit();
+	
 }
 function like(form_id) {
 	$(form_id).attr("action","heart.do").submit();	
@@ -477,16 +486,13 @@ function like(form_id) {
 
 function toggle(element){
 	
-	if (prev_element != null) {
-		prev_element.style.display = 'none';
-	}
 	var con = document.getElementById(element.getAttribute("id"));
 	if(con.style.display=='none'){
 		con.style.display = 'block';
 	}else{
 		con.style.display = 'none';
 	}
-	prev_element = element;
+	
 }
 
 function toggle_c(element){
@@ -502,6 +508,10 @@ function toggle_c(element){
 	}
 	prev_element = element;
 }
+function click(){
+	return;
+}
+
 </script>
 
 
