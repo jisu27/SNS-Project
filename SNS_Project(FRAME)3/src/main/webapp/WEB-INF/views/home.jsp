@@ -356,7 +356,6 @@
 									</div>
 								</form>
 							</div>
->>>>>>> refs/remotes/origin/경석님
 							</article>
 						</c:if>
 
