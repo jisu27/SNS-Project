@@ -187,21 +187,20 @@
 											</div>
 										</div>
 										<div class="sprite_more_icon" data-name="more"
-											onclick="toggle_c(this.children[0])">
-											<ul class="toggle_box_c" id="toggle_box${comment.cseq}">
-												<li><a href="updateComment.do?cseq=${comment.cseq}">
-														<input type="button" value="수정">
-												</a></li>
-
-												<li><form
-														action="deleteComment.do?cseq=${comment.cseq}"
-														method="post">
-														<c:if test="${sessionScope.user.id == comment.id }">
-															<input type="submit" value="삭제">
-														</c:if>
-													</form></li>
-											</ul>
-										</div>
+		                                    onclick="toggle_c(this.children[0])">
+		                                    <ul class="toggle_box_c" id="toggle_box${comment.cseq}">
+		                                             <c:if test="${sessionScope.user.id == comment.id }">
+		                                       <li><a href="goUpdateComment.do?cseq=${comment.cseq}">
+		                                             <input type="button" value="수정">
+		                                       </a></li>
+		                                       <li><form
+		                                             action="deleteComment.do?cseq=${comment.cseq}"
+		                                             method="post">
+		                                                <input type="submit" value="삭제">
+		                                          </form></li>
+		                                             </c:if>
+		                                    </ul>
+                               			  </div>
 										<div class="small_heart">
 											<div class="sprite_small_heart_icon_outline"></div>
 										</div>
@@ -470,12 +469,10 @@ function check_id() {
 }
 
 function deleteLike(form_id) {
-	
 	$(form_id).attr("action","deleteHeart.do").submit();
 }
 function like(form_id) {
-
-	$(form_id).attr("action","heart.do").submit();
+	$(form_id).attr("action","heart.do").submit();	
 }
 
 function toggle(element){

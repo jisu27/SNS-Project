@@ -42,7 +42,12 @@ public class BoardController {
 	@Autowired
 	private CommentService commentService;
 //	##############################################################################################################--home
-
+	@RequestMapping("/")
+	public String goLogin() {
+		
+		return "index";
+	}
+	
 	@RequestMapping(value = "/home.do")
 	public String BoardList(BoardVO bVo, CommentVO cVo, Model model) {
 
@@ -124,7 +129,6 @@ public class BoardController {
 			cVo.setBseq(vo.getbSeq());
 			List<CommentVO> cvo = commentService.getCommentList(cVo);
 			commentList.addAll(cvo);
-
 		}
 
 		model.addAttribute("time", time);

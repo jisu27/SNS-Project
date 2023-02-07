@@ -95,21 +95,20 @@
 							</div>
 
 							<div class="sprite_more_icon" data-name="more"
-								onclick="toggle(this.children[0])">
-								<ul class="toggle_box" id="toggle_box${status.count}">
-									<li><input type="submit" class="follow" value="팔로우"
-										data-name="follow"></li>
-									<li><a href="goUpdateBoard.do?bSeq=${board.bSeq}"> <input
-											type="button" value="수정"></a></li>
-
-									<li><form action="deleteBoard.do?bSeq=${board.bSeq}"
-											method="post">
-											<c:if test="${sessionScope.user.id == board.id }">
-												<input type="submit" value="삭제">
-											</c:if>
-										</form></li>
-								</ul>
-							</div>
+                                    onclick="toggle_c(this.children[0])">
+                                    <ul class="toggle_box_c" id="toggle_box${comment.cseq}">
+                                             <c:if test="${sessionScope.user.id == comment.id }">
+                                       <li><a href="goUpdateComment.do?cseq=${comment.cseq}">
+                                             <input type="button" value="수정">
+                                       </a></li>
+                                       <li><form
+                                             action="deleteComment.do?cseq=${comment.cseq}"
+                                             method="post">
+                                                <input type="submit" value="삭제">
+                                          </form></li>
+                                             </c:if>
+                                    </ul>
+                                 </div>
 						</header>
 
 						<div class="img_section">
