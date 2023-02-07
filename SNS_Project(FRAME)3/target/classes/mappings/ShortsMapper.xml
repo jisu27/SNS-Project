@@ -3,6 +3,7 @@
 
 <mapper namespace="ShortsMapper">
   
+<<<<<<< HEAD
  <!-- 
   <insert id = "insertShorts" parameterType = "shorts">
   	insert into Shorts(sSeq, sTitle, id, upload)
@@ -26,6 +27,17 @@
   	where sSeq=#{sSeq}
   </update>
   
+=======
+  <insert id = "insertShorts" parameterType = "shorts">
+  	insert into Shorts(sSeq, sTitle, id, upload, inDate)
+  	values(shorts_seq.NEXTVAL, #{sTitle}, #{id}, #{upload}, #{inDate})
+  </insert>
+  
+  <update id = "updateShorts" parameterType = "shorts">
+  	update Shorts set sTitle=#{sTitle}, id=#{id}, upload=#{upload}
+  	where sSeq=#{sSeq}
+  </update>
+>>>>>>> refs/remotes/origin/경석님
   
   <delete id="deleteShorts" parameterType="shorts">
   	delete shorts where sSeq=#{sSeq}

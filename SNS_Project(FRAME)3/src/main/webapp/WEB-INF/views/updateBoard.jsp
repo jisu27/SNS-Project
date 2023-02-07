@@ -5,36 +5,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<<<<<<< HEAD
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script> 
-</head>
-<body>
-<form action="insertBoard.do" method="post">
-	<input type="text" id="title" name="title" placeholder="title"><br>
-	<input type="hidden" id="id" name="id" readonly="readonly" value="${sessionScope.user.id}">
-	<input type="text" id="content" name="content" placeholder="content"><br>
-	<input type="file" id="upload" name="upload" ><br>
-	<c:if test="${empty sessionScope.user.pay}"><input type="hidden" id="pay" name="pay" value='0'><br></c:if>
-	<c:if test="${!empty sessionScope.user.pay}"><input type="hidden" id="pay" name="pay" value='${sessionScope.user.pay}'><br></c:if>
-	
-	
-	<input type="submit" value="등록하기">
-<script type="text/javascript">
-	$(document).ready(function(){
-		if($("#id").val() ==null || $("#id").val() ==""){
-			alert("세션이 만료되었습니다. 로그인을 해주세요");
-			window.history.back();
-		}
-	})
-</script>	 
-</form>
-=======
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-
+	
     <!-- Facebook Meta Tags / 페이스북 오픈 그래프 -->
     <meta property="og:url" content="http://kindtiger.dothome.co.kr/insta">
     <meta property="og:type" content="website">
@@ -104,35 +78,26 @@
     <div id="main_container">
 
         <div class="post_form_container">
-            <form action="insertBoard.do" method="post" class="post_form" enctype="multipart/form-data">
-            <input type="hidden" name="noImg" value="null">
+            <form action="updateBoard.do" method="post" class="post_form" enctype="multipart/form-data">
+            	<input type="hidden" name="bSeq" value="${board.bSeq}">
+            	<input type="hidden" name="nonImg" value="${board.upload}">
                 <div class="title">
-                    NEW POST
+                    UPDATE POST
                 </div>
                 <div class="preview">
                     <div class="upload">
-                        <div class="post_btn">
-                            <div class="plus_icon">
-                                <span></span>
-                                <span></span>
-                            </div>
-                            <p>포스트 이미지 추가</p>
-                            <canvas id="imageCanvas"></canvas>
-                            <!--<p><img id="img_id" src="#" style="width: 300px; height: 300px; object-fit: cover" alt="thumbnail"></p>-->
-                        </div>
+                        <img src="images/${board.upload}">
                     </div>
                 </div>
                 <p>
-                	<input type="text" id="title" name="title" placeholder="title"><br>
+                	<input type="text" id="title" name="title" placeholder="title" value="${board.title}"><br>
                     <input type="file" name="uploadfile" id="uploadfile" >
                 </p>
                 <p>
-                 
                     <textarea name="content" id="content" cols="50" rows="5" placeholder="140자 까지 등록 가능합니다.
 #태그명 을 통해서 검색 태그를 등록할 수 있습니다.
-예시 : I # love # insta!"></textarea>
-                 
-				
+예시 : I # love # insta!">${board.content}</textarea>
+
                 </p>
                 	<input type="hidden" id="id" name="id" readonly="readonly" value="${sessionScope.user.id}">
                 	<c:if test="${empty sessionScope.user.pay}"><input type="hidden" id="pay" name="pay" value='0'><br></c:if>
@@ -148,38 +113,8 @@
 
 </section>
 
-<script src="js/insta.js"></script>
-
 <script>
-       var fileInput  = document.querySelector( "#id_photo" ),
-           button     = document.querySelector( ".input-file-trigger" ),
-           the_return = document.querySelector(".file-return");
-
-       // Show image
-       fileInput.addEventListener('change', handleImage, false);
-       var canvas = document.getElementById('imageCanvas');
-       var ctx = canvas.getContext('2d');
-
-
-        function handleImage(e){
-           var reader = new FileReader();
-           reader.onload = function(event){
-               var img = new Image();
-               // var imgWidth =
-               img.onload = function(){
-                   canvas.width = 300;
-                   canvas.height = 300;
-                   ctx.drawImage(img,0,0,300,300);
-               };
-               img.src = event.target.result;
-               // img.width = img.width*0.5
-               // canvas.height = img.height;
-           };
-           reader.readAsDataURL(e.target.files[0]);
-       }
-		
 
 </script>
->>>>>>> refs/remotes/origin/경석님
 </body>
 </html>

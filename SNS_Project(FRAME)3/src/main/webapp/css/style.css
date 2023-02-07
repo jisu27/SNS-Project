@@ -4,6 +4,11 @@
     font-size: 14px;
     font-weight: bold;
 }
+.con{
+	font-size: 14px;
+    font-weight: normal;
+    text-align: left;
+}
 
 .s_text{
     font-size: 12px;
@@ -195,6 +200,7 @@ body{
 }
 .contents .sprite_more_icon{
     position: relative;
+    cursor: pointer;
 }
 
 .contents .toggle_box{
@@ -223,10 +229,17 @@ body{
 
 .contents .img_section{
     overflow:hidden;
+    
+}
+/* ?ù¥ÎØ∏Ï? Ï§ëÏïô?†ï?†¨*/
+.contents .trans_inner{
+	text-align: center;
 }
 
 .contents .img_section img{
-    width: 100%;
+   
+    max-width: 400px;
+    height: 400px;
 }
 
 
@@ -251,12 +264,16 @@ body{
 }
 
 .sprite_heart_icon_outline.on {
-    background: url('../imgs/background01.png') no-repeat -26px -261px;
+    background: url('../icon/free-icon-love-4397571.png') no-repeat -26px -261px;
 }
-
 
 .contents .likes{
     padding: 5px 20px;
+    color:#262626;
+}
+
+.contents .con{
+	padding: 5px 20px;
     color:#262626;
 }
 

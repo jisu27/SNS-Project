@@ -26,5 +26,8 @@ function openCity(e){
 }
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/remotes/origin/경석님
 tapContainer.addEventListener('click', openCity);

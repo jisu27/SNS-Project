@@ -3,7 +3,11 @@
 <mapper namespace="memberMapper">
  <!-- ########################################################################################################################## -->
   <select id="memberCheck" resultType="member">
+<<<<<<< HEAD
   		SELECT id,pwd,name,role,email,pay 
+=======
+  		SELECT id,pwd,name,role,email,pay,profile 
+>>>>>>> refs/remotes/origin/경석님
   		FROM member
   		WHERE id='${id}'
   </select>

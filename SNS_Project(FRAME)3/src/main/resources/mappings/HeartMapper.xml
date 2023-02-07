@@ -15,9 +15,15 @@
   </select>
   <!-- ###################################################################################################################### -->
   <select id="likeCount" resultType="Integer">
+<<<<<<< HEAD
  	SELECT count(*)
 	FROM board b , heart h 
 	WHERE b.bseq=h.bseq AND b.bseq=#{bSeq}
+=======
+    SELECT count(*)
+   FROM heart h 
+   WHERE bseq=#{bSeq}
+>>>>>>> refs/remotes/origin/경석님
   </select>
   <!-- ###################################################################################################################### -->
   <insert id="insertLike">

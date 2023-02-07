@@ -17,6 +17,7 @@ public class ShortServiceImpl implements ShortsService {
 
 	@Override
 	public ShortsVO getShorts(ShortsVO vo) {
+<<<<<<< HEAD
 		System.out.println("==getShort service 실행: " + vo);
 		return sDAO.getShorts(vo);
 	}
@@ -31,6 +32,22 @@ public class ShortServiceImpl implements ShortsService {
 	public void updateShorts(ShortsVO vo) {
 		sDAO.updateShorts(vo);
 		System.out.println("--updateShortService 실행: " + vo);
+=======
+		
+		return sDAO.getShorts(vo);
+	}
+
+	@Override
+	public void insertShorts(ShortsVO vo) {
+		sDAO.insertShorts(vo);
+
+	}
+
+	@Override
+	public void updateShorts(ShortsVO vo) {
+		sDAO.updateShorts(vo);
+
+>>>>>>> refs/remotes/origin/경석님
 	}
 
 	@Override

@@ -20,9 +20,19 @@
 <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
 </head>
 <body>
+<<<<<<< HEAD
 <form action="/insertMember.do" method="post">
 	<h1>회원 가입</h1>
 	<table>
+=======
+<form action="/insertMember.do" method="post" enctype="multipart/form-data">
+	<h1>회원 가입</h1>
+	<table>
+		<tr>
+			<th>프로필</th>
+			<td><input type="file" id="file" name="file" ></td>
+		</tr>
+>>>>>>> refs/remotes/origin/경석님
 		<tr>
 			<th>아이디</th>
 			<td><input type="text" name="id" id="id"></td>

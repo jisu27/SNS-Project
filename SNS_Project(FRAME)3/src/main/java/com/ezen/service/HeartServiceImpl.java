@@ -21,6 +21,10 @@ public class HeartServiceImpl implements HeartService {
 
 	@Override
 	public void insertLike(HeartVO vo) {
+<<<<<<< HEAD
+=======
+		
+>>>>>>> refs/remotes/origin/경석님
 		hDao.Insertlike(vo);
 		
 	}

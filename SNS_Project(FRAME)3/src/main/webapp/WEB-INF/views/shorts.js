@@ -2,6 +2,7 @@
  * 
  */
 
+<<<<<<< HEAD
 //파일을 첨부했는지 확인
 function check_file() {
 	
@@ -100,3 +101,21 @@ function length_check() {
 
 
 
+=======
+
+function check_file() {
+	
+	//var filecheck = $("#uploadFile").val();
+	
+	var filecheck = document.getElementById("uploadFile").value;
+	
+	if(filecheck == "") {
+		
+		alert("파일을 첨부해주세요");
+		document.getElementById("uploadFile").focus();
+	
+		return false;
+	}
+
+}
+>>>>>>> refs/remotes/origin/경석님

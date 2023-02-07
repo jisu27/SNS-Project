@@ -12,6 +12,7 @@ public class ShortsVO {
 	private String upload;
 	private Date inDate;
 	private MultipartFile uploadFile;
+<<<<<<< HEAD
 	private String sContent;
 	
 	private String searchKeyword;
@@ -68,6 +69,45 @@ public class ShortsVO {
 	public String toString() {
 		return "ShortsVO [sSeq=" + sSeq + ", sTitle=" + sTitle + ", id=" + id + ", upload=" + upload + ", inDate="
 				+ inDate + ", uploadFile=" + uploadFile + ", sContent=" + sContent + "]";
+=======
+	
+	
+	public int getsSeq() {
+		return sSeq;
+	}
+	public void setsSeq(int sSeq) {
+		this.sSeq = sSeq;
+	}
+	public String getsTitle() {
+		return sTitle;
+	}
+	public void setsTitle(String sTitle) {
+		this.sTitle = sTitle;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getUpload() {
+		return upload;
+	}
+	public void setUpload(String upload) {
+		this.upload = upload;
+	}
+	public Date getInDate() {
+		return inDate;
+	}
+	public void setInDate(Date inDate) {
+		this.inDate = inDate;
+	}
+	public MultipartFile getUploadFile() {
+		return uploadFile;
+	}
+	public void setUploadFile(MultipartFile uploadFile) {
+		this.uploadFile = uploadFile;
+>>>>>>> refs/remotes/origin/경석님
 	}
 
 	

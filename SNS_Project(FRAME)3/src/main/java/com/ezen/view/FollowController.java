@@ -28,6 +28,7 @@ public class FollowController {
 	private MemberService memberService;
 	
 	@PostMapping("follow.do")
+<<<<<<< HEAD
 	public String follow(FollowVO vo){
 		
 		followService.insertFollow(vo);
@@ -74,6 +75,63 @@ public class FollowController {
 	public String deleteFollow(FollowVO vo) {
 		
 		followService.deleteFollow(vo);
+=======
+	public String follow(FollowVO vo,HttpSession session){
+		
+		
+		followService.insertFollow(vo);
+		
+		List<FollowVO> list = followService.getFollowList(vo);
+		session.setAttribute("follower", list);
+		
+		return "redirect:profile.do?id="+vo.getId2();
+	}
+	
+	@GetMapping("followList.do")
+	public String goFolloweList(FollowVO vo,Model model) {
+		List<FollowVO> flist =new ArrayList<>();
+		List<MemberVO> mlist =new ArrayList<>();
+		
+		if (vo.getId2()!=null) {
+			flist = followService.getFollowListId1(vo);
+			
+			for(FollowVO fo : flist) {
+				MemberVO member =new MemberVO();
+				member.setId(fo.getId1());
+				
+				MemberVO mvo = memberService.MemberCheck(member);
+				
+				mlist.add(mvo);
+			}
+			
+		}else if (vo.getId1()!=null) {
+			flist= followService.getFollowList(vo);
+			
+			for(FollowVO fo : flist) {
+				MemberVO member =new MemberVO();
+				member.setId(fo.getId2());
+				
+				MemberVO mvo = memberService.MemberCheck(member);
+				
+				mlist.add(mvo);
+			}
+		}
+		
+		
+		model.addAttribute("memberList",mlist);
+		
+		return "followList";
+	}
+	
+	@PostMapping("deleteFollow.do")
+	public String deleteFollow(FollowVO vo,HttpSession session) {
+			
+			
+		followService.deleteFollow(vo);
+		
+		List<FollowVO> list = followService.getFollowList(vo);
+		session.setAttribute("follower", list);
+>>>>>>> refs/remotes/origin/경석님
 		
 		return "redirect:profile.do?id="+vo.getId2();
 	}

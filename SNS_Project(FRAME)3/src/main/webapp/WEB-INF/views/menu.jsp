@@ -32,6 +32,10 @@ padding: 0;
 		<li><a href="#">친구 목록</a> </li>
 		<li><a href="#">친구 추천</a></li>
 		<li><a href="#"> 쇼츠 </a></li>
+<<<<<<< HEAD
+=======
+		<li><a href="home.do">홈으로 이동</a></li>
+>>>>>>> refs/remotes/origin/경석님
 	</ul>
 </body>
 </html>
