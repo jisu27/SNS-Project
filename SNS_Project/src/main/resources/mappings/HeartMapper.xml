@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="heartMapper">
+
+  <select id="like" resultType="heart">
+  	SELECT *
+  	FROM heart
+  	WHERE id=#{id},bseq=#{bSeq}
+  </select>
+  <!-- ###################################################################################################################### -->
+  <select id="likeBoard" resultType="heart">
+  	SELECT bseq
+  	FROM heart
+  	WHERE id=#{id}
+  </select>
+  <!-- ###################################################################################################################### -->
+  <insert id="insertLike">
+  	INSERT INTO heart(bseq,id,use_like) 
+  	VALUES (#{bSeq},#{id},#{use_like})
+  </insert>
+  <!-- ###################################################################################################################### -->
+  <delete id="deleteLike">
+  	DELETE heart 
+  	WHERE id=#{id} AND bseq=#{bSeq}
+  </delete>
+  
+</mapper>
+
+ 
+
