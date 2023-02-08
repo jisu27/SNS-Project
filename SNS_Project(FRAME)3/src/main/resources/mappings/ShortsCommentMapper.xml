@@ -4,30 +4,35 @@
 
     <insert id="insertComment" parameterType="shortsComment">
 		INSERT INTO
-		SNS_COMMENT(scSeq, sSeq, id, content)
-		VALUES (seq_comment.NEXTVAL, #{sSeq}, #{id}, #{content})
+		shorts_COMMENT(scSeq, sSeq, id, content)
+		VALUES (SComment_seq.NEXTVAL, #{sSeq}, #{id}, #{content})
 	</insert>
 	
 	<update id = "updateComment" parameterType="shortsComment">
-		update Shorts_comment set id=#{id}, content=#{content}
-		where id=#{id}
+		UPDATE Shorts_comment set content=#{content}
+		WHERE scSeq=#{scSeq}
 	</update>
 	
 	<delete id = "deleteComment" parameterType="shortsComment">
-		delete Shorts_comment where scSeq = #{scSeq} and id = #{id};
+		DELETE Shorts_comment where scSeq = #{scSeq}
 	</delete>
 	
 	<select id = "getComment" resultType="shortsComment">
-		select * from Shorts where scSeq = #{scSeq};
+		SELECT * FROM Shorts_comment where scSeq = #{scSeq};
 	</select>
 	
 	
-	<select id="getcommentList" resultType="shortsComment">
-		SELECT * FROM Shorts_comment ORDER BY indate DESC
+	<select id="getCommentList" resultType="shortsComment">
+		SELECT c.*
+		FROM Shorts_comment c
+		JOIN shorts s
+		ON s.sSeq = c.sSeq
+		WHERE s.sSeq = #{sSeq}
+		ORDER BY c.indate DESC
 	</select>
 
-	<select id="countcommentList" resultType="int">
-		SELECT count(*) FROM Shorts_comment WHERE scSeq = #{scSeq}
+	<select id="countCommentList" resultType="int">
+		SELECT count(*) FROM Shorts_comment WHERE sSeq = #{sSeq}
 	</select>
 	
 	

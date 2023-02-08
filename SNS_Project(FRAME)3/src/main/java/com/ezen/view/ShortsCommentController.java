@@ -62,7 +62,7 @@ public class ShortsCommentController {
 			return "getShortsList";
 		} else {
 			service.updateComment(vo);
-			return "redirect:getShorts";
+			return "getShorts?sSeq="+vo.getsSeq();
 		}
 	}
 	

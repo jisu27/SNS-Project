@@ -4,18 +4,18 @@ import java.util.Date;
 
 public class ShortsCommentVO {
 	
-	private int s_seq;
+	private int scSeq;
 	private int sSeq;
 	private String id;
 	private String content;
 	private Date indate;
 	
 	
-	public int getS_seq() {
-		return s_seq;
+	public int getScSeq() {
+		return scSeq;
 	}
-	public void setS_seq(int s_seq) {
-		this.s_seq = s_seq;
+	public void setScSeq(int scSeq) {
+		this.scSeq = scSeq;
 	}
 	public int getsSeq() {
 		return sSeq;
@@ -43,7 +43,7 @@ public class ShortsCommentVO {
 	}
 	@Override
 	public String toString() {
-		return "ShortsCommentVO [s_seq=" + s_seq + ", sSeq=" + sSeq + ", id=" + id + ", content=" + content
+		return "ShortsCommentVO [scSeq=" + scSeq + ", sSeq=" + sSeq + ", id=" + id + ", content=" + content
 				+ ", indate=" + indate + "]";
 	}
 	
