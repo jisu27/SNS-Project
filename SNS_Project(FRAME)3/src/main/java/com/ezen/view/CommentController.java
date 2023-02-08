@@ -1,9 +1,7 @@
 package com.ezen.view;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,12 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.ezen.dto.BoardVO;
 import com.ezen.dto.CommentVO;
-import com.ezen.dto.MemberVO;
 import com.ezen.service.CommentService;
 
 @Controller
@@ -29,7 +24,7 @@ public class CommentController {
 	private CommentService commentService;
 	
 	@PostMapping(value="/insertComment.do")
-	public String saveCommentAction(CommentVO cvo, HttpSession session, HttpServletRequest request) {
+	public String saveCommentAction(BoardVO vo,CommentVO cvo, HttpSession session, HttpServletRequest request) {
 		
 		commentService.insertComment(cvo);
 		
