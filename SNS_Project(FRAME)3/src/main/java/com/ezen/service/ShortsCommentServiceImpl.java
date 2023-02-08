@@ -10,42 +10,41 @@ import com.ezen.dto.ShortsCommentVO;
 
 @Service
 public class ShortsCommentServiceImpl implements ShortsCommentService {
-	
+
 	@Autowired
 	private ShortsCommentDAO sdao;
 
 	@Override
-	public void insertComment(ShortsCommentVO vo) {
-		sdao.insertComment(vo);
+	public void insertShortsComment(ShortsCommentVO vo) {
+		sdao.insertShortsComment(vo);
 
 	}
 
 	@Override
-	public void updateComment(ShortsCommentVO vo) {
-		sdao.updateComment(vo);
+	public void updateShortsComment(ShortsCommentVO vo) {
+		sdao.updateShortsComment(vo);
 
 	}
 
 	@Override
-	public void deleteComment(ShortsCommentVO vo) {
-		sdao.deleteComment(vo);
+	public void deleteShortsComment(ShortsCommentVO vo) {
+		sdao.deleteShortsComment(vo);
 
 	}
 
 	@Override
-	public List<ShortsCommentVO> getCommentList(ShortsCommentVO vo) {
-		return sdao.getCommentList(vo);
+	public List<ShortsCommentVO> getShortsCommentList(ShortsCommentVO vo) {
+		return sdao.getShortsCommentList(vo);
 	}
-	
-	@Override
-	public ShortsCommentVO getComment(ShortsCommentVO vo) {
-		return sdao.getComment(vo);
-	}
-	
 
 	@Override
-	public int getCountCommentList(int s_seq) {
-		return sdao.getCountCommentList(s_seq);
+	public ShortsCommentVO getShortsComment(ShortsCommentVO vo) {
+		return sdao.getShortsComment(vo);
+	}
+
+	@Override
+	public int getCountShortsCommentList(int s_seq) {
+		return sdao.getCountShortsCommentList(s_seq);
 	}
 
 }

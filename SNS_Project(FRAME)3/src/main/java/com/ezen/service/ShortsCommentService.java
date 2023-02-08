@@ -6,16 +6,16 @@ import com.ezen.dto.ShortsCommentVO;
 
 public interface ShortsCommentService {
 
-	void insertComment(ShortsCommentVO vo);
+	void insertShortsComment(ShortsCommentVO vo);
 
-	void updateComment(ShortsCommentVO vo);
+	void updateShortsComment(ShortsCommentVO vo);
 
-	void deleteComment(ShortsCommentVO vo);
+	void deleteShortsComment(ShortsCommentVO vo);
 
-	List<ShortsCommentVO> getCommentList(ShortsCommentVO vo);
+	List<ShortsCommentVO> getShortsCommentList(ShortsCommentVO vo);
 
-	ShortsCommentVO getComment(ShortsCommentVO vo);
+	ShortsCommentVO getShortsComment(ShortsCommentVO vo);
 	
-	int getCountCommentList(int s_seq);
+	int getCountShortsCommentList(int s_seq);
 
 }

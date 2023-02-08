@@ -1,5 +1,6 @@
 package com.ezen.dto;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ShortsCommentVO {
@@ -8,8 +9,9 @@ public class ShortsCommentVO {
 	private int sSeq;
 	private String id;
 	private String content;
-	private Date indate;
-	
+	private Date inDate;
+	// private SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
+	// private String strDate;
 	
 	public int getScSeq() {
 		return scSeq;
@@ -35,16 +37,17 @@ public class ShortsCommentVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getIndate() {
-		return indate;
+
+	public Date getInDate() {
+		return inDate;
 	}
-	public void setIndate(Date indate) {
-		this.indate = indate;
+	public void setInDate(Date inDate) {
+		this.inDate = inDate;
 	}
 	@Override
 	public String toString() {
 		return "ShortsCommentVO [scSeq=" + scSeq + ", sSeq=" + sSeq + ", id=" + id + ", content=" + content
-				+ ", indate=" + indate + "]";
+				+ ", inDate=" + inDate + "]";
 	}
 	
 	

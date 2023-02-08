@@ -15,31 +15,31 @@ public class ShortsCommentDAO {
 	private SqlSessionTemplate mybatis;
 	
 	
-	public void insertComment(ShortsCommentVO vo) {
-		mybatis.insert("ShortsCommentMapper.insertComment", vo);
+	public void insertShortsComment(ShortsCommentVO vo) {
+		mybatis.insert("ShortsCommentMapper.insertShortsComment", vo);
 	}
 	
 	
-	public void updateComment(ShortsCommentVO vo) {
-		mybatis.update("ShortsCommentMapper.updateComment", vo);
+	public void updateShortsComment(ShortsCommentVO vo) {
+		mybatis.update("ShortsCommentMapper.updateShortsComment", vo);
 	}
 
 
-	public void deleteComment(ShortsCommentVO vo) {
-		mybatis.delete("ShortsCommentMapper.deleteComment", vo);
-	}
-	
-
-	public List<ShortsCommentVO> getCommentList(ShortsCommentVO vo){
-		return mybatis.selectList("ShortsCommentMapper.getCommentList", vo);
+	public void deleteShortsComment(ShortsCommentVO vo) {
+		mybatis.delete("ShortsCommentMapper.deleteShortsComment", vo);
 	}
 	
-	public ShortsCommentVO getComment(ShortsCommentVO vo) {
-		return mybatis.selectOne("ShortsCommentMapper.getComment", vo);
+
+	public List<ShortsCommentVO> getShortsCommentList(ShortsCommentVO vo){
+		return mybatis.selectList("ShortsCommentMapper.getShortsCommentList", vo);
+	}
+	
+	public ShortsCommentVO getShortsComment(ShortsCommentVO vo) {
+		return mybatis.selectOne("ShortsCommentMapper.getShortsComment", vo);
 	}
 
-	public int getCountCommentList(int s_seq) {
-		return mybatis.selectOne("ShortsCommentMapper.getCountCommentList", s_seq);
+	public int getCountShortsCommentList(int s_seq) {
+		return mybatis.selectOne("ShortsCommentMapper.getCountShortsCommentList", s_seq);
 	}
 	
 	

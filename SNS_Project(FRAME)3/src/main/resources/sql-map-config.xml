@@ -10,6 +10,7 @@
 		<typeAlias type="com.ezen.dto.AdvertisementVO"
 			alias="advertise" />
 		<typeAlias type="com.ezen.dto.HeartVO" alias="heart" />
+		<typeAlias type="com.ezen.dto.ShortsCommentVO" alias="shortsComment"/>
 	</typeAliases>
 
 	<mappers>
@@ -20,5 +21,6 @@
 		<mapper resource="mappings/ShortsMapper.xml" />
 		<mapper resource="mappings/AdvertiseMapper.xml" />
 		<mapper resource="mappings/HeartMapper.xml" />
+		<mapper resource="mappings/ShortsCommentMapper.xml"/>
 	</mappers>
 </configuration>

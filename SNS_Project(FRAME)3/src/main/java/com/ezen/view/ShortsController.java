@@ -16,7 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ezen.dto.MemberVO;
+import com.ezen.dto.ShortsCommentVO;
 import com.ezen.dto.ShortsVO;
+import com.ezen.service.HeartService;
+import com.ezen.service.MemberService;
+import com.ezen.service.ShortsCommentService;
 import com.ezen.service.ShortsService;
 
 @Controller
@@ -24,15 +28,27 @@ public class ShortsController {
 
 	@Autowired
 	private ShortsService shos;
+	@Autowired
+	private MemberService memberService;
+	@Autowired
+	private HeartService heartService;
+	@Autowired
+	private ShortsCommentService ShortsCommentService;
 
 	@RequestMapping("/getShorts")
-	public String getShorts(ShortsVO vo, Model model, HttpSession session) {
+	public String getShorts(ShortsVO vo, ShortsCommentVO scvo, Model model, HttpSession session) {
 		MemberVO user = (MemberVO) session.getAttribute("user");
 
 		ShortsVO shorts = shos.getShorts(vo);
 		model.addAttribute("shorts", shorts);
+		
+		scvo.setsSeq(vo.getsSeq());
+		List<ShortsCommentVO> ShortsCommentList = ShortsCommentService.getShortsCommentList(scvo);
+		model.addAttribute("ShortsCommentList", ShortsCommentList);
 
-		System.out.println("--getShorts controller 실행: " + shorts);
+		System.out.println("--getShorts controller �떎�뻾: " + shorts);
+		System.out.println("ShortsCommentVO =" + scvo);
+		System.out.println(ShortsCommentList);
 		return "getShorts";
 
 	}
@@ -83,10 +99,10 @@ public class ShortsController {
 
 				uploadFile.transferTo(new File("C:/shorts/" + fileName));
 				vo.setUpload(fileName);
-				System.out.println("파일이름 :" + fileName);
+				System.out.println("�뙆�씪�씠由� :" + fileName);
 
 			} else {
-				System.out.println("파일이 없습니다");
+				System.out.println("�뙆�씪�씠 �뾾�뒿�땲�떎");
 				return "insertShorts";
 			}
 
@@ -125,10 +141,10 @@ public class ShortsController {
 
 			uploadFile.transferTo(new File("C:/shorts/" + fileName));
 			vo.setUpload(fileName);
-			System.out.println("파일이름 :" + fileName);
+			System.out.println("�뙆�씪�씠由� :" + fileName);
 
 		} else {
-			System.out.println("파일이 없습니다");
+			System.out.println("�뙆�씪�씠 �뾾�뒿�땲�떎");
 			return "updatetShorts";
 		}
 
@@ -138,7 +154,7 @@ public class ShortsController {
 		} else {
 
 			shos.updateShorts(vo);
-			System.out.println("update controller 실행= " + "제목: " + vo.getsTitle() + " 내용: " + vo.getsContent());
+			System.out.println("update controller �떎�뻾= " + "�젣紐�: " + vo.getsTitle() + " �궡�슜: " + vo.getsContent());
 			return "redirect:getShortsList";
 		}
 

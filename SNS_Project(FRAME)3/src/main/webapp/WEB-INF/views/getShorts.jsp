@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -62,7 +63,7 @@
 			<section class="h_inner">
 
 				<h1 class="logo">
-					<a href="index.html">
+					<a href="home.do">
 						<div class="sprite_insta_icon"></div>
 						<div>
 							<div class="sprite_write_logo"></div>
@@ -123,35 +124,27 @@
 								</div>
 								<div class="sprite_more_icon" data-name="more">
 									<ul class="more_detail">
-										<li>íë¡ì°</li>
-										<li>ìì </li>
-										<li>ì­ì </li>
+										<li>무엇을</li>
+										<li>무언가</li>
+										<li>넣을게</li>
 									</ul>
 								</div>
 
 							</header>
 
 							<section class="scroll_section">
-								<div class="admin_container">
-									<div class="admin">
-										<img src="imgs/thumb.jpeg" alt="user">
-									</div>
-									<div class="comment">
-										<span class="user_id">Kindtiger</span>ê°ìì§ê° ë§ì´
-										íë ê°ë³´ë¤ãããããì¡°ê¸ë§íë´
-										<div class="time">2ìê°</div>
-									</div>
-								</div>
-
-								<div class="user_container-detail">
+								<c:forEach items="${ShortsCommentList}" var="ShortsComment">
+									<div class="user_container-detail">
 									<div class="user">
-										<img src="imgs/thumb02.jpg" alt="user">
+										<!--  <img src="imgs/thumb02.jpg" alt="user"> -->
+										프사
 									</div>
 									<div class="comment">
-										<span class="user_id">in0.lee</span>ëë¬´ê·ì½ë¤ì
-										ãããë§íí´ì~!
+										<span class="user_id">${ShortsComment.id}</span>
+										${ShortsComment.content}
 										<div class="time">
-											2ìê° <span class="try_comment">ëµê¸ ë¬ê¸°</span>
+										${ShortsComment.inDate}
+										  <!-- <span class="try_comment">ëµê¸ ë¬ê¸°</span>  -->
 										</div>
 										<div class="icon_wrap">
 											<div class="more_trigger">
@@ -163,90 +156,7 @@
 										</div>
 									</div>
 								</div>
-
-								<div class="user_container-detail">
-									<div class="user">
-										<img src="imgs/thumb03.jpg" alt="user">
-									</div>
-									<div class="comment">
-										<span class="user_id">ye_solkim</span>ê°ìì§ ì´ë¦ì´
-										ë­ìì???
-										<div class="time">
-											2ìê° <span class="try_comment">ëµê¸ ë¬ê¸°</span>
-										</div>
-										<div class="icon_wrap">
-											<div class="more_trigger">
-												<div class="sprite_more_icon"></div>
-											</div>
-											<div>
-												<div class="sprite_small_heart_icon_outline"></div>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="user_container-detail">
-									<div class="user">
-										<img src="imgs/thumb02.jpg" alt="user">
-									</div>
-									<div class="comment">
-										<span class="user_id">in0.lee</span>ëë¬´ê·ì½ë¤ì
-										ãããë§íí´ì~!
-										<div class="time">
-											2ìê° <span class="try_comment">ëµê¸ ë¬ê¸°</span>
-										</div>
-										<div class="icon_wrap">
-											<div class="more_trigger">
-												<div class="sprite_more_icon"></div>
-											</div>
-											<div>
-												<div class="sprite_small_heart_icon_outline"></div>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="user_container-detail">
-									<div class="user">
-										<img src="imgs/thumb03.jpg" alt="user">
-									</div>
-									<div class="comment">
-										<span class="user_id">in0.lee</span>ëë¬´ê·ì½ë¤ì
-										<div class="time">
-											2ìê° <span class="try_comment">ëµê¸ ë¬ê¸°</span>
-										</div>
-										<div class="icon_wrap">
-											<div class="more_trigger">
-												<div class="sprite_more_icon"></div>
-											</div>
-											<div>
-												<div class="sprite_small_heart_icon_outline"></div>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="user_container-detail">
-									<div class="user">
-										<img src="imgs/thumb02.jpg" alt="user">
-									</div>
-									<div class="comment">
-										<span class="user_id">in0.lee</span>ëë¬´ê·ì½ë¤ì
-										ãããë§íí´ì~!
-										<div class="time">
-											2ìê° <span class="try_comment">ëµê¸ ë¬ê¸°</span>
-										</div>
-										<div class="icon_wrap">
-											<div class="more_trigger">
-												<div class="sprite_more_icon"></div>
-											</div>
-											<div>
-												<div class="sprite_small_heart_icon_outline"></div>
-											</div>
-										</div>
-									</div>
-								</div>
-
+								</c:forEach>
 							</section>
 
 
@@ -269,29 +179,24 @@
 							</div>
 
 							<div class="count_likes">
-								ì¢ìì <span class="count">2,351</span> ê°
+								<!-- 좋아요 수<span class="count">{shorts.like}</span> -->
 							</div>
 							<div class="timer">2ìê°</div>
 
 							<div class="commit_field">
-								<input type="text" placeholder="ëê¸ë¬ê¸°..">
-
-								<div class="upload_btn">ê²ì</div>
+								<form action="insertShortsComment" method="post">
+									<input type="hidden" name="sSeq" value="${shorts.sSeq}">
+									<input type="hidden" name="id" value="${sessionScope.user.id}">
+									<input type="text" name="content" placeholder="댓글을 입력하세요">
+									
+								<input type="submit" value="댓글 달기">
+								<div class="upload_btn"></div>
+								</form>
 							</div>
-
-
-
 						</div>
-
-
 					</article>
-
-
 				</div>
-
-
 			</section>
-
 		</div>
 
 
