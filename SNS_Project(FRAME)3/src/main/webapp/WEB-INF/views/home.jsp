@@ -94,8 +94,7 @@
 								<div class="sprite_more_icon" data-name="more"
 									onclick="toggle(this.children[0])">
 									<ul class="toggle_box" id="toggle_box${status.count}">
-										<li><input type="submit" class="follow" value="팔로우"
-											data-name="follow"></li>
+									
 										<li><a href="goUpdateBoard.do?bSeq=${board.bSeq}"> <input
 												type="button" value="수정"></a></li>
 
@@ -106,7 +105,7 @@
 												</c:if>
 											</form></li>
 									</ul>
-								</div>
+								  </div>
 								</c:if>
 
 							</header>
@@ -189,10 +188,10 @@
 												<div>${comment.ccontent}</div>
 											</div>
 										</div>
+										<c:if test="${sessionScope.user.id == comment.id}">
 										<div class="sprite_more_icon" data-name="more"
 		                                    onclick="toggle(this.children[0])">
-		                                    <ul class="toggle_box_c" id="toggle_box${comment.cseq}">
-		                                             <c:if test="${sessionScope.user.id == comment.id }">
+		                                    <ul class="toggle_box" id="toggle_box${comment.cseq}">         
 		                                       <li><a href="goUpdateComment.do?cseq=${comment.cseq}">
 		                                             <input type="button" value="수정">
 		                                       </a></li>
@@ -201,9 +200,9 @@
 		                                             method="post">
 		                                                <input type="submit" value="삭제">
 		                                          </form></li>
-		                                             </c:if>
 		                                    </ul>
                                			  </div>
+		                                             </c:if>
 										<div class="small_heart">
 											<div class="sprite_small_heart_icon_outline"></div>
 										</div>
@@ -245,6 +244,7 @@
 
 									</div>
 
+									<c:if test="${sessionScope.user.id == adverList[status.index/3].id}">
 									<div class="sprite_more_icon" data-name="more"
 										onclick="toggle(this.children[0])">
 										<ul class="toggle_box" id="toggle_box2${status.count}">
@@ -264,6 +264,7 @@
 												</form></li>
 										</ul>
 									</div>
+									</c:if>
 
 
 
@@ -340,9 +341,10 @@
 													<div>${comment.ccontent}</div>
 												</div>
 											</div>
+											<c:if test="${sessionScope.user.id == comment.id}">
 											<div class="sprite_more_icon" data-name="more"
-												onclick="toggle(this.children[0])">
-												<ul class="toggle_box_c" id="toggle_box${comment.cseq}">
+												onclick="toggle_c(this.children[0])">
+												<ul class="toggle_box" id="toggle_box${comment.cseq}">
 													<li><a href="updateComment.do?cseq=${comment.cseq}">
 															<input type="button" value="수정">
 													</a></li>
@@ -355,6 +357,7 @@
 														</form></li>
 												</ul>
 											</div>
+											</c:if>
 											<div class="small_heart">
 												<div class="sprite_small_heart_icon_outline"></div>
 											</div>
@@ -487,19 +490,7 @@ function toggle(element){
 	}
 	
 }
-function toggle_c(element){
-	if (prev_element != null) {
-		prev_element.style.display = 'none';
-	}
-	
-	var con_c = document.getElementById(element.getAttribute("id"));
-	if(con_c.style.display=='none'){
-		con_c.style.display = 'block';
-	}else{
-		con_c.style.display = 'none';
-	}
-	prev_element = element;
-}
+
 function click(){
 	return;
 }

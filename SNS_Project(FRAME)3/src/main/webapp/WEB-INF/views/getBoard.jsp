@@ -89,14 +89,22 @@
 									</div>
 
 								</div>
-								<div class="sprite_more_icon" data-name="more">
-									<ul class="more_detail">
-										<li>이건 머야</li>
-										<li> </li>
-										<li> </li>
-									</ul>
-								</div>
+								<c:if test="${sessionScope.user.id == board.id}">
+								<div class="sprite_more_icon" data-name="more"
+									onclick="toggle(this.children[0])">
+									<ul class="toggle_box" id="toggle_box${status.count}">
+										<li><a href="goUpdateBoard.do?bSeq=${board.bSeq}"> <input
+												type="button" value="수정"></a></li>
 
+										<li><form action="deleteBoard.do?bSeq=${board.bSeq}"
+												method="post">
+												<c:if test="${sessionScope.user.id == board.id }">
+													<input type="submit" value="삭제">
+												</c:if>
+											</form></li>
+									</ul>
+								  </div>
+								</c:if>
 							</header>
 
 							<section class="scroll_section">
@@ -109,7 +117,7 @@
 										<div style="font-size:small; font-weight: 900">${time}</div>
 									</div>
 								</div>
-
+								
 								<c:forEach var="comment" items="${commentList}"
 									varStatus="status">
 									<div class="user_container-detail">
@@ -124,14 +132,30 @@
 													${comDate}에 작성된 글입니다. 											
 												<span class="try_comment"></span>
 											</div>
+											<c:if test="${sessionScope.user.id == comment.id}">
 											<div class="icon_wrap">
 												<div class="more_trigger">
-													<div class="sprite_more_icon"></div>
+													<div class="sprite_more_icon" data-name="more"
+												onclick="toggle(this.children[0])">
+												<ul class="toggle_box" id="toggle_box${comment.cseq}">
+													<li><a href="goUpdateComment.do?cseq=${comment.cseq}">
+															<input type="button" value="수정">
+													</a></li>
+													<li><form
+															action="deleteComment.do?cseq=${comment.cseq}"
+															method="post">
+															<c:if test="${sessionScope.user.id == comment.id }">
+																<input type="submit" value="삭제">
+															</c:if>
+														</form></li>
+												</ul>
+											</div>
 												</div>
 												<div>
 													<div class="sprite_small_heart_icon_outline"></div>
 												</div>
 											</div>
+											</c:if>
 										</div>
 									</div>
 
@@ -255,20 +279,6 @@
 			} else {
 				con.style.display = 'none';
 			}
-		}
-
-		function toggle_c(element) {
-			if (prev_element != null) {
-				prev_element.style.display = 'none';
-			}
-
-			var con_c = document.getElementById(element.getAttribute("id"));
-			if (con_c.style.display == 'none') {
-				con_c.style.display = 'block';
-			} else {
-				con_c.style.display = 'none';
-			}
-			prev_element = element;
 		}
 	</script>
 </body>
