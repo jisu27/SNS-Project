@@ -90,10 +90,8 @@ public class LoginController {
 		
 		if (!vo.getFile().isEmpty()) {
 			
-			fileName = vo.getFile().getOriginalFilename();
-					
+			fileName = vo.getFile().getOriginalFilename();	
 			String realPath = session.getServletContext().getRealPath("/profile/");
-			
 			vo.getFile().transferTo(new File(realPath+fileName));
 				
 		}
