@@ -80,7 +80,7 @@
 							<header class="top">
 								<div class="user_container">
 									<div class="profile_img">
-										<a><img src="profile/${memberList[status.index].profile}"
+										<a href="profile.do?id=${board.id}"><img src="profile/${memberList[status.index].profile}"
 											alt="프로필이미지"></a>
 									</div>
 									<div class="user_name">
@@ -90,6 +90,7 @@
 
 								</div>
 
+							<c:if test="${sessionScope.user.id == board.id}">
 								<div class="sprite_more_icon" data-name="more"
 									onclick="toggle(this.children[0])">
 									<ul class="toggle_box" id="toggle_box${status.count}">
@@ -106,6 +107,7 @@
 											</form></li>
 									</ul>
 								</div>
+								</c:if>
 
 							</header>
 
@@ -188,7 +190,7 @@
 											</div>
 										</div>
 										<div class="sprite_more_icon" data-name="more"
-		                                    onclick="toggle_c(this.children[0])">
+		                                    onclick="toggle(this.children[0])">
 		                                    <ul class="toggle_box_c" id="toggle_box${comment.cseq}">
 		                                             <c:if test="${sessionScope.user.id == comment.id }">
 		                                       <li><a href="goUpdateComment.do?cseq=${comment.cseq}">
@@ -234,7 +236,7 @@
 								<header class="top">
 									<div class="user_container">
 										<div class="profile_img">
-											<img src="${admemberList[status.index/3].profile}" alt="프로필이미지">
+											<a href="profile.do?id=${adverList[status.index/3].id}"><img src="${admemberList[status.index/3].profile}" alt="프로필이미지"></a>
 										</div>
 										<div class="user_name">
 											<div class="nick_name m_text">${adverList[status.index/3].id}</div>
@@ -339,7 +341,7 @@
 												</div>
 											</div>
 											<div class="sprite_more_icon" data-name="more"
-												onclick="toggle_c(this.children[0])">
+												onclick="toggle(this.children[0])">
 												<ul class="toggle_box_c" id="toggle_box${comment.cseq}">
 													<li><a href="updateComment.do?cseq=${comment.cseq}">
 															<input type="button" value="수정">
@@ -468,28 +470,23 @@ function check_id() {
 		$("#goProfile5").attr("href","/");
 	}
 }
-
 function deleteLike(form_id) {
 	$(form_id).attr("action","deleteHeart.do").submit();
+	
 }
 function like(form_id) {
 	$(form_id).attr("action","heart.do").submit();	
 }
-
 function toggle(element){
 	
-	if (prev_element != null) {
-		prev_element.style.display = 'none';
-	}
 	var con = document.getElementById(element.getAttribute("id"));
 	if(con.style.display=='none'){
 		con.style.display = 'block';
 	}else{
 		con.style.display = 'none';
 	}
-	prev_element = element;
+	
 }
-
 function toggle_c(element){
 	if (prev_element != null) {
 		prev_element.style.display = 'none';
@@ -502,6 +499,9 @@ function toggle_c(element){
 		con_c.style.display = 'none';
 	}
 	prev_element = element;
+}
+function click(){
+	return;
 }
 </script>
 

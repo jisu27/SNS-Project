@@ -213,18 +213,10 @@ body{
     display: none;
 }
 
-.contents .toggle_box_c{
-    text-align: center;
-    position: absolute;
-    right: -90px;
-    top: 20px;
-    border: 1px solid rgba(0,0,0,0.09);
-    border-radius: 3px;
-    display: none;
-}
 
 .contents .sprite_more_icon.on .toggle_box{
     display: block;
+    position:relative;
 }
 
 .contents .toggle_box > li {
@@ -238,6 +230,7 @@ body{
     font-size: inherit;
 }
 
+
 .contents .img_section{
     overflow:hidden;
     
@@ -249,8 +242,8 @@ body{
 
 .contents .img_section img{
    
-    max-width: 800px;
-    height: 600px;
+    max-width: 400px;
+    height: 400px;
 }
 
 

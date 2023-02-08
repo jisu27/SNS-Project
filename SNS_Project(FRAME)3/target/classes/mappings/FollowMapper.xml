@@ -17,7 +17,7 @@
  		Select id2 Where fSeq= #{fSeq}
  </select>
  
- <select id="getFollowList" resultType="follow">
+ <select id="getFollowList" resultType="String">
  		Select id2 
  		FROM  follow
  		Where id1 =#{id1}

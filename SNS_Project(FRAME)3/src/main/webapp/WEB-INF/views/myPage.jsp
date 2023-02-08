@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
-<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>    
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -87,9 +87,25 @@
 
                 <div class="detail">
                     <div class="top">
-                        <div class="user_name">${sessionScope.user.name}</div>
-                        <a href="profile_edit.html" class="profile_edit">프로필편집</a>
-                        <a href="logout.do" class="logout">로그아웃</a>
+                        <div class="user_name">${member.name}</div>
+                        <c:choose>
+                        	<c:when test="${sessionScope.user.id==member.id}">
+	    	                    <a href="profile_edit.html" class="profile_edit">프로필편집</a>
+		                        <a href="logout.do" class="logout">로그아웃</a>
+                        	</c:when>
+                        	<c:otherwise>
+                        				<c:choose>
+		                        		<c:when test="${fn:contains(sessionScope.follower,member.id)}">
+			                        		<a href="deleteFollow.do?id1=${sessionScope.user.id}&id2=${member.id}">언 팔로우</a>
+		    	                    		<a href="#">메시지</a>
+		                        		</c:when>
+		                        		<c:otherwise>
+			                        		<a href="follow.do?id1=${sessionScope.user.id}&id2=${member.id}">팔로우</a>
+		    	                    		<a href="#">메시지</a>
+		                        		</c:otherwise>
+	                        			</c:choose>                       		                      			
+                        	</c:otherwise>
+                        </c:choose>
                     </div>
 
                     <ul class="middle">

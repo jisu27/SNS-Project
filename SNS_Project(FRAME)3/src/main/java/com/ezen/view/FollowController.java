@@ -27,27 +27,29 @@ public class FollowController {
 	@Autowired
 	private MemberService memberService;
 	
-	@PostMapping("follow.do")
+	@GetMapping("follow.do")
 	public String follow(FollowVO vo,HttpSession session){
 		
 		
 		followService.insertFollow(vo);
 		
-		List<FollowVO> list = followService.getFollowList(vo);
+		List<String> list = followService.getFollowList(vo);
 		session.setAttribute("follower", list);
+		
 		
 		return "redirect:profile.do?id="+vo.getId2();
 	}
 	
 	@GetMapping("followList.do")
 	public String goFolloweList(FollowVO vo,Model model) {
-		List<FollowVO> flist =new ArrayList<>();
+		List<String> flist =new ArrayList<>();
+		List<FollowVO> flist2 =new ArrayList<>();
 		List<MemberVO> mlist =new ArrayList<>();
 		
 		if (vo.getId2()!=null) {
-			flist = followService.getFollowListId1(vo);
+			flist2 = followService.getFollowListId1(vo);
 			
-			for(FollowVO fo : flist) {
+			for(FollowVO fo : flist2) {
 				MemberVO member =new MemberVO();
 				member.setId(fo.getId1());
 				
@@ -59,9 +61,9 @@ public class FollowController {
 		}else if (vo.getId1()!=null) {
 			flist= followService.getFollowList(vo);
 			
-			for(FollowVO fo : flist) {
+			for(String fo : flist) {
 				MemberVO member =new MemberVO();
-				member.setId(fo.getId2());
+				member.setId(fo);
 				
 				MemberVO mvo = memberService.MemberCheck(member);
 				
@@ -75,13 +77,13 @@ public class FollowController {
 		return "followList";
 	}
 	
-	@PostMapping("deleteFollow.do")
+	@GetMapping("deleteFollow.do")
 	public String deleteFollow(FollowVO vo,HttpSession session) {
 			
 			
 		followService.deleteFollow(vo);
 		
-		List<FollowVO> list = followService.getFollowList(vo);
+		List<String> list = followService.getFollowList(vo);
 		session.setAttribute("follower", list);
 		
 		return "redirect:profile.do?id="+vo.getId2();
