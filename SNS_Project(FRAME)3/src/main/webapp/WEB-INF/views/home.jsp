@@ -80,7 +80,7 @@
 							<header class="top">
 								<div class="user_container">
 									<div class="profile_img">
-										<a><img src="profile/${memberList[status.index].profile}"
+										<a href="profile.do?id=${board.id}"><img src="profile/${memberList[status.index].profile}"
 											alt="프로필이미지"></a>
 									</div>
 									<div class="user_name">
@@ -89,12 +89,12 @@
 									</div>
 
 								</div>
-								<c:if test="${sessionScope.user.id == board.id}">
+                
+							<c:if test="${sessionScope.user.id == board.id}">
 								<div class="sprite_more_icon" data-name="more"
 									onclick="toggle(this.children[0])">
 									<ul class="toggle_box" id="toggle_box${status.count}">
-										<li><input type="submit" class="follow" value="팔로우"
-											data-name="follow"></li>
+									
 										<li><a href="goUpdateBoard.do?bSeq=${board.bSeq}"> <input
 												type="button" value="수정"></a></li>
 
@@ -105,7 +105,11 @@
 												</c:if>
 											</form></li>
 									</ul>
+
+								  </div>
+
 								</div>
+
 								</c:if>
 
 							</header>
@@ -195,7 +199,8 @@
 												<div>${comment.ccontent}</div>
 											</div>
 										</div>
-										<c:if test="${sessionScope.user.id == board.id}">
+
+										<c:if test="${sessionScope.user.id == comment.id}">
 										<div class="sprite_more_icon" data-name="more"
 		                                    onclick="toggle(this.children[0])">
 		                                    <ul class="toggle_box" id="toggle_box${comment.cseq}">         
@@ -242,7 +247,7 @@
 								<header class="top">
 									<div class="user_container">
 										<div class="profile_img">
-											<img src="${admemberList[status.index/3].profile}" alt="프로필이미지">
+											<a href="profile.do?id=${adverList[status.index/3].id}"><img src="${admemberList[status.index/3].profile}" alt="프로필이미지"></a>
 										</div>
 										<div class="user_name">
 											<div class="nick_name m_text">${adverList[status.index/3].id}</div>
@@ -250,7 +255,8 @@
 										</div>
 
 									</div>
-									<c:if test="${sessionScope.user.id == board.id}">
+
+									<c:if test="${sessionScope.user.id == adverList[status.index/3].id}">
 									<div class="sprite_more_icon" data-name="more"
 										onclick="toggle(this.children[0])">
 										<ul class="toggle_box" id="toggle_box2${status.count}">
@@ -279,7 +285,7 @@
 
 								<div class="img_section">
 									<div class="trans_inner">
-										<a href="getBoard.do?bSeq=${board.bSeq}&profile=${admemberList[status.index/3].profile}&time=${adtime[status.index/3]}">
+										<a href="getBoard.do?bSeq=${adverList[status.index/3].bSeq}&profile=${admemberList[status.index/3].profile}&time=${adtime[status.index/3]}">
 											<img src="images/${adverList[status.index/3].upload}"
 											alt="visual01">
 										</a>
@@ -347,10 +353,11 @@
 													<div>${comment.ccontent}</div>
 												</div>
 											</div>
-											<c:if test="${sessionScope.user.id == board.id}">
+
+											<c:if test="${sessionScope.user.id == comment.id}">
 											<div class="sprite_more_icon" data-name="more"
 												onclick="toggle_c(this.children[0])">
-												<ul class="toggle_box_c" id="toggle_box${comment.cseq}">
+												<ul class="toggle_box" id="toggle_box${comment.cseq}">
 													<li><a href="updateComment.do?cseq=${comment.cseq}">
 															<input type="button" value="수정">
 													</a></li>
@@ -478,7 +485,6 @@ function check_id() {
 		$("#goProfile5").attr("href","/");
 	}
 }
-
 function deleteLike(form_id) {
 
 	$(form_id).attr("action","deleteHeart.do").submit();
@@ -487,7 +493,6 @@ function deleteLike(form_id) {
 function like(form_id) {
 	$(form_id).attr("action","heart.do").submit();	
 }
-
 function toggle(element){
 	
 	var con = document.getElementById(element.getAttribute("id"));
@@ -499,18 +504,8 @@ function toggle(element){
 	
 }
 
-function toggle_c(element){
-	if (prev_element != null) {
-		prev_element.style.display = 'none';
-	}
-	
-	var con_c = document.getElementById(element.getAttribute("id"));
-	if(con_c.style.display=='none'){
-		con_c.style.display = 'block';
-	}else{
-		con_c.style.display = 'none';
-	}
-	prev_element = element;
+function click(){
+	return;
 }
 function click(){
 	return;

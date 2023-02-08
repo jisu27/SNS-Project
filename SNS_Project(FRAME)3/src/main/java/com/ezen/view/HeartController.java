@@ -50,7 +50,7 @@ public class HeartController {
 	}
 	
 	@PostMapping("getHeart.do")
-	public String getInsertLike(HeartVO vo,Model model,HttpSession session){
+	public String getInsertLike(MemberVO mvo,HeartVO vo,Model model,HttpSession session){
 		
 		System.out.println("heartvo타입의 번호 !! ============="+vo);
 		vo.setUse_like("y");
@@ -64,7 +64,7 @@ public class HeartController {
 		List<HeartVO> heart = heartService.boardLike(vo);
 		session.setAttribute("heart",heart);
 		
-		return"redirect:getBoard.do?bSeq="+vo.getBseq();
+		return"redirect:getBoard.do?bSeq="+vo.getBseq()+"&profile="+mvo.getProfile();
 	}
 	
 	@PostMapping("deleteHeart.do")
@@ -85,7 +85,7 @@ public class HeartController {
 	}
 	
 	@PostMapping("getDeleteHeart.do")
-	public String getDeleteLike(HeartVO vo,HttpSession session) {
+	public String getDeleteLike(MemberVO mvo,HeartVO vo,HttpSession session) {
 		
 		heartService.deleteLike(vo);
 		
@@ -97,7 +97,7 @@ public class HeartController {
 		List<HeartVO> heart = heartService.boardLike(vo);
 		session.setAttribute("heart",heart);
 		
-		return"redirect:getBoard.do?bSeq="+vo.getBseq();
+		return"redirect:getBoard.do?bSeq="+vo.getBseq()+"&profile="+mvo.getProfile();
 	}
 	
 	@GetMapping("getLikeList.do")

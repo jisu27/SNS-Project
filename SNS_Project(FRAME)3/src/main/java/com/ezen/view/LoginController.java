@@ -125,7 +125,7 @@ public class LoginController {
 				
 				List<HeartVO> heart = heartService.boardLike(hvo);
 				
-				List<FollowVO> follower = followService.getFollowList(fvo);
+				List<String> follower = followService.getFollowList(fvo);
 				
 				
 				session.setAttribute("user",mvo);
