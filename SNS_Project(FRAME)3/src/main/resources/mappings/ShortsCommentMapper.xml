@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ShortsCommentMapper">
+
+    <insert id="insertComment" parameterType="shortsComment">
+		INSERT INTO
+		SNS_COMMENT(scSeq, sSeq, id, content)
+		VALUES (seq_comment.NEXTVAL, #{sSeq}, #{id}, #{content})
+	</insert>
+	
+	<update id = "updateComment" parameterType="shortsComment">
+		update Shorts_comment set id=#{id}, content=#{content}
+		where id=#{id}
+	</update>
+	
+	<delete id = "deleteComment" parameterType="shortsComment">
+		delete Shorts_comment where scSeq = #{scSeq} and id = #{id};
+	</delete>
+	
+	<select id = "getComment" resultType="shortsComment">
+		select * from Shorts where scSeq = #{scSeq};
+	</select>
+	
+	
+	<select id="getcommentList" resultType="shortsComment">
+		SELECT * FROM Shorts_comment ORDER BY indate DESC
+	</select>
+
+	<select id="countcommentList" resultType="int">
+		SELECT count(*) FROM Shorts_comment WHERE scSeq = #{scSeq}
+	</select>
+	
+	
+</mapper>
