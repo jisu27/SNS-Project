@@ -50,6 +50,7 @@
 							class="sprite_heart_icon_outline"></div></a> <a id="goProfile4"
 						href="profile.do?id=${sessionScope.user.id}" onclick="check_id()"><div
 							class="sprite_user_icon_outline"></div></a>
+					<a href="insertShorts"><div class="sprite_short_icon"></div></a>		
 				</div>
 
 			</section>
@@ -119,11 +120,11 @@
 									</c:if>
 									<c:if test="${board.upload!='null'}">
 										<a
-											href="getBoard.do?bSeq=${board.bSeq}&profile=${memberList[status.index].profile}"><img
+											href="getBoard.do?bSeq=${board.bSeq}&profile=${memberList[status.index].profile}&time=${time[status.index]}"><img
 											src="images/${board.upload}" alt="${board.id}의 이미지"></a>
 										<br>
 										<div class="con">
-											<pre>${board.content }</pre>
+											<pre>${board.content}</pre>
 										</div>
 									</c:if>
 
@@ -269,7 +270,7 @@
 
 								<div class="img_section">
 									<div class="trans_inner">
-										<a href="getBoard.do?bSeq=${adverList[status.index/3].bSeq}">
+										<a href="getBoard.do?bSeq=${board.bSeq}&profile=${admemberList[status.index/3].profile}&time=${adtime[status.index/3]}">
 											<img src="images/${adverList[status.index/3].upload}"
 											alt="visual01">
 										</a>

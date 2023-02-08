@@ -16,6 +16,7 @@ public class ShortsDAO  {
 	
 	
 	public ShortsVO getShorts(ShortsVO vo) {
+		System.out.println("--getShort() 실행: " + vo);
 		return mybatis.selectOne("ShortsMapper.getShorts",vo);
 	}
 	
@@ -31,6 +32,7 @@ public class ShortsDAO  {
 	
 	public void updateShorts(ShortsVO vo) {
 		mybatis.update("ShortsMapper.updateShorts",vo);
+		System.out.println("--updateShorts() 실행: " + vo);
 	}
 	
 	

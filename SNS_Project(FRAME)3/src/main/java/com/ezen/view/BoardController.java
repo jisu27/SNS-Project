@@ -188,14 +188,26 @@ public class BoardController {
 
 //	##############################################################################################################--goInsertBoard
 	@GetMapping("getBoard.do")
-	public String getBoard(MemberVO mvo, CommentVO cvo, BoardVO bvo, Model model, HttpSession session) {
-
+	public String getBoard(@RequestParam (value = "time")String time,MemberVO mvo, CommentVO cvo, BoardVO bvo, Model model, HttpSession session) {
+		List<MemberVO> list =new ArrayList<MemberVO>();
+		
 		BoardVO board = (BoardVO) boardService.myBoard(bvo);
 		model.addAttribute("board", board);
+		model.addAttribute("time", time);
 		model.addAttribute("profile", mvo.getProfile());
 
+		
 		cvo.setBseq(bvo.getbSeq());
 		List<CommentVO> commentList = commentService.getCommentList(cvo);
+		
+		for(CommentVO vo : commentList) {
+			MemberVO v1 = new MemberVO();
+			v1.setId(vo.getId());
+			
+			MemberVO v2 = memberService.MemberCheck(v1);
+			list.add(v2); 
+		}
+		model.addAttribute("commentMemberList",list);
 		model.addAttribute("commentList", commentList);
 
 		System.out.println("commentList :" + commentList);

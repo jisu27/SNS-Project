@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="css/reset.css">
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/detail-page.css">
 <script src="https://code.jquery.com/jquery-3.6.3.js"
 	integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
 	crossorigin="anonymous"></script>
@@ -55,77 +56,82 @@
 			</section>
 
 		</header>
+<div id="main_container">
 
-		<div class="hidden_menu">
-			<div class="scroll_inner">
-				<div class="user">
-					<div class="thumb_img">
-						<img src="imgs/thumb.jpeg" alt="프로필사진">
-					</div>
-					<div class="id">kindtigerrr</div>
-				</div>
-			</div>
-		</div>
+        <section class="b_inner">
 
+            <div class="contents_box">
 
-		<section id="main_container">
-			<div class="inner">
+                <article class="contents cont01">
 
-				<div class="contents_box">
+                    <div class="img_section">
+                        <div class="trans_inner">
+                            <div>
+								<img alt="" src="images/${board.upload}" style="width: 800px; height:300px;">	
+                            </div>
+                        </div>
+                    </div>
 
 
-					<article class="contents">
-						<header class="top">
-							<div class="user_container">
-								<div class="profile_img">
-									<c:if test="${board.pay == 0}">
-									<img src="profile/${memberList[status.index].profile}"
-										alt="프로필이미지">
-									</c:if>
-									<c:if test="${board.pay != 0}">
-									<!-- 광고 -->
-									<img src="imgs/thumb.jpeg" alt="프로필이미지">
-									</c:if>
-								</div>
-								<div class="user_name">
-									<div class="nick_name m_text">${board.id}</div>
-									<div class="country s_text">Seoul, South Korea</div>
-								</div>
+                    <div class="detail--right_box">
 
-							</div>
+                        <header class="top">
+                            <div class="user_container">
+                                <div class="profile_img">
+                                    <img src="profile/${profile}" alt="">
+                                </div>
+                                <div class="user_name">
+                                    <div class="nick_name">${board.id}</div>
+                                    <div class="country">Seoul, South Korea</div>
+                                </div>
+                               
+                            </div>
+                            <div class="sprite_more_icon" data-name="more">
+                                <ul class="more_detail">
+                                    <li>이건 머야 </li>
+                                    <li> </li>
+                                    <li> </li>
+                                </ul>
+                            </div>
 
-							<div class="sprite_more_icon" data-name="more"
-                                    onclick="toggle_c(this.children[0])">
-                                    <ul class="toggle_box_c" id="toggle_box${comment.cseq}">
-                                             <c:if test="${sessionScope.user.id == comment.id }">
-                                       <li><a href="goUpdateComment.do?cseq=${comment.cseq}">
-                                             <input type="button" value="수정">
-                                       </a></li>
-                                       <li><form
-                                             action="deleteComment.do?cseq=${comment.cseq}"
-                                             method="post">
-                                                <input type="submit" value="삭제">
-                                          </form></li>
-                                             </c:if>
-                                    </ul>
-                                 </div>
-						</header>
+                        </header>
 
-						<div class="img_section">
-							<div class="trans_inner">
+                        <section class="scroll_section">
+                            <div class="admin_container">
+                                <div class="admin"><img src="profile/${profile}" alt="user"></div>
+                                <div class="comment">
+                                    <span class="user_id">${board.id}</span>${board.content}
+                                    <div class="time">${time}</div>
+                                </div>
+                            </div>
 
-								<div>
-									<img src="images/${board.upload}" alt="${board.id}의 이미지">
-								</div>
+						<c:forEach var="comment" items="${commentList}" varStatus="status">
+                            <div class="user_container-detail">
+                                <div class="user"><img src="profile/${commentMemberList[status.index].profile}" alt="user"></div>
+                                <div class="comment">
+                                    <span class="user_id">${comment.id}</span>${comment.ccontent}
+                                    <div class="time"><span class="try_comment"></span></div>
+                                    <div class="icon_wrap">
+                                        <div class="more_trigger">
+                                            <div class="sprite_more_icon"></div>
+                                        </div>
+                                        <div>
+                                            <div class="sprite_small_heart_icon_outline"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-							</div>
-						</div>
+						</c:forEach>
+                           
 
-						<div class="bottom_icons">
-							<div class="left_icons">
-								<div class="heart_btn">
+                        </section>
 
-									<c:choose>
+
+                        <div class="bottom_icons">
+                            <div class="left_icons">
+                                <div class="heart_btn">
+                                   <c:choose>
 										<c:when test="${fn:contains(sessionScope.heart , board.bSeq)}">
 											<div onclick="deleteLike()" class="sprite_heart_icon_outline"
 												id="heart" name="39" data-name="heartbeat"
@@ -155,136 +161,55 @@
 											</div>
 										</c:otherwise>
 									</c:choose>
-								</div>
-								<div class="sprite_bubble_icon"></div>
-								<div class="sprite_share_icon" data-name="share"></div>
-							</div>
-							<div class="right_icon">
-								<div class="sprite_bookmark_outline" data-name="bookmark"></div>
-							</div>
-						</div>
+                                </div>
+                                <div>
+                                    <div class="sprite_bubble_icon"></div>
+                                </div>
+                                <div>
+                                    <div class="sprite_share_icon" data-name="share"></div>
+                                </div>
+                            </div>
 
-						<div class="likes m_text">
-							좋아요 <span id="like-count-39">2,346</span> 개
-						</div>
-						<c:forEach items="${commentList}" var="comment">
-							<c:if test="${comment.bseq == board.bSeq }">
-								<div class="comment_container">
-									<div class="comment" id="comment-list-ajax-post37">
-										<div class="comment-detail">
-											<div class="nick_name m_text">${comment.id}</div>
-											<div>${comment.ccontent}</div>
-										</div>
-									</div>
-									<div class="sprite_more_icon" data-name="more"
-												onclick="toggle_c(this.children[0])">
-												<ul class="toggle_box_c" id="toggle_box${comment.cseq}">
-													<li><a href="updateComment.do?cseq=${comment.cseq}">
-															<input type="button" value="수정">
-													</a></li>
-													<li><form
-															action="deleteComment.do?cseq=${comment.cseq}"
-															method="post">
-															<c:if test="${sessionScope.user.id == comment.id }">
-																<input type="submit" value="삭제">
-															</c:if>
-														</form></li>
-												</ul>
-											</div>
-											<div class="small_heart">
-												<div class="sprite_small_heart_icon_outline"></div>
-											</div>
-										</div>
-									</c:if>
-								</c:forEach>
+                            <div class="right_icon">
+                                <div class="sprite_bookmark_outline" data-name="book-mark"></div>
+                            </div>
+                        </div>
 
-						<div class="timer">1시간 전</div>
-						<br>
-						<br>
+                        <div class="count_likes">
+                         	좋아요 <span id="like-count-39">${board.count}개</span>
+                         </div>
+                        <div class="timer"></div>
 
-						<div class="comment_field" id="add-comment-post37">
-							<form action="insertComment.do" method="post">
-								<input type="hidden" name="id" value="${sessionScope.user.id}">
-								<input type="hidden" name="bseq" value="${board.bSeq}">
-								<input type="text" name="ccontent" id="ccontent"
-									placeholder="댓글달기...">
-								<div class="upload_btn m_text" data-name="comment">
-									<input type="submit" value="게시">
-								</div>
-							</form>
-						</div>
-					</article>
+                        <div class="commit_field">
+                            <input type="text" placeholder="댓글을 달아주세요 ! ">
+
+                            <div class="upload_btn">게시</div>
+                        </div>
 
 
 
-
-				</div>
-				<input type="hidden" id="page" value="1">
-
-				<div class="side_box">
-					<div class="user_profile">
-						<div class="profile_thumb">
-							<a href="profile.do?id=${sessionScope.user.id}"><img
-								src="profile/${sessionScope.user.profile}" alt="프로필사진"></a>
-						</div>
-						<div class="detail">
-							<div class="id m_text">${sessionScope.user.id}</div>
-							<div class="ko_name">${sessionScope.user.name}</div>
-						</div>
-					</div>
-
-					<article class="story">
-						<header class="story_header">
-							<div>스토리</div>
-							<div class="more">모두 보기</div>
-						</header>
-
-						<div class="scroll_inner">
-							<div class="thumb_user">
-								<div class="profile_thumb">
-									<img src="imgs/thumb02.jpg" alt="프로필사진">
-								</div>
-								<div class="detail">
-									<div class="id">kind_tigerrrr</div>
-									<div class="time">1시간 전</div>
-								</div>
-							</div>
-							<div class="thumb_user">
-								<div class="profile_thumb">
-									<img src="imgs/thumb02.jpg" alt="프로필사진">
-								</div>
+                    </div>
 
 
-							</div>
-						</div>
-					</article>
-
-					<article class="recommend">
-						<header class="reco_header">
-							<div>회원님을 위한 추천</div>
-							<div class="more">모두 보기</div>
-						</header>
-
-						<div class="thumb_user">
-							<div class="profile_thumb">
-								<img src="imgs/thumb02.jpg" alt="프로필사진">
-							</div>
-							<div class="detail">
-								<div class="id">kind_tigerrrr</div>
-								<div class="time">1시간 전</div>
-							</div>
-						</div>
-
-					</article>
-				</div>
+                </article>
 
 
-			</div>
-		</section>
+            </div>
 
 
+        </section>
 
-	</section>
+    </div>
+
+
+    <div class="del_pop">
+        <div class="btn_box">
+            <div class="del">삭제</div>
+            <div class="cancel">취소</div>
+        </div>
+   </div>
+
+</section>
 	<script type="text/javascript">
 		
 	var prev_element = null;
