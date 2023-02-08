@@ -270,7 +270,7 @@
 
 								<div class="img_section">
 									<div class="trans_inner">
-										<a href="getBoard.do?bSeq=${board.bSeq}&profile=${admemberList[status.index/3].profile}&time=${adtime[status.index/3]}">
+										<a href="getBoard.do?bSeq=${adverList[status.index/3].bSeq}&profile=${admemberList[status.index/3].profile}&time=${adtime[status.index/3]}">
 											<img src="images/${adverList[status.index/3].upload}"
 											alt="visual01">
 										</a>

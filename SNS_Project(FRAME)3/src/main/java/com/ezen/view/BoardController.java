@@ -188,12 +188,25 @@ public class BoardController {
 
 //	##############################################################################################################--goInsertBoard
 	@GetMapping("getBoard.do")
-	public String getBoard(@RequestParam (value = "time")String time,MemberVO mvo, CommentVO cvo, BoardVO bvo, Model model, HttpSession session) {
+	public String getBoard(MemberVO mvo, CommentVO cvo, BoardVO bvo, Model model, HttpSession session) {
 		List<MemberVO> list =new ArrayList<MemberVO>();
 		
 		BoardVO board = (BoardVO) boardService.myBoard(bvo);
+		
+		LocalDate boarDate = board.getInDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		Period btn = Period.between(boarDate, LocalDate.now());
+		String btnTime;
+
+		if (btn.getYears() != 0) {
+			btnTime = btn.getYears() + "년" + btn.getMonths() + "월" + btn.getDays() + "일 전";
+		} else if (btn.getMonths() != 0) {
+			btnTime = btn.getMonths() + "월" + btn.getDays() + "일 전";
+		} else {
+			btnTime = btn.getDays() + "일 전";
+		}
+		
 		model.addAttribute("board", board);
-		model.addAttribute("time", time);
+		model.addAttribute("time", btnTime);
 		model.addAttribute("profile", mvo.getProfile());
 
 		

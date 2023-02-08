@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,7 +70,7 @@
 							<div class="trans_inner">
 								<div>
 									<img alt="" src="images/${board.upload}"
-										style="width: 800px; height: 600px;">
+										style="width: 600px; height: 600px;">
 								</div>
 							</div>
 						</div>
@@ -118,7 +119,9 @@
 										</div>
 										<div class="comment">
 											<span class="user_id">${comment.id}</span>${comment.ccontent}
-											<div class="time">
+											<div class="time" style="font-size: small;">
+													<fmt:formatDate var="comDate" value="${comment.indate}" pattern="yyyy년MM월dd일HH시"/>
+													${comDate}에 작성된 글입니다. 											
 												<span class="try_comment"></span>
 											</div>
 											<div class="icon_wrap">
@@ -154,7 +157,7 @@
 															value="${board.bSeq}"> <input type="hidden"
 															id="id" name="id" value="${sessionScope.user.id}">
 														<input type="hidden" id="profile" name="profile"
-															value="${memberList[status.index].profile}">
+															value="${profile}">
 													</form>
 												</div>
 											</c:when>
@@ -168,7 +171,7 @@
 															value="${board.bSeq}"> <input type="hidden"
 															id="id" name="id" value="${sessionScope.user.id}">
 														<input type="hidden" id="profile" name="profile"
-															value="${memberList[status.index].profile}">
+															value="${profile}">
 													</form>
 												</div>
 											</c:otherwise>
@@ -190,16 +193,18 @@
 							<div class="heart_count" style="font-weight: 900">
 								좋아요${board.count}개
 							</div>
-							<div class="timer"></div>
+							<div class="timer">
+								<fmt:formatDate var="boDate" value="${board.inDate}" pattern="yyyy년 MM월 dd일"/>
+								${boDate}
+							</div>
 
 							<div class="commit_field">
-								<form action="insertComment.do" method="post">
+								<form id="commentForm" action="insertComment.do" method="post">
 									<input type="hidden" name="id" value="${sessionScope.user.id}">
 									<input type="hidden" name="bseq" value="${board.bSeq}">
-									<input type="text" name="cconetent" placeholder="댓글을 달아주세요 ! ">
-									<div class="upload_btn m_text" data-name="comment">
-										<input type="submit" value="게시">
-									</div>
+									<input type="text" name="ccontent" placeholder="댓글을 달아주세요 !">
+									
+									<input type="submit" value="게시">
 								</form>
 							</div>
 
@@ -236,6 +241,7 @@
 				$("#goProfile").attr("href", "/");
 			}
 		}
+		
 		function deleteLike() {
 			$("#deleteLike").submit();
 		}
