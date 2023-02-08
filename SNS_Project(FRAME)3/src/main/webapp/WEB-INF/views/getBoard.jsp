@@ -161,6 +161,7 @@
 											</div>
 										</c:otherwise>
 									</c:choose>
+
                                 </div>
                                 <div>
                                     <div class="sprite_bubble_icon"></div>
@@ -169,6 +170,50 @@
                                     <div class="sprite_share_icon" data-name="share"></div>
                                 </div>
                             </div>
+
+								</div>
+								<div class="sprite_bubble_icon"></div>
+								<div class="sprite_share_icon" data-name="share"></div>
+							</div>
+							<div class="right_icon">
+								<div class="sprite_bookmark_outline" data-name="bookmark"></div>
+							</div>
+						</div>
+
+						<div class="likes m_text">
+							좋아요 <span id="like-count-39">${board.count }</span> 개
+						</div>
+						<c:forEach items="${commentList}" var="comment">
+							<c:if test="${comment.bseq == board.bSeq }">
+								<div class="comment_container">
+									<div class="comment" id="comment-list-ajax-post37">
+										<div class="comment-detail">
+											<div class="nick_name m_text">${comment.id}</div>
+											<div>${comment.ccontent}</div>
+										</div>
+									</div>
+									<div class="sprite_more_icon" data-name="more"
+												onclick="toggle(this.children[0])">
+												<ul class="toggle_box" id="toggle_box2${comment.cseq}">
+													<li><a href="updateComment.do?cseq=${comment.cseq}">
+															<input type="button" value="수정">
+													</a></li>
+													<li><form
+															action="deleteComment.do?cseq=${comment.cseq}"
+															method="post">
+															<c:if test="${sessionScope.user.id == comment.id }">
+																<input type="submit" value="삭제">
+															</c:if>
+														</form></li>
+												</ul>
+											</div>
+											<div class="small_heart">
+												<div class="sprite_small_heart_icon_outline"></div>
+											</div>
+										</div>
+									</c:if>
+								</c:forEach>
+
 
                             <div class="right_icon">
                                 <div class="sprite_bookmark_outline" data-name="book-mark"></div>
@@ -227,27 +272,18 @@
 			$("#like").submit();
 		}
 		function toggle(element) {
+			
 			var con = document.getElementById(element.getAttribute("id"));
 			if (con.style.display == 'none') {
 				con.style.display = 'block';
 			} else {
 				con.style.display = 'none';
 			}
+			
+		
 		}
 		
-		function toggle_c(element){
-			if (prev_element != null) {
-				prev_element.style.display = 'none';
-			}
-			
-			var con_c = document.getElementById(element.getAttribute("id"));
-			if(con_c.style.display=='none'){
-				con_c.style.display = 'block';
-			}else{
-				con_c.style.display = 'none';
-			}
-			prev_element = element;
-		}
+		
 	</script>
 
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js">
