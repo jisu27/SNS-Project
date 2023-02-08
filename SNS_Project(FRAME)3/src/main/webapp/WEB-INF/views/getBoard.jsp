@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -8,39 +8,39 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport"
-	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+   content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <title>Title</title>
 <link rel="stylesheet" href="css/reset.css">
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/detail-page.css">
 <script src="https://code.jquery.com/jquery-3.6.3.js"
-	integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
-	crossorigin="anonymous"></script>
+   integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+   crossorigin="anonymous"></script>
 </head>
 <body>
 
 
-	<section id="container">
+   <section id="container">
 
 
-		<header id="header">
-			<section class="inner">
+      <header id="header">
+         <section class="inner">
 
-				<h1 class="logo">
-					<a href="home.do" id="goProfile" onclick="check_id()">
-						<div class="sprite_insta_icon"></div>
-						<div class="sprite_write_logo"></div>
-					</a>
-				</h1>
+            <h1 class="logo">
+               <a href="home.do" id="goProfile" onclick="check_id()">
+                  <div class="sprite_insta_icon"></div>
+                  <div class="sprite_write_logo"></div>
+               </a>
+            </h1>
 
-				<div class="search_box">
-					<input type="text" placeholder="검색" id="search-field">
+            <div class="search_box">
+               <input type="text" placeholder="검색" id="search-field">
 
-					<div class="fake_field">
-						<span class="sprite_small_search_icon"></span> <span>검색</span>
-					</div>
-				</div>
+               <div class="fake_field">
+                  <span class="sprite_small_search_icon"></span> <span>검색</span>
+               </div>
+            </div>
 
 				<input type="hidden" id="check" value="${sessionScope.user.id}">
 				<div class="right_icons">
@@ -55,7 +55,8 @@
 					<a href="insertShorts"><div class="sprite_short_icon"></div></a>		
 				</div>
 
-			</section>
+         </section>
+
 
 		</header>
 		<div id="main_container">
@@ -93,6 +94,9 @@
 								<div class="sprite_more_icon" data-name="more"
 									onclick="toggle(this.children[0])">
 									<ul class="toggle_box" id="toggle_box${status.count}">
+										<li><input type="submit" class="follow" value="팔로우"
+											data-name="follow"></li>
+
 										<li><a href="goUpdateBoard.do?bSeq=${board.bSeq}"> <input
 												type="button" value="수정"></a></li>
 
@@ -103,6 +107,7 @@
 												</c:if>
 											</form></li>
 									</ul>
+
 								  </div>
 								</c:if>
 							</header>
@@ -240,9 +245,8 @@
 					</article>
 
 
+
 				</div>
-
-
 			</section>
 
 		</div>
