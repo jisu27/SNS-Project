@@ -35,6 +35,9 @@
     <link rel="stylesheet" href="css/new_post.css">
     <link rel="shortcut icon" href="imgs/instagram.png">
 
+<script src="https://code.jquery.com/jquery-3.6.3.js"
+	integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+	crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -92,16 +95,16 @@
                             </div>
                             <p>포스트 이미지 추가</p>
                             <canvas id="imageCanvas"></canvas>
-                            	<img id="img" alt="" src="" style="display: none;">
-                            <!-- 
-                            <p><img id="img_id" src="" style="width: 300px; height: 300px; object-fit: cover" alt="thumbnail"></p>
-                             -->
+                            
+                            
+                            <p><img id="" src="images/${board.upload}" style="width: 300px; height: 300px; object-fit: cover" alt="thumbnail"></p>
+                            
                         </div>
                     </div>
                 </div>
                 <p>
                 	<input type="text" id="title" name="title" placeholder="title"><br>
-                    <input type="file" name="uploadfile" id="uploadfile" value="">
+                    <input type="file" name="uploadfile" id="id_photo" value="">
                 </p>
                 <p>
                  
@@ -129,18 +132,6 @@
 <script src="js/insta.js"></script>
 
 <script>
-	$(function() {
-		if ($("#uploadfile").val()!='') {
-			$("#img").attr("style","display:block");
-			$("#img").attr("src","images/$('#uploadfile')");
-			
-		}
-	})
-
-
-
-
-
        var fileInput  = document.querySelector( "#id_photo" ),
            button     = document.querySelector( ".input-file-trigger" ),
            the_return = document.querySelector(".file-return");
