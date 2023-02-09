@@ -1,34 +1,3 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Codespaces
-Marketplace
-Explore
- 
-@insams 
-jisu27
-/
-SNS-Project
-Public
-Fork your own copy of jisu27/SNS-Project
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-SNS-Project/SNS_Project(FRAME)3/src/main/webapp/WEB-INF/views/home.jsp
-@jisu27
-jisu27 친구 추천
-Latest commit 30d8c98 1 hour ago
- History
- 3 contributors
-@jisu27@kimkyoungsuk@insams
-503 lines (422 sloc)  16.3 KB
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -454,7 +423,7 @@ Latest commit 30d8c98 1 hour ago
 									<div class="detail">
 									
 									
-										<div class="id">${shorts.id }</div>
+										<div class="id">${shorts.id}</div>
 										<div class="time">${stime[status.index]}</div>
 									
 									</div>
