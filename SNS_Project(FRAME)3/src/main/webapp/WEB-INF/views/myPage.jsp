@@ -110,8 +110,8 @@
 
                     <ul class="middle">
                         <li>
-                            <span>게시물</span>
-                            설정해야함
+                            <span>게시물 : ${board.count}</span>
+                            
                         </li>
                         <li>
                             <span onclick="window.open('followList.do?id2=${member.id}','_blank','width:500px; height: 150px;')">팔로워</span>

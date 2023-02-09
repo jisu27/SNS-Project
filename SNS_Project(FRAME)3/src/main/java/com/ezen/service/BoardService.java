@@ -23,4 +23,6 @@ public interface BoardService {
 	
 	public void deleteBoard(BoardVO vo);
 	void updateCount(BoardVO vo);
+	
+	public int boardCount(BoardVO vo);
 }

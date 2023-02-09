@@ -31,11 +31,14 @@ public class profileController {
 		
 		MemberVO member = memberService.MemberCheck(mvo);
 		List<BoardVO> list= boardService.myBoardList(bvo);
+		int boardCount = boardService.boardCount(bvo);
+		bvo.setCount(boardCount);
+		
 		
 		FollowVO follow = new FollowVO();
 		follow.setId1(mvo.getId().toString());
 		follow.setId2(mvo.getId().toString());
-		System.out.println(follow);
+		//System.out.println(follow);
 		
 //		FollowVO checkFollow = new FollowVO();
 //		checkFollow.setId1(mvo.getId().toString());
@@ -44,7 +47,9 @@ public class profileController {
 		int follower = followService.getCountFollow(follow);
 		int following = followService.getCountFollowing(follow);
 		
+		//System.out.println("boardVO :"+bvo);
 		
+		model.addAttribute("board",bvo);
 		model.addAttribute("boardList",list);
 		model.addAttribute("member",member);
 		model.addAttribute("follower",follower);

@@ -18,8 +18,8 @@ public class BoardVO {
 	public int getCount() {
 		return count;
 	}
-	public void setCount(int count) {
-		this.count = count;
+	public int setCount(int count) {
+		return this.count = count;
 	}
 	public MultipartFile getUploadfile() {
 		return uploadfile;

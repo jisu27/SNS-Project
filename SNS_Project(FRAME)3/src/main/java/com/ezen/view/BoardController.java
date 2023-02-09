@@ -91,6 +91,7 @@ public class BoardController {
 			int like = heartService.likeCount(hvo);
 			vo.setCount(like);
 			
+			
 
 			cVo.setBseq(vo.getbSeq());
 			List<CommentVO> cvo = commentService.getCommentList(cVo);

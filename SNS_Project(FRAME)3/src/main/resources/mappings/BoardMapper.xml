@@ -16,7 +16,10 @@
 
   <!-- #################################################################################################################### -->
   <select id="myBoardList" resultType="board">
-  	SELECT * FROM board WHERE id=#{id} 
+  	SELECT * FROM board 
+  	WHERE id=#{id}
+  	AND upload != 'null'
+  	ORDER BY INDATE DESC
   </select>
   <!-- #################################################################################################################### -->
   <insert id="insertBoard" >
@@ -52,6 +55,12 @@
         SET count=#{count}
         WHERE bSeq=#{bSeq} 
   </update>
+	
+	<select id="boardCount" resultType="Integer">
+	SELECT count(*)
+	FROM board
+	WHERE id=#{id}
+	</select>
 	
 </mapper>
 
