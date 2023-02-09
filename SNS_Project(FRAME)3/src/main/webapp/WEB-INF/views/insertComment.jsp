@@ -12,7 +12,7 @@
 <body>
 <form action="insertComment.do" method="post" name="theform" id="theform">
 		<input type="hidden" name="id" value="${sessionScope.user.id}"> <input
-			type="hidden" name="bseq" value="${board.bSeq}">
+			type="hidden" name="bSeq" value="${board.bSeq}">
 		<table id="comment">
 			<tr>
 				<td>댓글내용</td>

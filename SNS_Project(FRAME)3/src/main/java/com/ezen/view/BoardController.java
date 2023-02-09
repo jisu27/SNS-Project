@@ -92,7 +92,7 @@ public class BoardController {
 			model.addAttribute("recoMember",recoMemberList);
 		}
 		List<BoardVO> boardList = boardService.BoardList(bVo);
-		
+
 		List<BoardVO> getboardList = boardService.getBoardList(bVo);
 		List<BoardVO> getadverList = boardService.getAdverList(bVo);
 		
@@ -171,7 +171,6 @@ public class BoardController {
 
 			int like = heartService.likeCount(hvo);
 			vo.setCount(like);
-			
 
 			cVo.setBseq(vo.getbSeq());
 			List<CommentVO> cvo = commentService.getCommentList(cVo);
@@ -240,7 +239,7 @@ public class BoardController {
 		
 		model.addAttribute("commentList", commentList);
 		model.addAttribute("adcommentList", adCommentList);
-		model.addAttribute("shortsList",shortsList);
+		model.addAttribute("shortsList",shortsList); // 덮어씌우는지 확인
 		
 		return "home";
 	}
@@ -251,15 +250,16 @@ public class BoardController {
 
 		return "insertBoard";
 	}
-	
+
 //	##############################################################################################################--goUpdateBoard
 	@GetMapping("goUpdateBoard.do")
-	   public String updateBoardForm(Model model,BoardVO vo) {
-	      BoardVO board = boardService.myBoard(vo);
-	      
-	      model.addAttribute("board",board);
-	      return "updateBoard";
-	   }
+	public String updateBoardForm(Model model, BoardVO vo) {
+		BoardVO board = boardService.myBoard(vo);
+
+		model.addAttribute("board", board);
+		return "updateBoard";
+	}
+
 //	##############################################################################################################--updateBoard
 	@RequestMapping("/updateBoard.do")
 	public String UpdateBoard(@RequestParam(value = "nonImg") String org_image, BoardVO vo, HttpSession session)
@@ -330,7 +330,8 @@ public class BoardController {
 
 //	##############################################################################################################--insertBoard
 	@PostMapping("insertBoard.do")
-	public String InsertBoard(@RequestParam(value = "noImg") String no_image,BoardVO vo, HttpSession session) throws IllegalStateException, IOException {
+	public String InsertBoard(@RequestParam(value = "noImg") String no_image, BoardVO vo, HttpSession session)
+			throws IllegalStateException, IOException {
 
 		String fileName = "";
 
@@ -351,12 +352,12 @@ public class BoardController {
 
 		return "redirect:home.do";
 	}
-	
+
 	@RequestMapping("deleteBoard.do")
 	public String DeleteBoard(BoardVO vo, HttpSession session) throws IllegalStateException, IOException {
 		boardService.deleteBoard(vo);
-		System.out.println("딜리트:"+vo);
-		
+		System.out.println("딜리트:" + vo);
+
 		return "redirect:home.do";
 	}
 ////	##############################################################################################################--myPage.do
@@ -368,7 +369,5 @@ public class BoardController {
 //	
 //		return "myPage";
 //	}
-	
-	
 
 }

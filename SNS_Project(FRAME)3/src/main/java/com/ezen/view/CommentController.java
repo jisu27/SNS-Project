@@ -20,65 +20,58 @@ import com.ezen.service.CommentService;
 @Controller
 public class CommentController {
 
-	@Autowired 
+	@Autowired
 	private CommentService commentService;
 	
 	@PostMapping(value="/insertComment.do")
 	public String saveCommentAction(BoardVO vo,CommentVO cvo, HttpSession session, HttpServletRequest request) {
 		
 		commentService.insertComment(cvo);
-		
-		
+
 		// ���� �������� ����������.
-	    String referer = request.getHeader("Referer");
-	    return "redirect:"+ referer;
-		
+		String referer = request.getHeader("Referer");
+		return "redirect:" + referer;
+
 	}
-	
-	
 
-	
 	@GetMapping("goUpdateComment.do")
-	   public String goUpdateComment(Model model,CommentVO vo) {
-		
-	      CommentVO comment = commentService.getComment(vo);
-	      
-	      model.addAttribute("comment", comment);
-	      
-	      return "updateComment";
-	   }
-	   
+	public String goUpdateComment(Model model, CommentVO vo) {
 
-	   
-	   @PostMapping(value = "/updateComment.do")
-	   public String updateReview(CommentVO vo,HttpSession session) throws IllegalStateException, IOException {
-		  
-	         
-	      System.out.println("updateComment: " + vo);
-	         commentService.updateComment(vo);
+		CommentVO comment = commentService.getComment(vo);
 
-	      return "redirect:home.do";
-	   }
-	
+		model.addAttribute("comment", comment);
+
+		return "updateComment";
+	}
+
+	@PostMapping(value = "/updateComment.do")
+	public String updateReview(CommentVO vo, HttpSession session) throws IllegalStateException, IOException {
+
+		System.out.println("updateComment: " + vo);
+		commentService.updateComment(vo);
+
+		return "redirect:home.do";
+	}
+
 	@RequestMapping(value = "/deleteComment.do")
 	public String deleteReview(CommentVO vo, HttpServletRequest request) throws IllegalStateException, IOException {
-		
+
 		commentService.deleteComment(vo);
-		
-		    String referer = request.getHeader("Referer");
-		    return "redirect:"+ referer;
-		
+
+		String referer = request.getHeader("Referer");
+		return "redirect:" + referer;
+
 	}
+
 	@RequestMapping(value = "/getCommentList.do")
-	public String getCommentList(CommentVO vo, Model model ) {
+	public String getCommentList(CommentVO vo, Model model) {
 
 		List<CommentVO> commentList = commentService.getCommentList(vo);
 		System.out.println(commentList);
 		model.addAttribute("commentList", commentList);
-       // model.addAttribute("id",vo.getBseq());
-       
-		
+		// model.addAttribute("id",vo.getBseq());
+
 		return "redirect:getBoard.do";
 	}
-	
+
 }

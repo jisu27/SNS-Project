@@ -2,35 +2,38 @@
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="commentMapper">
 
-    
+
 	<insert id="insertComment" parameterType="comment">
-      INSERT INTO
-      SNS_COMMENT(cseq, bseq, id, ccontent)
-      VALUES
-      (sns_comment_seq.NEXTVAL, #{bSeq}, #{id}, #{ccontent, jdbcType=VARCHAR})
-   </insert>
-   
+		INSERT INTO
+		SNS_COMMENT(cseq, bseq, id, ccontent)
+		VALUES
+		(sns_comment_seq.NEXTVAL, #{bSeq}, #{id}, #{ccontent, jdbcType=VARCHAR})
+	</insert>
+
 	<delete id="deleteComment" parameterType="comment">
-		DELETE SNS_COMMENT WHERE cseq=#{cseq}
+		DELETE SNS_COMMENT
+		WHERE cseq=#{cseq}
 	</delete>
-	
+
 	<update id="updateComment" parameterType="comment">
-      UPDATE SNS_COMMENT 
-      SET ccontent=#{ccontent, jdbcType=VARCHAR}
-      WHERE cseq=#{cseq}
-   </update>
-	
+		UPDATE SNS_COMMENT
+		SET ccontent=#{ccontent, jdbcType=VARCHAR}
+		WHERE cseq=#{cseq}
+	</update>
+
 	<select id="getComment" resultType="comment">
-		SELECT * FROM SNS_COMMENT WHERE cseq=#{cseq}
+		SELECT * FROM SNS_COMMENT
+		WHERE cseq=#{cseq}
 	</select>
-	
+
 	<select id="getCommentList" resultType="comment">
-		SELECT s.* 
-	  	FROM SNS_COMMENT s
-	    join board  b
-	    on b.bseq = s.bseq
-	    where b.bseq = #{bseq}
-	  	order by s.indate DESC
+		SELECT s.*
+		FROM
+		SNS_COMMENT s
+		join board b
+		on b.bseq = s.bseq
+		where b.bseq = #{bseq}
+		order by s.indate DESC
 	</select>
-	
+
 </mapper>

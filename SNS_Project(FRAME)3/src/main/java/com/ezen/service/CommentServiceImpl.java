@@ -10,11 +10,10 @@ import com.ezen.dto.CommentVO;
 
 @Service("commentService")
 public class CommentServiceImpl implements CommentService {
-	
+
 	@Autowired
 	private CommentDAO cDao;
-	
-	
+
 	@Override
 	public void insertComment(CommentVO vo) {
 		cDao.insertComment(vo);
@@ -33,14 +32,15 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public CommentVO getComment(CommentVO vo) {
-		
+
 		return cDao.getComment(vo);
 	}
 
 	@Override
 	public List<CommentVO> getCommentList(CommentVO vo) {
-		
+
 		return cDao.getCommentList(vo);
+
 	}
 
 }

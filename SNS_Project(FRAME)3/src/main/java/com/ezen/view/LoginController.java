@@ -6,18 +6,12 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-
-import org.aspectj.weaver.NewMemberClassTypeMunger;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.ezen.dto.FollowVO;
 import com.ezen.dto.HeartVO;
@@ -26,7 +20,6 @@ import com.ezen.service.FollowService;
 import com.ezen.service.HeartService;
 import com.ezen.service.MemberService;
 
-
 @Controller
 public class LoginController {
 
@@ -34,212 +27,174 @@ public class LoginController {
 	private MemberService memberService;
 	@Autowired
 	private FollowService followService;
-	
+
 	@Autowired
 	private HeartService heartService;
-	
+
 	@GetMapping("/")
 	public String goHome() {
-		
-		return"index";
+
+		return "index";
 	}
+
 //	##############################################################################################################--goInsertMember
 	@GetMapping("/goInsertMember.do")
 	public String goInsertMember() {
-		
+
 		return "NewMember";
 	}
+
 // ##############################################################################################################--check.do	
 	@GetMapping("/check.do")
 	public String goIdCheck(Model model) {
-		
-		model.addAttribute("msg","");
-		model.addAttribute("check",0);
-		model.addAttribute("id","");
-		
+
+		model.addAttribute("msg", "");
+		model.addAttribute("check", 0);
+		model.addAttribute("id", "");
+
 		return "check_id";
 	}
+
 //	##############################################################################################################--IdCheck
 	@PostMapping("/idCheck.do")
-	public String check_id(MemberVO vo,Model model) {
-		
-	MemberVO mvo = memberService.MemberCheck(vo);
-	System.out.println(vo);
-	System.out.println(mvo);
-	
+	public String check_id(MemberVO vo, Model model) {
+
+		MemberVO mvo = memberService.MemberCheck(vo);
+		System.out.println(vo);
+		System.out.println(mvo);
+
 		if (mvo == null) {
-			
-			model.addAttribute("msg","사용가능한 아이디 입니다.");
-			model.addAttribute("id",vo.getId());
-			model.addAttribute("check",1);
-			
-		}else {
-			model.addAttribute("msg","이미 사용중인 아이디 입니다.");
-			model.addAttribute("id",vo.getId());
-			model.addAttribute("check",0);
+
+			model.addAttribute("msg", "�궗�슜媛��뒫�븳 �븘�씠�뵒 �엯�땲�떎.");
+			model.addAttribute("id", vo.getId());
+			model.addAttribute("check", 1);
+
+		} else {
+			model.addAttribute("msg", "�씠誘� �궗�슜以묒씤 �븘�씠�뵒 �엯�땲�떎.");
+			model.addAttribute("id", vo.getId());
+			model.addAttribute("check", 0);
 		}
-		
+
 		return "check_id";
-		
+
 	}
+
 //	##############################################################################################################--insertMember
 	@PostMapping("/insertMember.do")
-	public String insertMember(MemberVO vo,HttpSession session) throws IllegalStateException, IOException {
-		
+	public String insertMember(MemberVO vo, HttpSession session) throws IllegalStateException, IOException {
+
 		String fileName = "";
-		
+
 		if (!vo.getFile().isEmpty()) {
-			
-			fileName = vo.getFile().getOriginalFilename();	
+
+			fileName = vo.getFile().getOriginalFilename();
 			String realPath = session.getServletContext().getRealPath("profile/");
-			vo.getFile().transferTo(new File(realPath+fileName));
-				
+			vo.getFile().transferTo(new File(realPath + fileName));
+
 		}
-		
+
 		vo.setProfile(vo.getFile().getOriginalFilename());
-		
+
 		memberService.insertMember(vo);
-		
+
 		return "index";
 	}
+
 //	##############################################################################################################--login.do
 	@PostMapping("/login.do")
-	public String login(MemberVO vo,HttpSession session) {
-		String url ="redirect:/";
+	public String login(MemberVO vo, HttpSession session) {
+		String url = "redirect:/";
 		MemberVO mvo;
-		
-		//System.out.println(vo);
-		
+
+		// System.out.println(vo);
+
 		mvo = memberService.MemberCheck(vo);
 		System.out.println(vo);
-		
-		if (mvo!=null) {
 
-			if(vo.getId().equals(mvo.getId()) && vo.getPwd().equals(mvo.getPwd()) ) {
-							
+		if (mvo != null) {
+
+			if (vo.getId().equals(mvo.getId()) && vo.getPwd().equals(mvo.getPwd())) {
+
 				FollowVO fvo = new FollowVO();
 				fvo.setId1(mvo.getId().toString());
-				
+
 				HeartVO hvo = new HeartVO();
 				hvo.setId(mvo.getId().toString());
-				
+
 				List<HeartVO> heart = heartService.boardLike(hvo);
 				List<String> follower = followService.getFollowList(fvo);
-				
-				
-				session.setAttribute("user",mvo);
+
+				session.setAttribute("user", mvo);
 				session.setAttribute("follower", follower);
 				session.setAttribute("heart", heart);
-				
-				
-					if(mvo.getRole()==1) {
-						
-						url="redirect:/home.do";
-						
-					}else {
-						url="/admin";
-					}
-			
-			
-			}	
-		}else {
-			url="redirect:/";
-		}	
-		
+
+				if (mvo.getRole() == 1) {
+
+					url = "redirect:/home.do";
+
+				} else {
+					url = "/admin";
+				}
+
+			}
+		} else {
+			url = "redirect:/";
+		}
+
 		return url;
 	}
 //	##############################################################################################################--goFIndId
-	
+
 	@GetMapping("/goFindId.do")
 	public String goFindId(Model model) {
-		 
-		model.addAttribute("id","");
-		model.addAttribute("pwd","");
-		
+
+		model.addAttribute("id", "");
+		model.addAttribute("pwd", "");
+
 		return "findId";
 	}
-	
+
 //	##############################################################################################################--FindID.do
 	@PostMapping("/findId.do")
-	public String FindIdAction(MemberVO vo,Model model) {
-		
+	public String FindIdAction(MemberVO vo, Model model) {
+
 		MemberVO mvo = memberService.findId(vo);
-		
+
 		System.out.println(vo);
 		System.out.println(mvo);
-		
-		if(mvo != null) {
-			model.addAttribute("id","찾으시는 아이디는"+mvo.getId()+"입니다.");
-		}else {
-			model.addAttribute("id","찾으시는 아이디가 없습니다.");
+
+		if (mvo != null) {
+			model.addAttribute("id", "李얠쑝�떆�뒗 �븘�씠�뵒�뒗" + mvo.getId() + "�엯�땲�떎.");
+		} else {
+			model.addAttribute("id", "李얠쑝�떆�뒗 �븘�씠�뵒媛� �뾾�뒿�땲�떎.");
 		}
-		
+
 		return "findId";
 	}
+
 	@PostMapping("/findPwd.do")
-	public String FindPwdAction(MemberVO vo,Model model) {
-		
+	public String FindPwdAction(MemberVO vo, Model model) {
+
 		MemberVO mvo = memberService.findPwd(vo);
 		System.out.println(vo);
 		System.out.println(mvo);
-		
-		if(mvo != null) {
-			model.addAttribute("pwd","찾으시는 비밀번호는"+mvo.getPwd()+"입니다.");
-		}else {
-			model.addAttribute("pwd","찾으시는 비밀번호가 없습니다.");
+
+		if (mvo != null) {
+			model.addAttribute("pwd", "李얠쑝�떆�뒗 鍮꾨�踰덊샇�뒗" + mvo.getPwd() + "�엯�땲�떎.");
+		} else {
+			model.addAttribute("pwd", "李얠쑝�떆�뒗 鍮꾨�踰덊샇媛� �뾾�뒿�땲�떎.");
 		}
-		
+
 		return "findId";
 	}
-	
+
 //	##############################################################################################################--myPage.do
 	@GetMapping("/logout.do")
-	public String Logout(SessionStatus sessionStatus,HttpSession session ) {
-		
+	public String Logout(SessionStatus sessionStatus, HttpSession session) {
+
 		sessionStatus.setComplete();
 		session.invalidate();
-		
+
 		return "redirect:/";
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
