@@ -12,11 +12,13 @@
   	SELECT *
   	FROM board 
   	WHERE bSeq=#{bSeq}
+  	ORDER BY INDATE DESC
   </select>
 
   <!-- #################################################################################################################### -->
   <select id="myBoardList" resultType="board">
   	SELECT * FROM board WHERE id=#{id} 
+  	ORDER BY INDATE DESC
   </select>
   <!-- #################################################################################################################### -->
   <insert id="insertBoard" >
@@ -33,7 +35,6 @@
   <select id="getBoardList" resultType="board">
   	SELECT * FROM board
   	WHERE pay = 0
-  	ORDER BY INDATE DESC
   </select>
   <!-- get 광고  -->
   

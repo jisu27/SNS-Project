@@ -24,11 +24,12 @@ import com.ezen.dto.BoardVO;
 import com.ezen.dto.CommentVO;
 import com.ezen.dto.HeartVO;
 import com.ezen.dto.MemberVO;
-
+import com.ezen.dto.ShortsVO;
 import com.ezen.service.BoardService;
 import com.ezen.service.CommentService;
 import com.ezen.service.HeartService;
 import com.ezen.service.MemberService;
+import com.ezen.service.ShortsService;
 
 @Controller
 public class BoardController {
@@ -41,6 +42,8 @@ public class BoardController {
 	private HeartService heartService;
 	@Autowired
 	private CommentService commentService;
+	@Autowired
+	private ShortsService shortsService;
 //	##############################################################################################################--home
 	@RequestMapping("/")
 	public String goLogin() {
@@ -49,7 +52,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "/home.do")
-	public String BoardList(BoardVO bVo, CommentVO cVo, Model model) {
+	public String BoardList(BoardVO bVo, CommentVO cVo, Model model,ShortsVO sVo) {
 
 		List<BoardVO> boardList = boardService.BoardList(bVo);
 		
@@ -64,6 +67,11 @@ public class BoardController {
 		
 		List<String> time = new ArrayList<>();
 		List<String> adtime = new ArrayList<>();
+		List<String> stime = new ArrayList<>();
+		
+		List<ShortsVO> shortsList = shortsService.getShortsList(sVo);
+		List<ShortsVO> getshortsList = shortsService.getShortsList(sVo);
+		
 
 		for(BoardVO vo : getadverList) {
 			LocalDate boarDate = vo.getInDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -130,18 +138,41 @@ public class BoardController {
 			List<CommentVO> cvo = commentService.getCommentList(cVo);
 			commentList.addAll(cvo);
 		}
+			
+			for(ShortsVO vo : getshortsList) {
+				LocalDate shortsDate = vo.getInDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+				Period stn = Period.between(shortsDate, LocalDate.now());
+				String stnTime;
+
+				if (stn.getYears() != 0) {
+					stnTime = stn.getYears() + "년" + stn.getMonths() + "월" + stn.getDays() + "일 전";
+				} else if (stn.getMonths() != 0) {
+					stnTime = stn.getMonths() + "월" + stn.getDays() + "일 전";
+				} else {
+					stnTime = stn.getDays() + "일 전";
+				}
+				stime.add(stnTime);	
+		}
 
 		model.addAttribute("time", time);
 		model.addAttribute("adtime", adtime);
+		model.addAttribute("stime", stime);
 		
 		model.addAttribute("memberList", memberList);
 		model.addAttribute("admemberList", adverMemberList);
 		
 		model.addAttribute("boardList", getboardList);
 		model.addAttribute("adverList", getadverList);
+		model.addAttribute("shortsList", getshortsList);
 		
 		model.addAttribute("commentList", commentList);
 		model.addAttribute("adcommentList", adCommentList);
+		model.addAttribute("shortsList",shortsList);
+		
+		
+		System.out.println("sVo:" + sVo);
+		System.out.println("shortsList:" + shortsList);
+		System.out.println("getshortsList:" + getshortsList);
 
 		return "home";
 	}

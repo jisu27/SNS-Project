@@ -414,22 +414,21 @@
 						</header>
 
 						<div class="scroll_inner">
-							<div class="thumb_user">
-								<div class="profile_thumb">
-									<img src="imgs/thumb02.jpg" alt="프로필사진">
-								</div>
-								<div class="detail">
-									<div class="id">kind_tigerrrr</div>
-									<div class="time">1시간 전</div>
-								</div>
-							</div>
-							<div class="thumb_user">
-								<div class="profile_thumb">
-									<img src="imgs/thumb02.jpg" alt="프로필사진">
-								</div>
-
-
-							</div>
+							<c:forEach items="${shortsList}" var="shorts" varStatus="status">
+								<div class="thumb_user">
+									<div class="profile_thumb">
+										<a href="getShorts?sseq=${shorts.sSeq}"><img
+								src="profile/${sessionScope.user.profile}" alt="프로필사진"></a>
+									</div>
+									<div class="detail">
+									
+									
+										<div class="id">${shorts.id }</div>
+										<div class="time">${stime[status.index]}</div>
+									
+									</div>
+								</div>								
+							</c:forEach>
 						</div>
 					</article>
 
