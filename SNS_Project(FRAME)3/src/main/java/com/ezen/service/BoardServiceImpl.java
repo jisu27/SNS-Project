@@ -67,6 +67,12 @@ public class BoardServiceImpl implements BoardService {
 		bDao.updateCount(vo);
 		
 	}
+
+	@Override
+	public int boardCount(BoardVO vo) {
+		
+		return bDao.boardCount(vo);
+	}
 	
 
 }

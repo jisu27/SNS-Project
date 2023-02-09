@@ -23,15 +23,15 @@ import org.springframework.web.bind.support.SessionStatus;
 import com.ezen.dto.AdvertisementVO;
 import com.ezen.dto.BoardVO;
 import com.ezen.dto.CommentVO;
-import com.ezen.dto.FollowVO;
 import com.ezen.dto.HeartVO;
 import com.ezen.dto.MemberVO;
+import com.ezen.dto.FollowVO;
 import com.ezen.dto.ShortsVO;
 import com.ezen.service.BoardService;
 import com.ezen.service.CommentService;
-import com.ezen.service.FollowService;
 import com.ezen.service.HeartService;
 import com.ezen.service.MemberService;
+import com.ezen.service.FollowService;
 import com.ezen.service.ShortsService;
 
 @Controller
@@ -49,7 +49,6 @@ public class BoardController {
 	private ShortsService shortsService;
 	@Autowired
 	private FollowService followService;
-
 //	##############################################################################################################--home
 	@RequestMapping("/")
 	public String goLogin() {
@@ -105,11 +104,46 @@ public class BoardController {
 		
 		List<String> time = new ArrayList<>();
 		List<String> adtime = new ArrayList<>();
+
 		List<String> stime = new ArrayList<>();
 		
 		List<ShortsVO> shortsList = shortsService.getShortsList(sVo);
 		List<ShortsVO> getshortsList = shortsService.getShortsList(sVo);
 		
+
+		for(BoardVO vo : getadverList) {
+			LocalDate boarDate = vo.getInDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+			Period btn = Period.between(boarDate, LocalDate.now());
+			String btnTime;
+
+			if (btn.getYears() != 0) {
+				btnTime = btn.getYears() + "년" + btn.getMonths() + "월" + btn.getDays() + "일 전";
+			} else if (btn.getMonths() != 0) {
+				btnTime = btn.getMonths() + "월" + btn.getDays() + "일 전";
+			} else {
+				btnTime = btn.getDays() + "일 전";
+			}
+			adtime.add(btnTime);
+			
+			MemberVO mvo = new MemberVO();
+			mvo.setId(vo.getId());
+
+			MemberVO v1 = memberService.MemberCheck(mvo);
+			adverMemberList.add(v1);
+
+			HeartVO hvo = new HeartVO();
+			hvo.setBseq(vo.getbSeq());
+
+			int like = heartService.likeCount(hvo);
+			vo.setCount(like);
+			
+			
+
+			cVo.setBseq(vo.getbSeq());
+			List<CommentVO> cvo = commentService.getCommentList(cVo);
+			adCommentList.addAll(cvo);
+		}
+			
 		for (BoardVO vo : getboardList) {
 
 			LocalDate boarDate = vo.getInDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();

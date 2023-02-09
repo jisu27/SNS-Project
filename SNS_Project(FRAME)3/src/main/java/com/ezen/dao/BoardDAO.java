@@ -34,7 +34,6 @@ public class BoardDAO  {
         mybatis.update("boardMapper.updateCount",vo);
   }
 	
-	
 	//get 게시물
 	public List<BoardVO> getBoardList(BoardVO vo) {
 		return mybatis.selectList("boardMapper.getBoardList",vo);
@@ -48,5 +47,9 @@ public class BoardDAO  {
 	public void deleteBoard(BoardVO vo) {
 		
 		mybatis.delete("boardMapper.deleteBoard",vo);
+	}
+	//게시물 갯수
+	public int boardCount(BoardVO vo) {
+		return mybatis.selectOne("boardMapper.boardCount",vo);
 	}
 }
