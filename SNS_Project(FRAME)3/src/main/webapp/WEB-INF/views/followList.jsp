@@ -14,7 +14,7 @@
 <h1>팔로우 리스트</h1>
 
 	<c:forEach var="member" items="${memberList}">
-		<a href=# onclick="window.open('profile.do?id=${member.name}','_self','width:500; height:150px')">${member.name}</a>	
+		<a href=# onclick="window.open('profile.do?id=${member.id}','_self','width:500; height:150px')">${member.name}</a>	
 	</c:forEach>
 	
 </body>

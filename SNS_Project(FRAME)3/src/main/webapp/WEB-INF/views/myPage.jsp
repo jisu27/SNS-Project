@@ -90,13 +90,28 @@
 							<img src="profile/${member.profile}" alt="profile">
 						</div>
 					</div>
-
-					<div class="detail">
-						<div class="top">
-							<div class="user_name">${sessionScope.user.name}</div>
-							<a href="profile_edit.html" class="profile_edit">프로필편집</a> <a
-								href="logout.do" class="logout">로그아웃</a>
-						</div>
+                <div class="detail">
+                    <div class="top">
+                        <div class="user_name">${member.name}</div>
+                        <c:choose>
+                        	<c:when test="${sessionScope.user.id==member.id}">
+	    	                    <a href="profile_edit.html" class="profile_edit">프로필편집</a>
+		                        <a href="logout.do" class="logout">로그아웃</a>
+                        	</c:when>
+                        	<c:otherwise>
+                        				<c:choose>
+		                        		<c:when test="${fn:contains(sessionScope.follower,member.id)}">
+			                        		<a href="deleteFollow.do?id1=${sessionScope.user.id}&id2=${member.id}">언 팔로우</a>
+		    	                    		<a href="#">메시지</a>
+		                        		</c:when>
+		                        		<c:otherwise>
+			                        		<a href="follow.do?id1=${sessionScope.user.id}&id2=${member.id}">팔로우</a>
+		    	                    		<a href="#">메시지</a>
+		                        		</c:otherwise>
+	                        			</c:choose>                       		                      			
+                        	</c:otherwise>
+                        </c:choose>
+                    </div>
 
 						<ul class="middle">
 							<li><span>게시물</span> 설정해야함</li>
@@ -140,21 +155,22 @@
 
 
 	</section>
+<!--<script src="js/insta.js"></script>-->
+<script src="js/profile.js"></script>
+<script src="js/common.js"></script>
+<script>
+function check_id() {	
+	if ($("#check").val()=='' || $("#check").val()==null) {
+		alert("로그인을 해주세요");
+		$("#goProfile1").attr("href","/");
+		$("#goProfile2").attr("href","/");
+		$("#goProfile3").attr("href","/");
+		$("#goProfile4").attr("href","/");
+		$("#goProfile5").attr("href","/");
+	}
+}
 
 
-	<!--<script src="js/insta.js"></script>-->
-	<script src="js/profile.js"></script>
-	<script>
-		function check_id() {
-			if ($("#check").val() == '' || $("#check").val() == null) {
-				alert("로그인을 해주세요");
-				$("#goProfile1").attr("href", "/");
-				$("#goProfile2").attr("href", "/");
-				$("#goProfile3").attr("href", "/");
-				$("#goProfile4").attr("href", "/");
-				$("#goProfile5").attr("href", "/");
-			}
-		}
-	</script>
+</script>
 </body>
 </html>

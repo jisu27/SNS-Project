@@ -94,6 +94,12 @@ body {
     width: 24px;
     height: 22px;
 }
+.sprite_short_icon {
+	dispaly:inline-block;
+	background: url('../imgs/background02.png') no-repeat -320px -358px;
+	width: 24px;
+    height: 22px;
+}
 
 .sprite_insta_big_logo {
     display: inline-block;

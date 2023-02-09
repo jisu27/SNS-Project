@@ -3,7 +3,8 @@
 <mapper namespace="memberMapper">
 	<!-- ########################################################################################################################## -->
 	<select id="memberCheck" resultType="member">
-		SELECT id,pwd,name,role,email,pay,profile
+		SELECT
+		id,pwd,name,role,email,pay,profile
 		FROM member
 		WHERE id='${id}'
 	</select>
@@ -16,12 +17,21 @@
 	<select id="findId" resultType="member">
 		SELECT id
 		FROM member
-		WHERE name=#{name} AND email=#{email}
+		WHERE
+		name=#{name} AND email=#{email}
 	</select>
 	<!-- ########################################################################################################################## -->
 	<select id="findPwd" resultType="member">
 		SELECT pwd
 		FROM member
-		WHERE name=#{name} AND email=#{email} AND id=#{id}
+		WHERE
+		name=#{name} AND email=#{email} AND id=#{id}
+	</select>
+	<!-- ########################################################################################################################## -->
+	<select id="recomMember" resultType="String">
+		SELECT id
+		FROM member
+		ORDER BY
+		PAY
 	</select>
 </mapper>

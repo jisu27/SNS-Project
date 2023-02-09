@@ -16,13 +16,13 @@
 	</delete>
 
 	<update id="updateComment" parameterType="comment">
-		UPDATE SNS_COMMENT SET
-		ccontent=#{ccontent}
-		WHERE cseq=#{cseq}
-	</update>
-
+      UPDATE SNS_COMMENT 
+      SET ccontent=#{ccontent, jdbcType=VARCHAR}
+      WHERE cseq=#{cseq}
+   </update>
+   
 	<select id="getComment" resultType="comment">
-		SELECT * FROM SNS_COMMENT
+		SELECT * FROM SNS_COMMENT WHERE cseq=#{cseq}
 	</select>
 
 	<select id="getCommentList" resultType="comment">

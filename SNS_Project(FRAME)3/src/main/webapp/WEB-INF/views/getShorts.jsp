@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -44,9 +44,7 @@
 <style>
 #main_container {
 	/*height: 6000px;*/
-	
 }
-
 .contents .img_section .trans_inner video {
 	width: 100%;
 	height: 100%;
@@ -56,9 +54,8 @@
 <body>
 
 
+
 	<section id="container">
-
-
 		<header id="header">
 			<section class="h_inner">
 

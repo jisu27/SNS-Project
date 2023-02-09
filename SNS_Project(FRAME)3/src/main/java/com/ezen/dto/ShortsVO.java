@@ -13,7 +13,6 @@ public class ShortsVO {
 	private Date inDate;
 	private MultipartFile uploadFile;
 	private String sContent;
-
 	private String searchKeyword;
 
 	public String getSearchKeyword() {
@@ -85,5 +84,4 @@ public class ShortsVO {
 		return "ShortsVO [sSeq=" + sSeq + ", sTitle=" + sTitle + ", id=" + id + ", upload=" + upload + ", inDate="
 				+ inDate + ", uploadFile=" + uploadFile + ", sContent=" + sContent + "]";
 	}
-
 }

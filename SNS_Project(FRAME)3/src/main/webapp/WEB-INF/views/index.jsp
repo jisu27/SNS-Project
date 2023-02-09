@@ -46,15 +46,14 @@
 
 		<header id="header">
 			<section class="h_inner">
-
-				<h1 class="logo">
-					<a href="index.html">
-						<div class="sprite_insta_icon"></div>
-						<div>
-							<div class="sprite_write_logo"></div>
-						</div>
-					</a>
-				</h1>
+            <h1 class="logo" onclick="check_id()">
+                <a id="goProfile5" href="/" onclick="check_id()">
+                    <div class="sprite_insta_icon"></div>
+                    <div>
+                        <div class="sprite_write_logo"></div>
+                    </div>
+                </a>
+            </h1>
 
 				<div class="search_field">
 					<input type="text" placeholder="검색" tabindex="0">
@@ -63,21 +62,15 @@
 						<span class=sprite_small_search_icon></span> <span>검색</span>
 					</div>
 				</div>
-
-
-				<input type="hidden" id="check" value="${sessionScope.user.id}">
-				<div class="right_icons">
-					<a id="goProfile1" href="goInsertBoard.do" onclick="check_id()"><div
-							class="sprite_camera_icon"></div></a> <a id="goProfile2"
-						href="login.html" onclick="check_id()"><div
-							class="sprite_compass_icon"></div></a> <a id="goProfile3"
-						href="follow.html" onclick="check_id()"><div
-							class="sprite_heart_icon_outline"></div></a> <a id="goProfile4"
-						href="profile.do?id=${sessionScope.user.id}" onclick="check_id()"><div
-							class="sprite_user_icon_outline"></div></a>
-				</div>
-			</section>
-		</header>
+            <input type="hidden" id="check" value="${sessionScope.user.id}">
+            <div class="right_icons" onclick="check_id()">
+                <a id="goProfile1" href="goInsertBoard.do" onclick="check_id()"><div  class="sprite_camera_icon"></div></a>
+                <a id="goProfile2" href="/" onclick="check_id()"><div class="sprite_compass_icon"></div></a>
+                <a id="goProfile3" href="getLikeList.do?id=${sessionScope.user.id}" onclick="check_id()"><div  class="sprite_heart_icon_outline"></div></a>
+                <a id="goProfile4" href="profile.do?id=${sessionScope.user.id}" onclick="check_id()"><div  class="sprite_user_icon_outline"></div></a>
+            </div>
+        </section>
+    </header>
 
 
 
@@ -125,20 +118,18 @@
 
 	</section>
 
+<script type="text/javascript">
 
-	<script src="js/insta.js"></script>
-	<script type="text/javascript">
-		function check_id() {
-			if ($("#check").val() == '' || $("#check").val() == null) {
-				alert("로그인을 해주세요");
-				$("#goProfile1").attr("href", "/");
-				$("#goProfile2").attr("href", "/");
-				$("#goProfile3").attr("href", "/");
-				$("#goProfile4").attr("href", "/");
-				$("#goProfile5").attr("href", "/");
-			}
+	function check_id() {	
+		if ($("#check").val()=='') {
+			alert("로그인을 해주세요");
+			$("#goProfile1").attr("href","/");
+			$("#goProfile2").attr("href","/");
+			$("#goProfile3").attr("href","/");
+			$("#goProfile4").attr("href","/");
+			$("#goProfile5").attr("href","/");
 		}
-	</script>
-	>>>>>>> refs/remotes/origin/경석님
+	}
+</script>
 </body>
 </html>

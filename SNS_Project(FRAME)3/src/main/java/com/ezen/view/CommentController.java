@@ -9,15 +9,14 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.ezen.dto.CommentVO;
 import com.ezen.service.CommentService;
 
 @Controller
-@SessionAttributes("comment")
 public class CommentController {
 
 	@Autowired
@@ -34,16 +33,23 @@ public class CommentController {
 
 	}
 
-	@RequestMapping(value = "/updateComment.do")
+	@GetMapping("goUpdateComment.do")
+	public String goUpdateComment(Model model, CommentVO vo) {
+
+		CommentVO comment = commentService.getComment(vo);
+
+		model.addAttribute("comment", comment);
+
+		return "updateComment";
+	}
+
+	@PostMapping(value = "/updateComment.do")
 	public String updateReview(CommentVO vo, HttpSession session) throws IllegalStateException, IOException {
 
-		if (session.getAttribute("id") == null) {
-			return "index";
-		} else {
-			commentService.updateComment(vo);
-		}
+		System.out.println("updateComment: " + vo);
+		commentService.updateComment(vo);
 
-		return "redirect:getBoard";
+		return "redirect:home.do";
 	}
 
 	@RequestMapping(value = "/deleteComment.do")
@@ -51,7 +57,6 @@ public class CommentController {
 
 		commentService.deleteComment(vo);
 
-		// ���� �������� ����������.
 		String referer = request.getHeader("Referer");
 		return "redirect:" + referer;
 

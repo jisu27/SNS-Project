@@ -17,13 +17,11 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public void insertComment(CommentVO vo) {
 		cDao.insertComment(vo);
-
 	}
 
 	@Override
 	public void updateComment(CommentVO vo) {
 		cDao.updateComment(vo);
-
 	}
 
 	@Override

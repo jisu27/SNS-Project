@@ -38,10 +38,9 @@ public class ShortsController {
 	@RequestMapping("/getShorts")
 	public String getShorts(ShortsVO vo, ShortsCommentVO scvo, Model model, HttpSession session) {
 		MemberVO user = (MemberVO) session.getAttribute("user");
-
 		ShortsVO shorts = shos.getShorts(vo);
 		model.addAttribute("shorts", shorts);
-		
+
 		scvo.setsSeq(vo.getsSeq());
 		List<ShortsCommentVO> ShortsCommentList = ShortsCommentService.getShortsCommentList(scvo);
 		model.addAttribute("ShortsCommentList", ShortsCommentList);
@@ -76,6 +75,7 @@ public class ShortsController {
 		if (user == null) {
 			return "index";
 		} else {
+
 			return "insertShorts";
 		}
 
@@ -173,6 +173,5 @@ public class ShortsController {
 			return "redirect:getShortsList";
 
 		}
-
 	}
 }

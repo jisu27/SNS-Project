@@ -28,7 +28,9 @@ public class MemberDao{
 	public void insertMember(MemberVO vo) {
 		mybatis.insert("memberMapper.insertMember",vo);
 	}
-	
+	public List<String> recomMember(){
+		return mybatis.selectList("memberMapper.recomMember");
+	}
 }
 
 

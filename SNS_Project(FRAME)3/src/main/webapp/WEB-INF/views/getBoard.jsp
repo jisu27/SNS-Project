@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +13,7 @@
 <link rel="stylesheet" href="css/reset.css">
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/detail-page.css">
 <script src="https://code.jquery.com/jquery-3.6.3.js"
 	integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
 	crossorigin="anonymous"></script>
@@ -40,244 +42,229 @@
 					</div>
 				</div>
 
+				<input type="hidden" id="check" value="${sessionScope.user.id}">
 				<div class="right_icons">
-					<a id="goProfile" href="goInsertBoard.do" onclick="check_id()"><div
-							class="sprite_camera_icon"></div></a> <a id="goProfile"
-						href="login.html" onclick="check_id()"><div
-							class="sprite_compass_icon"></div></a> <a id="goProfile"
-						href="follow.html" onclick="check_id()"><div
-							class="sprite_heart_icon_outline"></div></a> <a id="goProfile"
+					<a id="goProfile1" href="goInsertBoard.do" onclick="check_id()"><div
+							class="sprite_camera_icon"></div></a> <a id="goProfile2"
+						href="/" onclick="check_id()"><div
+							class="sprite_compass_icon"></div></a> <a id="goProfile3"
+						href="getLikeList.do?id=${sessionScope.user.id}" onclick="check_id()"><div
+							class="sprite_heart_icon_outline"></div></a> <a id="goProfile4"
 						href="profile.do?id=${sessionScope.user.id}" onclick="check_id()"><div
-							class="sprite_user_icon_outline"></div></a> <input type="hidden"
-						id="check" value="${sessionScope.user.id}">
+							class="sprite_user_icon_outline"></div></a>
+					<a href="insertShorts"><div class="sprite_short_icon"></div></a>		
 				</div>
 
 			</section>
 
 		</header>
+		<div id="main_container">
 
-		<div class="hidden_menu">
-			<div class="scroll_inner">
-				<div class="user">
-					<div class="thumb_img">
-						<img src="imgs/thumb.jpeg" alt="프로필사진">
-					</div>
-					<div class="id">kindtigerrr</div>
-				</div>
-			</div>
-		</div>
-
-
-		<section id="main_container">
-			<div class="inner">
+			<section class="b_inner">
 
 				<div class="contents_box">
 
-
-					<article class="contents">
-						<header class="top">
-							<div class="user_container">
-								<div class="profile_img">
-									<c:if test="${board.pay == 0}">
-									<img src="profile/${memberList[status.index].profile}"
-										alt="프로필이미지">
-									</c:if>
-									<c:if test="${board.pay != 0}">
-									<!-- 광고 -->
-									<img src="imgs/thumb.jpeg" alt="프로필이미지">
-									</c:if>
-								</div>
-								<div class="user_name">
-									<div class="nick_name m_text">${board.id}</div>
-									<div class="country s_text">Seoul, South Korea</div>
-								</div>
-
-							</div>
-
-							<div class="sprite_more_icon" data-name="more"
-								onclick="toggle(this.children[0])">
-								<ul class="toggle_box" id="toggle_box${status.count}">
-									<li><input type="submit" class="follow" value="팔로우"
-										data-name="follow"></li>
-									<li><a href="goUpdateBoard.do?bSeq=${board.bSeq}"> <input
-											type="button" value="수정"></a></li>
-
-									<li><form action="deleteBoard.do?bSeq=${board.bSeq}"
-											method="post">
-											<c:if test="${sessionScope.user.id == board.id }">
-												<input type="submit" value="삭제">
-											</c:if>
-										</form></li>
-								</ul>
-							</div>
-						</header>
+					<article class="contents cont01">
 
 						<div class="img_section">
 							<div class="trans_inner">
-
 								<div>
-									<img src="images/${board.upload}" alt="${board.id}의 이미지">
+									<img alt="" src="images/${board.upload}"
+										style="width: 600px; height: 600px;">
 								</div>
-
 							</div>
 						</div>
 
-						<div class="bottom_icons">
-							<div class="left_icons">
-								<div class="heart_btn">
 
-									<c:choose>
-										<c:when test="${fn:contains(sessionScope.heart , board.bSeq)}">
-											<div onclick="deleteLike()" class="sprite_heart_icon_outline"
-												id="heart" name="39" data-name="heartbeat"
-												style="background: url('../../imgs/background01.png') no-repeat -26px -261px;">
-												<form id="deleteLike" action="getDeleteHeart.do"
-													method="post">
-													<input type="hidden" id="bseq" name="bseq"
-														value="${board.bSeq}"> <input type="hidden"
-														id="id" name="id" value="${sessionScope.user.id}">
-													<input type="hidden" id="profile" name="profile"
-														value="${memberList[status.index].profile}">
-												</form>
-											</div>
-										</c:when>
+						<div class="detail--right_box">
 
-										<c:otherwise>
-											<div onclick="like()" class="sprite_heart_icon_outline"
-												id="heart" name="39" data-name="heartbeat"
-												style="background: url('../../imgs/background01.png') no-repeat -52px -261px;">
-												<form id="like" action="getHeart.do" method="post">
-													<input type="hidden" id="bseq" name="bseq"
-														value="${board.bSeq}"> <input type="hidden"
-														id="id" name="id" value="${sessionScope.user.id}">
-													<input type="hidden" id="profile" name="profile"
-														value="${memberList[status.index].profile}">
-												</form>
-											</div>
-										</c:otherwise>
-									</c:choose>
+							<header class="top">
+								<div class="user_container">
+									<div class="profile_img">
+										<img src="profile/${profile}" alt="">
+									</div>
+									<div class="user_name">
+										<div class="nick_name">${board.id}</div>
+										<div class="country">Seoul, South Korea</div>
+									</div>
+
 								</div>
-								<div class="sprite_bubble_icon"></div>
-								<div class="sprite_share_icon" data-name="share"></div>
-							</div>
-							<div class="right_icon">
-								<div class="sprite_bookmark_outline" data-name="bookmark"></div>
-							</div>
-						</div>
+								<c:if test="${sessionScope.user.id == board.id}">
+								<div class="sprite_more_icon" data-name="more"
+									onclick="toggle(this.children[0])">
+									<ul class="toggle_box" id="toggle_box${status.count}">
+										<li><a href="goUpdateBoard.do?bSeq=${board.bSeq}"> <input
+												type="button" value="수정"></a></li>
 
-						<div class="likes m_text">
-							좋아요 <span id="like-count-39">2,346</span> 개
-						</div>
-						<c:forEach items="${commentList}" var="comment">
-							<c:if test="${comment.bseq == board.bSeq }">
-								<div class="comment_container">
-									<div class="comment" id="comment-list-ajax-post37">
-										<div class="comment-detail">
-											<div class="nick_name m_text">${comment.id}</div>
-											<div>${comment.ccontent}</div>
+										<li><form action="deleteBoard.do?bSeq=${board.bSeq}"
+												method="post">
+												<c:if test="${sessionScope.user.id == board.id }">
+													<input type="submit" value="삭제">
+												</c:if>
+											</form></li>
+									</ul>
+								  </div>
+								</c:if>
+							</header>
+
+							<section class="scroll_section">
+								<div class="admin_container">
+									<div class="admin">
+										<img src="profile/${profile}" alt="user">
+									</div>
+									<div class="comment">
+										<span class="user_id">${board.id}</span>${board.content}
+										<div style="font-size:small; font-weight: 900">${time}</div>
+									</div>
+								</div>
+								
+								<c:forEach var="comment" items="${commentList}"
+									varStatus="status">
+									<div class="user_container-detail">
+										<div class="user">
+											<img src="profile/${commentMemberList[status.index].profile}"
+												alt="user">
+										</div>
+										<div class="comment">
+											<span class="user_id">${comment.id}</span>
+											${comment.ccontent}
+											
+											<div class="time" style="font-size: small;">
+													<fmt:formatDate var="comDate" value="${comment.indate}" pattern="yyyy년MM월dd일HH시"/>
+													${comDate}에 작성된 글입니다. 											
+												<span class="try_comment"></span>
+											</div>
+											<c:if test="${sessionScope.user.id == comment.id}">
+											<div class="icon_wrap">
+												<div class="more_trigger">
+													<div class="sprite_more_icon" data-name="more"
+												onclick="toggle(this.children[0])">
+												<ul class="toggle_box" id="toggle_box${comment.cseq}">
+													<li>
+														<a href="goUpdateComment.do?cseq=${comment.cseq}">
+															<input type="button" value="수정">
+														</a>
+													 
+													</li>
+													<li><form
+															action="deleteComment.do?cseq=${comment.cseq}"
+															method="post">
+															<c:if test="${sessionScope.user.id == comment.id }">
+																<input type="submit" value="삭제">
+															</c:if>
+														</form></li>
+												</ul>
+											</div>
+												</div>
+												<div>
+													<div class="sprite_small_heart_icon_outline"></div>
+												</div>
+											</div>
+											</c:if>
 										</div>
 									</div>
-									<form action="deleteComment.do">
-										<c:if test="${sessionScope.user.id == comment.id }">
-											<input type="submit" value="삭제" name="">
-											<input type="hidden" id="cseq" name="cseq"
-												value="${comment.cseq}">
-										</c:if>
-									</form>
-									<div class="small_heart">
-										<div class="sprite_small_heart_icon_outline"></div>
+
+								</c:forEach>
+
+
+							</section>
+
+
+							<div class="bottom_icons">
+								<div class="left_icons">
+									<div class="heart_btn">
+										<c:choose>
+											<c:when
+												test="${fn:contains(sessionScope.heart , board.bSeq)}">
+												<div onclick="deleteLike()"
+													class="sprite_heart_icon_outline" id="heart" name="39"
+													data-name="heartbeat"
+													style="background: url('../../imgs/background01.png') no-repeat -26px -261px;">
+													<form id="deleteLike" action="getDeleteHeart.do"
+														method="post">
+														<input type="hidden" id="bseq" name="bseq"
+															value="${board.bSeq}"> <input type="hidden"
+															id="id" name="id" value="${sessionScope.user.id}">
+														<input type="hidden" id="profile" name="profile"
+															value="${profile}">
+													</form>
+												</div>
+											</c:when>
+
+											<c:otherwise>
+												<div onclick="like()" class="sprite_heart_icon_outline"
+													id="heart" name="39" data-name="heartbeat"
+													style="background: url('../../imgs/background01.png') no-repeat -52px -261px;">
+													<form id="like" action="getHeart.do" method="post">
+														<input type="hidden" id="bseq" name="bseq"
+															value="${board.bSeq}"> <input type="hidden"
+															id="id" name="id" value="${sessionScope.user.id}">
+														<input type="hidden" id="profile" name="profile"
+															value="${profile}">
+													</form>
+												</div>
+											</c:otherwise>
+										</c:choose>
+									</div>
+									<div>
+										<div class="sprite_bubble_icon"></div>
+									</div>
+									<div>
+										<div class="sprite_share_icon" data-name="share"></div>
 									</div>
 								</div>
-							</c:if>
-							<br>
-						</c:forEach>
 
-						<div class="timer">1시간 전</div>
+								<div class="right_icon">
+									<div class="sprite_bookmark_outline" data-name="book-mark"></div>
+								</div>
+							</div>
 
-						<div class="comment_field" id="add-comment-post37">
-							<form action="insertComment.do" method="post">
-								<input type="hidden" name="id" value="${sessionScope.user.id}">
-								<input type="hidden" name="bseq" value="${board.bSeq}">
-								<input type="text" name="ccontent" id="ccontent"
-									placeholder="댓글달기...">
-								<div class="upload_btn m_text" data-name="comment">
+							<div class="heart_count" style="font-weight: 900">
+								좋아요${board.count}개
+							</div>
+							<div class="timer">
+								<fmt:formatDate var="boDate" value="${board.inDate}" pattern="yyyy년 MM월 dd일"/>
+								${boDate}
+							</div>
+
+							<div class="commit_field">
+								<form id="commentForm" action="insertComment.do" method="post">
+									<input type="hidden" name="id" value="${sessionScope.user.id}">
+									<input type="hidden" name="bseq" value="${board.bSeq}">
+									<input type="text" name="ccontent" placeholder="댓글을 달아주세요 !">
+									
 									<input type="submit" value="게시">
-								</div>
-							</form>
+								</form>
+							</div>
+
+
+
 						</div>
+
+
 					</article>
-
-
 
 
 				</div>
-				<input type="hidden" id="page" value="1">
-
-				<div class="side_box">
-					<div class="user_profile">
-						<div class="profile_thumb">
-							<a href="profile.do?id=${sessionScope.user.id}"><img
-								src="profile/${sessionScope.user.profile}" alt="프로필사진"></a>
-						</div>
-						<div class="detail">
-							<div class="id m_text">${sessionScope.user.id}</div>
-							<div class="ko_name">${sessionScope.user.name}</div>
-						</div>
-					</div>
-
-					<article class="story">
-						<header class="story_header">
-							<div>스토리</div>
-							<div class="more">모두 보기</div>
-						</header>
-
-						<div class="scroll_inner">
-							<div class="thumb_user">
-								<div class="profile_thumb">
-									<img src="imgs/thumb02.jpg" alt="프로필사진">
-								</div>
-								<div class="detail">
-									<div class="id">kind_tigerrrr</div>
-									<div class="time">1시간 전</div>
-								</div>
-							</div>
-							<div class="thumb_user">
-								<div class="profile_thumb">
-									<img src="imgs/thumb02.jpg" alt="프로필사진">
-								</div>
 
 
-							</div>
-						</div>
-					</article>
+			</section>
 
-					<article class="recommend">
-						<header class="reco_header">
-							<div>회원님을 위한 추천</div>
-							<div class="more">모두 보기</div>
-						</header>
-
-						<div class="thumb_user">
-							<div class="profile_thumb">
-								<img src="imgs/thumb02.jpg" alt="프로필사진">
-							</div>
-							<div class="detail">
-								<div class="id">kind_tigerrrr</div>
-								<div class="time">1시간 전</div>
-							</div>
-						</div>
-
-					</article>
-				</div>
+		</div>
 
 
+		<div class="del_pop">
+			<div class="btn_box">
+				<div class="del">삭제</div>
+				<div class="cancel">취소</div>
 			</div>
-		</section>
-
-
+		</div>
 
 	</section>
 	<script type="text/javascript">
+	
+		var prev_element = null;
+
 		function check_id() {
 			if ($("#check").val() == '' || $("#check").val() == null) {
 				alert("로그인을 해주세요");
@@ -299,10 +286,5 @@
 			}
 		}
 	</script>
-
-	<script src="https://code.jquery.com/jquery-1.12.4.min.js">
-		
-	</script>
-	<script src="js/main.js"></script>
 </body>
 </html>

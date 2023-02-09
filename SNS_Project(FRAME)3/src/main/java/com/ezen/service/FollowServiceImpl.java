@@ -32,7 +32,7 @@ public class FollowServiceImpl implements FollowService {
 	}
 
 	@Override
-	public List<FollowVO> getFollowList(FollowVO vo) {
+	public List<String> getFollowList(FollowVO vo) {
 		
 		return dao.getFollowList(vo);
 	}
@@ -52,6 +52,12 @@ public class FollowServiceImpl implements FollowService {
 	public List<FollowVO> getFollowListId1(FollowVO vo) {
 
 		return dao.getFollowListId1(vo);
+	}
+
+	@Override
+	public List<String> recomFollow(String id) {
+		
+		return dao.recomFollow(id);
 	}
 
 }
