@@ -2,13 +2,14 @@
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="commentMapper">
 
-    <insert id="insertComment" parameterType="comment">
-		INSERT INTO
-		SNS_COMMENT(cseq, bseq, id, ccontent)
-		VALUES
-		(sns_comment_seq.NEXTVAL, #{bSeq}, #{id}, #{ccontent})
-	</insert>
-	
+    
+	<insert id="insertComment" parameterType="comment">
+      INSERT INTO
+      SNS_COMMENT(cseq, bseq, id, ccontent)
+      VALUES
+      (sns_comment_seq.NEXTVAL, #{bSeq}, #{id}, #{ccontent, jdbcType=VARCHAR})
+   </insert>
+   
 	<delete id="deleteComment" parameterType="comment">
 		DELETE SNS_COMMENT WHERE cseq=#{cseq}
 	</delete>
