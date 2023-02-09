@@ -79,7 +79,7 @@
 
         <div class="post_form_container">
             <form action="insertBoard.do" method="post" class="post_form" enctype="multipart/form-data">
-            <input type="hidden" name="noImg" value="null">
+            <input type="hidden" name="noImg" value="no-background.png">
                 <div class="title">
                     NEW POST
                 </div>
@@ -92,13 +92,16 @@
                             </div>
                             <p>포스트 이미지 추가</p>
                             <canvas id="imageCanvas"></canvas>
-                            <!--<p><img id="img_id" src="#" style="width: 300px; height: 300px; object-fit: cover" alt="thumbnail"></p>-->
+                            	<img id="img" alt="" src="" style="display: none;">
+                            <!-- 
+                            <p><img id="img_id" src="" style="width: 300px; height: 300px; object-fit: cover" alt="thumbnail"></p>
+                             -->
                         </div>
                     </div>
                 </div>
                 <p>
                 	<input type="text" id="title" name="title" placeholder="title"><br>
-                    <input type="file" name="uploadfile" id="uploadfile" >
+                    <input type="file" name="uploadfile" id="uploadfile" value="">
                 </p>
                 <p>
                  
@@ -126,6 +129,18 @@
 <script src="js/insta.js"></script>
 
 <script>
+	$(function() {
+		if ($("#uploadfile").val()!='') {
+			$("#img").attr("style","display:block");
+			$("#img").attr("src","images/$('#uploadfile')");
+			
+		}
+	})
+
+
+
+
+
        var fileInput  = document.querySelector( "#id_photo" ),
            button     = document.querySelector( ".input-file-trigger" ),
            the_return = document.querySelector(".file-return");

@@ -24,4 +24,11 @@
 		FROM member
 		WHERE name=#{name} AND email=#{email} AND id=#{id}
   </select>
+  <!-- ########################################################################################################################## -->
+  <select id="recomMember" resultType="String">
+		SELECT id
+		FROM member
+		ORDER BY PAY
+  </select>
+  
 </mapper>

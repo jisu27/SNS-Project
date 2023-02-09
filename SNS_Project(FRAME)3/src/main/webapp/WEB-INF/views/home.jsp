@@ -410,7 +410,7 @@
 					<article class="story">
 						<header class="story_header">
 							<div>스토리</div>
-							<div class="more">모두 보기</div>
+							<a href="getShortsList"><div class="more">모두 보기</div></a>
 						</header>
 
 						<div class="scroll_inner">
@@ -437,16 +437,18 @@
 							<div>회원님을 위한 추천</div>
 							<div class="more">모두 보기</div>
 						</header>
-
+					<c:forEach var="reco" items="${recoMember}">
 						<div class="thumb_user">
+						
 							<div class="profile_thumb">
-								<img src="imgs/thumb02.jpg" alt="프로필사진">
+								<a href="profile.do?id=${reco.id}"><img src="../profile/${reco.profile}" alt=""></a>
 							</div>
 							<div class="detail">
-								<div class="id">kind_tigerrrr</div>
-								<div class="time">1시간 전</div>
+								<div class="id">${reco.id}</div>
+								<div class="time"></div>
 							</div>
 						</div>
+					</c:forEach>
 
 					</article>
 				</div>

@@ -54,4 +54,10 @@ public class FollowServiceImpl implements FollowService {
 		return dao.getFollowListId1(vo);
 	}
 
+	@Override
+	public List<String> recomFollow(String id) {
+		
+		return dao.recomFollow(id);
+	}
+
 }

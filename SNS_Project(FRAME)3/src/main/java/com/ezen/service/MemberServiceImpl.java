@@ -39,5 +39,10 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.findPwd(vo);
 	}
 
+	@Override
+	public List<String> recomMember() {
+		return mDao.recomMember();
+	}
+
 
 }

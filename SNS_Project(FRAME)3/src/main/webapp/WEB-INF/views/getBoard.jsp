@@ -126,7 +126,9 @@
 												alt="user">
 										</div>
 										<div class="comment">
-											<span class="user_id">${comment.id}</span>${comment.ccontent}
+											<span class="user_id">${comment.id}</span>
+											${comment.ccontent}
+											
 											<div class="time" style="font-size: small;">
 													<fmt:formatDate var="comDate" value="${comment.indate}" pattern="yyyy년MM월dd일HH시"/>
 													${comDate}에 작성된 글입니다. 											
@@ -138,9 +140,12 @@
 													<div class="sprite_more_icon" data-name="more"
 												onclick="toggle(this.children[0])">
 												<ul class="toggle_box" id="toggle_box${comment.cseq}">
-													<li><a href="goUpdateComment.do?cseq=${comment.cseq}">
+													<li>
+														<a href="goUpdateComment.do?cseq=${comment.cseq}">
 															<input type="button" value="수정">
-													</a></li>
+														</a>
+													 
+													</li>
 													<li><form
 															action="deleteComment.do?cseq=${comment.cseq}"
 															method="post">
@@ -257,6 +262,7 @@
 
 	</section>
 	<script type="text/javascript">
+	
 		var prev_element = null;
 
 		function check_id() {
@@ -265,7 +271,6 @@
 				$("#goProfile").attr("href", "/");
 			}
 		}
-		
 		function deleteLike() {
 			$("#deleteLike").submit();
 		}

@@ -91,7 +91,7 @@ public class LoginController {
 		if (!vo.getFile().isEmpty()) {
 			
 			fileName = vo.getFile().getOriginalFilename();	
-			String realPath = session.getServletContext().getRealPath("/profile/");
+			String realPath = session.getServletContext().getRealPath("profile/");
 			vo.getFile().transferTo(new File(realPath+fileName));
 				
 		}
@@ -124,7 +124,6 @@ public class LoginController {
 				hvo.setId(mvo.getId().toString());
 				
 				List<HeartVO> heart = heartService.boardLike(hvo);
-				
 				List<String> follower = followService.getFollowList(fvo);
 				
 				
