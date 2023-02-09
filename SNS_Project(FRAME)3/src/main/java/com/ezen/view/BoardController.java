@@ -176,20 +176,8 @@ public class BoardController {
 		
 		model.addAttribute("boardList", getboardList);
 		model.addAttribute("adverList", getadverList);
-<<<<<<< HEAD
-		// System.out.println(adverList);
-
-=======
-		
->>>>>>> refs/heads/test
 		model.addAttribute("commentList", commentList);
-<<<<<<< HEAD
-		// System.out.println("commentList :" + commentList);
-
-=======
 		model.addAttribute("adcommentList", adCommentList);
-		
->>>>>>> refs/heads/test
 		return "home";
 	}
 
@@ -291,12 +279,8 @@ public class BoardController {
 
 			String realPath = session.getServletContext().getRealPath("images/");
 			vo.getUploadfile().transferTo(new File(realPath + fileName));
-<<<<<<< HEAD
-		} else {
-=======
 			vo.setUpload(fileName);
 		}else {
->>>>>>> refs/heads/test
 			vo.setUpload(no_image);
 		}
 

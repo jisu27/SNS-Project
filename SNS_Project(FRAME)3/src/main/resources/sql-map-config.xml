@@ -4,7 +4,7 @@
 	<typeAliases>
 		<typeAlias type="com.ezen.dto.MemberVO" alias="member" />
 		<typeAlias type="com.ezen.dto.FollowVO" alias="follow" />
-		<typeAlias type="com.ezen.dto.FollowVO" alias="comment" />
+		<typeAlias type="com.ezen.dto.CommentVO" alias="comment" />
 		<typeAlias type="com.ezen.dto.BoardVO" alias="board" />
 		<typeAlias type="com.ezen.dto.ShortsVO" alias="shorts" />
 		<typeAlias type="com.ezen.dto.AdvertisementVO"

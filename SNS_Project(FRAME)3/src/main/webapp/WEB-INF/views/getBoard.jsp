@@ -196,7 +196,7 @@
 													id="heart" name="39" data-name="heartbeat"
 													style="background: url('../../imgs/background01.png') no-repeat -52px -261px;">
 													<form id="like" action="getHeart.do" method="post">
-														<input type="hidden" id="bseq" name="bseq"
+														<input type="hidden" id="bSeq" name="bSeq"
 															value="${board.bSeq}"> <input type="hidden"
 															id="id" name="id" value="${sessionScope.user.id}">
 														<input type="hidden" id="profile" name="profile"
@@ -230,7 +230,7 @@
 							<div class="commit_field">
 								<form id="commentForm" action="insertComment.do" method="post">
 									<input type="hidden" name="id" value="${sessionScope.user.id}">
-									<input type="hidden" name="bseq" value="${board.bSeq}">
+									<input type="hidden" name="bSeq" value="${board.bSeq}">
 									<input type="text" name="ccontent" placeholder="댓글을 달아주세요 !">
 									
 									<input type="submit" value="게시">
