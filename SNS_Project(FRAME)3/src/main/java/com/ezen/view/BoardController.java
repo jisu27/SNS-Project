@@ -18,15 +18,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.ezen.dto.AdvertisementVO;
 import com.ezen.dto.BoardVO;
 import com.ezen.dto.CommentVO;
+import com.ezen.dto.FollowVO;
 import com.ezen.dto.HeartVO;
 import com.ezen.dto.MemberVO;
 
 import com.ezen.service.BoardService;
 import com.ezen.service.CommentService;
+import com.ezen.service.FollowService;
 import com.ezen.service.HeartService;
 import com.ezen.service.MemberService;
 
@@ -41,6 +44,8 @@ public class BoardController {
 	private HeartService heartService;
 	@Autowired
 	private CommentService commentService;
+	@Autowired
+	private FollowService followService;
 //	##############################################################################################################--home
 	@RequestMapping("/")
 	public String goLogin() {
@@ -49,8 +54,41 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "/home.do")
-	public String BoardList(BoardVO bVo, CommentVO cVo, Model model) {
-
+	public String BoardList(BoardVO bVo, CommentVO cVo, Model model,HttpSession session) {
+		
+		FollowVO fvo = new FollowVO();
+		List<MemberVO> recoMemberList =new ArrayList<>();
+		MemberVO mvo2 = (MemberVO)session.getAttribute("user");
+		
+		System.out.println("mvo2 = "+mvo2);
+		if (mvo2!=null) {
+			
+			fvo.setId1(mvo2.getId());
+			List<String> followerList = (List<String>)session.getAttribute("follower");
+			List<String> recom = followService.recomFollow(fvo.getId1());
+			
+				if (recom == null ||recom.isEmpty()) {
+					recom = memberService.recomMember();
+				}
+			//추천에 본인과 이미 팔로우한 사람 제거 
+				System.out.println("recom = "+recom);
+				recom.remove(fvo.getId1());
+				for(String follower: followerList) {
+					recom.remove(follower);
+				}
+			// 추천 멤버 객체 불러오기 	
+				for(String id : recom ) {
+					MemberVO member = new MemberVO();
+					member.setId(id);
+					MemberVO member2 = memberService.MemberCheck(member);
+					recoMemberList.add(member2);
+				}
+			
+				
+				System.out.println("recoMemberList = "+recoMemberList);
+			model.addAttribute("recoMember",recoMemberList);
+		}
+		
 		List<BoardVO> boardList = boardService.BoardList(bVo);
 		
 		List<BoardVO> getboardList = boardService.getBoardList(bVo);
@@ -142,7 +180,7 @@ public class BoardController {
 		
 		model.addAttribute("commentList", commentList);
 		model.addAttribute("adcommentList", adCommentList);
-
+		
 		return "home";
 	}
 
@@ -240,7 +278,7 @@ public class BoardController {
 
 			System.out.println("filename=" + fileName);
 
-			String realPath = session.getServletContext().getRealPath("/images/");
+			String realPath = session.getServletContext().getRealPath("images/");
 			vo.getUploadfile().transferTo(new File(realPath + fileName));
 			vo.setUpload(fileName);
 		}else {

@@ -19,4 +19,6 @@ public interface FollowService {
 	public int getCountFollow(FollowVO vo);
 
 	public int getCountFollowing(FollowVO vo);
+	
+	List<String> recomFollow(String id);
 }

@@ -38,5 +38,8 @@ public class FollowDao {
 	public int getCountFollowing(FollowVO vo) {
 		return mybatis.selectOne("followMapper.countFollowing", vo.getId1());
 	}
+	public List<String> recomFollow(String id){
+		return mybatis.selectList("followMapper.recomFollow",id);
+	}
 	
 }
