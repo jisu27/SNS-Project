@@ -15,5 +15,7 @@ public interface CommentService {
 	CommentVO getComment(CommentVO vo);
 
 	List<CommentVO> getCommentList(CommentVO vo);
+	
+	void updateCount(CommentVO vo);
 
 }
