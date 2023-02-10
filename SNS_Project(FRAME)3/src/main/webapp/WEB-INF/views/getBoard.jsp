@@ -162,7 +162,37 @@
 											</div>
 												</div>
 												<div>
-													<div class="sprite_small_heart_icon_outline"></div>
+												<c:choose>
+													<c:when test="${fn:contains(sessionScope.heart,comment.cseq)}">
+														<div onclick="deleteLike_c()" data-name="smallheart"
+													class="sprite_small_heart_icon_outline">
+													<form id="deleteLike${status.count}" method="post" action="getDeleteHeart.do">
+													<input type="hidden" id="cSeq" name="cSeq"
+															value="${comment.cseq}"> <input type="hidden"
+															id="id" name="id" value="${sessionScope.user.id}">
+													</form>
+													</div>
+													
+
+											</c:when>
+											
+											<c:otherwise>
+												<div onclick="like_c(like${comment.cseq})" data-name="smallheart"
+												class="sprite_small_heart_icon_outline">
+												<form id="like${comment.cseq}" method="post" action="getHeart.do">
+														<input type="hidden" id="cseq" name="cseq"
+															value="${comment.cseq}"> <input type="hidden"
+															id="id" name="id" value="${sessionScope.user.id}">
+															<input type="hidden" id="ccontent" name="ccontent"
+															value="${comment.ccontent}">
+															<input type="hidden" id="bSeq" name="bSeq"
+															value="${comment.bSeq}">
+
+													</form>
+													</div>
+													
+											</c:otherwise>
+										</c:choose>
 												</div>
 											</div>
 											</c:if>
@@ -269,7 +299,6 @@
 	<script type="text/javascript">
 	
 		var prev_element = null;
-
 		function check_id() {
 			if ($("#check").val() == '' || $("#check").val() == null) {
 				alert("로그인을 해주세요");
@@ -281,6 +310,12 @@
 		}
 		function like() {
 			$("#like").submit();
+		}
+		function deleteLike_c() {
+			$("#deleteLike").submit();
+		}
+		function like_c(comment) {
+			$(comment).submit();
 		}
 		function toggle(element) {
 			var con = document.getElementById(element.getAttribute("id"));

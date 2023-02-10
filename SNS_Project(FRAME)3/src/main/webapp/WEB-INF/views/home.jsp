@@ -345,6 +345,7 @@
 											<div class="sprite_more_icon" data-name="more"
 												onclick="toggle_c(this.children[0])">
 												<ul class="toggle_box2" id="toggle_box${comment.cseq}">
+
 													<li><a href="updateComment.do?cseq=${comment.cseq}">
 															<input type="button" value="수정">
 													</a></li>
@@ -419,7 +420,9 @@
 									<div class="profile_thumb">
 										<a href="getShorts?sSeq=${shorts.sSeq}"><img
 								src="profile/${sessionScope.user.profile}" alt="프로필사진"></a>
+
 									</div>
+									
 									<div class="detail">
 									
 									

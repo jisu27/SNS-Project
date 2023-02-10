@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+ <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -143,37 +145,53 @@
 							</header>
 
 							<section class="scroll_section">
-								<c:forEach items="${ShortsCommentList}" var="ShortsComment">
+										<div class="admin">
+											<img src="profile/${profile}" alt="user">
+										</div>
+										
+								<c:forEach items="${shortsCommentList}" var="shortsComment">
 									<div class="user_container-detail">
 									<div class="user">
-										<!--  <img src="imgs/thumb02.jpg" alt="user"> -->
+										<!--  <img src="profile/${commentMemberList[status.index].profile}"
+												alt="user"> -->
 										프사
 									</div>
 									<div class="comment">
-										<span class="user_id">${ShortsComment.id}</span>
-										${ShortsComment.content}
-										<div class="time">
-										${ShortsComment.inDate}
+										<span class="user_id">${shortsComment.id}</span>
+										${shortsComment.content}
+										<div class="time" style="font-size:small;">
+											<fmt:formatDate var="comDate" value="${shortsComment.inDate}" pattern="yyyy년MM월dd일HH시"/>
+											${comDate}에 작성된 글.
 										  <!-- <span class="try_comment">ëµê¸ ë¬ê¸°</span>  -->
 										</div>
+										
+										
 										<div class="icon_wrap">
 											<div class="more_trigger">
 												<div class="sprite_more_icon" data-name="more"
 												onclick="toggle(this.children[0])">
-												<ul class="toggle_box" id="toggle_box${ShortsComment.scSeq}">
+												<ul class="toggle_box" id="toggle_box${shortsComment.scSeq}">
 													<li>
-														<a href="goUpdateComment.do?scseq=${ShortsComment.scSeq}">
+														<a href="follow.do?id1=${sessionScope.user.id}&id2=${shortsComment.id}">
+															<input type="hidden" value="${shortsComment.scSeq}">
+															<input type="button" value="팔로우">
+														</a>
+													</li>
+															<c:if test="${sessionScope.user.id == shortsComment.id}">
+													<li>
+														<a href="updateShortsComment?scSeq=${shortsComment.scSeq}">
 															<input type="button" value="수정">
+															
 														</a>
 													 
 													</li>
 													<li><form
-															action="deleteComment.do?scSeq=${ShortsComment.scSeq}"
+															action="deleteShortsComment?scSeq=${shortsComment.scSeq}"
 															method="post">
-															<c:if test="${sessionScope.user.id == ShortsComment.id }">
+																
 																<input type="submit" value="삭제">
-															</c:if>
 														</form></li>
+															</c:if>
 												</ul>
 											</div>
 											</div>
@@ -181,6 +199,7 @@
 												<div class="sprite_small_heart_icon_outline"></div>
 											</div>
 										</div>
+										
 									</div>
 								</div>
 								</c:forEach>
@@ -190,7 +209,38 @@
 							<div class="bottom_icons">
 								<div class="left_icons">
 									<div class="heart_btn">
-										<div class="sprite_heart_icon_outline" data-name="heartbeat"></div>
+										<c:choose>
+											<c:when
+												test="${fn:contains(sessionScope.heart , shorts.sSeq)}">
+												<div onclick="deleteLike()"
+													class="sprite_heart_icon_outline" id="heart" name="39"
+													data-name="heartbeat"
+													style="background: url('../../imgs/background01.png') no-repeat -26px -261px;">
+													<form id="deleteLike" action="getDeleteHeart.do"
+														method="post">
+														<input type="hidden" id="sSeq" name="sSeq"
+															value="${shorts.sSeq}"> <input type="hidden"
+															id="id" name="id" value="${sessionScope.user.id}">
+														<input type="hidden" id="profile" name="profile"
+															value="${profile}">
+													</form>
+												</div>
+											</c:when>
+
+											<c:otherwise>
+												<div onclick="like()" class="sprite_heart_icon_outline"
+													id="heart" name="39" data-name="heartbeat"
+													style="background: url('../../imgs/background01.png') no-repeat -52px -261px;">
+													<form id="like" action="getHeart.do" method="post">
+														<input type="hidden" id="sSeq" name="sSeq"
+															value="${shorts.sSeq}"> <input type="hidden"
+															id="id" name="id" value="${sessionScope.user.id}">
+														<input type="hidden" id="profile" name="profile"
+															value="${profile}">
+													</form>
+												</div>
+											</c:otherwise>
+										</c:choose>
 									</div>
 									<div>
 										<div class="sprite_bubble_icon"></div>
@@ -205,19 +255,23 @@
 								</div>
 							</div>
 
-							<div class="count_likes">
-								<!-- 좋아요 수<span class="count">{shorts.like}</span> -->
+							<div class="heart_count" style="font-weight: 900">
+								좋아요${shorts.count}개
 							</div>
-							<div class="timer">2ìê°</div>
+							<div class="timer">
+								<fmt:formatDate var="soDate" value="${shorts.inDate}" pattern="yyyy년 MM월 dd일"/>
+								${soDate}
+							</div>
 
 							<div class="commit_field">
 								<form action="insertShortsComment" method="post">
 									<input type="hidden" name="sSeq" value="${shorts.sSeq}">
 									<input type="hidden" name="id" value="${sessionScope.user.id}">
 									<input type="text" name="content" placeholder="댓글을 입력하세요">
-									
+									<div class="upload_btn m_text" data-name="comment">
 								<input type="submit" value="댓글 달기">
-								<div class="upload_btn"></div>
+								</div>
+								<!-- <div class="upload_btn"></div> -->
 								</form>
 							</div>
 						</div>
