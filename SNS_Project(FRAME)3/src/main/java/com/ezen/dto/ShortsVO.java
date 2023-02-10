@@ -14,6 +14,7 @@ public class ShortsVO {
 	private MultipartFile uploadFile;
 	private String sContent;
 	private String searchKeyword;
+	private int count;
 
 	public String getSearchKeyword() {
 		return searchKeyword;
@@ -79,9 +80,20 @@ public class ShortsVO {
 		this.sContent = sContent;
 	}
 
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
 	@Override
 	public String toString() {
 		return "ShortsVO [sSeq=" + sSeq + ", sTitle=" + sTitle + ", id=" + id + ", upload=" + upload + ", inDate="
-				+ inDate + ", uploadFile=" + uploadFile + ", sContent=" + sContent + "]";
+				+ inDate + ", uploadFile=" + uploadFile + ", sContent=" + sContent + ", searchKeyword=" + searchKeyword
+				+ ", count=" + count + "]";
 	}
+
+
 }

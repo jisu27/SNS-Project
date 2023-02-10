@@ -40,8 +40,8 @@ public class CommentVO {
 	}
 	@Override
 	public String toString() {
-		return "SnsCommentVO [cseq=" + cseq + ", bseq=" + bSeq + ", id=" + id + ", ccontent=" + ccontent + ", indate="
+		return "CommentVO [cseq=" + cseq + ", bSeq=" + bSeq + ", id=" + id + ", ccontent=" + ccontent + ", indate="
 				+ indate + "]";
 	}
-	
+
 }

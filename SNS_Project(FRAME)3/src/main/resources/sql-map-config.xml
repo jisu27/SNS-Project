@@ -9,7 +9,7 @@
 		<typeAlias type="com.ezen.dto.ShortsVO" alias="shorts" />
 		<typeAlias type="com.ezen.dto.HeartVO" alias="heart" />
 		<typeAlias type="com.ezen.dto.ShortsCommentVO" alias="shortsComment"/>
-		<typeAlias type="com.ezen.dto.bookMarkVO" alias="bookMark"/>
+		<typeAlias type="com.ezen.dto.BookMarkVO" alias="bookMark"/>
 	</typeAliases>
 
 	<mappers>

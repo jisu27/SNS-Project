@@ -29,6 +29,7 @@ public class CommentController {
 		commentService.insertComment(cvo);
 
 		// ���� �������� ����������.
+		System.out.println(cvo);
 		String referer = request.getHeader("Referer");
 		return "redirect:" + referer;
 

@@ -5,7 +5,7 @@
 
 	<insert id="insertComment" parameterType="comment">
 		INSERT INTO
-		SNS_COMMENT(cseq, bseq, id, ccontent)
+		SNS_COMMENT(cseq, bSeq, id, ccontent)
 		VALUES
 		(sns_comment_seq.NEXTVAL, #{bSeq}, #{id}, #{ccontent, jdbcType=VARCHAR})
 	</insert>
