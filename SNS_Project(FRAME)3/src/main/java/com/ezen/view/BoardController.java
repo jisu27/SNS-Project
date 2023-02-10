@@ -235,11 +235,10 @@ public class BoardController {
 		
 		model.addAttribute("boardList", getboardList);
 		model.addAttribute("adverList", getadverList);
-		model.addAttribute("shortsList", getshortsList);
 		
 		model.addAttribute("commentList", commentList);
 		model.addAttribute("adcommentList", adCommentList);
-		model.addAttribute("shortsList",shortsList); // 덮어씌우는지 확인
+		model.addAttribute("shortsList",shortsList); 
 		
 		return "home";
 	}

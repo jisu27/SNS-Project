@@ -423,7 +423,7 @@
 									<div class="detail">
 									
 									
-										<div class="id">${shorts.id }</div>
+										<div class="id">${shorts.id}</div>
 										<div class="time">${stime[status.index]}</div>
 									
 									</div>
