@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="bookMarkMapper">
+  
+<insert id="insertBookMark" parameterType="bookMark">
+  INSERT INTO bookMark (bmSeq, bSeq, sSeq, bmTitle, bmUrl, id)
+  VALUES (#{bmSeq}, #{bSeq}, #{sSeq}, #{bmTitle}, #{bmUrl}, #{id})
+</insert>
+
+<update id="updateBookMark" parameterType="bookMark">
+	UPDATE bookMark SET bmTitle = #{bmTitle} Where bmSeq = #{bmSeq}
+</update>
+
+<delete id="deleteBookMark" parameterType="bookMark">
+  DELETE FROM bookMark WHERE bmSeq = #{bmSeq}
+</delete>
+
+<select id="getBoardBookMarkList" resultType="bookMark">
+  SELECT * FROM bookMark WHERE id=#{id} AND bSeq IS NOT NULL
+</select>
+
+<select id="getShortsBookMarkList" resultType="bookMark">
+	SELECT * FROM bookMark WHERE id=#{id} AND sSeq IS NOT NULL
+</select>
+
+<select id="getAllBookMarkList" resultType="bookMark">
+	SELECT * FROM bookMark WHERE id=#{id}
+</select>
+
+<select id="getBookMark" resultType="bookMark">
+	Select * FROM bookMark WHERE bmSeq = #{bmSeq}
+</select>
+</mapper>
+
+ 
+
+

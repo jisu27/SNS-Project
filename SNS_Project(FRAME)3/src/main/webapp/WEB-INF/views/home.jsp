@@ -1,34 +1,3 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Codespaces
-Marketplace
-Explore
- 
-@insams 
-jisu27
-/
-SNS-Project
-Public
-Fork your own copy of jisu27/SNS-Project
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-SNS-Project/SNS_Project(FRAME)3/src/main/webapp/WEB-INF/views/home.jsp
-@jisu27
-jisu27 친구 추천
-Latest commit 30d8c98 1 hour ago
- History
- 3 contributors
-@jisu27@kimkyoungsuk@insams
-503 lines (422 sloc)  16.3 KB
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -375,7 +344,8 @@ Latest commit 30d8c98 1 hour ago
 											<c:if test="${sessionScope.user.id == comment.id}">
 											<div class="sprite_more_icon" data-name="more"
 												onclick="toggle_c(this.children[0])">
-												<ul class="toggle_box" id="toggle_box${comment.cseq}">
+												<ul class="toggle_box2" id="toggle_box${comment.cseq}">
+
 													<li><a href="updateComment.do?cseq=${comment.cseq}">
 															<input type="button" value="수정">
 													</a></li>
@@ -448,13 +418,15 @@ Latest commit 30d8c98 1 hour ago
 							<c:forEach items="${shortsList}" var="shorts" varStatus="status">
 								<div class="thumb_user">
 									<div class="profile_thumb">
-										<a href="getShorts?sseq=${shorts.sSeq}"><img
+										<a href="getShorts?sSeq=${shorts.sSeq}"><img
 								src="profile/${sessionScope.user.profile}" alt="프로필사진"></a>
+
 									</div>
+									
 									<div class="detail">
 									
 									
-										<div class="id">${shorts.id }</div>
+										<div class="id">${shorts.id}</div>
 										<div class="time">${stime[status.index]}</div>
 									
 									</div>
@@ -522,9 +494,7 @@ function toggle(element){
 	}
 	
 }
-function click(){
-	return;
-}
+
 </script>
 
 

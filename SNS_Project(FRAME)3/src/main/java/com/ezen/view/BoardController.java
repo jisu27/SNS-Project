@@ -61,12 +61,12 @@ public class BoardController {
 	public String BoardList(BoardVO bVo, CommentVO cVo, Model model, HttpSession session, ShortsVO sVo) {
 
 		FollowVO fvo = new FollowVO();
-		List<MemberVO> recoMemberList = new ArrayList<>();
-		MemberVO mvo2 = (MemberVO) session.getAttribute("user");
+		List<MemberVO> recoMemberList =new ArrayList<>();
+		MemberVO mvo2 = (MemberVO)session.getAttribute("user");
+		
 
-		System.out.println("mvo2 = " + mvo2);
-		if (mvo2 != null) {
-
+		if (mvo2!=null) {
+			
 			fvo.setId1(mvo2.getId());
 			List<String> followerList = (List<String>) session.getAttribute("follower");
 			List<String> recom = followService.recomFollow(fvo.getId1());
@@ -233,8 +233,8 @@ public class BoardController {
 
 		model.addAttribute("commentList", commentList);
 		model.addAttribute("adcommentList", adCommentList);
-		model.addAttribute("shortsList", shortsList); // �뜮�뼱�뵆�슦�뒗吏� �솗�씤
-
+		model.addAttribute("shortsList",shortsList); 
+		
 		return "home";
 	}
 
@@ -285,8 +285,8 @@ public class BoardController {
 		List<MemberVO> list = new ArrayList<MemberVO>();
 
 		BoardVO board = (BoardVO) boardService.myBoard(bvo);
-
-		LocalDate boarDate = board.getInDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		
+		/*LocalDate boarDate = board.getInDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 		Period btn = Period.between(boarDate, LocalDate.now());
 		String btnTime;
 
@@ -297,9 +297,9 @@ public class BoardController {
 		} else {
 			btnTime = btn.getDays() + "�씪 �쟾";
 		}
-
+		
+		model.addAttribute("time", btnTime);*/
 		model.addAttribute("board", board);
-		model.addAttribute("time", btnTime);
 		model.addAttribute("profile", mvo.getProfile());
 
 		cvo.setBseq(bvo.getbSeq());

@@ -71,7 +71,7 @@
 							<div class="trans_inner">
 								<div>
 									<img alt="" src="images/${board.upload}"
-										style="width: 600px; height: 600px;">
+										style="width: 600px;">
 								</div>
 							</div>
 						</div>
@@ -144,7 +144,7 @@
 												<div class="more_trigger">
 													<div class="sprite_more_icon" data-name="more"
 												onclick="toggle(this.children[0])">
-												<ul class="toggle_box" id="toggle_box${comment.cseq}">
+												<ul class="toggle_box2" id="toggle_box${comment.cseq}">
 													<li>
 														<a href="goUpdateComment.do?cseq=${comment.cseq}">
 															<input type="button" value="수정">
@@ -162,7 +162,37 @@
 											</div>
 												</div>
 												<div>
-													<div class="sprite_small_heart_icon_outline"></div>
+												<c:choose>
+													<c:when test="${fn:contains(sessionScope.heart,comment.cseq)}">
+														<div onclick="deleteLike_c()" data-name="smallheart"
+													class="sprite_small_heart_icon_outline">
+													<form id="deleteLike${status.count}" method="post" action="getDeleteHeart.do">
+													<input type="hidden" id="cSeq" name="cSeq"
+															value="${comment.cseq}"> <input type="hidden"
+															id="id" name="id" value="${sessionScope.user.id}">
+													</form>
+													</div>
+													
+
+											</c:when>
+											
+											<c:otherwise>
+												<div onclick="like_c(like${comment.cseq})" data-name="smallheart"
+												class="sprite_small_heart_icon_outline">
+												<form id="like${comment.cseq}" method="post" action="getHeart.do">
+														<input type="hidden" id="cseq" name="cseq"
+															value="${comment.cseq}"> <input type="hidden"
+															id="id" name="id" value="${sessionScope.user.id}">
+															<input type="hidden" id="ccontent" name="ccontent"
+															value="${comment.ccontent}">
+															<input type="hidden" id="bSeq" name="bSeq"
+															value="${comment.bSeq}">
+
+													</form>
+													</div>
+													
+											</c:otherwise>
+										</c:choose>
 												</div>
 											</div>
 											</c:if>
@@ -224,7 +254,7 @@
 								</div>
 							</div>
 
-							<div class="heart_count" style="font-weight: 900">
+							<div class="heart_count" style="font-weight: 900; padding-left: 20px;">
 								좋아요${board.count}개
 							</div>
 							<div class="timer">
@@ -235,10 +265,11 @@
 							<div class="commit_field">
 								<form id="commentForm" action="insertComment.do" method="post">
 									<input type="hidden" name="id" value="${sessionScope.user.id}">
-									<input type="hidden" name="bSeq" value="${board.bSeq}">
+									<input type="hidden" name="bseq" value="${board.bSeq}">
 									<input type="text" name="ccontent" placeholder="댓글을 달아주세요 !">
-									
+									<div class="upload_btn m_text" data-name="comment">
 									<input type="submit" value="게시">
+									</div>
 								</form>
 							</div>
 
@@ -268,7 +299,6 @@
 	<script type="text/javascript">
 	
 		var prev_element = null;
-
 		function check_id() {
 			if ($("#check").val() == '' || $("#check").val() == null) {
 				alert("로그인을 해주세요");
@@ -280,6 +310,12 @@
 		}
 		function like() {
 			$("#like").submit();
+		}
+		function deleteLike_c() {
+			$("#deleteLike").submit();
+		}
+		function like_c(comment) {
+			$(comment).submit();
 		}
 		function toggle(element) {
 			var con = document.getElementById(element.getAttribute("id"));
