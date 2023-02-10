@@ -28,25 +28,25 @@ public class BookMarkServiceImpl implements BookMarkService {
 	}
 
 	@Override
-	public BookMarkVO getBoardBookMark(BookMarkVO vo) {
+	public List<BookMarkVO> getBoardBookMarkList(BookMarkVO vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public BookMarkVO getShortsBookMark(BookMarkVO vo) {
+	public List<BookMarkVO> getShortsBookMarkList(BookMarkVO vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public BookMarkVO getAllBookMark(BookMarkVO vo) {
+	public List<BookMarkVO> getAllBookMarkList(BookMarkVO vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<BookMarkVO> getBookMarkList(BookMarkVO vo) {
+	public BookMarkVO getBookMark(BookMarkVO vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}

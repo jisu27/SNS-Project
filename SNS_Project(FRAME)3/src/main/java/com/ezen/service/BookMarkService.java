@@ -11,11 +11,11 @@ public interface BookMarkService {
 
 	void deleteBookMark(BookMarkVO vo);
 
-	BookMarkVO getBoardBookMark(BookMarkVO vo);
+	List<BookMarkVO> getBoardBookMarkList(BookMarkVO vo);
 
-	BookMarkVO getShortsBookMark(BookMarkVO vo);
+	List<BookMarkVO> getShortsBookMarkList(BookMarkVO vo);
 
-	BookMarkVO getAllBookMark(BookMarkVO vo);
+	List<BookMarkVO> getAllBookMarkList(BookMarkVO vo);
 
-	List<BookMarkVO> getBookMarkList(BookMarkVO vo);
+	BookMarkVO getBookMark(BookMarkVO vo);
 }

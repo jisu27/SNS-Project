@@ -7,6 +7,10 @@
   VALUES (#{bmSeq}, #{bSeq}, #{sSeq}, #{bmTitle}, #{bmUrl}, #{id})
 </insert>
 
+<update id="updateBookMark" parameterType="bookMark">
+	UPDATE bookMark SET bmTitle = #{bmTitle} Where bmSeq = #{bmSeq}
+</update>
+
 <delete id="deleteBookMark" parameterType="bookMark">
   DELETE FROM bookMark WHERE bmSeq = #{bmSeq}
 </delete>
@@ -21,6 +25,10 @@
 
 <select id="getAllBookMarkList" resultType="bookMark">
 	SELECT * FROM bookMark WHERE id=#{id}
+</select>
+
+<select id="getBookMark" resultType="bookMark">
+	Select * FROM bookMark WHERE bmSeq = #{bmSeq}
 </select>
 </mapper>
 
