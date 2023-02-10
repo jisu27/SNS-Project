@@ -213,10 +213,6 @@
     
 }
 
-.scroll_section .comment .icon_wrap > div:nth-child(1){
-    display: block;
-}
-
 .scroll_section .comment .icon_wrap > div{
     background: #fff;
     display: flex;

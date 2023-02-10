@@ -94,7 +94,9 @@
 								<div class="sprite_more_icon" data-name="more"
 									onclick="toggle(this.children[0])">
 									<ul class="toggle_box" id="toggle_box${status.count}">
-									
+										<li>
+											<a href="insertAD.do?bSeq=${board.bSeq}&id=${sessionScope.user.id}"><input type="button" value="광고 요청"></a>
+		                                </li>    
 										<li><a href="goUpdateBoard.do?bSeq=${board.bSeq}"> <input
 												type="button" value="수정"></a></li>
 
@@ -191,7 +193,7 @@
 										<c:if test="${sessionScope.user.id == comment.id}">
 										<div class="sprite_more_icon" data-name="more"
 		                                    onclick="toggle(this.children[0])">
-		                                    <ul class="toggle_box" id="toggle_box${comment.cseq}">         
+		                                    <ul class="toggle_box" id="toggle_box${comment.cseq}">     
 		                                       <li><a href="goUpdateComment.do?cseq=${comment.cseq}">
 		                                             <input type="button" value="수정">
 		                                       </a></li>
@@ -417,7 +419,7 @@
 							<c:forEach items="${shortsList}" var="shorts" varStatus="status">
 								<div class="thumb_user">
 									<div class="profile_thumb">
-										<a href="getShorts?sseq=${shorts.sSeq}"><img
+										<a href="getShorts?sSeq=${shorts.sSeq}"><img
 								src="profile/${sessionScope.user.profile}" alt="프로필사진"></a>
 									</div>
 									<div class="detail">
@@ -441,7 +443,7 @@
 						<div class="thumb_user">
 						
 							<div class="profile_thumb">
-								<a href="profile.do?id=${reco.id}"><img src="../profile/${reco.profile}" alt=""></a>
+								<a href="profile.do?id=${reco.id}"><img src="profile/${reco.profile}" alt=""></a>
 							</div>
 							<div class="detail">
 								<div class="id">${reco.id}</div>

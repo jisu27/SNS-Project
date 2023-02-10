@@ -108,7 +108,7 @@
 
 .contents_container.active{
     display: flex;
-<<<<<<< HEAD
+	display:inline-block;
 }
 
 .contents_container .pic{
@@ -116,7 +116,6 @@
     max-height:300px;
     overflow:hidden;
     margin-bottom: 18px;
-=======
     display: inline-block;
 }
 
@@ -126,8 +125,6 @@
     overflow:hidden;
     margin-bottom: 18px;
     object-fit:cover;
->>>>>>> refs/remotes/origin/경석님
-
 
 }
 

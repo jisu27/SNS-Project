@@ -61,7 +61,12 @@
 	FROM board
 	WHERE id=#{id}
 	</select>
-	
+	  <!-- #################################################################################################################### -->
+	  <update id="updatePay" parameterType="board"> 
+	  		UPDATE board 
+	  		SET pay=pay+1
+	  		WHERE bSeq=#{bSeq} 
+	  </update>
 </mapper>
 
  

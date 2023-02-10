@@ -88,7 +88,7 @@ public class LoginController {
 		if (!vo.getFile().isEmpty()) {
 
 			fileName = vo.getFile().getOriginalFilename();
-			String realPath = session.getServletContext().getRealPath("profile/");
+			String realPath = session.getServletContext().getRealPath("/profile/");
 			vo.getFile().transferTo(new File(realPath + fileName));
 
 		}
@@ -133,7 +133,7 @@ public class LoginController {
 					url = "redirect:/home.do";
 
 				} else {
-					url = "/admin";
+					url = "redirect:goAdmin.do";
 				}
 
 			}
@@ -197,4 +197,34 @@ public class LoginController {
 
 		return "redirect:/";
 	}
+	@GetMapping("profile_edit.do")
+	public String goProfileEdit(MemberVO vo,Model model) {
+		
+		MemberVO member = memberService.MemberCheck(vo);
+		model.addAttribute("member",member);
+		
+		return "profile_edit";
+	}
+//	##############################################################################################################--updateMember
+	@PostMapping("updateMember.do")
+	public String updateMember(MemberVO vo,HttpSession session) throws IllegalStateException, IOException {
+			
+		String fileName = "";
+
+		if (!vo.getFile().isEmpty()) {
+
+			fileName = vo.getFile().getOriginalFilename();
+			String realPath = session.getServletContext().getRealPath("/profile/");
+			vo.getFile().transferTo(new File(fileName+realPath));
+
+			vo.setProfile(vo.getFile().getOriginalFilename());
+		}else {
+			vo.setProfile("no-image.png");
+		}
+
+		memberService.updateMember(vo);
+		
+		return"redirect:profile.do?id="+vo.getId();
+	}
+	
 }

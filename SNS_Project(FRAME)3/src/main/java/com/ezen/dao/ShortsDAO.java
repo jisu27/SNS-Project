@@ -36,5 +36,8 @@ public class ShortsDAO {
 	public void deleteShorts(ShortsVO vo) {
 		mybatis.delete("ShortsMapper.deleteShorts", vo);
 	}
+	public void updatePay(int sSeq) {
+		mybatis.selectOne("ShortsMapper.updatePay",sSeq);
+	}
 
 }

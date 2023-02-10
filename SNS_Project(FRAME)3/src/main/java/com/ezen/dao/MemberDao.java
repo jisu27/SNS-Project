@@ -31,6 +31,9 @@ public class MemberDao{
 	public List<String> recomMember(){
 		return mybatis.selectList("memberMapper.recomMember");
 	}
+	public void updateMember(MemberVO vo) {
+		mybatis.update("memberMapper.updateMember",vo);
+	}
 }
 
 

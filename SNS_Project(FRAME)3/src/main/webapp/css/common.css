@@ -48,11 +48,8 @@ body {
     display: inline-block;
     background: url('../imgs/background01.png') no-repeat -301px -218px;
     width: 15px;
-<<<<<<< HEAD
-    height: 3px;
-=======
     height: 15px;
->>>>>>> refs/remotes/origin/경석님
+
 }
 
 .sprite_bubble_icon {

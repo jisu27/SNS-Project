@@ -97,11 +97,18 @@
 				</div>
 
 
+				
+				<input type="hidden" id="check" value="${sessionScope.user.id}">
 				<div class="right_icons">
-					<a href="new_post.html"><div class="sprite_camera_icon"></div></a>
-					<a href="login.html"><div class="sprite_compass_icon"></div></a> <a
-						href="follow.html"><div class="sprite_heart_icon_outline"></div></a>
-					<a href="profile.html"><div class="sprite_user_icon_outline"></div></a>
+					<a id="goProfile1" href="goInsertBoard.do" onclick="check_id()"><div
+							class="sprite_camera_icon"></div></a> <a id="goProfile2"
+						href="/" onclick="check_id()"><div
+							class="sprite_compass_icon"></div></a> <a id="goProfile3"
+						href="getLikeList.do?id=${sessionScope.user.id}" onclick="check_id()"><div
+							class="sprite_heart_icon_outline"></div></a> <a id="goProfile4"
+						href="profile.do?id=${sessionScope.user.id}" onclick="check_id()"><div
+							class="sprite_user_icon_outline"></div></a>
+					<a href="insertShorts"><div class="sprite_short_icon"></div></a>		
 				</div>
 			</section>
 		</header>
@@ -110,7 +117,7 @@
 		<div id="main_container">
 
 			<section class="b_inner">
-
+<!-- 
 				<div class="hori_cont">
 					<div class="profile_wrap">
 						<div class="profile_img">
@@ -137,6 +144,7 @@
 
 					</div>
 				</div>
+ -->
 
 
 
