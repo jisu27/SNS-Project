@@ -135,7 +135,6 @@
 													<input type="submit" value="삭제">
 												</c:if>
 											</form></li>
-											
 									</ul>
 
 								  </div>
