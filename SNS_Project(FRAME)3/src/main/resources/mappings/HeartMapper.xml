@@ -14,15 +14,27 @@
 		WHERE id=#{id}
 	</select>
 	<!-- ###################################################################################################################### -->
+	<select id="likeComment" resultType="heart">
+		SELECT cseq
+		FROM heart
+		WHERE id=#{id}
+	</select>
+	<!-- ###################################################################################################################### -->
 	<select id="likeCount" resultType="Integer">
 		SELECT count(*)
 		FROM heart h
 		WHERE bseq=#{bSeq}
 	</select>
 	<!-- ###################################################################################################################### -->
+	<select id="likeCommentCount" resultType="Integer">
+		SELECT count(*)
+		FROM heart h
+		WHERE cseq=#{cseq}
+	</select>
+	<!-- ###################################################################################################################### -->
 	<insert id="insertLike">
-		INSERT INTO heart(hseq,bseq,id,use_like)
-		VALUES (heart_seq.NEXTVAL,#{bSeq},#{id},#{use_like})
+		INSERT INTO heart(hseq,bseq,cseq,id,use_like)
+		VALUES (heart_seq.NEXTVAL,#{bSeq},#{cseq},#{id},#{use_like})
 	</insert>
 	<!-- ###################################################################################################################### -->
 	<delete id="deleteLike">
