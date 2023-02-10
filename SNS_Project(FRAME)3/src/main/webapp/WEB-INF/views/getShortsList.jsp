@@ -74,6 +74,8 @@
 </head>
 <body>
 
+<body>
+
 	<section id="container">
 
 		<header id="header">
@@ -110,7 +112,7 @@
 		<div id="main_container">
 
 			<section class="b_inner">
-<!--  
+
 				<div class="hori_cont">
 					<div class="profile_wrap">
 						<div class="profile_img">
@@ -137,7 +139,7 @@
 
 					</div>
 				</div>
--->
+
 
 
 				<div class="mylist_contents contents_container active">
