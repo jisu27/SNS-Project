@@ -112,20 +112,33 @@
 							<header class="top">
 								<div class="user_container">
 									<div class="profile_img">
-										<img src="imgs/thumb.jpeg" alt="">
+										<img src="profile/${profile}" alt="">
 									</div>
 									<div class="user_name">
-										<div class="nick_name">KindTiger</div>
+										<div class="nick_name">${shorts.id }</div>
 										<div class="country">Seoul, South Korea</div>
 									</div>
 								</div>
-								<div class="sprite_more_icon" data-name="more">
-									<ul class="more_detail">
-										<li>무엇을</li>
-										<li>무언가</li>
-										<li>넣을게</li>
+								<c:if test="${sessionScope.user.id == shorts.id}">
+								<div class="sprite_more_icon" data-name="more"
+									onclick="toggle(this.children[0])">
+									<ul class="toggle_box" id="toggle_box${status.count}">
+										<li><input type="submit" class="follow" value="팔로우"
+											data-name="follow"></li>
+
+										<li><a href="updateShorts?sSeq=${shorts.sSeq}"> <input
+												type="button" value="수정"></a></li>
+
+										<li><form action="deleteShorts?sSeq=${shorts.sSeq}"
+												method="post">
+												<c:if test="${sessionScope.user.id == shorts.id }">
+													<input type="submit" value="삭제">
+												</c:if>
+											</form></li>
 									</ul>
-								</div>
+
+								  </div>
+								</c:if>
 
 							</header>
 
@@ -145,7 +158,24 @@
 										</div>
 										<div class="icon_wrap">
 											<div class="more_trigger">
-												<div class="sprite_more_icon"></div>
+												<div class="sprite_more_icon" data-name="more"
+												onclick="toggle(this.children[0])">
+												<ul class="toggle_box" id="toggle_box${ShortsComment.scSeq}">
+													<li>
+														<a href="goUpdateComment.do?scseq=${ShortsComment.scSeq}">
+															<input type="button" value="수정">
+														</a>
+													 
+													</li>
+													<li><form
+															action="deleteComment.do?scSeq=${ShortsComment.scSeq}"
+															method="post">
+															<c:if test="${sessionScope.user.id == ShortsComment.id }">
+																<input type="submit" value="삭제">
+															</c:if>
+														</form></li>
+												</ul>
+											</div>
 											</div>
 											<div>
 												<div class="sprite_small_heart_icon_outline"></div>
@@ -208,6 +238,19 @@
 
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<!--<script src="js/detail.js"></script>-->
+	<script type="text/javascript">
+	function toggle(element) {
+		var con = document.getElementById(element.getAttribute("id"));
+		if (con.style.display == 'none') {
+			con.style.display = 'block';
+		} else {
+			con.style.display = 'none';
+		}
+	}
+	
+	</script>
+	
+	
 
 </body>
 </html>

@@ -5,7 +5,7 @@
     font-weight: bold;
 }
 .con{
-	font-size: 14px;
+   font-size: 14px;
     font-weight: normal;
     text-align: left;
 }
@@ -236,9 +236,9 @@ body{
     
 }
 
-/* 占쎌뵠沃섎챷占� 餓λ쵐釉곤옙�젟占쎌졊*/
+/* 占쎌뵠沃섎챷占  餓λ쵐釉곤옙 젟占쎌졊*/
 .contents .trans_inner{
-	text-align: center;
+   text-align: center;
 }
 
 .contents .img_section img{
@@ -278,7 +278,7 @@ body{
 }
 
 .contents .con{
-	padding: 5px 20px;
+   padding: 5px 20px;
     color:#262626;
 }
 
@@ -536,7 +536,6 @@ body{
 
 
 }
-
 
 
 
