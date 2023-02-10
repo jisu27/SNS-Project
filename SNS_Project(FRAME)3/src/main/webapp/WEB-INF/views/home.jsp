@@ -344,7 +344,7 @@
 											<c:if test="${sessionScope.user.id == comment.id}">
 											<div class="sprite_more_icon" data-name="more"
 												onclick="toggle_c(this.children[0])">
-												<ul class="toggle_box" id="toggle_box${comment.cseq}">
+												<ul class="toggle_box2" id="toggle_box${comment.cseq}">
 													<li><a href="updateComment.do?cseq=${comment.cseq}">
 															<input type="button" value="수정">
 													</a></li>

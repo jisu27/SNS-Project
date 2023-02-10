@@ -6,30 +6,8 @@
     border: 1px solid rgba(0,0,0,.0975);
     border-radius: 3px;
     background: #fff;
+    align-items: center;
 }
-
-.contents .img_section{
-    overflow: hidden;
-    max-width: 598px;
-    border-right: 1px solid rgba(0,0,0,.0975);
-
-}
-
-.contents .img_section .trans_inner{
-    /*width: 2448px;*/
-    font-size: 0;
-}
-
-.contents .img_section .trans_inner > div{
-    width: 100%;
-    display: inline-block;
-}
-.contents .img_section .trans_inner img{
-    width: 100%;
-    height: 100%;
-}
-
-
 
 .user_container{
     display: flex;
@@ -98,6 +76,10 @@
 
 .contents .img_section{
     overflow: hidden;
+    max-width: 598px;
+    width: 100%;
+    border-right: 1px solid rgba(0,0,0,.0975);
+
 }
 
 .contents .img_section .trans_inner{
@@ -110,12 +92,12 @@
     display: inline-block;
 }
 .contents .img_section .trans_inner img{
-    width: 100%;
+    width: 500px;
     height: 100%;
 }
 
 .detail--right_box{
-    max-width:335px;
+    max-width:380px;
     width: 100%;
 }
 
@@ -214,12 +196,10 @@
 }
 
 .scroll_section .comment .icon_wrap > div{
-    background: #fff;
     display: flex;
     align-items: center;
-    width: 40px;
+    width: 60px;
     height: 20px;
-    justify-content: center;
     cursor: pointer;text-align: center;
 }
 
@@ -229,7 +209,6 @@
 }
 
 .scroll_section .comment .icon_wrap > div:nth-child(2){
-	z-index:1;
     background: transparent;
 }
 

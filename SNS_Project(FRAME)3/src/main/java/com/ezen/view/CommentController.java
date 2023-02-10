@@ -27,7 +27,7 @@ public class CommentController {
 	public String saveCommentAction(BoardVO vo,CommentVO cvo, HttpSession session, HttpServletRequest request) {
 		
 		commentService.insertComment(cvo);
-
+		System.out.println("댓글 :"+ cvo);
 		// ���� �������� ����������.
 		String referer = request.getHeader("Referer");
 		return "redirect:" + referer;

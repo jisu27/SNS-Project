@@ -71,7 +71,7 @@
 							<div class="trans_inner">
 								<div>
 									<img alt="" src="images/${board.upload}"
-										style="width: 600px; height: 600px;">
+										style="width: 600px;">
 								</div>
 							</div>
 						</div>
@@ -144,7 +144,7 @@
 												<div class="more_trigger">
 													<div class="sprite_more_icon" data-name="more"
 												onclick="toggle(this.children[0])">
-												<ul class="toggle_box" id="toggle_box${comment.cseq}">
+												<ul class="toggle_box2" id="toggle_box${comment.cseq}">
 													<li>
 														<a href="goUpdateComment.do?cseq=${comment.cseq}">
 															<input type="button" value="수정">
@@ -224,7 +224,7 @@
 								</div>
 							</div>
 
-							<div class="heart_count" style="font-weight: 900">
+							<div class="heart_count" style="font-weight: 900; padding-left: 20px;">
 								좋아요${board.count}개
 							</div>
 							<div class="timer">
@@ -235,10 +235,11 @@
 							<div class="commit_field">
 								<form id="commentForm" action="insertComment.do" method="post">
 									<input type="hidden" name="id" value="${sessionScope.user.id}">
-									<input type="hidden" name="bSeq" value="${board.bSeq}">
+									<input type="hidden" name="bseq" value="${board.bSeq}">
 									<input type="text" name="ccontent" placeholder="댓글을 달아주세요 !">
-									
+									<div class="upload_btn m_text" data-name="comment">
 									<input type="submit" value="게시">
+									</div>
 								</form>
 							</div>
 
