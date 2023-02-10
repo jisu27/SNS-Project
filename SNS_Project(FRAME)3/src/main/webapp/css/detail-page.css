@@ -154,7 +154,7 @@
     height: 100%;
 }
 
-/* ´ñ±Û css Ãß°¡  */
+/* ï¿½ï¿½ï¿½ css ï¿½ß°ï¿½  */
 .commet_container{
     padding: 5px 20px;
     display: flex;
@@ -198,7 +198,7 @@
 .scroll_section .comment .icon_wrap > div{
     display: flex;
     align-items: center;
-    width: 60px;
+    width: 40px;
     height: 20px;
     cursor: pointer;text-align: center;
 }

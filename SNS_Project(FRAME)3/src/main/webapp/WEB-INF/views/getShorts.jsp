@@ -62,28 +62,31 @@
 			<section class="h_inner">
 
 				<h1 class="logo">
-					<a href="home.do">
+					<a href="home.do" id="goProfile" onclick="check_id()">
 						<div class="sprite_insta_icon"></div>
-						<div>
-							<div class="sprite_write_logo"></div>
-						</div>
+						<div class="sprite_write_logo"></div>
+						
 					</a>
 				</h1>
 
 				<div class="search_field">
-					<input type="text" placeholder="ê²ì" tabindex="0">
+					<input type="text" placeholder="검색" tabindex="0">
 
 					<div class="fake_field">
-						<span class=sprite_small_search_icon></span> <span>ê²ì</span>
+						<span class=sprite_small_search_icon></span> <span>검색</span>
 					</div>
 				</div>
 
-
+				<input type="hidden" id="check" value="${sessionScope.user.id}">
 				<div class="right_icons">
-					<a href="new_post.html"><div class="sprite_camera_icon"></div></a>
-					<a href="login.html"><div class="sprite_compass_icon"></div></a> <a
-						href="follow.html"><div class="sprite_heart_icon_outline"></div></a>
-					<a href="profile.html"><div class="sprite_user_icon_outline"></div></a>
+					<a id="goProfile1" href="goInsertBoard.do" onclick="check_id()"><div
+							class="sprite_camera_icon"></div></a> <a id="goProfile2" href="/"
+						onclick="check_id()"><div class="sprite_compass_icon"></div></a> <a
+						id="goProfile3" href="getLikeList.do?id=${sessionScope.user.id}"
+						onclick="check_id()"><div class="sprite_heart_icon_outline"></div></a>
+					<a id="goProfile4" href="profile.do?id=${sessionScope.user.id}"
+						onclick="check_id()"><div class="sprite_user_icon_outline"></div></a>
+					<a href="insertShorts"><div class="sprite_short_icon"></div></a>
 				</div>
 			</section>
 		</header>
@@ -158,7 +161,7 @@
 									</div>
 									<div class="comment">
 										<span class="user_id">${shortsComment.id}</span>
-										${shortsComment.content}
+										<div class="scomment" style="width: 230px"> ${shortsComment.content}</div>
 										<div class="time" style="font-size:small;">
 											<fmt:formatDate var="comDate" value="${shortsComment.inDate}" pattern="yyyy년MM월dd일HH시"/>
 											${comDate}에 작성된 글.
@@ -293,6 +296,13 @@
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<!--<script src="js/detail.js"></script>-->
 	<script type="text/javascript">
+	function check_id() {
+		if ($("#check").val() == '' || $("#check").val() == null) {
+			alert("로그인을 해주세요");
+			$("#goProfile").attr("href", "/");
+		}
+	}
+	
 	function toggle(element) {
 		var con = document.getElementById(element.getAttribute("id"));
 		if (con.style.display == 'none') {
