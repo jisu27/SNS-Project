@@ -417,7 +417,7 @@
 							<c:forEach items="${shortsList}" var="shorts" varStatus="status">
 								<div class="thumb_user">
 									<div class="profile_thumb">
-										<a href="getShorts?sseq=${shorts.sSeq}"><img
+										<a href="getShorts?sSeq=${shorts.sSeq}"><img
 								src="profile/${sessionScope.user.profile}" alt="프로필사진"></a>
 									</div>
 									<div class="detail">
@@ -491,9 +491,7 @@ function toggle(element){
 	}
 	
 }
-function click(){
-	return;
-}
+
 </script>
 
 

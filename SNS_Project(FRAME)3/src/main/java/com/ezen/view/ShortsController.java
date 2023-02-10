@@ -45,9 +45,9 @@ public class ShortsController {
 		List<ShortsCommentVO> ShortsCommentList = ShortsCommentService.getShortsCommentList(scvo);
 		model.addAttribute("ShortsCommentList", ShortsCommentList);
 
-		System.out.println("--getShorts controller �떎�뻾: " + shorts);
-		System.out.println("ShortsCommentVO =" + scvo);
-		System.out.println(ShortsCommentList);
+//		System.out.println("--getShorts controller �떎�뻾: " + shorts);
+//		System.out.println("ShortsCommentVO =" + scvo);
+//		System.out.println(ShortsCommentList);
 		return "getShorts";
 
 	}
