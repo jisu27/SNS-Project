@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 
-import com.ezen.dto.AdvertisementVO;
 import com.ezen.dto.BoardVO;
 import com.ezen.dto.CommentVO;
 import com.ezen.dto.HeartVO;
