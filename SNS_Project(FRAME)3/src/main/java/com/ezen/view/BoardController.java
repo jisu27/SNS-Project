@@ -49,82 +49,81 @@ public class BoardController {
 	private ShortsService shortsService;
 	@Autowired
 	private FollowService followService;
+
 //	##############################################################################################################--home
 	@RequestMapping("/")
 	public String goLogin() {
-		
+
 		return "index";
 	}
-	
+
 	@RequestMapping(value = "/home.do")
-	public String BoardList(BoardVO bVo, CommentVO cVo, Model model,HttpSession session,ShortsVO sVo) {
-		
+	public String BoardList(BoardVO bVo, CommentVO cVo, Model model, HttpSession session, ShortsVO sVo) {
+
 		FollowVO fvo = new FollowVO();
-		List<MemberVO> recoMemberList =new ArrayList<>();
-		MemberVO mvo2 = (MemberVO)session.getAttribute("user");
-		
-		System.out.println("mvo2 = "+mvo2);
-		if (mvo2!=null) {
-			
+		List<MemberVO> recoMemberList = new ArrayList<>();
+		MemberVO mvo2 = (MemberVO) session.getAttribute("user");
+
+		System.out.println("mvo2 = " + mvo2);
+		if (mvo2 != null) {
+
 			fvo.setId1(mvo2.getId());
-			List<String> followerList = (List<String>)session.getAttribute("follower");
+			List<String> followerList = (List<String>) session.getAttribute("follower");
 			List<String> recom = followService.recomFollow(fvo.getId1());
-			
-				if (recom == null ||recom.isEmpty()) {
-					recom = memberService.recomMember();
-				}
-			//추천에 본인과 이미 팔로우한 사람 제거 
-				System.out.println("recom = "+recom);
-				recom.remove(fvo.getId1());
-				for(String follower: followerList) {
-					recom.remove(follower);
-				}
-			// 추천 멤버 객체 불러오기 	
-				for(String id : recom ) {
-					MemberVO member = new MemberVO();
-					member.setId(id);
-					MemberVO member2 = memberService.MemberCheck(member);
-					recoMemberList.add(member2);
-				}
-			
-				
-				System.out.println("recoMemberList = "+recoMemberList);
-			model.addAttribute("recoMember",recoMemberList);
+
+			if (recom == null || recom.isEmpty()) {
+				recom = memberService.recomMember();
+			}
+			// 異붿쿇�뿉 蹂몄씤怨� �씠誘� �뙏濡쒖슦�븳 �궗�엺 �젣嫄�
+			System.out.println("recom = " + recom);
+			recom.remove(fvo.getId1());
+			for (String follower : followerList) {
+				recom.remove(follower);
+			}
+			// 異붿쿇 硫ㅻ쾭 媛앹껜 遺덈윭�삤湲�
+			for (String id : recom) {
+				MemberVO member = new MemberVO();
+				member.setId(id);
+				MemberVO member2 = memberService.MemberCheck(member);
+				recoMemberList.add(member2);
+			}
+
+			System.out.println("recoMemberList = " + recoMemberList);
+			model.addAttribute("recoMember", recoMemberList);
 		}
 		List<BoardVO> boardList = boardService.BoardList(bVo);
 
 		List<BoardVO> getboardList = boardService.getBoardList(bVo);
 		List<BoardVO> getadverList = boardService.getAdverList(bVo);
-		
+
 		List<MemberVO> memberList = new ArrayList<>();
 		List<MemberVO> adverMemberList = new ArrayList<>();
-		
+
 		List<CommentVO> commentList = new ArrayList<CommentVO>();
 		List<CommentVO> adCommentList = new ArrayList<CommentVO>();
-		
+
 		List<String> time = new ArrayList<>();
 		List<String> adtime = new ArrayList<>();
 
 		List<String> stime = new ArrayList<>();
-		
+
 		List<ShortsVO> shortsList = shortsService.getShortsList(sVo);
 		List<ShortsVO> getshortsList = shortsService.getShortsList(sVo);
-		
 
-		for(BoardVO vo : getadverList) {
+		for (BoardVO vo : getadverList) {
 			LocalDate boarDate = vo.getInDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 			Period btn = Period.between(boarDate, LocalDate.now());
 			String btnTime;
 
 			if (btn.getYears() != 0) {
-				btnTime = btn.getYears() + "년" + btn.getMonths() + "월" + btn.getDays() + "일 전";
+				btnTime = btn.getYears() + "�뀈" + btn.getMonths() + "�썡" + btn.getDays() + "�씪 �쟾";
 			} else if (btn.getMonths() != 0) {
-				btnTime = btn.getMonths() + "월" + btn.getDays() + "일 전";
+				btnTime = btn.getMonths() + "�썡" + btn.getDays() + "�씪 �쟾";
 			} else {
-				btnTime = btn.getDays() + "일 전";
+				btnTime = btn.getDays() + "�씪 �쟾";
 			}
 			adtime.add(btnTime);
-			
+
 			MemberVO mvo = new MemberVO();
 			mvo.setId(vo.getId());
 
@@ -136,14 +135,12 @@ public class BoardController {
 
 			int like = heartService.likeCount(hvo);
 			vo.setCount(like);
-			
-			
 
 			cVo.setBseq(vo.getbSeq());
 			List<CommentVO> cvo = commentService.getCommentList(cVo);
 			adCommentList.addAll(cvo);
 		}
-			
+
 		for (BoardVO vo : getboardList) {
 
 			LocalDate boarDate = vo.getInDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -151,11 +148,11 @@ public class BoardController {
 			String btnTime;
 
 			if (btn.getYears() != 0) {
-				btnTime = btn.getYears() + "년" + btn.getMonths() + "월" + btn.getDays() + "일 전";
+				btnTime = btn.getYears() + "�뀈" + btn.getMonths() + "�썡" + btn.getDays() + "�씪 �쟾";
 			} else if (btn.getMonths() != 0) {
-				btnTime = btn.getMonths() + "월" + btn.getDays() + "일 전";
+				btnTime = btn.getMonths() + "�썡" + btn.getDays() + "�씪 �쟾";
 			} else {
-				btnTime = btn.getDays() + "일 전";
+				btnTime = btn.getDays() + "�씪 �쟾";
 			}
 
 			time.add(btnTime);
@@ -176,21 +173,21 @@ public class BoardController {
 			List<CommentVO> cvo = commentService.getCommentList(cVo);
 			commentList.addAll(cvo);
 		}
-		
-		for(BoardVO vo : getadverList) {
+
+		for (BoardVO vo : getadverList) {
 			LocalDate boarDate = vo.getInDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 			Period btn = Period.between(boarDate, LocalDate.now());
 			String btnTime;
 
 			if (btn.getYears() != 0) {
-				btnTime = btn.getYears() + "년" + btn.getMonths() + "월" + btn.getDays() + "일 전";
+				btnTime = btn.getYears() + "�뀈" + btn.getMonths() + "�썡" + btn.getDays() + "�씪 �쟾";
 			} else if (btn.getMonths() != 0) {
-				btnTime = btn.getMonths() + "월" + btn.getDays() + "일 전";
+				btnTime = btn.getMonths() + "�썡" + btn.getDays() + "�씪 �쟾";
 			} else {
-				btnTime = btn.getDays() + "일 전";
+				btnTime = btn.getDays() + "�씪 �쟾";
 			}
 			adtime.add(btnTime);
-			
+
 			MemberVO mvo = new MemberVO();
 			mvo.setId(vo.getId());
 
@@ -202,45 +199,42 @@ public class BoardController {
 
 			int like = heartService.likeCount(hvo);
 			vo.setCount(like);
-			
 
 			cVo.setBseq(vo.getbSeq());
 			List<CommentVO> cvo = commentService.getCommentList(cVo);
 			adCommentList.addAll(cvo);
 		}
-			
-		
-			
-			for(ShortsVO vo : getshortsList) {
-				LocalDate shortsDate = vo.getInDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-				Period stn = Period.between(shortsDate, LocalDate.now());
-				String stnTime;
 
-				if (stn.getYears() != 0) {
-					stnTime = stn.getYears() + "년" + stn.getMonths() + "월" + stn.getDays() + "일 전";
-				} else if (stn.getMonths() != 0) {
-					stnTime = stn.getMonths() + "월" + stn.getDays() + "일 전";
-				} else {
-					stnTime = stn.getDays() + "일 전";
-				}
-				stime.add(stnTime);	
+		for (ShortsVO vo : getshortsList) {
+			LocalDate shortsDate = vo.getInDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+			Period stn = Period.between(shortsDate, LocalDate.now());
+			String stnTime;
+
+			if (stn.getYears() != 0) {
+				stnTime = stn.getYears() + "�뀈" + stn.getMonths() + "�썡" + stn.getDays() + "�씪 �쟾";
+			} else if (stn.getMonths() != 0) {
+				stnTime = stn.getMonths() + "�썡" + stn.getDays() + "�씪 �쟾";
+			} else {
+				stnTime = stn.getDays() + "�씪 �쟾";
+			}
+			stime.add(stnTime);
 		}
 
 		model.addAttribute("time", time);
 		model.addAttribute("adtime", adtime);
 		model.addAttribute("stime", stime);
-		
+
 		model.addAttribute("memberList", memberList);
 		model.addAttribute("admemberList", adverMemberList);
-		
+
 		model.addAttribute("boardList", getboardList);
 		model.addAttribute("adverList", getadverList);
 		model.addAttribute("shortsList", getshortsList);
-		
+
 		model.addAttribute("commentList", commentList);
 		model.addAttribute("adcommentList", adCommentList);
-		model.addAttribute("shortsList",shortsList); // 덮어씌우는지 확인
-		
+		model.addAttribute("shortsList", shortsList); // �뜮�뼱�뵆�슦�뒗吏� �솗�씤
+
 		return "home";
 	}
 
@@ -288,38 +282,37 @@ public class BoardController {
 //	##############################################################################################################--goInsertBoard
 	@GetMapping("getBoard.do")
 	public String getBoard(MemberVO mvo, CommentVO cvo, BoardVO bvo, Model model, HttpSession session) {
-		List<MemberVO> list =new ArrayList<MemberVO>();
-		
+		List<MemberVO> list = new ArrayList<MemberVO>();
+
 		BoardVO board = (BoardVO) boardService.myBoard(bvo);
-		
+
 		LocalDate boarDate = board.getInDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 		Period btn = Period.between(boarDate, LocalDate.now());
 		String btnTime;
 
 		if (btn.getYears() != 0) {
-			btnTime = btn.getYears() + "년" + btn.getMonths() + "월" + btn.getDays() + "일 전";
+			btnTime = btn.getYears() + "�뀈" + btn.getMonths() + "�썡" + btn.getDays() + "�씪 �쟾";
 		} else if (btn.getMonths() != 0) {
-			btnTime = btn.getMonths() + "월" + btn.getDays() + "일 전";
+			btnTime = btn.getMonths() + "�썡" + btn.getDays() + "�씪 �쟾";
 		} else {
-			btnTime = btn.getDays() + "일 전";
+			btnTime = btn.getDays() + "�씪 �쟾";
 		}
-		
+
 		model.addAttribute("board", board);
 		model.addAttribute("time", btnTime);
 		model.addAttribute("profile", mvo.getProfile());
 
-		
 		cvo.setBseq(bvo.getbSeq());
 		List<CommentVO> commentList = commentService.getCommentList(cvo);
-		
-		for(CommentVO vo : commentList) {
+
+		for (CommentVO vo : commentList) {
 			MemberVO v1 = new MemberVO();
 			v1.setId(vo.getId());
-			
+
 			MemberVO v2 = memberService.MemberCheck(v1);
-			list.add(v2); 
+			list.add(v2);
 		}
-		model.addAttribute("commentMemberList",list);
+		model.addAttribute("commentMemberList", list);
 		model.addAttribute("commentList", commentList);
 
 		System.out.println("commentList :" + commentList);
@@ -343,7 +336,7 @@ public class BoardController {
 			String realPath = session.getServletContext().getRealPath("images/");
 			vo.getUploadfile().transferTo(new File(realPath + fileName));
 			vo.setUpload(fileName);
-		}else {
+		} else {
 			vo.setUpload(no_image);
 		}
 
@@ -356,7 +349,7 @@ public class BoardController {
 	@RequestMapping("deleteBoard.do")
 	public String DeleteBoard(BoardVO vo, HttpSession session) throws IllegalStateException, IOException {
 		boardService.deleteBoard(vo);
-		System.out.println("딜리트:" + vo);
+		System.out.println("�뵜由ы듃:" + vo);
 
 		return "redirect:home.do";
 	}
