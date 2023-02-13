@@ -62,8 +62,10 @@ public class BoardController {
 		FollowVO fvo = new FollowVO();
 		List<MemberVO> recoMemberList =new ArrayList<>();
 		MemberVO mvo2 = (MemberVO)session.getAttribute("user");
-		MemberVO mvo3 = memberService.
-		System.out.println("mvo2 = "+mvo2);
+		
+		List<MemberVO> shortsMemberList = new ArrayList<>();
+		
+
 		if (mvo2!=null) {
 			
 			fvo.setId1(mvo2.getId());
@@ -291,10 +293,9 @@ public class BoardController {
 		
 		BoardVO board = (BoardVO) boardService.myBoard(bvo);
 		
-		/*LocalDate boarDate = board.getInDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		LocalDate boarDate = board.getInDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 		Period btn = Period.between(boarDate, LocalDate.now());
 		String btnTime;
-
 		if (btn.getYears() != 0) {
 			btnTime = btn.getYears() + "년" + btn.getMonths() + "월" + btn.getDays() + "일 전";
 		} else if (btn.getMonths() != 0) {
@@ -303,7 +304,7 @@ public class BoardController {
 			btnTime = btn.getDays() + "일 전";
 		}
 		
-		model.addAttribute("time", btnTime);*/
+		model.addAttribute("time", btnTime);
 		model.addAttribute("board", board);
 		model.addAttribute("profile", mvo.getProfile());
 

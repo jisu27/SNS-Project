@@ -163,13 +163,17 @@
 												</div>
 												<div>
 												<c:choose>
-													<c:when test="${fn:contains(sessionScope.heart,comment.cseq)}">
-														<div onclick="deleteLike_c()" data-name="smallheart"
-													class="sprite_small_heart_icon_outline">
-													<form id="deleteLike${status.count}" method="post" action="getDeleteHeart.do">
-													<input type="hidden" id="cSeq" name="cSeq"
+													<c:when test="${fn:contains(sessionScope.c_heart,comment.cseq)}">
+														<div onclick="deleteLike_c(deleteLike${comment.cseq})" data-name="smallheart"
+													class="sprite_small_heart_icon_outline" style="background :url('../../imgs/background01.png') no-repeat -323px -287px">
+													<form id="deleteLike${comment.cseq}" method="post" action="getDeleteHeart_c.do">
+													<input type="hidden" id="cseq" name="cseq"
 															value="${comment.cseq}"> <input type="hidden"
 															id="id" name="id" value="${sessionScope.user.id}">
+															<input type="hidden" id="bSeq" name="bSeq"
+															value="${comment.bSeq}">
+															<input type="hidden" id="profile" name="profile"
+															value="${profile}">
 													</form>
 													</div>
 													
@@ -179,7 +183,7 @@
 											<c:otherwise>
 												<div onclick="like_c(like${comment.cseq})" data-name="smallheart"
 												class="sprite_small_heart_icon_outline">
-												<form id="like${comment.cseq}" method="post" action="getHeart.do">
+												<form id="like${comment.cseq}" method="post" action="getHeart_c.do">
 														<input type="hidden" id="cseq" name="cseq"
 															value="${comment.cseq}"> <input type="hidden"
 															id="id" name="id" value="${sessionScope.user.id}">
@@ -187,6 +191,8 @@
 															value="${comment.ccontent}">
 															<input type="hidden" id="bSeq" name="bSeq"
 															value="${comment.bSeq}">
+															<input type="hidden" id="profile" name="profile"
+															value="${profile}">
 
 													</form>
 													</div>
@@ -310,8 +316,8 @@
 		function like() {
 			$("#like").submit();
 		}
-		function deleteLike_c() {
-			$("#deleteLike").submit();
+		function deleteLike_c(decomment) {
+			$(decomment).submit();
 		}
 		function like_c(comment) {
 			$(comment).submit();

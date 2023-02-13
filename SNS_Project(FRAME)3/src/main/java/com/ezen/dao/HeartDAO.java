@@ -31,12 +31,15 @@ public class HeartDAO  {
 	public void deleteLike(HeartVO vo) {
 		mybatis.selectOne("heartMapper.deleteLike",vo);
 	}
+	public void deleteLike_c(HeartVO vo) {
+		mybatis.selectOne("heartMapper.deleteLike_c",vo);
+	}
 	
 	public int getLikeCount(HeartVO vo) {
 		return mybatis.selectOne("heartMapper.likeCount",vo);
 	}
 	
-	public List<HeartVO> commentLike(HeartVO vo) {
+	public List<Integer> commentLike(HeartVO vo) {
 		
 		return mybatis.selectList("heartMapper.likeComment",vo);
 	}

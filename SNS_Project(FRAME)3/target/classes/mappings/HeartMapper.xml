@@ -14,7 +14,7 @@
 		WHERE id=#{id}
 	</select>
 	<!-- ###################################################################################################################### -->
-	<select id="likeComment" resultType="heart">
+	<select id="likeComment" resultType="Integer">
 		SELECT cseq
 		FROM heart
 		WHERE id=#{id}
@@ -40,6 +40,11 @@
 	<delete id="deleteLike">
 		DELETE heart
 		WHERE id=#{id} AND bseq=#{bSeq}
+	</delete>
+	<!-- ###################################################################################################################### -->
+	<delete id="deleteLike_c">
+		DELETE heart
+		WHERE id=#{id} AND cseq=#{cseq}
 	</delete>
 
 </mapper>
