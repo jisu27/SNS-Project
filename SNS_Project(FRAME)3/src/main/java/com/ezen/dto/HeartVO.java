@@ -8,6 +8,7 @@ public class HeartVO {
 	private String use_like;
 	
 	
+	
 	public int gethSeq() {
 		return hSeq;
 	}
@@ -40,7 +41,8 @@ public class HeartVO {
 	}
 	@Override
 	public String toString() {
-		return "HeartVO [hSeq=" + hSeq + ", bSeq=" + bSeq + ", id=" + id + ", use_like=" + use_like + "]";
+		return "HeartVO [hSeq=" + hSeq + ", bSeq=" + bSeq + ", id=" + id
+				+ ", use_like=" + use_like + "]";
 	}
 	
 	

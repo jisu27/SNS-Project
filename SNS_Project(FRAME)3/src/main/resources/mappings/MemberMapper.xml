@@ -31,8 +31,7 @@
 	<select id="recomMember" resultType="String">
 		SELECT id
 		FROM member
-		ORDER BY
-		PAY
+		ORDER BY PAY
 	</select>
 	<!-- ########################################################################################################################## -->
 	<update id="updateMember" >

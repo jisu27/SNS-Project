@@ -32,14 +32,14 @@
 					</a>
 				</h1>
 
-				<div class="search_box">
-					<input type="text" placeholder="검색" id="search-field">
-
-					<div class="fake_field">
+				<form div class="search_box" >
+						<input type="text" name="keyWord" placeholder="검색" id="search-field">
+					
+					<div class="fake_field" onclick="search()">
 						<span class="sprite_small_search_icon"></span> <span>검색</span>
 					</div>
 				</div>
-
+				</form>	
 				<input type="hidden" id="check" value="${sessionScope.user.id}">
 				<div class="right_icons">
 					<a id="goProfile1" href="goInsertBoard.do" onclick="check_id()"><div
@@ -148,6 +148,7 @@
 														<input type="hidden" id="bseq" name="bSeq"
 															value="${board.bSeq}"> <input type="hidden"
 															id="id" name="id" value="${sessionScope.user.id}">
+															
 													</form>
 												</div>
 
@@ -162,14 +163,16 @@
 														<input type="hidden" id="bseq" name="bSeq"
 															value="${board.bSeq}"> <input type="hidden"
 															id="id" name="id" value="${sessionScope.user.id}">
-
+														
 													</form>
 												</div>
 											</c:otherwise>
 										</c:choose>
 
 									</div>
-									<div class="sprite_bubble_icon"></div>
+									<div class="sprite_bubble_icon" id="sprite_bubble_icon${status.index}" onclick="showComment(comment_container${status.index})">
+										<input id="show" type="hidden" value="0">
+									</div>
 									<div class="sprite_share_icon" data-name="share"></div>
 								</div>
 								<div class="right_icon">
@@ -183,7 +186,7 @@
 
 							<c:forEach items="${commentList}" var="comment">
 								<c:if test="${comment.bseq == board.bSeq }">
-									<div class="comment_container">
+									<div class="comment_container" id="comment_container${status.index}" style="display: none;">
 										<div class="comment" id="comment-list-ajax-post37">
 											<div class="comment-detail">
 												<div class="nick_name m_text">${comment.id}</div>
@@ -228,7 +231,7 @@
 								</form>
 							</div>
 						</article>
-
+					
 						<!-- 광고 게시물 -->
 						<c:if test="${status.index%3==0}">
 						<c:if test="${not empty adverList[status.index/3]}">
@@ -321,7 +324,7 @@
 											
 
 										</div>
-										<div class="sprite_bubble_icon"></div>
+										<div class="sprite_bubble_icon" onclick="showComment()"></div>
 										<div class="sprite_share_icon" data-name="share"></div>
 									</div>
 									<div class="right_icon">
@@ -397,7 +400,7 @@
 				</div>
 				<input type="hidden" id="page" value="1">
 
-				<div class="side_box">
+				<div class="side_box" >
 					<div class="user_profile">
 						<div class="profile_thumb">
 							<a href="profile.do?id=${sessionScope.user.id}"><img
@@ -419,8 +422,13 @@
 							<c:forEach items="${shortsList}" var="shorts" varStatus="status">
 								<div class="thumb_user">
 									<div class="profile_thumb">
+									<!-- 
 										<a href="getShorts?sSeq=${shorts.sSeq}"><img
 								src="profile/${sessionScope.user.profile}" alt="프로필사진"></a>
+									 -->
+										<a href="getShorts?sSeq=${shorts.sSeq}"><img
+										src="profile/${sessionScope.user.profile}" alt="프로필사진"></a>
+
 									</div>
 									<div class="detail">
 									
@@ -437,20 +445,21 @@
 					<article class="recommend">
 						<header class="reco_header">
 							<div>회원님을 위한 추천</div>
-							<div class="more">모두 보기</div>
+							
 						</header>
-					<c:forEach var="reco" items="${recoMember}">
-						<div class="thumb_user">
-						
-							<div class="profile_thumb">
-								<a href="profile.do?id=${reco.id}"><img src="profile/${reco.profile}" alt=""></a>
+					<div class="scroll_inner">
+						<c:forEach var="reco" items="${recoMember}" >
+							<div class="thumb_user">
+								<div class="profile_thumb">
+									<a href="profile.do?id=${reco.id}"><img src="profile/${reco.profile}" alt=""></a>
+								</div>
+								<div class="detail">
+									<div class="id">${reco.id}</div>
+									<div class="time"></div>
+								</div>
 							</div>
-							<div class="detail">
-								<div class="id">${reco.id}</div>
-								<div class="time"></div>
-							</div>
-						</div>
-					</c:forEach>
+						</c:forEach>
+					</div>	
 
 					</article>
 				</div>
@@ -464,6 +473,7 @@
 	</section>
 	<script src="js/common.js"></script>
 	<script type="text/javascript">
+	
 	var prev_element = null;
 	
 function check_id() {	
@@ -478,10 +488,9 @@ function check_id() {
 }
 function deleteLike(form_id) {
 	$(form_id).attr("action","deleteHeart.do").submit();
-	
 }
 function like(form_id) {
-	$(form_id).attr("action","heart.do").submit();	
+	$(form_id).attr("action","heart.do").submit();
 }
 function toggle(element){
 	
@@ -496,6 +505,21 @@ function toggle(element){
 function click(){
 	return;
 }
+
+function showComment(commentId) {
+	if ($("#show").val()==0) {		
+		$(commentId).attr("style","display:flex");
+		$("#show").val(1);
+	}else {
+		$(commentId).attr("style","display:none")
+		$("#show").val(0);
+	}
+}
+
+function search() {
+	$(".search_box").attr("action","home.do").submit();
+}
+
 </script>
 
 

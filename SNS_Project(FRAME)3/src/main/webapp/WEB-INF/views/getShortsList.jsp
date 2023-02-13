@@ -88,13 +88,13 @@
 					</a>
 				</h1>
 
-				<div class="search_field">
-					<input type="text" placeholder="검색" tabindex="0">
+				<form div class="search_field">
+					<input type="text" name="searchKeyword" placeholder="검색" tabindex="0">
 
-					<div class="fake_field">
+					<div class="fake_field" onclick="search()">
 						<span class=sprite_small_search_icon></span> <span>검색</span>
 					</div>
-				</div>
+				</form div>
 
 
 				
@@ -208,6 +208,9 @@
 	<!--<script src="js/insta.js"></script>-->
 	<script src="js/profile.js"></script>
 	<script>
+	function search() {
+		$(".search_box").attr("action","home.do").submit();
+	}
 	</script>
 </body>
 </html>

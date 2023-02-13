@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ezen.dto.MemberVO;
@@ -56,9 +57,9 @@ public class ShortsController {
 	public String getShortsList(HttpSession session, ShortsVO vo, Model model) {
 		MemberVO user = (MemberVO) session.getAttribute("user");
 
-		if (vo.getSearchKeyword() == null)
+		if (vo.getSearchKeyword() == null) {
 			vo.setSearchKeyword("");
-
+		}
 		List<ShortsVO> list = shos.getShortsList(vo);
 
 		model.addAttribute("shortsList", list);
