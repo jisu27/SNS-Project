@@ -138,61 +138,68 @@
 												${comDate}에 작성된 글입니다. <span class="try_comment"></span>
 											</div>
 											<c:if test="${sessionScope.user.id == comment.id}">
-												<div class="icon_wrap">
-													<div class="more_trigger">
-														<div class="sprite_more_icon" data-name="more"
-															onclick="toggle(this.children[0])">
-															<ul class="toggle_box2" id="toggle_box${comment.cseq}">
-																<li><a
-																	href="goUpdateComment.do?cseq=${comment.cseq}"> <input
-																		type="button" value="수정">
-																</a></li>
-																<li><form
-																		action="deleteComment.do?cseq=${comment.cseq}"
-																		method="post">
-																		<c:if test="${sessionScope.user.id == comment.id }">
-																			<input type="submit" value="삭제">
-																		</c:if>
-																	</form></li>
-															</ul>
-														</div>
+
+											<div class="icon_wrap">
+												<div class="more_trigger">
+													<div class="sprite_more_icon" data-name="more"
+												onclick="toggle(this.children[0])">
+												<ul class="toggle_box2" id="toggle_box${comment.cseq}">
+													<li>
+														<a href="goUpdateComment.do?cseq=${comment.cseq}">
+															<input type="button" value="수정">
+														</a>
+													 
+													</li>
+													<li><form
+															action="deleteComment.do?cseq=${comment.cseq}"
+															method="post">
+															<c:if test="${sessionScope.user.id == comment.id }">
+																<input type="submit" value="삭제">
+															</c:if>
+														</form></li>
+												</ul>
+											</div>
+												</div>
+												<div>
+												<c:choose>
+													<c:when test="${fn:contains(sessionScope.c_heart,comment.cseq)}">
+														<div onclick="deleteLike_c(deleteLike${comment.cseq})" data-name="smallheart"
+													class="sprite_small_heart_icon_outline" style="background :url('../../imgs/background01.png') no-repeat -323px -287px">
+													<form id="deleteLike${comment.cseq}" method="post" action="getDeleteHeart_c.do">
+													<input type="hidden" id="cseq" name="cseq"
+															value="${comment.cseq}"> <input type="hidden"
+															id="id" name="id" value="${sessionScope.user.id}">
+															<input type="hidden" id="bSeq" name="bSeq"
+															value="${comment.bSeq}">
+															<input type="hidden" id="profile" name="profile"
+															value="${profile}">
+													</form>
 													</div>
-													<div>
-														<c:choose>
-															<c:when
-																test="${fn:contains(sessionScope.heart,comment.cseq)}">
-																<div onclick="deleteLike_c()" data-name="smallheart"
-																	class="sprite_small_heart_icon_outline">
-																	<form id="deleteLike${status.count}" method="post"
-																		action="getDeleteHeart.do">
-																		<input type="hidden" id="cSeq" name="cSeq"
-																			value="${comment.cseq}"> <input type="hidden"
-																			id="id" name="id" value="${sessionScope.user.id}">
-																	</form>
-																</div>
+													
 
+											</c:when>
+											
+											<c:otherwise>
+												<div onclick="like_c(like${comment.cseq})" data-name="smallheart"
+												class="sprite_small_heart_icon_outline">
+												<form id="like${comment.cseq}" method="post" action="getHeart_c.do">
+														<input type="hidden" id="cseq" name="cseq"
+															value="${comment.cseq}"> <input type="hidden"
+															id="id" name="id" value="${sessionScope.user.id}">
+															<input type="hidden" id="ccontent" name="ccontent"
+															value="${comment.ccontent}">
+															<input type="hidden" id="bSeq" name="bSeq"
+															value="${comment.bSeq}">
+															<input type="hidden" id="profile" name="profile"
+															value="${profile}">
 
-															</c:when>
+													</form>
 
-															<c:otherwise>
-																<div onclick="like_c(like${comment.cseq})"
-																	data-name="smallheart"
-																	class="sprite_small_heart_icon_outline">
-																	<form id="like${comment.cseq}" method="post"
-																		action="getHeart.do">
-																		<input type="hidden" id="cseq" name="cseq"
-																			value="${comment.cseq}"> <input type="hidden"
-																			id="id" name="id" value="${sessionScope.user.id}">
-																		<input type="hidden" id="ccontent" name="ccontent"
-																			value="${comment.ccontent}"> <input
-																			type="hidden" id="bSeq" name="bSeq"
-																			value="${comment.bSeq}">
-
-																	</form>
 																</div>
 
 															</c:otherwise>
 														</c:choose>
+
 													</div>
 												</div>
 											</c:if>
@@ -312,8 +319,8 @@
 		function like() {
 			$("#like").submit();
 		}
-		function deleteLike_c() {
-			$("#deleteLike").submit();
+		function deleteLike_c(decomment) {
+			$(decomment).submit();
 		}
 		function like_c(comment) {
 			$(comment).submit();
