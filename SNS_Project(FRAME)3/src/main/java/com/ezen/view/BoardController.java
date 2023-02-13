@@ -63,7 +63,7 @@ public class BoardController {
 		List<MemberVO> recoMemberList =new ArrayList<>();
 		MemberVO mvo2 = (MemberVO)session.getAttribute("user");
 		
-		List<MemberVO> shortsMemberList = new ArrayList<>();
+		
 		
 
 		if (mvo2!=null) {
@@ -110,41 +110,7 @@ public class BoardController {
 		List<String> stime = new ArrayList<>();
 		
 		List<ShortsVO> shortsList = shortsService.getShortsList(sVo);
-		List<ShortsVO> getshortsList = shortsService.getShortsList(sVo);
-		
-
-		for(BoardVO vo : getadverList) {
-			LocalDate boarDate = vo.getInDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-			Period btn = Period.between(boarDate, LocalDate.now());
-			String btnTime;
-
-			if (btn.getYears() != 0) {
-				btnTime = btn.getYears() + "년" + btn.getMonths() + "월" + btn.getDays() + "일 전";
-			} else if (btn.getMonths() != 0) {
-				btnTime = btn.getMonths() + "월" + btn.getDays() + "일 전";
-			} else {
-				btnTime = btn.getDays() + "일 전";
-			}
-			adtime.add(btnTime);
-			
-			MemberVO mvo = new MemberVO();
-			mvo.setId(vo.getId());
-
-			MemberVO v1 = memberService.MemberCheck(mvo);
-			adverMemberList.add(v1);
-
-			HeartVO hvo = new HeartVO();
-			hvo.setBseq(vo.getbSeq());
-
-			int like = heartService.likeCount(hvo);
-			vo.setCount(like);
-			
-			
-
-			cVo.setBseq(vo.getbSeq());
-			List<CommentVO> cvo = commentService.getCommentList(cVo);
-			adCommentList.addAll(cvo);
-		}
+		List<MemberVO> shortsMemberList = new ArrayList<>();
 			
 		for (BoardVO vo : getboardList) {
 
@@ -213,10 +179,18 @@ public class BoardController {
 			
 		
 			
-			for(ShortsVO vo : getshortsList) {
+			for(ShortsVO vo : shortsList) {
 				LocalDate shortsDate = vo.getInDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 				Period stn = Period.between(shortsDate, LocalDate.now());
 				String stnTime;
+				
+				
+				MemberVO mvo = new MemberVO();
+				mvo.setId(vo.getId());
+				
+				MemberVO v1 = memberService.MemberCheck(mvo);
+				shortsMemberList.add(v1);
+				
 
 				if (stn.getYears() != 0) {
 					stnTime = stn.getYears() + "년" + stn.getMonths() + "월" + stn.getDays() + "일 전";
@@ -240,7 +214,8 @@ public class BoardController {
 		
 		model.addAttribute("commentList", commentList);
 		model.addAttribute("adcommentList", adCommentList);
-		model.addAttribute("shortsList",shortsList); 
+		model.addAttribute("shortsList",shortsList);
+		model.addAttribute("getshortsList",shortsMemberList);
 		
 		return "home";
 	}

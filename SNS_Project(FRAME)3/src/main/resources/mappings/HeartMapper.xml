@@ -23,7 +23,7 @@
 	<select id="likeCount" resultType="Integer">
 		SELECT count(*)
 		FROM heart h
-		WHERE bseq=#{bSeq}
+		WHERE cseq=0
 	</select>
 	<!-- ###################################################################################################################### -->
 	<select id="likeCommentCount" resultType="Integer">
