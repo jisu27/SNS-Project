@@ -379,8 +379,9 @@
 											</div>
 											<c:if test="${sessionScope.user.id == comment.id}">
 											<div class="sprite_more_icon" data-name="more"
-												onclick="toggle(this.children[0])">
-												<ul class="toggle_box" id="toggle_box${comment.cseq}">
+												onclick="toggle_c(this.children[0])">
+												<ul class="toggle_box2" id="toggle_box${comment.cseq}">
+
 													<li><a href="updateComment.do?cseq=${comment.cseq}">
 															<input type="button" value="수정">
 													</a></li>
@@ -453,6 +454,7 @@
 							<c:forEach items="${shortsList}" var="shorts" varStatus="status">
 								<div class="thumb_user">
 									<div class="profile_thumb">
+
 									<c:forEach var="member" items="${shortsMemberList}">
 								<input type="text" value="${member.profile}">
 										<a href="getShorts?sSeq=${shorts.sSeq}"><img
@@ -538,9 +540,7 @@ function toggle(element){
 	}
 	
 }
-function click(){
-	return;
-}
+
 </script>
 
 

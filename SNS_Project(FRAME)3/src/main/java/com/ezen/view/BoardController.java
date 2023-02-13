@@ -63,8 +63,8 @@ public class BoardController {
 		List<MemberVO> recoMemberList =new ArrayList<>();
 		MemberVO mvo2 = (MemberVO)session.getAttribute("user");
 		
+
 		List<MemberVO> shortsMemberList = new ArrayList<>();
-		
 
 		if (mvo2!=null) {
 			

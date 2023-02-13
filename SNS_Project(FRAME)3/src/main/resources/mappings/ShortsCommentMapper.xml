@@ -10,7 +10,7 @@
 	
 	<update id = "updateShortsComment" parameterType="shortsComment">
 		UPDATE Shorts_comment set content=#{content}
-		WHERE scSeq=#{scSeq}
+		WHERE scSeq=#{scSeq} AND sSeq=#{sSeq}
 	</update>
 	
 	<delete id = "deleteShortsComment" parameterType="shortsComment">
@@ -18,7 +18,7 @@
 	</delete>
 	
 	<select id = "getShortsComment" resultType="shortsComment">
-		SELECT * FROM Shorts_comment where scSeq = #{scSeq};
+		SELECT * FROM Shorts_comment where scSeq = #{scSeq}
 	</select>
 	
 	

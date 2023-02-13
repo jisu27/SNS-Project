@@ -206,7 +206,7 @@ body{
 .contents .toggle_box{
     text-align: center;
     position: absolute;
-    right: -75px;
+    right:-55px;
     top: 20px;
     border: 1px solid rgba(0,0,0,0.09);
     border-radius: 3px;
@@ -234,7 +234,8 @@ body{
 .contents .toggle_box2{
     text-align: center;
     position: absolute;
-    right: -75px;
+    right: -55px;
+    top:20px;
     border: 1px solid rgba(0,0,0,0.09);
     border-radius: 3px;
     display: none;
@@ -262,7 +263,11 @@ body{
     
 }
 
-/* �씠誘몄�  以묒븰� ���젹*/
+<<<<<<< HEAD
+/* 占쎌뵠沃섎챷占  餓λ쵐釉곤옙 젟占쎌졊*/
+=======
+/* �씠誘몄�  以묒븰� ���젹*/
+>>>>>>> branch 'hearterror' of https://github.com/jisu27/SNS-Project.git
 .contents .trans_inner{
    text-align: center;
 }

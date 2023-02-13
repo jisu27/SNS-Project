@@ -43,15 +43,14 @@ public class ShortsController {
 
 		scvo.setsSeq(vo.getsSeq());
 		List<ShortsCommentVO> ShortsCommentList = ShortsCommentService.getShortsCommentList(scvo);
-		model.addAttribute("ShortsCommentList", ShortsCommentList);
+		model.addAttribute("shortsCommentList", ShortsCommentList);
 
-		System.out.println("--getShorts controller �떎�뻾: " + shorts);
-		System.out.println("ShortsCommentVO =" + scvo);
-		System.out.println(ShortsCommentList);
+//		System.out.println("--getShorts controller 占쎈뼄占쎈뻬: " + shorts);
+//		System.out.println("ShortsCommentVO =" + scvo);
+//		System.out.println(ShortsCommentList);
 		return "getShorts";
 
 	}
-
 	@RequestMapping("/getShortsList")
 	public String getShortsList(HttpSession session, ShortsVO vo, Model model) {
 		MemberVO user = (MemberVO) session.getAttribute("user");
@@ -99,10 +98,10 @@ public class ShortsController {
 
 				uploadFile.transferTo(new File("C:/shorts/" + fileName));
 				vo.setUpload(fileName);
-				System.out.println("�뙆�씪�씠由� :" + fileName);
+				System.out.println("占쎈솁占쎌뵬占쎌뵠�뵳占� :" + fileName);
 
 			} else {
-				System.out.println("�뙆�씪�씠 �뾾�뒿�땲�떎");
+				System.out.println("占쎈솁占쎌뵬占쎌뵠 占쎈씨占쎈뮸占쎈빍占쎈뼄");
 				return "insertShorts";
 			}
 
@@ -141,10 +140,10 @@ public class ShortsController {
 
 			uploadFile.transferTo(new File("C:/shorts/" + fileName));
 			vo.setUpload(fileName);
-			System.out.println("�뙆�씪�씠由� :" + fileName);
+			System.out.println("占쎈솁占쎌뵬占쎌뵠�뵳占� :" + fileName);
 
 		} else {
-			System.out.println("�뙆�씪�씠 �뾾�뒿�땲�떎");
+			System.out.println("占쎈솁占쎌뵬占쎌뵠 占쎈씨占쎈뮸占쎈빍占쎈뼄");
 			return "updatetShorts";
 		}
 
@@ -154,7 +153,7 @@ public class ShortsController {
 		} else {
 
 			shos.updateShorts(vo);
-			System.out.println("update controller �떎�뻾= " + "�젣紐�: " + vo.getsTitle() + " �궡�슜: " + vo.getsContent());
+			System.out.println("update controller 占쎈뼄占쎈뻬= " + "占쎌젫筌륅옙: " + vo.getsTitle() + " 占쎄땀占쎌뒠: " + vo.getsContent());
 			return "redirect:getShortsList";
 		}
 
