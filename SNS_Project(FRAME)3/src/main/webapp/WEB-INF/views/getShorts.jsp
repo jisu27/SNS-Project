@@ -210,48 +210,85 @@
 							<div class="bottom_icons">
 								<div class="left_icons">
 									<div class="heart_btn">
-										<c:choose>
-											<c:when
-												test="${fn:contains(sessionScope.heart , shorts.sSeq)}">
-												<div onclick="deleteLike()"
-													class="sprite_heart_icon_outline" id="heart" name="39"
-													data-name="heartbeat"
-													style="background: url('../../imgs/background01.png') no-repeat -26px -261px;">
-													<form id="deleteLike" action="getDeleteHeart.do"
-														method="post">
-														<input type="hidden" id="sSeq" name="sSeq"
-															value="${shorts.sSeq}"> <input type="hidden"
-															id="id" name="id" value="${sessionScope.user.id}">
-														<input type="hidden" id="profile" name="profile"
-															value="${profile}">
-													</form>
-												</div>
-											</c:when>
+										<div>
+											<c:choose>
+												<c:when
+													test="${fn:contains(sessionScope.heart,shorts.sSeq)}">
+													<div onclick="deleteLike_s()" data-name="smallheart"
+														class="sprite_small_heart_icon_outline">
+														<form id="deleteLike${status.count}" method="post"
+															action="getDeleteHeart.do">
+															<input type="hidden" id="sSeq" name="sSeq"
+																value="${comment.sSeq}"> <input type="hidden"
+																id="id" name="id" value="${sessionScope.user.id}">
+														</form>
+													</div>
 
-											<c:otherwise>
-												<div onclick="like()" class="sprite_heart_icon_outline"
-													id="heart" name="39" data-name="heartbeat"
-													style="background: url('../../imgs/background01.png') no-repeat -52px -261px;">
-													<form id="like" action="getHeart.do" method="post">
-														<input type="hidden" id="sSeq" name="sSeq"
-															value="${shorts.sSeq}"> <input type="hidden"
-															id="id" name="id" value="${sessionScope.user.id}">
-														<input type="hidden" id="profile" name="profile"
-															value="${profile}">
-													</form>
-												</div>
-											</c:otherwise>
-										</c:choose>
-									</div>
-									<div>
-										<div class="sprite_bubble_icon"></div>
-									</div>
-									<div>
-										<div class="sprite_share_icon" data-name="share"></div>
-									</div>
-								</div>
 
-								<div class="right_icon">
+												</c:when>
+
+												<c:otherwise>
+													<div onclick="like_c(like${shorts.sSeq})"
+														data-name="smallheart"
+														class="sprite_small_heart_icon_outline">
+														<form id="like${shorts.sSeq}" method="post"
+															action="getHeart.do">
+															<input type="hidden" id="cseq" name="cseq"
+																value="${shorts.sSeq}"> <input type="hidden"
+																id="id" name="id" value="${sessionScope.user.id}">
+										 						<inputtype="hidden" id="sSeq" name="sSeq"
+																value="${shorts.sSeq}">
+
+														</form>
+													</div>
+
+												</c:otherwise>
+											</c:choose>
+										</div>
+										<div>
+											<div class="sprite_bubble_icon"><div>
+											<c:choose>
+												<c:when
+													test="${fn:contains(sessionScope.bookMark,shorts.sSeq)}">
+													<div onclick="deleteShortsBookMark()" data-name="bookMark"
+														class="sprite_small_heart_icon_outline">
+														<form id="deleteShortsBookMark" method="post"
+															action="deleteShortsBookMark">
+															<input type="hidden" id="sSeq" name="sSeq"
+																value="${shorts.sSeq}">
+																 <input type="hidden" id="id" name="id" value="${sessionScope.user.id}">
+														</form>
+													</div>
+
+												</c:when>
+
+												<c:otherwise>
+													<div onclick="insertShortsBookMark${shorts.sSeq}()"
+														data-name="smallheart"
+														class="sprite_small_heart_icon_outline">
+														<form id="insertShortsBookMark${shorts.sSeq}" method="post"
+															action="insertShortsBookMark">
+															<input type="hidden" id="sSeq" name="sSeq"
+																value="${shorts.sSeq}"> 
+																<input type="hidden" id="id" name="id" value="${sessionScope.user.id}">
+																
+														</form>
+													</div>
+
+												</c:otherwise>
+											</c:choose>
+										</div></div>
+										</div>
+										<div>
+											<div class="sprite_share_icon" data-name="share"></div>
+										</div>
+
+										<div>
+											<div class="sprite_share_icon" data-name="share"></div>
+										</div>
+									</div>
+
+									<div class="right_icon">
 									<div class="sprite_bookmark_outline" data-name="book-mark"></div>
 								</div>
 							</div>
@@ -270,10 +307,8 @@
 									<input type="hidden" name="id" value="${sessionScope.user.id}">
 									<input type="text" name="content" placeholder="댓글을 입력하세요">
 									<div class="upload_btn m_text" data-name="comment">
-										<input type="submit" value="댓글 달기"> <<<<<<< HEAD
-										=======
+										<input type="submit" value="댓글 달기"> 
 									</div>
-									>>>>>>> refs/heads/test2
 									<!-- <div class="upload_btn"></div> -->
 								</form>
 							</div>

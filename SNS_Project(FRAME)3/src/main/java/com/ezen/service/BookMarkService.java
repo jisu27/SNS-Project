@@ -15,7 +15,7 @@ public interface BookMarkService {
 
 	List<BookMarkVO> getShortsBookMarkList(BookMarkVO vo);
 
-	List<BookMarkVO> getAllBookMarkList(BookMarkVO vo);
+	List<BookMarkVO> getBookMarkList(BookMarkVO vo);
 
 	BookMarkVO getBookMark(BookMarkVO vo);
 }

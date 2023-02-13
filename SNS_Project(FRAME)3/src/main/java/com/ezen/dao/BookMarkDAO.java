@@ -39,9 +39,9 @@ public class BookMarkDAO {
 		return mybatis.selectList("bookMarkMapper.getShortsBookMarkList", vo);
 	}
 
-	public List<BookMarkVO> getAllBookMarkList(BookMarkVO vo) {
+	public List<BookMarkVO> getBookMarkList(BookMarkVO vo) {
 
-		return mybatis.selectList("bookMarkMapper.getAllBookMarkList", vo);
+		return mybatis.selectList("bookMarkMapper.getBookMarkList", vo);
 	}
 
 	public BookMarkVO getBookMark(BookMarkVO vo) {

@@ -4,45 +4,46 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.ezen.dao.BookMarkDAO;
 import com.ezen.dto.BookMarkVO;
 
 @Service("BookMarkService")
 public class BookMarkServiceImpl implements BookMarkService {
-
+	BookMarkDAO bmDAO;
+	
 	@Override
 	public void insertBookMark(BookMarkVO vo) {
-		// TODO Auto-generated method stub
+		bmDAO.insertBookMark(vo);
 
 	}
 
 	@Override
 	public void updateBookMark(BookMarkVO vo) {
-		// TODO Auto-generated method stub
-
+		bmDAO.updateBookMark(vo);
 	}
 
 	@Override
 	public void deleteBookMark(BookMarkVO vo) {
-		// TODO Auto-generated method stub
+		bmDAO.deleteBookMark(vo);
 
 	}
 
 	@Override
 	public List<BookMarkVO> getBoardBookMarkList(BookMarkVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+
+		return bmDAO.getBoardBookMarkList(vo);
 	}
 
 	@Override
 	public List<BookMarkVO> getShortsBookMarkList(BookMarkVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+
+		return bmDAO.getShortsBookMarkList(vo);
 	}
 
 	@Override
-	public List<BookMarkVO> getAllBookMarkList(BookMarkVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<BookMarkVO> getBookMarkList(BookMarkVO vo) {
+
+		return bmDAO.getBookMarkList(vo);
 	}
 
 	@Override

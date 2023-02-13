@@ -23,7 +23,7 @@
 	SELECT * FROM bookMark WHERE id=#{id} AND sSeq IS NOT NULL
 </select>
 
-<select id="getAllBookMarkList" resultType="bookMark">
+<select id="getBookMarkList" resultType="bookMark">
 	SELECT * FROM bookMark WHERE id=#{id}
 </select>
 
