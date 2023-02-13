@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
- <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +46,9 @@
 <style>
 #main_container {
 	/*height: 6000px;*/
+	
 }
+
 .contents .img_section .trans_inner video {
 	width: 100%;
 	height: 100%;
@@ -65,7 +67,7 @@
 					<a href="home.do" id="goProfile" onclick="check_id()">
 						<div class="sprite_insta_icon"></div>
 						<div class="sprite_write_logo"></div>
-						
+
 					</a>
 				</h1>
 
@@ -125,86 +127,86 @@
 									</div>
 								</div>
 								<c:if test="${sessionScope.user.id == shorts.id}">
-								<div class="sprite_more_icon" data-name="more"
-									onclick="toggle(this.children[0])">
-									<ul class="toggle_box" id="toggle_box${status.count}">
-										<li><input type="submit" class="follow" value="팔로우"
-											data-name="follow"></li>
+									<div class="sprite_more_icon" data-name="more"
+										onclick="toggle(this.children[0])">
+										<ul class="toggle_box" id="toggle_box${status.count}">
+											<li><input type="submit" class="follow" value="팔로우"
+												data-name="follow"></li>
 
-										<li><a href="updateShorts?sSeq=${shorts.sSeq}"> <input
-												type="button" value="수정"></a></li>
+											<li><a href="updateShorts?sSeq=${shorts.sSeq}"> <input
+													type="button" value="수정"></a></li>
 
-										<li><form action="deleteShorts?sSeq=${shorts.sSeq}"
-												method="post">
-												<c:if test="${sessionScope.user.id == shorts.id }">
-													<input type="submit" value="삭제">
-												</c:if>
-											</form></li>
-									</ul>
+											<li><form action="deleteShorts?sSeq=${shorts.sSeq}"
+													method="post">
+													<c:if test="${sessionScope.user.id == shorts.id }">
+														<input type="submit" value="삭제">
+													</c:if>
+												</form></li>
+										</ul>
 
-								  </div>
+									</div>
 								</c:if>
 
 							</header>
 
 							<section class="scroll_section">
-										<div class="admin">
-											<img src="profile/${profile}" alt="user">
-										</div>
-										
+								<div class="admin">
+									<img src="profile/${profile}" alt="user">
+								</div>
+
 								<c:forEach items="${shortsCommentList}" var="shortsComment">
 									<div class="user_container-detail">
-									<div class="user">
-										<!--  <img src="profile/${commentMemberList[status.index].profile}"
+										<div class="user">
+											<!--  <img src="profile/${commentMemberList[status.index].profile}"
 												alt="user"> -->
-										프사
-									</div>
-									<div class="comment">
-										<span class="user_id">${shortsComment.id}</span>
-										<div class="scomment" style="width: 230px"> ${shortsComment.content}</div>
-										<div class="time" style="font-size:small;">
-											<fmt:formatDate var="comDate" value="${shortsComment.inDate}" pattern="yyyy년MM월dd일HH시"/>
-											${comDate}에 작성된 글.
-										  <!-- <span class="try_comment">ëµê¸ ë¬ê¸°</span>  -->
+											프사
 										</div>
-										
-										
-										<div class="icon_wrap">
-											<div class="more_trigger">
-												<div class="sprite_more_icon" data-name="more"
-												onclick="toggle(this.children[0])">
-												<ul class="toggle_box" id="toggle_box${shortsComment.scSeq}">
-													<li>
-														<a href="follow.do?id1=${sessionScope.user.id}&id2=${shortsComment.id}">
-															<input type="hidden" value="${shortsComment.scSeq}">
-															<input type="button" value="팔로우">
-														</a>
-													</li>
+										<div class="comment">
+											<span class="user_id">${shortsComment.id}</span>
+											<div class="scomment" style="width: 230px">
+												${shortsComment.content}</div>
+											<div class="time" style="font-size: small;">
+												<fmt:formatDate var="comDate"
+													value="${shortsComment.inDate}" pattern="yyyy년MM월dd일HH시" />
+												${comDate}에 작성된 글.
+												<!-- <span class="try_comment">ëµê¸ ë¬ê¸°</span>  -->
+											</div>
+
+
+											<div class="icon_wrap">
+												<div class="more_trigger">
+													<div class="sprite_more_icon" data-name="more"
+														onclick="toggle(this.children[0])">
+														<ul class="toggle_box2"
+															id="toggle_box${shortsComment.scSeq}">
+															<li><a
+																href="follow.do?id1=${sessionScope.user.id}&id2=${shortsComment.id}">
+																	<input type="hidden" value="${shortsComment.scSeq}">
+																	<input type="button" value="팔로우">
+															</a></li>
 															<c:if test="${sessionScope.user.id == shortsComment.id}">
-													<li>
-														<a href="updateShortsComment?scSeq=${shortsComment.scSeq}">
-															<input type="button" value="수정">
-															
-														</a>
-													 
-													</li>
-													<li><form
-															action="deleteShortsComment?scSeq=${shortsComment.scSeq}"
-															method="post">
-																
-																<input type="submit" value="삭제">
-														</form></li>
+																<li><a
+																	href="updateShortsComment?scSeq=${shortsComment.scSeq}">
+																		<input type="button" value="수정">
+
+																</a></li>
+																<li><form
+																		action="deleteShortsComment?scSeq=${shortsComment.scSeq}"
+																		method="post">
+
+																		<input type="submit" value="삭제">
+																	</form></li>
 															</c:if>
-												</ul>
+														</ul>
+													</div>
+												</div>
+												<div>
+													<div class="sprite_small_heart_icon_outline"></div>
+												</div>
 											</div>
-											</div>
-											<div>
-												<div class="sprite_small_heart_icon_outline"></div>
-											</div>
+
 										</div>
-										
 									</div>
-								</div>
 								</c:forEach>
 							</section>
 
@@ -259,10 +261,10 @@
 							</div>
 
 							<div class="heart_count" style="font-weight: 900">
-								좋아요${shorts.count}개
-							</div>
+								좋아요${shorts.count}개</div>
 							<div class="timer">
-								<fmt:formatDate var="soDate" value="${shorts.inDate}" pattern="yyyy년 MM월 dd일"/>
+								<fmt:formatDate var="soDate" value="${shorts.inDate}"
+									pattern="yyyy년 MM월 dd일" />
 								${soDate}
 							</div>
 
@@ -272,9 +274,9 @@
 									<input type="hidden" name="id" value="${sessionScope.user.id}">
 									<input type="text" name="content" placeholder="댓글을 입력하세요">
 									<div class="upload_btn m_text" data-name="comment">
-								<input type="submit" value="댓글 달기">
-								</div>
-								<!-- <div class="upload_btn"></div> -->
+										<input type="submit" value="댓글 달기">
+									</div>
+									<!-- <div class="upload_btn"></div> -->
 								</form>
 							</div>
 						</div>
@@ -296,25 +298,24 @@
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<!--<script src="js/detail.js"></script>-->
 	<script type="text/javascript">
-	function check_id() {
-		if ($("#check").val() == '' || $("#check").val() == null) {
-			alert("로그인을 해주세요");
-			$("#goProfile").attr("href", "/");
+		function check_id() {
+			if ($("#check").val() == '' || $("#check").val() == null) {
+				alert("로그인을 해주세요");
+				$("#goProfile").attr("href", "/");
+			}
 		}
-	}
-	
-	function toggle(element) {
-		var con = document.getElementById(element.getAttribute("id"));
-		if (con.style.display == 'none') {
-			con.style.display = 'block';
-		} else {
-			con.style.display = 'none';
+
+		function toggle(element) {
+			var con = document.getElementById(element.getAttribute("id"));
+			if (con.style.display == 'none') {
+				con.style.display = 'block';
+			} else {
+				con.style.display = 'none';
+			}
 		}
-	}
-	
 	</script>
-	
-	
+
+
 
 </body>
 </html>

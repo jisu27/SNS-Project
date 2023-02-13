@@ -5,36 +5,42 @@
 	<select id="like" resultType="heart">
 		SELECT *
 		FROM heart
-		WHERE id=#{id},bseq=#{bSeq}
+		WHERE
+		id=#{id},bseq=#{bSeq}
 	</select>
 	<!-- ###################################################################################################################### -->
 	<select id="likeBoard" resultType="heart">
 		SELECT bseq
 		FROM heart
-		WHERE id=#{id}
+		WHERE
+		id=#{id}
 	</select>
 	<!-- ###################################################################################################################### -->
 	<select id="likeComment" resultType="Integer">
 		SELECT cseq
 		FROM heart
-		WHERE id=#{id}
+		WHERE
+		id=#{id}
 	</select>
 	<!-- ###################################################################################################################### -->
 	<select id="likeCount" resultType="Integer">
 		SELECT count(*)
 		FROM heart h
 		WHERE bseq=#{bSeq}
+		AND cseq=0
 	</select>
 	<!-- ###################################################################################################################### -->
 	<select id="likeCommentCount" resultType="Integer">
 		SELECT count(*)
-		FROM heart h
+		FROM
+		heart h
 		WHERE cseq=#{cseq}
 	</select>
 	<!-- ###################################################################################################################### -->
 	<insert id="insertLike">
 		INSERT INTO heart(hseq,bseq,cseq,id,use_like)
-		VALUES (heart_seq.NEXTVAL,#{bSeq},#{cseq},#{id},#{use_like})
+		VALUES
+		(heart_seq.NEXTVAL,#{bSeq},#{cseq},#{id},#{use_like})
 	</insert>
 	<!-- ###################################################################################################################### -->
 	<delete id="deleteLike">

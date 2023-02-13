@@ -273,7 +273,7 @@
 							<div class="commit_field">
 								<form id="commentForm" action="insertComment.do" method="post">
 									<input type="hidden" name="id" value="${sessionScope.user.id}">
-									<input type="hidden" name="bseq" value="${board.bSeq}">
+									<input type="hidden" name="bSeq" value="${board.bSeq}">
 									<input type="text" name="ccontent" placeholder="댓글을 달아주세요 !">
 									<div class="upload_btn m_text" data-name="comment">
 										<input type="submit" value="게시">
