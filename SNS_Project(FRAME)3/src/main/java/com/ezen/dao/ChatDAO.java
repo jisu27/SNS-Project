@@ -15,34 +15,34 @@ public class ChatDAO {
 	private SqlSessionTemplate sqlSession;
 
 	public void insertPrivateChat(ChatVO vo) {
-		sqlSession.insert("insertPrivateChat", vo);
+		sqlSession.insert("chatMapper.insertPrivateChat", vo);
 	}
 
 	public void insertRoomChat(ChatVO vo) {
-		sqlSession.insert("insertRoomChat", vo);
+		sqlSession.insert("chatMapper.insertRoomChat", vo);
 	}
 
 	public void deleteChat(ChatVO vo) {
-		sqlSession.delete("deleteChat", vo);
+		sqlSession.delete("chatMapper.deleteChat", vo);
 	}
 
 	public List<ChatVO> getPrivateChatList(ChatVO vo) {
-		return sqlSession.selectList("getPrivateChatList", vo);
+		return sqlSession.selectList("chatMapper.getPrivateChatList", vo);
 	}
 
 	public List<ChatVO> getRoomChatList(ChatVO vo) {
-		return sqlSession.selectList("getRoomChatList", vo);
+		return sqlSession.selectList("chatMapper.getRoomChatList", vo);
 	}
 
 	public List<ChatVO> getChatList(ChatVO vo) {
-		return sqlSession.selectList("getChatList", vo);
+		return sqlSession.selectList("chatMapper.getChatList", vo);
 	}
 	
 	public ChatVO getChat(ChatVO vo) {
-		return sqlSession.selectOne("getChat", vo);
+		return sqlSession.selectOne("chatMapper.getChat", vo);
 	}
 
 	public int insertChat(ChatVO vo) {
-		return sqlSession.insert("insertChat", vo);
+		return sqlSession.insert("chatMapper.insertChat", vo);
 	}
 }

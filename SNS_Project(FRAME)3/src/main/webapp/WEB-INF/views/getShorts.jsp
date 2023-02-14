@@ -212,7 +212,7 @@
 									<div class="heart_btn">
 										<div>
 											<c:choose>
-												<c:when test="${sessionScope.heart.sSeq == shorts.sSeq}">
+												<c:when test="${(sessionScope.heart.sSeq + '') == (shorts.sSeq + '')}">
 													<div onclick="deleteLike_s()" data-name="smallheart"
 														class="sprite_small_heart_icon_outline">
 														<form id="deleteLike${status.count}" method="post"

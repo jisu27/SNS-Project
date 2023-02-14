@@ -36,4 +36,8 @@
 	<bean class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSessionFactory"></constructor-arg>
 	</bean>
+	
+	<!-- WebSocket -->
+	<bean id="echoHandler" class="com.ezen.config.EchoHandler"/>
+	<bean id="WebSocketConfig" class="com.ezen.config.WebSocketConfig"/>
 </beans>

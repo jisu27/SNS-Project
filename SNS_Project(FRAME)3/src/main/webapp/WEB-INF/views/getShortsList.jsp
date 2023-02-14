@@ -82,7 +82,7 @@
 			<section class="h_inner">
 
 				<h1 class="logo">
-					<a href="index.html">
+					<a href="home.do" id="goProfile5" onclick="check_id()">
 						<div class="sprite_insta_icon"></div>
 						<div>
 							<div class="sprite_write_logo"></div>
@@ -201,7 +201,19 @@
 
 	<!--<script src="js/insta.js"></script>-->
 	<script src="js/profile.js"></script>
-	<script>
+	<script type="text/javascript">
+	var prev_element = null;
+	
+function check_id() {	
+	if ($("#check").val()=='' || $("#check").val()==null) {
+		alert("로그인을 해주세요");
+		$("#goProfile1").attr("href","/");
+		$("#goProfile2").attr("href","/");
+		$("#goProfile3").attr("href","/");
+		$("#goProfile4").attr("href","/");
+		$("#goProfile5").attr("href","/");
+	}
+}
 	</script>
 </body>
 </html>
