@@ -12,7 +12,15 @@
 </update>
 
 <delete id="deleteBookMark" parameterType="bookMark">
-  DELETE FROM bookMark WHERE bmSeq = #{bmSeq}
+  DELETE bookMark WHERE bmSeq = #{bmSeq}
+</delete>
+
+<delete id="deleteBoardBookMark" parameterType="bookMark">
+	DELETE bookMark WHERE bSeq = #{bSeq} AND id = #{id}
+</delete>
+
+<delete id="deleteShortsBookMark" parameterType="bookMark">
+	DELETE bookMark WHERE sSeq = #{sSeq} AND id= #{id}
 </delete>
 
 <select id="getBoardBookMarkList" resultType="bookMark">

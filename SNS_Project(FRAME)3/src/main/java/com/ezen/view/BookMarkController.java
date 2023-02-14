@@ -39,6 +39,20 @@ public class BookMarkController {
 
 		return "redirect:" + (String) request.getHeader("Referer");
 	}
+	
+	@PostMapping(value = "deleteShortsBookMark")
+	public String deleteShortsBookMark(BookMarkVO vo, Model model, HttpServletRequest request) {
+		bookMarkService.deleteShortsBookMark(vo);
+		
+		return "redirect:" + (String) request.getHeader("Referer");
+	}
+	
+	@PostMapping(value = "deleteBoardBookMark")
+	public String deleteBoardBookMark(BookMarkVO vo, Model model, HttpServletRequest request) {
+		bookMarkService.deleteBoardBookMark(vo);
+		
+		return "redirect:" + (String) request.getHeader("Referer");
+	}
 
 	@RequestMapping(value = "deleteBookMark")
 	public String deleteBookMark(BookMarkVO vo, HttpServletRequest request) {

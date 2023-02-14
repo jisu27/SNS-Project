@@ -27,6 +27,16 @@ public class BookMarkServiceImpl implements BookMarkService {
 		bmDAO.deleteBookMark(vo);
 
 	}
+	
+	@Override
+	public void deleteShortsBookMark(BookMarkVO vo) {
+		bmDAO.deleteShortsBookMark(vo);
+	}
+	
+	@Override
+	public void deleteBoardBookMark(BookMarkVO vo) {
+		bmDAO.deleteBoardBookMark(vo);
+	}
 
 	@Override
 	public List<BookMarkVO> getBoardBookMarkList(BookMarkVO vo) {

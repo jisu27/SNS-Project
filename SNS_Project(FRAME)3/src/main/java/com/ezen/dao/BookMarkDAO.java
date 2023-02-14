@@ -28,6 +28,14 @@ public class BookMarkDAO {
 		mybatis.delete("bookMarkMapper.deleteBookMark", vo);
 
 	}
+	
+	public void deleteShortsBookMark(BookMarkVO vo) {
+		mybatis.delete("bookMarkMapper.deleteShortsBookMark", vo);
+	}
+	
+	public void deleteBoardBookMark(BookMarkVO vo) {
+		mybatis.delete("bookMarkMapper.deleteBoardBookMark", vo);
+	}
 
 	public List<BookMarkVO> getBoardBookMarkList(BookMarkVO vo) {
 

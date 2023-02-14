@@ -10,6 +10,10 @@ public interface BookMarkService {
 	void updateBookMark(BookMarkVO vo);
 
 	void deleteBookMark(BookMarkVO vo);
+	
+	void deleteShortsBookMark(BookMarkVO vo);
+	
+	void deleteBoardBookMark(BookMarkVO vo);
 
 	List<BookMarkVO> getBoardBookMarkList(BookMarkVO vo);
 

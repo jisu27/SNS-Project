@@ -325,6 +325,13 @@
 				con.style.display = 'none';
 			}
 		}
+		
+		function deleteShortsBookMark(form_id) {
+			$(form_id).attr("action","deleteShortsBookMark").submit();
+		}
+		function insertShortsBookMark(form_id) {
+			$(form_id).attr("action","insertShortsBookMark").submit();
+		}
 	</script>
 </body>
 </html>

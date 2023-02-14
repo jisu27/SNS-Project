@@ -212,8 +212,7 @@
 									<div class="heart_btn">
 										<div>
 											<c:choose>
-												<c:when
-													test="${fn:contains(sessionScope.heart,shorts.sSeq)}">
+												<c:when test="${sessionScope.heart.sSeq == shorts.sSeq}">
 													<div onclick="deleteLike_s()" data-name="smallheart"
 														class="sprite_small_heart_icon_outline">
 														<form id="deleteLike${status.count}" method="post"
@@ -223,8 +222,6 @@
 																id="id" name="id" value="${sessionScope.user.id}">
 														</form>
 													</div>
-
-
 												</c:when>
 
 												<c:otherwise>
@@ -248,8 +245,7 @@
 										<div>
 											<div class="sprite_bubble_icon"><div>
 											<c:choose>
-												<c:when
-													test="${fn:contains(sessionScope.bookMark,shorts.sSeq)}">
+												<c:when test="${fn:contains(sessionScope.bookMark,shorts.sSeq)}">
 													<div onclick="deleteShortsBookMark()" data-name="bookMark"
 														class="sprite_small_heart_icon_outline">
 														<form id="deleteShortsBookMark" method="post"
@@ -338,6 +334,20 @@
 			} else {
 				con.style.display = 'none';
 			}
+		}
+		
+		function deleteLike(form_id) {
+			$(form_id).attr("action","deleteHeart.do").submit();
+		}
+		function like(form_id) {
+			$(form_id).attr("action","heart.do").submit();	
+		}
+		
+		function deleteShortsBookMark(form_id) {
+			$(form_id).attr("action","deleteShortsBookMark").submit();
+		}
+		function insertShortsBookMark(form_id) {
+			$(form_id).attr("action","insertShortsBookMark").submit();
 		}
 	</script>
 
