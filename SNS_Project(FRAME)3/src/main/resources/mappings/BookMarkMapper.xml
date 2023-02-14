@@ -4,7 +4,7 @@
   
 <insert id="insertBookMark" parameterType="bookMark">
   INSERT INTO bookMark (bmSeq, bSeq, sSeq, bmTitle, bmUrl, id)
-  VALUES (#{bmSeq}, #{bSeq}, #{sSeq}, #{bmTitle}, #{bmUrl}, #{id})
+  VALUES (bookMark_Seq.NEXTVAL, #{bSeq}, #{sSeq}, #{bmTitle}, #{bmUrl}, #{id})
 </insert>
 
 <update id="updateBookMark" parameterType="bookMark">

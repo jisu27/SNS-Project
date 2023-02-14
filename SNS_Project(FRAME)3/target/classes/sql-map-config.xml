@@ -8,8 +8,9 @@
 		<typeAlias type="com.ezen.dto.BoardVO" alias="board" />
 		<typeAlias type="com.ezen.dto.ShortsVO" alias="shorts" />
 		<typeAlias type="com.ezen.dto.HeartVO" alias="heart" />
-		<typeAlias type="com.ezen.dto.ShortsCommentVO" alias="shortsComment"/>
-		<typeAlias type="com.ezen.dto.BookMarkVO" alias="bookMark"/>
+		<typeAlias type="com.ezen.dto.ShortsCommentVO" alias="shortsComment" />
+		<typeAlias type="com.ezen.dto.BookMarkVO" alias="bookMark" />
+		<typeAlias type="com.ezen.dto.ChatVO" alias="chat" />
 	</typeAliases>
 
 	<mappers>
@@ -19,7 +20,8 @@
 		<mapper resource="mappings/BoardMapper.xml" />
 		<mapper resource="mappings/ShortsMapper.xml" />
 		<mapper resource="mappings/HeartMapper.xml" />
-		<mapper resource="mappings/ShortsCommentMapper.xml"/>
-		<mapper resource="mappings/BookMarkMapper.xml"/>
+		<mapper resource="mappings/ShortsCommentMapper.xml" />
+		<mapper resource="mappings/BookMarkMapper.xml" />
+		<mapper resource="mappings/ChatMapper.xml" />
 	</mappers>
 </configuration>
