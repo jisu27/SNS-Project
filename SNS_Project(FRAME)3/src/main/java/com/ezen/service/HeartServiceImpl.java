@@ -11,11 +11,11 @@ import com.ezen.dto.HeartVO;
 public class HeartServiceImpl implements HeartService {
 
 	@Autowired
-	private HeartDAO hDao; 
-	
+	private HeartDAO hDao;
+
 	@Override
 	public HeartVO like(HeartVO vo) {
-		
+
 		return hDao.like(vo);
 	}
 
@@ -23,25 +23,43 @@ public class HeartServiceImpl implements HeartService {
 	public void insertLike(HeartVO vo) {
 
 		hDao.Insertlike(vo);
-		
+
 	}
 
 	@Override
 	public List<HeartVO> boardLike(HeartVO vo) {
-		
+
 		return hDao.boardLike(vo);
 	}
 
 	@Override
 	public void deleteLike(HeartVO vo) {
 		hDao.deleteLike(vo);
-		
+
 	}
 
 	@Override
 	public int likeCount(HeartVO vo) {
-	
+
 		return hDao.getLikeCount(vo);
+	}
+
+	@Override
+	public List<Integer> commentLike(HeartVO vo) {
+
+		return hDao.commentLike(vo);
+	}
+
+	@Override
+	public int likeCommentCount(HeartVO vo) {
+
+		return hDao.getLikeCommentCount(vo);
+	}
+
+	@Override
+	public void deleteLike_c(HeartVO vo) {
+		hDao.deleteLike_c(vo);
+
 	}
 
 }

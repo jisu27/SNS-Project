@@ -5,7 +5,7 @@ import java.util.List;
 import com.ezen.dto.CommentVO;
 
 public interface CommentService {
-	
+
 	void insertComment(CommentVO vo);
 
 	void updateComment(CommentVO vo);
@@ -15,5 +15,7 @@ public interface CommentService {
 	CommentVO getComment(CommentVO vo);
 
 	List<CommentVO> getCommentList(CommentVO vo);
+
+	void updateCount(CommentVO vo);
 
 }

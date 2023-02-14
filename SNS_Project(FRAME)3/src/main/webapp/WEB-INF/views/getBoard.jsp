@@ -162,7 +162,43 @@
 											</div>
 												</div>
 												<div>
-													<div class="sprite_small_heart_icon_outline"></div>
+												<c:choose>
+													<c:when test="${fn:contains(sessionScope.c_heart,comment.cseq)}">
+														<div onclick="deleteLike_c(deleteLike${comment.cseq})" data-name="smallheart"
+													class="sprite_small_heart_icon_outline" style="background :url('../../imgs/background01.png') no-repeat -323px -287px">
+													<form id="deleteLike${comment.cseq}" method="post" action="getDeleteHeart_c.do">
+													<input type="hidden" id="cseq" name="cseq"
+															value="${comment.cseq}"> <input type="hidden"
+															id="id" name="id" value="${sessionScope.user.id}">
+															<input type="hidden" id="bSeq" name="bSeq"
+															value="${comment.bSeq}">
+															<input type="hidden" id="profile" name="profile"
+															value="${profile}">
+													</form>
+													</div>
+													
+
+											</c:when>
+											
+											<c:otherwise>
+												<div onclick="like_c(like${comment.cseq})" data-name="smallheart"
+												class="sprite_small_heart_icon_outline">
+												<form id="like${comment.cseq}" method="post" action="getHeart_c.do">
+														<input type="hidden" id="cseq" name="cseq"
+															value="${comment.cseq}"> <input type="hidden"
+															id="id" name="id" value="${sessionScope.user.id}">
+															<input type="hidden" id="ccontent" name="ccontent"
+															value="${comment.ccontent}">
+															<input type="hidden" id="bSeq" name="bSeq"
+															value="${comment.bSeq}">
+															<input type="hidden" id="profile" name="profile"
+															value="${profile}">
+
+													</form>
+													</div>
+													
+											</c:otherwise>
+										</c:choose>
 												</div>
 											</div>
 											</c:if>
@@ -235,7 +271,7 @@
 							<div class="commit_field">
 								<form id="commentForm" action="insertComment.do" method="post">
 									<input type="hidden" name="id" value="${sessionScope.user.id}">
-									<input type="hidden" name="bseq" value="${board.bSeq}">
+									<input type="hidden" name="bSeq" value="${board.bSeq}">
 									<input type="text" name="ccontent" placeholder="댓글을 달아주세요 !">
 									
 									<input type="submit" value="게시">
@@ -268,7 +304,6 @@
 	<script type="text/javascript">
 	
 		var prev_element = null;
-
 		function check_id() {
 			if ($("#check").val() == '' || $("#check").val() == null) {
 				alert("로그인을 해주세요");
@@ -280,6 +315,12 @@
 		}
 		function like() {
 			$("#like").submit();
+		}
+		function deleteLike_c(decomment) {
+			$(decomment).submit();
+		}
+		function like_c(comment) {
+			$(comment).submit();
 		}
 		function toggle(element) {
 			var con = document.getElementById(element.getAttribute("id"));

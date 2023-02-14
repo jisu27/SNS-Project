@@ -8,6 +8,7 @@ public class CommentVO {
 	private String id;
 	private String ccontent;
 	private Date indate;
+	private int count;
 	public int getCseq() {
 		return cseq;
 	}
@@ -40,8 +41,21 @@ public class CommentVO {
 	}
 	@Override
 	public String toString() {
-		return "SnsCommentVO [cseq=" + cseq + ", bseq=" + bSeq + ", id=" + id + ", ccontent=" + ccontent + ", indate="
-				+ indate + "]";
+		return "CommentVO [cseq=" + cseq + ", bSeq=" + bSeq + ", id=" + id
+				+ ", ccontent=" + ccontent + ", indate=" + indate + ", count="
+				+ count + "]";
 	}
-	
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+	public int getbSeq() {
+		return bSeq;
+	}
+	public void setbSeq(int bSeq) {
+		this.bSeq = bSeq;
+	}
+
 }

@@ -8,7 +8,6 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,20 +17,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.support.SessionStatus;
 
-import com.ezen.dto.AdvertisementVO;
 import com.ezen.dto.BoardVO;
 import com.ezen.dto.CommentVO;
+import com.ezen.dto.FollowVO;
 import com.ezen.dto.HeartVO;
 import com.ezen.dto.MemberVO;
-import com.ezen.dto.FollowVO;
 import com.ezen.dto.ShortsVO;
 import com.ezen.service.BoardService;
 import com.ezen.service.CommentService;
+import com.ezen.service.FollowService;
 import com.ezen.service.HeartService;
 import com.ezen.service.MemberService;
-import com.ezen.service.FollowService;
 import com.ezen.service.ShortsService;
 
 @Controller
@@ -115,7 +112,7 @@ public class BoardController {
 		List<String> stime = new ArrayList<>();
 
 		List<ShortsVO> shortsList = shortsService.getShortsList(sVo);
-		List<ShortsVO> getshortsList = shortsService.getShortsList(sVo);
+		List<MemberVO> shortsMemberList = new ArrayList<>();
 
 		for (BoardVO vo : getadverList) {
 			LocalDate boarDate = vo.getInDate().toInstant()
@@ -184,12 +181,18 @@ public class BoardController {
 			List<CommentVO> cvo = commentService.getCommentList(cVo);
 			commentList.addAll(cvo);
 		}
-		
-		for (ShortsVO vo : getshortsList) {
+
+		for (ShortsVO vo : shortsList) {
 			LocalDate shortsDate = vo.getInDate().toInstant()
 					.atZone(ZoneId.systemDefault()).toLocalDate();
 			Period stn = Period.between(shortsDate, LocalDate.now());
 			String stnTime;
+
+			MemberVO mvo = new MemberVO();
+			mvo.setId(vo.getId());
+
+			MemberVO v1 = memberService.MemberCheck(mvo);
+			shortsMemberList.add(v1);
 
 			if (stn.getYears() != 0) {
 				stnTime = stn.getYears() + "년" + stn.getMonths() + "월"
@@ -214,7 +217,9 @@ public class BoardController {
 
 		model.addAttribute("commentList", commentList);
 		model.addAttribute("adcommentList", adCommentList);
+
 		model.addAttribute("shortsList", shortsList);
+		model.addAttribute("getshortsList", shortsMemberList);
 
 		return "home";
 	}

@@ -63,7 +63,6 @@
 		</header>
 		<section id="main_container">
 			
-			<c:forEach var="demend" items="${deAd}">
 				<form action="checkAd.do" method="post" style="margin-right: 100px;">
 						<table >
 						<tr style="text-align: center;"><h2 style="font-weight: 900"> 광고 요청 된 게시글</h2></tr>
@@ -75,6 +74,7 @@
 							<th>광고 승인</th>
 						</tr>
 						
+						<c:forEach var="demend" items="${deAd}">
 						<tr>
 								<th><input name="aSeq" type="hidden" value="${demend.aSeq}">${demend.aSeq}</th>
 								<th><input name="id" type="hidden" value="${demend.id}">${demend.id}</th>
@@ -89,9 +89,9 @@
 								<th><fmt:formatDate pattern="yyyy-MM-dd" value="${demend.inDate}"/></th>
 								<th><input type="submit" value="승인"></th>	 
 						</tr>
+						</c:forEach>
 						</table>
 				</form>
-			</c:forEach>
 				
 			<c:forEach var="demend" items="${checkAd}">
 				<form action="checkAd.do" method="post" >

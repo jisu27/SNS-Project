@@ -118,7 +118,7 @@
 									<c:if test="${board.upload=='null'}">
 										<br>
 										<div class="con">
-											<pre>${board.content }</pre>
+											<pre>${board.content}</pre>
 										</div>
 									</c:if>
 									<c:if test="${board.upload!='null'}">
@@ -209,7 +209,47 @@
                                			  </div>
 		                                             </c:if>
 										<div class="small_heart">
-											<div class="sprite_small_heart_icon_outline"></div>
+											<c:choose>
+												<c:when
+													test="${fn:contains(sessionScope.c_heart,comment.cseq)}">
+													<div onclick="deleteLike_c(deleteLike${comment.cseq})"
+														data-name="smallheart"
+														class="sprite_small_heart_icon_outline"
+														style="background: url('../../imgs/background01.png') no-repeat -323px -287px">
+														<form id="deleteLike${comment.cseq}" method="post"
+															action="deleteHeart_c.do">
+															<input type="hidden" id="cseq" name="cseq"
+																value="${comment.cseq}"> <input type="hidden"
+																id="id" name="id" value="${sessionScope.user.id}">
+															<input type="hidden" id="bSeq" name="bSeq"
+																value="${comment.bSeq}"> <input type="hidden"
+																id="profile" name="profile" value="${profile}">
+														</form>
+													</div>
+
+
+												</c:when>
+
+												<c:otherwise>
+													<div onclick="like_c(like${comment.cseq})"
+														data-name="smallheart"
+														class="sprite_small_heart_icon_outline">
+														<form id="like${comment.cseq}" method="post"
+															action="heart_c.do">
+															<input type="hidden" id="cseq" name="cseq"
+																value="${comment.cseq}"> <input type="hidden"
+																id="id" name="id" value="${sessionScope.user.id}">
+															<input type="hidden" id="ccontent" name="ccontent"
+																value="${comment.ccontent}"> <input
+																type="hidden" id="bSeq" name="bSeq"
+																value="${comment.bSeq}"> <input type="hidden"
+																id="profile" name="profile" value="${profile}">
+
+														</form>
+													</div>
+
+												</c:otherwise>
+											</c:choose>
 										</div>
 									</div>
 								</c:if>
@@ -240,7 +280,7 @@
 								<header class="top">
 									<div class="user_container">
 										<div class="profile_img">
-											<a href="profile.do?id=${adverList[status.index/3].id}"><img src="${admemberList[status.index/3].profile}" alt="프로필이미지"></a>
+											<a href="profile.do?id=${adverList[status.index/3].id}"><img src="profile/${admemberList[status.index/3].profile}" alt="프로필이미지"></a>
 										</div>
 										<div class="user_name">
 											<div class="nick_name m_text">${adverList[status.index/3].id}</div>
@@ -364,7 +404,47 @@
 											</div>
 											</c:if>
 											<div class="small_heart">
-												<div class="sprite_small_heart_icon_outline"></div>
+												<c:choose>
+												<c:when
+													test="${fn:contains(sessionScope.c_heart,comment.cseq)}">
+													<div onclick="deleteLike_c(deleteLike${comment.cseq})"
+														data-name="smallheart"
+														class="sprite_small_heart_icon_outline"
+														style="background: url('../../imgs/background01.png') no-repeat -323px -287px">
+														<form id="deleteLike${comment.cseq}" method="post"
+															action="deleteHeart_c.do">
+															<input type="hidden" id="cseq" name="cseq"
+																value="${comment.cseq}"> <input type="hidden"
+																id="id" name="id" value="${sessionScope.user.id}">
+															<input type="hidden" id="bSeq" name="bSeq"
+																value="${comment.bSeq}"> <input type="hidden"
+																id="profile" name="profile" value="${profile}">
+														</form>
+													</div>
+
+
+												</c:when>
+
+												<c:otherwise>
+													<div onclick="like_c(like${comment.cseq})"
+														data-name="smallheart"
+														class="sprite_small_heart_icon_outline">
+														<form id="like${comment.cseq}" method="post"
+															action="heart_c.do">
+															<input type="hidden" id="cseq" name="cseq"
+																value="${comment.cseq}"> <input type="hidden"
+																id="id" name="id" value="${sessionScope.user.id}">
+															<input type="hidden" id="ccontent" name="ccontent"
+																value="${comment.ccontent}"> <input
+																type="hidden" id="bSeq" name="bSeq"
+																value="${comment.bSeq}"> <input type="hidden"
+																id="profile" name="profile" value="${profile}">
+
+														</form>
+													</div>
+
+												</c:otherwise>
+											</c:choose>
 											</div>
 										</div>
 									</c:if>
@@ -422,16 +502,10 @@
 							<c:forEach items="${shortsList}" var="shorts" varStatus="status">
 								<div class="thumb_user">
 									<div class="profile_thumb">
-									<!-- 
 										<a href="getShorts?sSeq=${shorts.sSeq}"><img
-								src="profile/${sessionScope.user.profile}" alt="프로필사진"></a>
-									 -->
-										<a href="getShorts?sSeq=${shorts.sSeq}"><img
-										src="profile/${sessionScope.user.profile}" alt="프로필사진"></a>
-
+								src="profile/${getshortsList[status.index].profile}" alt="프로필사진"></a>
 									</div>
 									<div class="detail">
-									
 									
 										<div class="id">${shorts.id}</div>
 										<div class="time">${stime[status.index]}</div>
@@ -492,6 +566,12 @@ function deleteLike(form_id) {
 function like(form_id) {
 	$(form_id).attr("action","heart.do").submit();
 }
+function deleteLike_c(decomment) {
+	$(decomment).submit();
+}
+function like_c(comment) {
+	$(comment).submit();
+}
 function toggle(element){
 	
 	var con = document.getElementById(element.getAttribute("id"));
@@ -501,9 +581,6 @@ function toggle(element){
 		con.style.display = 'none';
 	}
 	
-}
-function click(){
-	return;
 }
 
 function showComment(commentId) {
