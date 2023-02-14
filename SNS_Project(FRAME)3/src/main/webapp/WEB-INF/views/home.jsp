@@ -296,7 +296,6 @@
 														href="goUpdateBoard.do?bSeq=${adverList[status.index/3].bSeq}">
 															<input type="button" value="수정">
 													</a></li>
-
 													<li><form
 															action="deleteBoard.do?bSeq=${adverList[status.index/3].bSeq}"
 															method="post">

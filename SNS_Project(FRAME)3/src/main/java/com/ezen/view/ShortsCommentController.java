@@ -14,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.ezen.dto.CommentVO;
 import com.ezen.dto.MemberVO;
@@ -24,7 +26,8 @@ import com.ezen.service.MemberService;
 import com.ezen.service.ShortsCommentService;
 import com.ezen.service.ShortsService;
 
-@Controller
+@RequestMapping("/comments")
+@RestController
 public class ShortsCommentController {
 
 	@Autowired
@@ -46,10 +49,10 @@ public class ShortsCommentController {
 
 		} else {
 			vo.setId(user.getId());
-			System.out.println(vo);
+
 			service.insertShortsComment(vo);
 
-			return "redirect:" + (String) request.getHeader("Referer");
+			return "success";
 		}
 	}
 
@@ -94,14 +97,28 @@ public class ShortsCommentController {
 	 * }
 	 */
 
-	@RequestMapping(value = "/getShortsCommentList")
-	public String getCommentList(ShortsCommentVO vo, Model model) {
-
-		List<ShortsCommentVO> ShortsCommentList = service.getShortsCommentList(vo);
-		System.out.println(ShortsCommentList);
-		model.addAttribute("ShortsCommentList", ShortsCommentList);
-
-		return "redirect:getShorts";
+	@RequestMapping(value = "/getShortsCommentList", produces="application/json; charset=UTF-8")
+	@ResponseBody
+	public Map<String, Object> getCommentList(ShortsCommentVO vo){
+		
+		Map<String, Object> comment = new HashMap<>();
+		
+		List<ShortsCommentVO> list = service.getShortsCommentList(vo.getsSeq());
+		
+		comment.put("total", list.size());
+		comment.put("commentList", list);
+		
+		return comment;
+		
+	
+	
 	}
-
+//	public String getCommentList(ShortsCommentVO vo, Model model) {
+//
+//		List<ShortsCommentVO> ShortsCommentList = service.getShortsCommentList(vo);
+//		System.out.println(ShortsCommentList);
+//		model.addAttribute("ShortsCommentList", ShortsCommentList);
+//
+//		return "redirect:getShorts";
+//	}
 }

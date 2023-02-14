@@ -12,7 +12,7 @@ public interface ShortsCommentService {
 
 	void deleteShortsComment(ShortsCommentVO vo);
 
-	List<ShortsCommentVO> getShortsCommentList(ShortsCommentVO vo);
+	List<ShortsCommentVO> getShortsCommentList(int sSeq);
 
 	ShortsCommentVO getShortsComment(ShortsCommentVO vo);
 	

@@ -33,8 +33,8 @@ public class ShortsCommentServiceImpl implements ShortsCommentService {
 	}
 
 	@Override
-	public List<ShortsCommentVO> getShortsCommentList(ShortsCommentVO vo) {
-		return sdao.getShortsCommentList(vo);
+	public List<ShortsCommentVO> getShortsCommentList(int sSeq) {
+		return sdao.getShortsCommentList(sSeq);
 	}
 
 	@Override

@@ -36,14 +36,12 @@ public class ShortsController {
 	private ShortsCommentService ShortsCommentService;
 
 	@RequestMapping("/getShorts")
-	public String getShorts(ShortsVO vo, ShortsCommentVO scvo, Model model, HttpSession session) {
+	public String getShorts(MemberVO mvo, ShortsVO vo, ShortsCommentVO scvo, Model model, HttpSession session) {
 		MemberVO user = (MemberVO) session.getAttribute("user");
 		ShortsVO shorts = shos.getShorts(vo);
 		model.addAttribute("shorts", shorts);
-
+		model.addAttribute("profile", mvo.getProfile());
 		scvo.setsSeq(vo.getsSeq());
-		List<ShortsCommentVO> ShortsCommentList = ShortsCommentService.getShortsCommentList(scvo);
-		model.addAttribute("shortsCommentList", ShortsCommentList);
 
 //		System.out.println("--getShorts controller 占쎈뼄占쎈뻬: " + shorts);
 //		System.out.println("ShortsCommentVO =" + scvo);
@@ -51,6 +49,7 @@ public class ShortsController {
 		return "getShorts";
 
 	}
+
 	@RequestMapping("/getShortsList")
 	public String getShortsList(HttpSession session, ShortsVO vo, Model model) {
 		MemberVO user = (MemberVO) session.getAttribute("user");
@@ -140,10 +139,10 @@ public class ShortsController {
 
 			uploadFile.transferTo(new File("C:/shorts/" + fileName));
 			vo.setUpload(fileName);
-			System.out.println("占쎈솁占쎌뵬占쎌뵠�뵳占� :" + fileName);
+			System.out.println("파일이름 :" + fileName);
 
 		} else {
-			System.out.println("占쎈솁占쎌뵬占쎌뵠 占쎈씨占쎈뮸占쎈빍占쎈뼄");
+			System.out.println("파일이 없습니다.");
 			return "updatetShorts";
 		}
 
@@ -153,7 +152,7 @@ public class ShortsController {
 		} else {
 
 			shos.updateShorts(vo);
-			System.out.println("update controller 占쎈뼄占쎈뻬= " + "占쎌젫筌륅옙: " + vo.getsTitle() + " 占쎄땀占쎌뒠: " + vo.getsContent());
+			System.out.println("update controller 실행= " + "제목: " + vo.getsTitle() + " 占쎄땀占쎌뒠: " + vo.getsContent());
 			return "redirect:getShortsList";
 		}
 

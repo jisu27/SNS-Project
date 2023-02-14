@@ -21,7 +21,11 @@
 		SELECT * FROM Shorts_comment where scSeq = #{scSeq}
 	</select>
 	
+	<select id="getShortsCommentList" resultType="shortsComment">
+		SELECT * FROM Shorts_comment WHERE sSeq=#{sSeq} ORDER BY indate DESC
+	</select>
 	
+	<!-- 
 	<select id="getShortsCommentList" resultType="shortsComment">
 		SELECT c.*
 		FROM Shorts_comment c
@@ -30,6 +34,7 @@
 		WHERE s.sSeq = #{sSeq}
 		ORDER BY c.indate DESC
 	</select>
+	 -->
 
 	<select id="countShortsCommentList" resultType="int">
 		SELECT count(*) FROM Shorts_comment WHERE sSeq = #{sSeq}

@@ -30,8 +30,8 @@ public class ShortsCommentDAO {
 	}
 	
 
-	public List<ShortsCommentVO> getShortsCommentList(ShortsCommentVO vo){
-		return mybatis.selectList("ShortsCommentMapper.getShortsCommentList", vo);
+	public List<ShortsCommentVO> getShortsCommentList(int sSeq){
+		return mybatis.selectList("ShortsCommentMapper.getShortsCommentList", sSeq);
 	}
 	
 	public ShortsCommentVO getShortsComment(ShortsCommentVO vo) {
