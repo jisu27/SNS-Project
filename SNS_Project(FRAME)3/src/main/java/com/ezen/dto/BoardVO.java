@@ -14,7 +14,14 @@ public class BoardVO {
 	private Date inDate;
 	private MultipartFile uploadfile;
 	private int count;
+	private String keyWord;
 
+	public String getKeyWord() {
+		return keyWord;
+	}
+	public void setKeyWord(String keyWord) {
+		this.keyWord = keyWord;
+	}
 	public int getCount() {
 		return count;
 	}
@@ -88,8 +95,10 @@ public class BoardVO {
 
 	@Override
 	public String toString() {
-		return "BoardVO [bSeq=" + bSeq + ", title=" + title + ", id=" + id + ", pay=" + pay + ", content=" + content
-				+ ", upload=" + upload + ", inDate=" + inDate + ", uploadfile=" + uploadfile + ", count=" + count + "]";
+		return "BoardVO [bSeq=" + bSeq + ", title=" + title + ", id=" + id
+				+ ", pay=" + pay + ", content=" + content + ", upload=" + upload
+				+ ", inDate=" + inDate + ", uploadfile=" + uploadfile
+				+ ", count=" + count + ", keyWord=" + keyWord + "]";
 	}
 
 }
