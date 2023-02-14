@@ -88,39 +88,43 @@ public class BoardController {
 			System.out.println("recoMemberList = " + recoMemberList);
 			model.addAttribute("recoMember", recoMemberList);
 
-			if (bVo.getKeyWord() == null) {
-				bVo.setKeyWord("");
-			}
-			if (sVo.getSearchKeyword() == null) {
-				sVo.setSearchKeyword("");
-			}
-
 		}
-		List<BoardVO> boardList = new ArrayList<>();
+		if (bVo.getKeyWord() == null) {
+			bVo.setKeyWord("");
+		}
+		if (sVo.getSearchKeyword() == null) {
+			sVo.setSearchKeyword("");
+		}
+
+		List<BoardVO> newBoardList = new ArrayList<>();
 
 		List<BoardVO> getboardList = boardService.getBoardList(bVo);
 		List<BoardVO> getadverList = boardService.getAdverList(bVo);
 
-		for (BoardVO vo : getadverList) {
-			int i = getboardList.size();
+		for (int i = 0; i < getboardList.size() + getadverList.size(); i++) {
+			int j = 0;
+			int k = 0;
+
+			if (i != 0 && i % 3 == 0 && j <= (getadverList.size() - 1)) {
+				newBoardList.add(i, getadverList.get(j));
+				j++;
+			} else {
+				newBoardList.add(i, getboardList.get(k));
+				k++;
+			}
 
 		}
 
 		List<MemberVO> memberList = new ArrayList<>();
-		List<MemberVO> adverMemberList = new ArrayList<>();
-
 		List<CommentVO> commentList = new ArrayList<CommentVO>();
-		List<CommentVO> adCommentList = new ArrayList<CommentVO>();
 
 		List<String> time = new ArrayList<>();
-		List<String> adtime = new ArrayList<>();
-
 		List<String> stime = new ArrayList<>();
 
 		List<ShortsVO> shortsList = shortsService.getShortsList(sVo);
 		List<MemberVO> shortsMemberList = new ArrayList<>();
 
-		for (BoardVO vo : getboardList) {
+		for (BoardVO vo : newBoardList) {
 
 			LocalDate boarDate = vo.getInDate().toInstant()
 					.atZone(ZoneId.systemDefault()).toLocalDate();
@@ -154,39 +158,7 @@ public class BoardController {
 			List<CommentVO> cvo = commentService.getCommentList(cVo);
 			commentList.addAll(cvo);
 		}
-
-		for (BoardVO vo : getadverList) {
-			LocalDate boarDate = vo.getInDate().toInstant()
-					.atZone(ZoneId.systemDefault()).toLocalDate();
-			Period btn = Period.between(boarDate, LocalDate.now());
-			String btnTime;
-
-			if (btn.getYears() != 0) {
-				btnTime = btn.getYears() + "년" + btn.getMonths() + "월"
-						+ btn.getDays() + "일 전";
-			} else if (btn.getMonths() != 0) {
-				btnTime = btn.getMonths() + "월" + btn.getDays() + "일 전";
-			} else {
-				btnTime = btn.getDays() + "일 전";
-			}
-			adtime.add(btnTime);
-
-			MemberVO mvo = new MemberVO();
-			mvo.setId(vo.getId());
-
-			MemberVO v1 = memberService.MemberCheck(mvo);
-			adverMemberList.add(v1);
-
-			HeartVO hvo = new HeartVO();
-			hvo.setBseq(vo.getbSeq());
-
-			int like = heartService.likeCount(hvo);
-			vo.setCount(like);
-
-			cVo.setBseq(vo.getbSeq());
-			List<CommentVO> cvo = commentService.getCommentList(cVo);
-			adCommentList.addAll(cvo);
-		}
+		System.out.println("commentList==================" + commentList);
 
 		for (ShortsVO vo : shortsList) {
 			LocalDate shortsDate = vo.getInDate().toInstant()
@@ -211,18 +183,12 @@ public class BoardController {
 			stime.add(stnTime);
 		}
 
+		model.addAttribute("newBoardList", newBoardList);
 		model.addAttribute("time", time);
-		model.addAttribute("adtime", adtime);
 		model.addAttribute("stime", stime);
-
 		model.addAttribute("memberList", memberList);
-		model.addAttribute("admemberList", adverMemberList);
-
-		model.addAttribute("boardList", getboardList);
-		model.addAttribute("adverList", getadverList);
 
 		model.addAttribute("commentList", commentList);
-		model.addAttribute("adcommentList", adCommentList);
 		model.addAttribute("shortsList", shortsList);
 		model.addAttribute("getshortsList", shortsMemberList);
 

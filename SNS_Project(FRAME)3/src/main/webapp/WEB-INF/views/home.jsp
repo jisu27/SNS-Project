@@ -73,7 +73,7 @@
 
 				<div class="contents_box">
 
-					<c:forEach items="${boardList}" var="board" varStatus="status">
+					<c:forEach items="${newBoardList}" var="board" varStatus="status">
 
 						<article class="contents">
 							<header class="top">
@@ -267,7 +267,7 @@
 							</div>
 						</article>
 
-						<!-- 광고 게시물 -->
+						<!-- 광고 게시물 
 						<c:if test="${status.index%3==0}">
 							<c:if test="${not empty adverList[status.index/3]}">
 
@@ -472,6 +472,7 @@
 								</article>
 							</c:if>
 						</c:if>
+						-->
 
 
 					</c:forEach>

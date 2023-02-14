@@ -27,13 +27,10 @@
 	</select>
 
 	<select id="getCommentList" resultType="comment">
-		SELECT s.*
-		FROM
-		SNS_COMMENT s
-		join board b
-		on b.bseq = s.bseq
-		where b.bseq = #{bseq}
-		order by s.indate DESC
+		SELECT *
+		FROM SNS_COMMENT 
+		where bseq = 0
+		order by indate DESC
 	</select>
 	
 	<update id="updateCount" parameterType="comment"> 
