@@ -31,7 +31,12 @@
 	<select id="recomMember" resultType="String">
 		SELECT id
 		FROM member
-		ORDER BY
-		PAY
+		ORDER BY PAY
 	</select>
+	<!-- ########################################################################################################################## -->
+	<update id="updateMember" >
+		UPDATE member 
+		SET  id=#{id},profile=#{profile},name=#{name},email=#{email},pwd=#{pwd}
+		WHERE id=#{id}
+	</update>
 </mapper>

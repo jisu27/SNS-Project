@@ -44,4 +44,10 @@ public class ShortServiceImpl implements ShortsService {
 		return sDAO.getShortsList(vo);
 	}
 
+	@Override
+	public void updatePay(int sSeq) {
+		sDAO.updatePay(sSeq);
+		
+	}
+
 }

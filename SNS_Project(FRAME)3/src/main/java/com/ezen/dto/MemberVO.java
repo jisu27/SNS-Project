@@ -1,6 +1,7 @@
 package com.ezen.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,7 +15,6 @@ public class MemberVO {
 	private String email;
 	private Date reg_date;
 	private int pay;
-
 	private MultipartFile file;
 
 	public MultipartFile getFile() {

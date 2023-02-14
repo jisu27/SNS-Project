@@ -37,6 +37,12 @@
 		where b.bseq = #{bseq}
 		order by s.indate DESC
 	</select>
+	
+	<update id="updateCount" parameterType="comment"> 
+        UPDATE SNS_COMMENT
+        SET count=#{count}
+        WHERE cseq=#{cseq} 
+ 	 </update>
 
 	<update id="updateCount" parameterType="comment">
 		UPDATE SNS_COMMENT

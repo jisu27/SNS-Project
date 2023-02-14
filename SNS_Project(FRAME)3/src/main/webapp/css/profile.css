@@ -108,20 +108,16 @@
 
 .contents_container.active{
     display: flex;
-    display: inline-block;
+	display:inline-block;
 }
 
 .contents_container .pic{
-    width:300px;
-    height:300px;
+    max-width:300px;
+    max-height:300px;
     overflow:hidden;
     margin-bottom: 18px;
-    object-fit:cover;
-
-
+    display: inline-block;
 }
-
-
 
 .contents_container .pic img{
     width: 100%;

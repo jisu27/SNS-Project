@@ -7,9 +7,12 @@
 		<typeAlias type="com.ezen.dto.CommentVO" alias="comment" />
 		<typeAlias type="com.ezen.dto.BoardVO" alias="board" />
 		<typeAlias type="com.ezen.dto.ShortsVO" alias="shorts" />
+		<typeAlias type="com.ezen.dto.BookMarkVO" alias="bookMark"/>
+		<typeAlias type="com.ezen.dto.AdvertisementVO" alias="advertise" />
 		<typeAlias type="com.ezen.dto.HeartVO" alias="heart" />
 		<typeAlias type="com.ezen.dto.ShortsCommentVO" alias="shortsComment"/>
-		<typeAlias type="com.ezen.dto.BookMarkVO" alias="bookMark"/>
+		<typeAlias type="com.ezen.dto.AdminVO" alias="admin"/>
+
 	</typeAliases>
 
 	<mappers>
@@ -21,5 +24,6 @@
 		<mapper resource="mappings/HeartMapper.xml" />
 		<mapper resource="mappings/ShortsCommentMapper.xml"/>
 		<mapper resource="mappings/BookMarkMapper.xml"/>
+		<mapper resource="mappings/AdminMapper.xml" />
 	</mappers>
 </configuration>

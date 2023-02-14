@@ -15,5 +15,6 @@ public interface ShortsService {
 	void deleteShorts(ShortsVO vo);
 	
 	List<ShortsVO> getShortsList(ShortsVO vo);
-
+	
+	void updatePay(int sSeq);
 }

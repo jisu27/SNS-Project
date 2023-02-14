@@ -44,5 +44,11 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.recomMember();
 	}
 
+	@Override
+	public void updateMember(MemberVO vo) {
+		mDao.updateMember(vo);
+		
+	}
+
 
 }

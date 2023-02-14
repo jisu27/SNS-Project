@@ -46,7 +46,7 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public void updateCount(CommentVO vo) {
 		cDao.updateCount(vo);
-		
+
 	}
 
 }

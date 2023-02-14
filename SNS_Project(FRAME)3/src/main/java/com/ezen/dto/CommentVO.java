@@ -41,8 +41,11 @@ public class CommentVO {
 	}
 	@Override
 	public String toString() {
-		return "CommentVO [cseq=" + cseq + ", bSeq=" + bSeq + ", id=" + id + ", ccontent=" + ccontent + ", indate="
-				+ indate + ", count=" + count + "]";
+
+		return "CommentVO [cseq=" + cseq + ", bSeq=" + bSeq + ", id=" + id
+				+ ", ccontent=" + ccontent + ", indate=" + indate + ", count="
+				+ count + "]";
+
 	}
 	public int getCount() {
 		return count;
@@ -56,7 +59,5 @@ public class CommentVO {
 	public void setbSeq(int bSeq) {
 		this.bSeq = bSeq;
 	}
-	
-	
-	
+
 }

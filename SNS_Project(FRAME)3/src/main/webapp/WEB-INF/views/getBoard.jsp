@@ -204,7 +204,6 @@
 															</c:otherwise>
 														</c:choose>
 
-													</div>
 												</div>
 											</c:if>
 										</div>

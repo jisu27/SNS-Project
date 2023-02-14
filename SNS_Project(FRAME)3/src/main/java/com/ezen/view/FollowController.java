@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ezen.dto.FollowVO;
 import com.ezen.dto.MemberVO;
@@ -79,6 +80,14 @@ public class FollowController {
 		session.setAttribute("follower", list);
 
 		return "redirect:profile.do?id=" + vo.getId2();
+	}
+	
+	@GetMapping("recoMember.do")
+	public String recoMember(MemberVO memberList,Model model) {
+		
+		model.addAttribute("memberList",memberList);
+		
+		return "recoMember";
 	}
 
 }

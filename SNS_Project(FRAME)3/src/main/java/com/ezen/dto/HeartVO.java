@@ -50,8 +50,9 @@ public class HeartVO {
 
 	@Override
 	public String toString() {
-		return "HeartVO [hSeq=" + hSeq + ", bSeq=" + bSeq + ", cseq=" + cseq + ", id=" + id + ", use_like=" + use_like
-				+ "]";
+
+		return "HeartVO [hSeq=" + hSeq + ", bSeq=" + bSeq + ", cseq=" + cseq
+				+ ", id=" + id + ", use_like=" + use_like + "]";
 	}
 
 	public int getCseq() {
@@ -61,5 +62,6 @@ public class HeartVO {
 	public void setCseq(int cseq) {
 		this.cseq = cseq;
 	}
+
 
 }
