@@ -4,6 +4,7 @@ public class HeartVO {
 	
 	private int hSeq;
 	private int bSeq;
+	private int cseq;
 	private String id; 
 	private String use_like;
 	
@@ -12,6 +13,7 @@ public class HeartVO {
 	public int gethSeq() {
 		return hSeq;
 	}
+	
 	public void sethSeq(int hSeq) {
 		this.hSeq = hSeq;
 	}
@@ -39,11 +41,25 @@ public class HeartVO {
 	public void setUse_like(String use_like) {
 		this.use_like = use_like;
 	}
+
+	
+
 	@Override
 	public String toString() {
+
 		return "HeartVO [hSeq=" + hSeq + ", bSeq=" + bSeq + ", id=" + id
 				+ ", use_like=" + use_like + "]";
+
 	}
+
+	public int getCseq() {
+		return cseq;
+	}
+
+	public void setCseq(int cseq) {
+		this.cseq = cseq;
+	}
+	
 	
 	
 	

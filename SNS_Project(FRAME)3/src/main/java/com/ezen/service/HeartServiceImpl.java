@@ -44,4 +44,22 @@ public class HeartServiceImpl implements HeartService {
 		return hDao.getLikeCount(vo);
 	}
 
+	@Override
+	public List<Integer> commentLike(HeartVO vo) {
+		
+		return hDao.commentLike(vo);
+	}
+
+	@Override
+	public int likeCommentCount(HeartVO vo) {
+		
+		return hDao.getLikeCommentCount(vo);
+	}
+
+	@Override
+	public void deleteLike_c(HeartVO vo) {
+		hDao.deleteLike_c(vo);
+		
+	}
+
 }
