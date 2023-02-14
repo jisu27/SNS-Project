@@ -1,3 +1,18 @@
+.word1{
+	width:300px;
+	 word-wrap: break-word;
+        display: webkit-box;
+        -webkit-line-clamp: 4 ;
+        -webkit-box-orient: vertical;
+}
+.word2{
+	width:240px;
+	 word-wrap: break-word;
+        display: webkit-box;
+        -webkit-line-clamp: 4 ;
+        -webkit-box-orient: vertical;
+}
+
 .m_text {
 	font-size: 14px;
 	font-weight: bold;

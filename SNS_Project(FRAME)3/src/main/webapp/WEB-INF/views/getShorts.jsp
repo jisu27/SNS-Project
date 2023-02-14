@@ -125,7 +125,7 @@
 							<header class="top">
 								<div class="user_container">
 									<div class="profile_img">
-										<img src="imgs/thumb.jpeg" alt="">
+										<img src="profile/${profile}" alt="">
 									</div>
 									<div class="user_name">
 										<div class="nick_name">${shorts.id}</div>

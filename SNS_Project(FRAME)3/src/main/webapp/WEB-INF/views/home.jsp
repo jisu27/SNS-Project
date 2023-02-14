@@ -185,7 +185,7 @@
 										<div class="comment" id="comment-list-ajax-post37">
 											<div class="comment-detail">
 												<div class="nick_name m_text">${comment.id}</div>
-												<div>${comment.ccontent}</div>
+												<div class="word1">${comment.ccontent}</div>
 											</div>
 										</div>
 										<c:if test="${sessionScope.user.id == comment.id}">

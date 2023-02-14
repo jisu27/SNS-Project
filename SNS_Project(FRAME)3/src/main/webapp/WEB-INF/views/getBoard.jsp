@@ -130,8 +130,9 @@
 												alt="user">
 										</div>
 										<div class="comment">
-											<span class="user_id">${comment.id}</span>
-											${comment.ccontent}
+											<span class="user_id">${comment.id}</span><br>
+											<div class="word2">${comment.ccontent}</div>
+											<br>
 
 											<div class="time" style="font-size: small;">
 												<fmt:formatDate var="comDate" value="${comment.indate}"
