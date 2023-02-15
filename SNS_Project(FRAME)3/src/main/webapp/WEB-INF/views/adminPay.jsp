@@ -107,6 +107,7 @@ table, tr, th {
 						<th>아이디</th>
 						<th>게시물 번호</th>
 						<th>요청일</th>
+						<th>승인 취소</th>
 
 					</tr>
 
@@ -126,6 +127,8 @@ table, tr, th {
 							</c:choose>
 							<th><fmt:formatDate pattern="yyyy-MM-dd"
 									value="${demend.inDate}" /></th>
+									<th><input type="submit" value="승인 취소"></th>
+									
 						</tr>
 					</c:forEach>
 				</table>
