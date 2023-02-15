@@ -3,7 +3,6 @@ package com.ezen.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Service;
 
 import com.ezen.dao.MemberDao;
@@ -42,6 +41,12 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public List<String> recomMember() {
 		return mDao.recomMember();
+	}
+
+	@Override
+	public void updateMember(MemberVO vo) {
+		mDao.updateMember(vo);
+		
 	}
 
 

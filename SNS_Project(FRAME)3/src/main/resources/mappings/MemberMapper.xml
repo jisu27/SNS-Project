@@ -34,4 +34,10 @@
 		ORDER BY
 		PAY
 	</select>
+	<!-- ########################################################################################################################## -->
+	<update id="updateMember" >
+		UPDATE member 
+		SET  id=#{id},profile=#{profile},name=#{name},email=#{email},pwd=#{pwd}
+		WHERE id=#{id}
+	</update>
 </mapper>

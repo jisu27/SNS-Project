@@ -32,14 +32,15 @@
 					</a>
 				</h1>
 
-				<div class="search_box">
+				<form div class="search_box">
+
 					<input type="text" name="keyWord" placeholder="검색"
 						id="search-field">
 
-					<div class="fake_field">
+					<div class="fake_field" onclick="search()">
 						<span class="sprite_small_search_icon"></span> <span>검색</span>
 					</div>
-				</div>
+				</form>
 
 				<input type="hidden" id="check" value="${sessionScope.user.id}">
 				<div class="right_icons">
@@ -95,6 +96,11 @@
 									<div class="sprite_more_icon" data-name="more"
 										onclick="toggle(this.children[0])">
 										<ul class="toggle_box" id="toggle_box${status.count}">
+										<c:if test="${board.pay!=1}">
+											<li>
+												<a href="insertAD.do?bSeq=${board.bSeq}&id=${sessionScope.user.id}"><input type="button" value="광고 요청"></a>
+			                                </li>    
+										</c:if>
 
 											<li><a href="goUpdateBoard.do?bSeq=${board.bSeq}"> <input
 													type="button" value="수정"></a></li>
@@ -301,8 +307,9 @@
 								<div class="thumb_user">
 									<div class="profile_thumb">
 										<a href="getShorts?sSeq=${shorts.sSeq}"><img
-											src="../profile/${getshortsList[status.index].profile}"
-											alt="프로필사진"></a>
+
+								src="profile/${getshortsList[status.index].profile}" alt="프로필사진"></a>
+
 									</div>
 									<div class="detail">
 
@@ -319,14 +326,14 @@
 					<article class="recommend">
 						<header class="reco_header">
 							<div>회원님을 위한 추천</div>
-							<div class="more">모두 보기</div>
 						</header>
+						<div class="scroll_inner"> 
 						<c:forEach var="reco" items="${recoMember}">
 							<div class="thumb_user">
 
 								<div class="profile_thumb">
 									<a href="profile.do?id=${reco.id}"><img
-										src="../profile/${reco.profile}" alt=""></a>
+										src="profile/${reco.profile}" alt=""></a>
 								</div>
 								<div class="detail">
 									<div class="id">${reco.id}</div>
@@ -334,6 +341,7 @@
 								</div>
 							</div>
 						</c:forEach>
+						</div>
 
 					</article>
 				</div>
@@ -382,9 +390,13 @@ function toggle(element){
    }
    
 }
-function click(){
-   return;
+
+function search() {
+	$(".search_box").attr("action","home.do").submit();
+
 }
+
+
 </script>
 
 

@@ -35,9 +35,17 @@
 	</select>
 
 	<select id="getShortsList" resultType="shorts">
-		select * from shorts order
-		by sSeq DESC
+		select * 
+		from shorts
+		WHERE scontent LIKE '%'||#{searchKeyword}||'%' 
+		ORDER BY sSeq DESC
 	</select>
-
+	
+	<!-- #################################################################################################################### -->
+	<update id="updatePay" parameterType="shorts">
+		UPDATE board
+		SET pay=pay+1
+		WHERE sSeq=#{sSeq}
+	</update>
 
 </mapper>

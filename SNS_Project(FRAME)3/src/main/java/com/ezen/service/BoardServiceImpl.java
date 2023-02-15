@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 import com.ezen.dao.BoardDAO;
 import com.ezen.dto.BoardVO;
 
-import com.ezen.dto.JoinBoardVO;
-
 @Service("BoardService")
 public class BoardServiceImpl implements BoardService {
 
@@ -74,6 +72,10 @@ public class BoardServiceImpl implements BoardService {
 		
 		return bDao.boardCount(vo);
 	}
-	
 
+	@Override
+	public void updatePay(int bSeq) {
+		bDao.updatePay(bSeq);
+	}
+	
 }

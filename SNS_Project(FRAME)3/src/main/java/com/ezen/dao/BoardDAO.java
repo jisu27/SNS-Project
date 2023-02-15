@@ -55,4 +55,7 @@ public class BoardDAO {
 	public int boardCount(BoardVO vo) {
 		return mybatis.selectOne("boardMapper.boardCount", vo);
 	}
+	public void updatePay(int bSeq) {
+		mybatis.selectOne("boardMapper.updatePay",bSeq);
+	}
 }

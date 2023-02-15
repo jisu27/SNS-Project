@@ -188,8 +188,6 @@ public class HeartController {
 
 		List<BoardVO> boardList = new ArrayList<>();
 		List<HeartVO> heartList = heartService.boardLike(hvo);
-		List<MemberVO> memberList = new ArrayList<>();
-		List<CommentVO> commentList = new ArrayList<>();
 
 		MemberVO mvo = new MemberVO();
 
@@ -199,18 +197,8 @@ public class HeartController {
 			BoardVO board = boardService.myBoard(bvo);
 			boardList.add(board);
 
-			cvo.setCseq(vo.getCseq());
-			CommentVO comment = commentService.getComment(cvo);
-			commentList.add(comment);
-
-			mvo.setId(board.getId());
-			MemberVO member = memberService.MemberCheck(mvo);
-			memberList.add(member);
-
 		}
 		model.addAttribute("boardList", boardList);
-		model.addAttribute("memberList", memberList);
-		model.addAttribute("commentList", commentList);
 
 		return "likeList";
 

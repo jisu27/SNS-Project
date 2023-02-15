@@ -38,7 +38,9 @@
 <link rel="stylesheet" href="css/profile.css">
 <link rel="shortcut icon" href="imgs/instagram.png">
 
-
+<script src="https://code.jquery.com/jquery-3.6.3.js"
+	integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+	crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -95,7 +97,7 @@
                         <div class="user_name">${member.name}</div>
                         <c:choose>
                         	<c:when test="${sessionScope.user.id==member.id}">
-	    	                    <a href="profile_edit.html" class="profile_edit">프로필편집</a>
+	    	                    <a href="profile_edit.do?id=${sessionScope.user.id}" class="profile_edit">프로필편집</a>
 		                        <a href="logout.do" class="logout">로그아웃</a>
                         	</c:when>
                         	<c:otherwise>

@@ -77,40 +77,44 @@
 	<section id="container">
 
 		<header id="header">
-			<section class="h_inner">
+			<section class="inner">
 
 				<h1 class="logo">
-					<a href="index.html">
+					<a href="home.do" id="goProfile5" onclick="check_id()">
 						<div class="sprite_insta_icon"></div>
-						<div>
-							<div class="sprite_write_logo"></div>
-						</div>
+						<div class="sprite_write_logo"></div>
 					</a>
 				</h1>
 
-				<div class="search_field">
-					<input type="text" placeholder="검색" tabindex="0">
+				<form div class="search_box">
+					<input type="text" name="searchKeyword" placeholder="검색"
+						id="search-field">
 
-					<div class="fake_field">
-						<span class=sprite_small_search_icon></span> <span>검색</span>
+					<div class="fake_field" onclick="search()">
+						<span class="sprite_small_search_icon"></span> <span>검색</span>
 					</div>
-				</div>
+				</form>
 
-
+				<input type="hidden" id="check" value="${sessionScope.user.id}">
 				<div class="right_icons">
-					<a href="new_post.html"><div class="sprite_camera_icon"></div></a>
-					<a href="login.html"><div class="sprite_compass_icon"></div></a> <a
-						href="follow.html"><div class="sprite_heart_icon_outline"></div></a>
-					<a href="profile.html"><div class="sprite_user_icon_outline"></div></a>
+					<a id="goProfile1" href="goInsertBoard.do" onclick="check_id()"><div
+							class="sprite_camera_icon"></div></a> <a id="goProfile2" href="/"
+						onclick="check_id()"><div class="sprite_compass_icon"></div></a> <a
+						id="goProfile3" href="getLikeList.do?id=${sessionScope.user.id}"
+						onclick="check_id()"><div class="sprite_heart_icon_outline"></div></a>
+					<a id="goProfile4" href="profile.do?id=${sessionScope.user.id}"
+						onclick="check_id()"><div class="sprite_user_icon_outline"></div></a>
+					<a href="insertShorts"><div class="sprite_short_icon"></div></a>
 				</div>
-			</section>
-		</header>
 
+			</section>
+
+		</header>
 
 		<div id="main_container">
 
 			<section class="b_inner">
-<!--  
+<!-- 
 				<div class="hori_cont">
 					<div class="profile_wrap">
 						<div class="profile_img">
@@ -137,7 +141,8 @@
 
 					</div>
 				</div>
--->
+ -->
+
 
 
 				<div class="mylist_contents contents_container active">
@@ -200,6 +205,9 @@
 	<!--<script src="js/insta.js"></script>-->
 	<script src="js/profile.js"></script>
 	<script>
+	function search() {
+		$(".search_box").attr("action","home.do").submit();
+	}
 	</script>
 </body>
 </html>

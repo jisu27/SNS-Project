@@ -43,7 +43,8 @@ public class HeartDAO {
 
 	public List<Integer> commentLike(HeartVO vo) {
 
-		return mybatis.selectList("heartMapper.likeComment", vo);
+		return mybatis.selectList("heartMapper.likeComment",vo);
+
 	}
 
 	public int getLikeCommentCount(HeartVO vo) {
