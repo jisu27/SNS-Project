@@ -6,7 +6,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.ezen.dto.BoardVO;
 import com.ezen.dto.HeartVO;
 
 @Repository
@@ -40,7 +39,6 @@ public class HeartDAO  {
 	}
 	
 	public List<Integer> commentLike(HeartVO vo) {
-		
 		return mybatis.selectList("heartMapper.likeComment",vo);
 	}
 	

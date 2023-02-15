@@ -15,4 +15,6 @@ public interface MemberService {
 	void insertMember(MemberVO vo);
 
 	List<String> recomMember();
+	
+	void updateMember(MemberVO vo);
 }

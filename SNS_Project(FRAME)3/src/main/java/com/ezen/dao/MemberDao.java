@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ezen.dto.MemberVO;
-import com.ezen.service.MemberService;
 
 @Repository
 public class MemberDao{
@@ -30,6 +29,9 @@ public class MemberDao{
 	}
 	public List<String> recomMember(){
 		return mybatis.selectList("memberMapper.recomMember");
+	}
+	public void updateMember(MemberVO vo) {
+		mybatis.update("memberMapper.updateMember",vo);
 	}
 }
 

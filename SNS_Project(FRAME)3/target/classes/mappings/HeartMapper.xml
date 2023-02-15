@@ -11,7 +11,7 @@
 	<select id="likeBoard" resultType="heart">
 		SELECT bseq
 		FROM heart
-		WHERE id=#{id}
+		WHERE id=#{id} AND cseq=0
 	</select>
 	<!-- ###################################################################################################################### -->
 	<select id="likeComment" resultType="Integer">

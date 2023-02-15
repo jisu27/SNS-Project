@@ -121,13 +121,17 @@ public class LoginController {
 
 				HeartVO hvo = new HeartVO();
 				hvo.setId(mvo.getId().toString());
+				
+				
 
 				List<HeartVO> heart = heartService.boardLike(hvo);
+				List<Integer> c_heart = heartService.commentLike(hvo);
 				List<String> follower = followService.getFollowList(fvo);
 
 				session.setAttribute("user", mvo);
 				session.setAttribute("follower", follower);
 				session.setAttribute("heart", heart);
+				session.setAttribute("c_heart", c_heart);
 
 				if (mvo.getRole() == 1) {
 
@@ -188,6 +192,37 @@ public class LoginController {
 
 		return "findId";
 	}
+	@GetMapping("profile_edit.do")
+	public String goProfileEdit(MemberVO vo, Model model) {
+
+		MemberVO member = memberService.MemberCheck(vo);
+		model.addAttribute("member", member);
+
+		return "profile_edit";
+	}
+	// ##############################################################################################################--updateMember
+		@PostMapping("updateMember.do")
+		public String updateMember(MemberVO vo, HttpSession session)
+				throws IllegalStateException, IOException {
+
+			String fileName = "";
+
+			if (!vo.getFile().isEmpty()) {
+
+				fileName = vo.getFile().getOriginalFilename();
+				String realPath = session.getServletContext()
+						.getRealPath("/profile/");
+				vo.getFile().transferTo(new File(fileName + realPath));
+
+				vo.setProfile(vo.getFile().getOriginalFilename());
+			} else {
+				vo.setProfile("no-image.png");
+			}
+
+			memberService.updateMember(vo);
+
+			return "redirect:profile.do?id=" + vo.getId();
+		}
 
 //	##############################################################################################################--myPage.do
 	@GetMapping("/logout.do")

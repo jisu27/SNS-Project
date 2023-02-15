@@ -32,13 +32,14 @@
 					</a>
 				</h1>
 
-				<div class="search_box">
-					<input type="text" name="keyWord" placeholder="검색" id="search-field">
+				<form div class="search_box">
+					<input type="text" name="keyWord" placeholder="검색"
+						id="search-field">
 
-					<div class="fake_field">
+					<div class="fake_field" onclick="search()">
 						<span class="sprite_small_search_icon"></span> <span>검색</span>
 					</div>
-				</div>
+				</form>
 
 				<input type="hidden" id="check" value="${sessionScope.user.id}">
 				<div class="right_icons">
@@ -325,7 +326,7 @@
 
 								<div class="profile_thumb">
 									<a href="profile.do?id=${reco.id}"><img
-										src="../profile/${reco.profile}" alt=""></a>
+										src="profile/${reco.profile}" alt=""></a>
 								</div>
 								<div class="detail">
 									<div class="id">${reco.id}</div>
@@ -381,9 +382,11 @@ function toggle(element){
 	}
 	
 }
-function click(){
-	return;
+function search() {
+	$(".search_box").attr("action","home.do").submit();
 }
+
+
 </script>
 
 
