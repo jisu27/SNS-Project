@@ -10,47 +10,32 @@ import com.ezen.dto.ShortsCommentVO;
 
 @Repository
 public class ShortsCommentDAO {
-	
+
 	@Autowired
 	private SqlSessionTemplate mybatis;
-	
-	
-	public void insertShortsComment(ShortsCommentVO vo) {
+
+	public void insertComment(ShortsCommentVO vo) {
 		mybatis.insert("ShortsCommentMapper.insertShortsComment", vo);
 	}
-	
-	
-	public void updateShortsComment(ShortsCommentVO vo) {
+
+	public void updateComment(ShortsCommentVO vo) {
 		mybatis.update("ShortsCommentMapper.updateShortsComment", vo);
 	}
 
-
-	public void deleteShortsComment(ShortsCommentVO vo) {
+	public void deleteComment(ShortsCommentVO vo) {
 		mybatis.delete("ShortsCommentMapper.deleteShortsComment", vo);
 	}
-	
 
-	public List<ShortsCommentVO> getShortsCommentList(ShortsCommentVO vo){
-		return mybatis.selectList("ShortsCommentMapper.getShortsCommentList", vo);
+	public List<ShortsCommentVO> getCommentList(int sSeq) {
+		return mybatis.selectList("ShortsCommentMapper.getShortsCommentList", sSeq);
 	}
-	
-	public ShortsCommentVO getShortsComment(ShortsCommentVO vo) {
+
+	public ShortsCommentVO getComment(ShortsCommentVO vo) {
 		return mybatis.selectOne("ShortsCommentMapper.getShortsComment", vo);
 	}
 
-	public int getCountShortsCommentList(int s_seq) {
-		return mybatis.selectOne("ShortsCommentMapper.getCountShortsCommentList", s_seq);
+	public int getCountCommentList(int sSeq) {
+		return mybatis.selectOne("ShortsCommentMapper.getCountShortsCommentList", sSeq);
 	}
-	
-	
+
 }
-
-
-
-
-
-
-
-
-
-

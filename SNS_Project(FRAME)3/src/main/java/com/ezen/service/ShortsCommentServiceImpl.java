@@ -15,36 +15,36 @@ public class ShortsCommentServiceImpl implements ShortsCommentService {
 	private ShortsCommentDAO sdao;
 
 	@Override
-	public void insertShortsComment(ShortsCommentVO vo) {
-		sdao.insertShortsComment(vo);
+	public void insertComment(ShortsCommentVO vo) {
+		sdao.insertComment(vo);
 
 	}
 
 	@Override
-	public void updateShortsComment(ShortsCommentVO vo) {
-		sdao.updateShortsComment(vo);
+	public void updateComment(ShortsCommentVO vo) {
+		sdao.updateComment(vo);
 
 	}
 
 	@Override
-	public void deleteShortsComment(ShortsCommentVO vo) {
-		sdao.deleteShortsComment(vo);
+	public void deleteComment(ShortsCommentVO vo) {
+		sdao.deleteComment(vo);
 
 	}
 
 	@Override
-	public List<ShortsCommentVO> getShortsCommentList(ShortsCommentVO vo) {
-		return sdao.getShortsCommentList(vo);
+	public List<ShortsCommentVO> getCommentList(int sSeq) {
+		return sdao.getCommentList(sSeq);
 	}
 
 	@Override
-	public ShortsCommentVO getShortsComment(ShortsCommentVO vo) {
-		return sdao.getShortsComment(vo);
+	public ShortsCommentVO getComment(ShortsCommentVO vo) {
+		return sdao.getComment(vo);
 	}
 
 	@Override
-	public int getCountShortsCommentList(int s_seq) {
-		return sdao.getCountShortsCommentList(s_seq);
+	public int getCountCommentList(int scSeq) {
+		return sdao.getCountCommentList(scSeq);
 	}
 
 }

@@ -13,20 +13,16 @@
 
 
 	<mvc:annotation-driven></mvc:annotation-driven>
-	<mvc:resources location="file:///c:/shorts/"
-		mapping="/shorts/**"></mvc:resources>
+	<mvc:resources location="file:///c:/shorts/" mapping="/shorts/**"/>
 	<mvc:resources mapping="/images/**" location="/images/" />
-	<mvc:resources mapping="/views/**"
-		location="/WEB-INF/views/" />
+	<mvc:resources mapping="/views/**" location="/WEB-INF/views/" />
 	<mvc:resources mapping="/icon/**" location="/icon/" />
 	<mvc:resources mapping="/profile/**" location="/profile/" />
 	<mvc:resources mapping="/imgs/**" location="/imgs/" />
 	<mvc:resources mapping="/css/**" location="/css/" />
 	<mvc:resources mapping="/js/**" location="/js/" />
-	<mvc:resources location="/adverimages/"
-		mapping="/adverimages/**" />
-	<mvc:resources location="/WEB-INF/views/"
-		mapping="/views/**" />
+	<mvc:resources location="/adverimages/" mapping="/adverimages/**" />
+	<mvc:resources location="/WEB-INF/views/" mapping="/views/**" />
 
 
 	<bean

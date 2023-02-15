@@ -11,6 +11,7 @@
 		<typeAlias type="com.ezen.dto.HeartVO" alias="heart" />
 		<typeAlias type="com.ezen.dto.ShortsCommentVO" alias="shortsComment"/>
 		<typeAlias type="com.ezen.dto.AdminVO" alias="admin"/>
+		<typeAlias type="com.ezen.dto.ShortslikeVO" alias="shortslike"/>
 	</typeAliases>
 
 	<mappers>
@@ -23,5 +24,6 @@
 		<mapper resource="mappings/HeartMapper.xml" />
 		<mapper resource="mappings/ShortsCommentMapper.xml"/>
 		<mapper resource="mappings/AdminMapper.xml" />
+		<mapper resource="mappings/ShortslikeMapper.xml"/>
 	</mappers>
 </configuration>

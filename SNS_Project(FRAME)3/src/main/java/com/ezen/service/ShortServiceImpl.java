@@ -16,21 +16,17 @@ public class ShortServiceImpl implements ShortsService {
 
 	@Override
 	public ShortsVO getShorts(ShortsVO vo) {
-
-		System.out.println("==getShort service �떎�뻾: " + vo);
 		return sDAO.getShorts(vo);
 	}
 
 	@Override
 	public void insertShorts(ShortsVO vo) {
 		sDAO.insertShorts(vo);
-
 	}
 
 	@Override
 	public void updateShorts(ShortsVO vo) {
 		sDAO.updateShorts(vo);
-		System.out.println("--updateShortService �떎�뻾: " + vo);
 	}
 
 	@Override
@@ -45,9 +41,18 @@ public class ShortServiceImpl implements ShortsService {
 	}
 
 	@Override
-	public void updatePay(int sSeq) {
-		sDAO.updatePay(sSeq);
-		
+	public int shortsCount(ShortsVO vo) {
+		return sDAO.shortsCount(vo);
 	}
 
+	@Override
+	public void shortslikeUpdate(ShortsVO vo) {
+		sDAO.shortslikeUpdate(vo);
+	}
+
+	@Override
+	public void updatePay(int sSeq) {
+		sDAO.updatePay(sSeq);
+
+	}
 }

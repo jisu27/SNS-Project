@@ -13,8 +13,13 @@ public interface ShortsService {
 	void updateShorts(ShortsVO vo);
 
 	void deleteShorts(ShortsVO vo);
-	
+
 	List<ShortsVO> getShortsList(ShortsVO vo);
 
+	int shortsCount(ShortsVO vo);
+
+	void shortslikeUpdate(ShortsVO vo);
+
 	void updatePay(int sSeq);
+
 }

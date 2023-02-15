@@ -3,36 +3,30 @@
 <mapper namespace="ShortsCommentMapper">
 
     <insert id="insertShortsComment" parameterType="shortsComment">
-		INSERT INTO
-		shorts_COMMENT(scSeq, sSeq, id, content)
-		VALUES (SComment_seq.NEXTVAL, #{sSeq}, #{id}, #{content})
+		INSERT INTO	shorts_comment(scSeq, sSeq, id, content)
+		VALUES (seq_comment.NEXTVAL, #{sSeq}, #{id}, #{content})
 	</insert>
 	
 	<update id = "updateShortsComment" parameterType="shortsComment">
-		UPDATE Shorts_comment set content=#{content}
-		WHERE scSeq=#{scSeq}
+		update Shorts_comment set id=#{id}, content=#{content}
+		where id=#{id}
 	</update>
 	
 	<delete id = "deleteShortsComment" parameterType="shortsComment">
-		DELETE Shorts_comment where scSeq = #{scSeq}
+		delete Shorts_comment where scSeq = #{scSeq} and id = #{id};
 	</delete>
 	
 	<select id = "getShortsComment" resultType="shortsComment">
-		SELECT * FROM Shorts_comment where scSeq = #{scSeq};
+		select * from Shorts where scSeq = #{scSeq};
 	</select>
 	
 	
 	<select id="getShortsCommentList" resultType="shortsComment">
-		SELECT c.*
-		FROM Shorts_comment c
-		JOIN shorts s
-		ON s.sSeq = c.sSeq
-		WHERE s.sSeq = #{sSeq}
-		ORDER BY c.indate DESC
+		SELECT * FROM Shorts_comment WHERE sSeq=#{sSeq} ORDER BY indate DESC
 	</select>
 
-	<select id="countShortsCommentList" resultType="int">
-		SELECT count(*) FROM Shorts_comment WHERE sSeq = #{sSeq}
+	<select id="getcountShortscommentList" resultType="int">
+		SELECT count(*) FROM Shorts_comment WHERE scSeq = #{scSeq}
 	</select>
 	
 	

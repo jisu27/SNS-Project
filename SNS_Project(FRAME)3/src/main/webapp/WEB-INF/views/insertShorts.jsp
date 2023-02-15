@@ -99,6 +99,7 @@
                     <input type="file" name="uploadFile" id="id_photo" required="required">
                 </p>
                 <p>
+                	<input type ="text" name="sTitle" placeholder="제목을 입력하세요" maxlength="28">
                     <textarea name="sContent" id="text_field" cols="50" rows="5" placeholder="140자 까지 등록 가능합니다."></textarea>
 
                 </p>
