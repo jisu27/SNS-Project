@@ -87,7 +87,7 @@
 				</h1>
 
 				<form div class="search_box">
-					<input type="text" name="keyWord" placeholder="검색"
+					<input type="text" name="searchKeyword" placeholder="검색"
 						id="search-field">
 
 					<div class="fake_field" onclick="search()">
