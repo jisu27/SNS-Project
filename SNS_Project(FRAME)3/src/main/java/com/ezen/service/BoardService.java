@@ -27,4 +27,6 @@ public interface BoardService {
 	public int boardCount(BoardVO vo);
 	
 	void updatePay(int bSeq);
+	
+	void updateManusPay(int bSeq);
 }

@@ -13,4 +13,6 @@ public interface AdminService {
 	 void updateAdmin(int aSeq);
 	 
 	 void insertAd(AdminVO vo);
+	 
+	 void updateManusAdmin(int aSeq);
 }

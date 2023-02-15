@@ -69,6 +69,12 @@
 	  		SET pay=pay+1
 	  		WHERE bSeq=#{bSeq} 
 	  </update>
+	 <!-- #################################################################################################################### -->
+	  <update id="update-Pay" parameterType="board"> 
+	  		UPDATE board 
+	  		SET pay=pay-1
+	  		WHERE bSeq=#{bSeq} 
+	  </update>
 	
 </mapper>
 
