@@ -13,6 +13,12 @@
 		FROM heart
 		WHERE id=#{id}
 	</select>
+	
+	<select id="likeShort" resultType="heart">
+		SELECT sSeq 
+		FROM heart 
+		WHERE id=#{id}
+	</select> 
 	<!-- ###################################################################################################################### -->
 	<select id="likeComment" resultType="Integer">
 		SELECT cseq
@@ -30,6 +36,12 @@
 		SELECT count(*)
 		FROM heart h
 		WHERE cseq=#{cseq}
+	</select>
+	
+	<select id="likeShortsCount" resultType="Integer">
+		SELECT count(*)
+		FROM heart 
+		WHERE sSeq=#{sSeq}
 	</select>
 	<!-- ###################################################################################################################### -->
 	<insert id="insertLike">

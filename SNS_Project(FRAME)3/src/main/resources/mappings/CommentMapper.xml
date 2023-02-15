@@ -29,7 +29,7 @@
 	<select id="getCommentList" resultType="comment">
 		SELECT *
 		FROM SNS_COMMENT 
-		where bseq = 0
+		where bseq = #{bSeq}
 		order by indate DESC
 	</select>
 	

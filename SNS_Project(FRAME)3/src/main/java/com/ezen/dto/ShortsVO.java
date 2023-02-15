@@ -14,6 +14,15 @@ public class ShortsVO {
 	private MultipartFile uploadFile;
 	private String sContent;
 	private String searchKeyword;
+	private int count;
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
 
 	public String getSearchKeyword() {
 		return searchKeyword;
