@@ -47,6 +47,7 @@ public class HeartController {
 
 		List<HeartVO> heart = heartService.boardLike(vo);
 		session.setAttribute("heart", heart);
+		System.out.println("heartSession===============" + session.getAttribute("heart"));
 				
 		return "redirect:home.do";
 	}

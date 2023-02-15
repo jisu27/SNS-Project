@@ -38,6 +38,11 @@
 		select * from shorts order
 		by sSeq DESC
 	</select>
-
+	<!-- #################################################################################################################### -->
+	<update id="updatePay" parameterType="shorts">
+		UPDATE board
+		SET pay=pay+1
+		WHERE sSeq=#{sSeq}
+	</update>
 
 </mapper>

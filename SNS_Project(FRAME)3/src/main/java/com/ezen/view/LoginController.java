@@ -113,7 +113,8 @@ public class LoginController {
 
 		if (mvo != null) {
 
-			if (vo.getId().equals(mvo.getId()) && vo.getPwd().equals(mvo.getPwd())) {
+			if (vo.getId().equals(mvo.getId())
+					&& vo.getPwd().equals(mvo.getPwd())) {
 
 				FollowVO fvo = new FollowVO();
 				fvo.setId1(mvo.getId().toString());
@@ -133,7 +134,7 @@ public class LoginController {
 					url = "redirect:/home.do";
 
 				} else {
-					url = "/admin";
+					url = "redirect:goAdmin.do";
 				}
 
 			}

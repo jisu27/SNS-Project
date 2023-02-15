@@ -101,20 +101,21 @@ public class BoardController {
 		List<BoardVO> getboardList = boardService.getBoardList(bVo);
 		List<BoardVO> getadverList = boardService.getAdverList(bVo);
 
-		for (int i = 0; i < getboardList.size() + getadverList.size(); i++) {
-			int j = 0;
-			int k = 0;
+		newBoardList.addAll(getboardList);		
+		int i = 0;
+		
+		for (BoardVO vo : getadverList) {
 
-			if (i != 0 && i % 3 == 0 && j <= (getadverList.size() - 1)) {
-				newBoardList.add(i, getadverList.get(j));
-				j++;
-			} else {
-				newBoardList.add(i, getboardList.get(k));
-				k++;
+			newBoardList.add(i, vo);
+			
+			if (newBoardList.size()>i+4) {
+				i= i+3;				
+			}else {
+				i++;
 			}
-
 		}
-
+		
+		
 		List<MemberVO> memberList = new ArrayList<>();
 		List<CommentVO> commentList = new ArrayList<CommentVO>();
 
