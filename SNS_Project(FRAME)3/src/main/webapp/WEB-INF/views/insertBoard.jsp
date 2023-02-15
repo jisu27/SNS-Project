@@ -81,53 +81,41 @@
 
 
 		<div id="main_container">
-        <div class="post_form_container">
-            <form action="insertBoard.do" method="post" class="post_form" enctype="multipart/form-data">
-            <input type="hidden" name="noImg" value="no-background.png">
-                <div class="title">
-                    NEW POST
-                </div>
-                <div class="preview">
-                    <div class="upload">
-                        <div class="post_btn">
-                            <div class="plus_icon">
-                                <span></span>
-                                <span></span>
-                            </div>
-                            <p>포스트 이미지 추가</p>
-                            <canvas id="imageCanvas"></canvas>
-                            
-                            
-                            <p><img id="" src="images/${board.upload}" style="width: 300px; height: 300px; object-fit: cover" alt="thumbnail"></p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <p>
-                	<input type="text" id="title" name="title" placeholder="title"><br>
-                    <input type="file" name="uploadfile" id="id_photo" value="">
-                </p>
-                <p>
-                 
-                    <textarea name="content" id="content" cols="50" rows="5" placeholder="140자 까지 등록 가능합니다.
+			<div class="post_form_container">
+				<form action="insertBoard.do" method="post" class="post_form"
+					enctype="multipart/form-data">
+					<input type="hidden" name="noImg" value="no-background.png">
+					<div class="title">NEW POST</div>
+					<div class="preview">
+						<div class="upload">
+							<div class="post_btn">
+								<div class="plus_icon">
+									<span></span> <span></span>
+								</div>
+								<p>포스트 이미지 추가</p>
+								<canvas id="imageCanvas"></canvas>
+
+
+								<p>
+									<img id="" src="images/${board.upload}"
+										style="width: 300px; height: 300px; object-fit: cover"
+										alt="thumbnail">
+								</p>
+
+							</div>
+						</div>
+					</div>
+					<p>
+						<input type="text" id="title" name="title" placeholder="title"><br>
+						<input type="file" name="uploadfile" id="id_photo" value="">
+					</p>
+
+					<p>
+						<textarea name="content" id="content" cols="50" rows="5"
+							placeholder="140자 까지 등록 가능합니다.
 					#태그명 을 통해서 검색 태그를 등록할 수 있습니다.
 					예시 : I # love # insta!">
 					</textarea>
-                 
-				
-                </p>
-                	<input type="hidden" id="id" name="id" readonly="readonly" value="${sessionScope.user.id}">
-                	<c:if test="${empty sessionScope.user.pay}"><input type="hidden" id="pay" name="pay" value='0'><br></c:if>
-					<c:if test="${!empty sessionScope.user.pay}"><input type="hidden" id="pay" name="pay" value='${sessionScope.user.pay}'><br></c:if>
-                
-                <input class="submit_btn" type="submit" value="저장">
-            </form>
-
-        </div>
-
-    </div>
-
-
 					</p>
 					<input type="hidden" id="id" name="id" readonly="readonly"
 						value="${sessionScope.user.id}">
@@ -148,6 +136,21 @@
 
 		</div>
 
+
+
+		<input type="hidden" id="id" name="id" readonly="readonly"
+			value="${sessionScope.user.id}">
+		<c:if test="${empty sessionScope.user.pay}">
+			<input type="hidden" id="pay" name="pay" value='0'>
+			<br>
+		</c:if>
+		<c:if test="${!empty sessionScope.user.pay}">
+			<input type="hidden" id="pay" name="pay"
+				value='${sessionScope.user.pay}'>
+			<br>
+		</c:if>
+
+		<input class="submit_btn" type="submit" value="저장">
 
 	</section>
 

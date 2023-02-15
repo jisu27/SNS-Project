@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -8,27 +8,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport"
-   content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <title>Title</title>
 <link rel="stylesheet" href="css/reset.css">
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/detail-page.css">
 <script src="https://code.jquery.com/jquery-3.6.3.js"
-   integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
-   crossorigin="anonymous"></script>
+	integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+	crossorigin="anonymous"></script>
 </head>
 <body>
 
 
-   <section id="container">
+	<section id="container">
 
 
-     <header id="header">
+		<header id="header">
 			<section class="inner">
 
 				<h1 class="logo">
-					<a href="home.do" id="goProfile5" onclick="check_id()">
+					<a href="home.do" id="goProfile" onclick="check_id()">
+
 						<div class="sprite_insta_icon"></div>
 						<div class="sprite_write_logo"></div>
 					</a>
@@ -56,8 +57,6 @@
 				</div>
 
 			</section>
-
-		</header>
 
 
 		</header>
@@ -93,24 +92,24 @@
 
 								</div>
 								<c:if test="${sessionScope.user.id == board.id}">
-								<div class="sprite_more_icon" data-name="more"
-									onclick="toggle(this.children[0])">
-									<ul class="toggle_box" id="toggle_box${status.count}">
-										<li><input type="submit" class="follow" value="팔로우"
-											data-name="follow"></li>
+									<div class="sprite_more_icon" data-name="more"
+										onclick="toggle(this.children[0])">
+										<ul class="toggle_box" id="toggle_box${status.count}">
+											<li><input type="submit" class="follow" value="팔로우"
+												data-name="follow"></li>
 
-										<li><a href="goUpdateBoard.do?bSeq=${board.bSeq}"> <input
-												type="button" value="수정"></a></li>
+											<li><a href="goUpdateBoard.do?bSeq=${board.bSeq}"> <input
+													type="button" value="수정"></a></li>
 
-										<li><form action="deleteBoard.do?bSeq=${board.bSeq}"
-												method="post">
-												<c:if test="${sessionScope.user.id == board.id }">
-													<input type="submit" value="삭제">
-												</c:if>
-											</form></li>
-									</ul>
+											<li><form action="deleteBoard.do?bSeq=${board.bSeq}"
+													method="post">
+													<c:if test="${sessionScope.user.id == board.id }">
+														<input type="submit" value="삭제">
+													</c:if>
+												</form></li>
+										</ul>
 
-								  </div>
+									</div>
 								</c:if>
 							</header>
 
@@ -121,10 +120,10 @@
 									</div>
 									<div class="comment">
 										<span class="user_id">${board.id}</span>${board.content}
-										<div style="font-size:small; font-weight: 900">${time}</div>
+										<div style="font-size: small; font-weight: 900">${time}</div>
 									</div>
 								</div>
-								
+
 								<c:forEach var="comment" items="${commentList}"
 									varStatus="status">
 									<div class="user_container-detail">
@@ -134,76 +133,77 @@
 										</div>
 										<div class="comment">
 											<span class="user_id">${comment.id}</span>
-											${comment.ccontent}
-											
-											<div class="time" style="font-size: small;">
-													<fmt:formatDate var="comDate" value="${comment.indate}" pattern="yyyy년MM월dd일HH시"/>
-													${comDate}에 작성된 글입니다. 											
-												<span class="try_comment"></span>
-											</div>
-											<c:if test="${sessionScope.user.id == comment.id}">
+											<div class="word2">${comment.ccontent}</div>
+
 											<div class="icon_wrap">
 												<div class="more_trigger">
-													<div class="sprite_more_icon" data-name="more"
-												onclick="toggle(this.children[0])">
-												<ul class="toggle_box" id="toggle_box${comment.cseq}">
-													<li>
-														<a href="goUpdateComment.do?cseq=${comment.cseq}">
-															<input type="button" value="수정">
-														</a>
-													 
-													</li>
-													<li><form
-															action="deleteComment.do?cseq=${comment.cseq}"
-															method="post">
-															<c:if test="${sessionScope.user.id == comment.id }">
-																<input type="submit" value="삭제">
-															</c:if>
-														</form></li>
-												</ul>
-											</div>
+													<c:if test="${sessionScope.user.id == comment.id}">
+														<div class="sprite_more_icon" data-name="more"
+															onclick="toggle(this.children[0])">
+															<ul class="toggle_box" id="toggle_box${comment.cseq}">
+																<li><a
+																	href="goUpdateComment.do?cseq=${comment.cseq}"> <input
+																		type="button" value="수정">
+																</a></li>
+																<li><form
+																		action="deleteComment.do?cseq=${comment.cseq}"
+																		method="post">
+																		<input type="submit" value="삭제">
+																	</form></li>
+															</ul>
+														</div>
+													</c:if>
+
 												</div>
 												<div>
-												<c:choose>
-													<c:when test="${fn:contains(sessionScope.c_heart,comment.cseq)}">
-														<div onclick="deleteLike_c(deleteLike${comment.cseq})" data-name="smallheart"
-													class="sprite_small_heart_icon_outline" style="background :url('../../imgs/background01.png') no-repeat -323px -287px">
-													<form id="deleteLike${comment.cseq}" method="post" action="getDeleteHeart_c.do">
-													<input type="hidden" id="cseq" name="cseq"
-															value="${comment.cseq}"> <input type="hidden"
-															id="id" name="id" value="${sessionScope.user.id}">
-															<input type="hidden" id="bSeq" name="bSeq"
-															value="${comment.bSeq}">
-															<input type="hidden" id="profile" name="profile"
-															value="${profile}">
-													</form>
-													</div>
-													
+													<c:choose>
+														<c:when
+															test="${fn:contains(sessionScope.c_heart,comment.cseq)}">
+															<div onclick="deleteLike_c(deleteLike${comment.cseq})"
+																data-name="smallheart"
+																class="sprite_small_heart_icon_outline"
+																style="background: url('../../imgs/background01.png') no-repeat -323px -287px">
+																<form id="deleteLike${comment.cseq}" method="post"
+																	action="getDeleteHeart_c.do">
+																	<input type="hidden" id="cseq" name="cseq"
+																		value="${comment.cseq}"> <input type="hidden"
+																		id="id" name="id" value="${sessionScope.user.id}">
+																	<input type="hidden" id="bSeq" name="bSeq"
+																		value="${comment.bSeq}"> <input type="hidden"
+																		id="profile" name="profile" value="${profile}">
+																</form>
+															</div>
 
-											</c:when>
-											
-											<c:otherwise>
-												<div onclick="like_c(like${comment.cseq})" data-name="smallheart"
-												class="sprite_small_heart_icon_outline">
-												<form id="like${comment.cseq}" method="post" action="getHeart_c.do">
-														<input type="hidden" id="cseq" name="cseq"
-															value="${comment.cseq}"> <input type="hidden"
-															id="id" name="id" value="${sessionScope.user.id}">
-															<input type="hidden" id="ccontent" name="ccontent"
-															value="${comment.ccontent}">
-															<input type="hidden" id="bSeq" name="bSeq"
-															value="${comment.bSeq}">
-															<input type="hidden" id="profile" name="profile"
-															value="${profile}">
 
-													</form>
-													</div>
-													
-											</c:otherwise>
-										</c:choose>
+														</c:when>
+
+														<c:otherwise>
+															<div onclick="like_c(like${comment.cseq})"
+																data-name="smallheart"
+																class="sprite_small_heart_icon_outline">
+																<form id="like${comment.cseq}" method="post"
+																	action="getHeart_c.do">
+																	<input type="hidden" id="cseq" name="cseq"
+																		value="${comment.cseq}"> <input type="hidden"
+																		id="id" name="id" value="${sessionScope.user.id}">
+																	<input type="hidden" id="ccontent" name="ccontent"
+																		value="${comment.ccontent}"> <input
+																		type="hidden" id="bSeq" name="bSeq"
+																		value="${comment.bSeq}"> <input type="hidden"
+																		id="profile" name="profile" value="${profile}">
+
+																</form>
+															</div>
+
+														</c:otherwise>
+													</c:choose>
 												</div>
 											</div>
-											</c:if>
+											<div class="time" style="font-size: small;">
+												<fmt:formatDate var="comDate" value="${comment.indate}"
+													pattern="yyyy년MM월dd일HH시" />
+												${comDate}에 작성된 글입니다. <span class="try_comment"></span>
+											</div>
 										</div>
 									</div>
 
@@ -263,20 +263,22 @@
 							</div>
 
 							<div class="heart_count" style="font-weight: 900">
-								좋아요${board.count}개
-							</div>
+								좋아요${board.count}개</div>
 							<div class="timer">
-								<fmt:formatDate var="boDate" value="${board.inDate}" pattern="yyyy년 MM월 dd일"/>
+								<fmt:formatDate var="boDate" value="${board.inDate}"
+									pattern="yyyy년 MM월 dd일" />
 								${boDate}
 							</div>
 
-							<div class="commit_field">
-								<form id="commentForm" action="insertComment.do" method="post">
+							<div class="comment_field" id="add-comment-post37">
+								<form action="insertComment.do" method="post">
 									<input type="hidden" name="id" value="${sessionScope.user.id}">
-									<input type="hidden" name="bSeq" value="${board.bSeq}">
-									<input type="text" name="ccontent" placeholder="댓글을 달아주세요 !">
-									
-									<input type="submit" value="게시">
+									<input type="hidden" name="bseq" value="${board.bSeq}">
+									<input type="text" name="ccontent" id="ccontent"
+										placeholder="댓글달기...">
+									<div class="upload_btn m_text" data-name="comment">
+										<input type="submit" value="게시">
+									</div>
 								</form>
 							</div>
 

@@ -1,6 +1,6 @@
 
 .word1{
-	width:300px;
+	width:450px;
 	 word-wrap: break-word;
         display: webkit-box;
         -webkit-line-clamp: 4 ;
@@ -215,6 +215,14 @@ body{
 .contents .sprite_more_icon{
     position: relative;
     cursor: pointer;
+}
+.icon_wrap1{
+	display: flex;
+}
+#sprite_more_icon{
+display: inline-block;
+    margin-right: 10px;
+    margin-top: 5px;
 }
 
 .contents .toggle_box{

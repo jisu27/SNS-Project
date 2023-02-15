@@ -46,6 +46,7 @@ public class BoardController {
 	private ShortsService shortsService;
 	@Autowired
 	private FollowService followService;
+
 	// ##############################################################################################################--home
 	@RequestMapping("/")
 	public String goLogin() {
@@ -54,8 +55,7 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/home.do")
-	public String BoardList(BoardVO bVo, CommentVO cVo, Model model,
-			HttpSession session, ShortsVO sVo) {
+	public String BoardList(BoardVO bVo, CommentVO cVo, Model model, HttpSession session, ShortsVO sVo) {
 
 		FollowVO fvo = new FollowVO();
 		List<MemberVO> recoMemberList = new ArrayList<>();
@@ -64,8 +64,7 @@ public class BoardController {
 		if (mvo2 != null) {
 
 			fvo.setId1(mvo2.getId());
-			List<String> followerList = (List<String>) session
-					.getAttribute("follower");
+			List<String> followerList = (List<String>) session.getAttribute("follower");
 			List<String> recom = followService.recomFollow(fvo.getId1());
 
 			if (recom == null || recom.isEmpty()) {
@@ -101,6 +100,7 @@ public class BoardController {
 		List<BoardVO> getboardList = boardService.getBoardList(bVo);
 		List<BoardVO> getadverList = boardService.getAdverList(bVo);
 
+
 		newBoardList.addAll(getboardList);		
 		int i = 0;
 		
@@ -111,6 +111,7 @@ public class BoardController {
 			if (newBoardList.size()>i+4) {
 				i= i+3;				
 			}else {
+
 				i++;
 			}
 		}
@@ -127,14 +128,12 @@ public class BoardController {
 
 		for (BoardVO vo : newBoardList) {
 
-			LocalDate boarDate = vo.getInDate().toInstant()
-					.atZone(ZoneId.systemDefault()).toLocalDate();
+			LocalDate boarDate = vo.getInDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 			Period btn = Period.between(boarDate, LocalDate.now());
 			String btnTime;
 
 			if (btn.getYears() != 0) {
-				btnTime = btn.getYears() + "년" + btn.getMonths() + "월"
-						+ btn.getDays() + "일 전";
+				btnTime = btn.getYears() + "년" + btn.getMonths() + "월" + btn.getDays() + "일 전";
 			} else if (btn.getMonths() != 0) {
 				btnTime = btn.getMonths() + "월" + btn.getDays() + "일 전";
 			} else {
@@ -162,8 +161,7 @@ public class BoardController {
 		System.out.println("commentList==================" + commentList);
 
 		for (ShortsVO vo : shortsList) {
-			LocalDate shortsDate = vo.getInDate().toInstant()
-					.atZone(ZoneId.systemDefault()).toLocalDate();
+			LocalDate shortsDate = vo.getInDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 			Period stn = Period.between(shortsDate, LocalDate.now());
 			String stnTime;
 
@@ -174,8 +172,7 @@ public class BoardController {
 			shortsMemberList.add(v1);
 
 			if (stn.getYears() != 0) {
-				stnTime = stn.getYears() + "년" + stn.getMonths() + "월"
-						+ stn.getDays() + "일 전";
+				stnTime = stn.getYears() + "년" + stn.getMonths() + "월" + stn.getDays() + "일 전";
 			} else if (stn.getMonths() != 0) {
 				stnTime = stn.getMonths() + "월" + stn.getDays() + "일 전";
 			} else {
@@ -214,8 +211,7 @@ public class BoardController {
 
 	// ##############################################################################################################--updateBoard
 	@RequestMapping("/updateBoard.do")
-	public String UpdateBoard(@RequestParam(value = "nonImg") String org_image,
-			BoardVO vo, HttpSession session)
+	public String UpdateBoard(@RequestParam(value = "nonImg") String org_image, BoardVO vo, HttpSession session)
 			throws IllegalStateException, IOException {
 
 		String fileName = "";
@@ -225,8 +221,7 @@ public class BoardController {
 
 			System.out.println("filename=" + fileName);
 
-			String realPath = session.getServletContext()
-					.getRealPath("/images/");
+			String realPath = session.getServletContext().getRealPath("/images/");
 			vo.setUpload(fileName);
 			vo.getUploadfile().transferTo(new File(realPath + fileName));
 		} else {
@@ -241,19 +236,16 @@ public class BoardController {
 
 	// ##############################################################################################################--goInsertBoard
 	@GetMapping("getBoard.do")
-	public String getBoard(MemberVO mvo, CommentVO cvo, BoardVO bvo,
-			Model model, HttpSession session) {
+	public String getBoard(MemberVO mvo, CommentVO cvo, BoardVO bvo, Model model, HttpSession session) {
 		List<MemberVO> list = new ArrayList<MemberVO>();
 
 		BoardVO board = (BoardVO) boardService.myBoard(bvo);
 
-		LocalDate boarDate = board.getInDate().toInstant()
-				.atZone(ZoneId.systemDefault()).toLocalDate();
+		LocalDate boarDate = board.getInDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 		Period btn = Period.between(boarDate, LocalDate.now());
 		String btnTime;
 		if (btn.getYears() != 0) {
-			btnTime = btn.getYears() + "년" + btn.getMonths() + "월"
-					+ btn.getDays() + "일 전";
+			btnTime = btn.getYears() + "년" + btn.getMonths() + "월" + btn.getDays() + "일 전";
 		} else if (btn.getMonths() != 0) {
 			btnTime = btn.getMonths() + "월" + btn.getDays() + "일 전";
 		} else {
@@ -285,8 +277,7 @@ public class BoardController {
 
 	// ##############################################################################################################--insertBoard
 	@PostMapping("insertBoard.do")
-	public String InsertBoard(@RequestParam(value = "noImg") String no_image,
-			BoardVO vo, HttpSession session)
+	public String InsertBoard(@RequestParam(value = "noImg") String no_image, BoardVO vo, HttpSession session)
 			throws IllegalStateException, IOException {
 
 		String fileName = "";
@@ -296,8 +287,7 @@ public class BoardController {
 
 			System.out.println("filename=" + fileName);
 
-			String realPath = session.getServletContext()
-					.getRealPath("images/");
+			String realPath = session.getServletContext().getRealPath("images/");
 			vo.getUploadfile().transferTo(new File(realPath + fileName));
 			vo.setUpload(fileName);
 		} else {
@@ -311,8 +301,7 @@ public class BoardController {
 	}
 
 	@RequestMapping("deleteBoard.do")
-	public String DeleteBoard(BoardVO vo, HttpSession session)
-			throws IllegalStateException, IOException {
+	public String DeleteBoard(BoardVO vo, HttpSession session) throws IllegalStateException, IOException {
 		boardService.deleteBoard(vo);
 		System.out.println("딜리트:" + vo);
 
