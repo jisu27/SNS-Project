@@ -24,38 +24,40 @@
    <section id="container">
 
 
-      <header id="header">
-         <section class="inner">
+     <header id="header">
+			<section class="inner">
 
-            <h1 class="logo">
-               <a href="home.do" id="goProfile" onclick="check_id()">
-                  <div class="sprite_insta_icon"></div>
-                  <div class="sprite_write_logo"></div>
-               </a>
-            </h1>
+				<h1 class="logo">
+					<a href="home.do" id="goProfile5" onclick="check_id()">
+						<div class="sprite_insta_icon"></div>
+						<div class="sprite_write_logo"></div>
+					</a>
+				</h1>
 
-            <div class="search_box">
-               <input type="text" placeholder="검색" id="search-field">
+				<form div class="search_box">
+					<input type="text" name="keyWord" placeholder="검색"
+						id="search-field">
 
-               <div class="fake_field">
-                  <span class="sprite_small_search_icon"></span> <span>검색</span>
-               </div>
-            </div>
+					<div class="fake_field" onclick="search()">
+						<span class="sprite_small_search_icon"></span> <span>검색</span>
+					</div>
+				</form>
 
 				<input type="hidden" id="check" value="${sessionScope.user.id}">
 				<div class="right_icons">
 					<a id="goProfile1" href="goInsertBoard.do" onclick="check_id()"><div
-							class="sprite_camera_icon"></div></a> <a id="goProfile2"
-						href="/" onclick="check_id()"><div
-							class="sprite_compass_icon"></div></a> <a id="goProfile3"
-						href="getLikeList.do?id=${sessionScope.user.id}" onclick="check_id()"><div
-							class="sprite_heart_icon_outline"></div></a> <a id="goProfile4"
-						href="profile.do?id=${sessionScope.user.id}" onclick="check_id()"><div
-							class="sprite_user_icon_outline"></div></a>
-					<a href="insertShorts"><div class="sprite_short_icon"></div></a>		
+							class="sprite_camera_icon"></div></a> <a id="goProfile2" href="/"
+						onclick="check_id()"><div class="sprite_compass_icon"></div></a> <a
+						id="goProfile3" href="getLikeList.do?id=${sessionScope.user.id}"
+						onclick="check_id()"><div class="sprite_heart_icon_outline"></div></a>
+					<a id="goProfile4" href="profile.do?id=${sessionScope.user.id}"
+						onclick="check_id()"><div class="sprite_user_icon_outline"></div></a>
+					<a href="insertShorts"><div class="sprite_short_icon"></div></a>
 				</div>
 
-         </section>
+			</section>
+
+		</header>
 
 
 		</header>
