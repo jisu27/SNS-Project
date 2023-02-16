@@ -115,10 +115,10 @@
 							<header class="top">
 								<div class="user_container">
 									<div class="profile_img">
-										<img src="imgs/thumb.jpeg" alt="">
+										<img src="profile/${member.profile}" alt="">
 									</div>
 									<div class="user_name">
-										<div class="nick_name">KindTiger</div>
+										<div class="nick_name">${shorts.id}</div>
 										<div class="country">Seoul, South Korea</div>
 									</div>
 								</div>
@@ -133,11 +133,11 @@
 							</header>
 
 							<section class="scroll_section">
-								<c:forEach items="${ShortsCommentList}" var="ShortsComment">
-									<div class="user_container-detail">
+								<div class="user_container-detail">
+									<c:forEach items="${ShortsCommentList}" var="ShortsComment">
 										<div class="user">
-											<!--  <img src="imgs/thumb02.jpg" alt="user"> -->
-											프사
+											<img src="profile/${member.profile}" alt="user">
+
 										</div>
 										<div class="comment">
 											<span class="user_id">${ShortsComment.id}</span>
@@ -155,8 +155,8 @@
 												</div>
 											</div>
 										</div>
-									</div>
-								</c:forEach>
+									</c:forEach>
+								</div>
 							</section>
 
 
@@ -202,62 +202,61 @@
 										</c:otherwise>
 									</c:choose>
 								</div>
+							</div>
 
+							<div class="count_likes">
+								<!-- 좋아요 수<span class="count">{shorts.like}</span> -->
+								
+							</div>
+							<div class="timer">2ìê°</div>
+
+							<div class="commit_field">
+								<form action="insertShortsComment" method="post">
+									<input type="hidden" name="sSeq" value="${shorts.sSeq}">
+									<input type="hidden" name="id" value="${sessionScope.user.id}">
+									<input type="text" name="content" placeholder="댓글을 입력하세요">
+
+									<input type="submit" value="댓글 달기">
+									<div class="upload_btn"></div>
+								</form>
 							</div>
 						</div>
-
-						<div class="count_likes">
-							<!-- 좋아요 수<span class="count">{shorts.like}</span> -->
-							
-						</div>
-						<div class="timer">2ìê°</div>
-
-						<div class="commit_field">
-							<form action="insertShortsComment" method="post">
-								<input type="hidden" name="sSeq" value="${shorts.sSeq}">
-								<input type="hidden" name="id" value="${sessionScope.user.id}">
-								<input type="text" name="content" placeholder="댓글을 입력하세요">
-
-								<input type="submit" value="댓글 달기">
-								<div class="upload_btn"></div>
-							</form>
-						</div>
+					</article>
 				</div>
-				</article>
+			</section>
 		</div>
-	</section>
-	</div>
 
 
-	<div class="del_pop">
-		<div class="btn_box">
-			<div class="del">삭제</div>
-			<div class="cancel">취소</div>
+		<div class="del_pop">
+			<div class="btn_box">
+				<div class="del">삭제</div>
+				<div class="cancel">취소</div>
+			</div>
 		</div>
-	</div>
 
 	</section>
 	<script src="js/common.js"></script>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<!--<script src="js/detail.js"></script>-->
 	<script type="text/javascript">
-	function deleteShortsBookMark(delBookMark) {
-		  if (confirm("북마크를 삭제하시겠습니까?")) {
-		    $("#deleteShortsBookMark").attr("action", "deleteShortsBookMark").submit();
-		  }
+		function deleteShortsBookMark(delBookMark) {
+			if (confirm("북마크를 삭제하시겠습니까?")) {
+				$("#deleteShortsBookMark").attr("action",
+						"deleteShortsBookMark").submit();
+			}
 		}
-		
-	function insertBookMark(inBookMark) {
-		  var bmTitle = prompt("북마크 제목", "");
-		  if (bmTitle === null) {
-		    // User clicked "Cancel" in the prompt dialog
-		    return;
-		  } else if (bmTitle === "") {
-		    alert("북마크 제목을 입력해 주십시오.");
-		  } else {
-		    $("#bmTitle").val(bmTitle);
-		    $("#insertBookMark").attr("action", "insertBookMark").submit();
-		  }
+
+		function insertBookMark(inBookMark) {
+			var bmTitle = prompt("북마크 제목", "");
+			if (bmTitle === null) {
+				// User clicked "Cancel" in the prompt dialog
+				return;
+			} else if (bmTitle === "") {
+				alert("북마크 제목을 입력해 주십시오.");
+			} else {
+				$("#bmTitle").val(bmTitle);
+				$("#insertBookMark").attr("action", "insertBookMark").submit();
+			}
 		}
 	</script>
 

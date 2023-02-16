@@ -48,8 +48,15 @@ public class ShortsController {
 		ShortsVO shorts = shos.getShorts(vo);
 		model.addAttribute("shorts", shorts);
 		
+
 		List<Integer> shortsBookMarkNum = bookMarkService.getShortsBookMarkNums(bmvo);
 		session.setAttribute("shortsBookMarkNum", shortsBookMarkNum);
+
+		MemberVO mVo =new MemberVO();
+		mVo.setId(shorts.getId());
+		MemberVO mvo= memberService.MemberCheck(mVo);
+		model.addAttribute("member",mvo);
+
 		
 		scvo.setsSeq(vo.getsSeq());
 		List<ShortsCommentVO> ShortsCommentList = ShortsCommentService.getShortsCommentList(scvo);
@@ -58,6 +65,7 @@ public class ShortsController {
 		System.out.println("--getShorts controller �떎�뻾: " + shorts);
 		System.out.println("ShortsCommentVO =" + scvo);
 		System.out.println(ShortsCommentList);
+		
 		return "getShorts";
 
 	}

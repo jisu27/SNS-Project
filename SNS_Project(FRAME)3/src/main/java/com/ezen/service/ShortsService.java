@@ -17,4 +17,6 @@ public interface ShortsService {
 	List<ShortsVO> getShortsList(ShortsVO vo);
 
 	void updatePay(int sSeq);
+	
+	void updateManusPay(int sSeq);
 }

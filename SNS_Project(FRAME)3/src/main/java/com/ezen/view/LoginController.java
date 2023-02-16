@@ -81,25 +81,25 @@ public class LoginController {
 
 //	##############################################################################################################--insertMember
 	@PostMapping("/insertMember.do")
-	public String insertMember(MemberVO vo, HttpSession session) throws IllegalStateException, IOException {
+	   public String insertMember(MemberVO vo, HttpSession session) throws IllegalStateException, IOException {
 
-		String fileName = "";
+	      String fileName = "";
 
-		if (!vo.getFile().isEmpty()) {
+	      if (!vo.getFile().isEmpty()) {
 
-			fileName = vo.getFile().getOriginalFilename();
-			String realPath = session.getServletContext().getRealPath("profile/");
-			vo.getFile().transferTo(new File(realPath + fileName));
+	         fileName = vo.getFile().getOriginalFilename();
+	         String realPath = session.getServletContext().getRealPath("profile/");
+	         vo.getFile().transferTo(new File(realPath + fileName));
 
-		}
+	         vo.setProfile(vo.getFile().getOriginalFilename());
+	      } else {
+	         vo.setProfile("no-image.png");
+	      }
 
-		vo.setProfile(vo.getFile().getOriginalFilename());
+	      memberService.insertMember(vo);
 
-		memberService.insertMember(vo);
-
-		return "index";
-	}
-
+	      return "index";
+	   }
 //	##############################################################################################################--login.do
 	@PostMapping("/login.do")
 	public String login(MemberVO vo, HttpSession session) {

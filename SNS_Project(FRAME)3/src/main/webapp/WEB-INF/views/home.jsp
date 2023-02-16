@@ -173,11 +173,16 @@
 										</c:choose>
 
 									</div>
-									<div class="sprite_bubble_icon"></div>
+									<div class="sprite_bubble_icon"
+										id="sprite_bubble_icon${status.index}"
+										onclick="showComment(comment_container${status.index})">
+										<input id="show" type="hidden" value="0">
+									</div>
 									<div class="sprite_share_icon" data-name="share"></div>
 								</div>
 								<div class="right_icon">
 									<div class="sprite_bookmark_outline" data-name="bookmark"></div>
+									
 								</div>
 							</div>
 
@@ -187,7 +192,7 @@
 
 							<c:forEach items="${commentList}" var="comment">
 								<c:if test="${comment.bseq == board.bSeq }">
-									<div class="comment_container">
+									<div class="comment_container" id="comment_container${status.index}">
 										<div class="comment" id="comment-list-ajax-post37">
 											<div class="comment-detail">
 												<div class="nick_name m_text">${comment.id}</div>
@@ -385,10 +390,18 @@ function toggle(element){
 	}
 	
 }
+function showComment(commentId) {
+	if ($("#show").val()==0) {		
+		$(commentId).attr("style","display:flex");
+		$("#show").val(1);
+	}else {
+		$(commentId).attr("style","display:none")
+		$("#show").val(0);
+	}
+}
 function search() {
 	$(".search_box").attr("action","home.do").submit();
 }
-
 
 </script>
 

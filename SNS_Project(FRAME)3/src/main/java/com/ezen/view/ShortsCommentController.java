@@ -1,9 +1,7 @@
 package com.ezen.view;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.ezen.dto.CommentVO;
 import com.ezen.dto.MemberVO;
 import com.ezen.dto.ShortsCommentVO;
 import com.ezen.service.ShortsCommentService;
@@ -32,7 +29,7 @@ public class ShortsCommentController {
 		MemberVO user= (MemberVO) session.getAttribute("user");
 		
 		if(user == null) {
-			return "login";
+			return "redirect:/";
 			
 		}else {
 			vo.setId(user.getId());

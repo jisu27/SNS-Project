@@ -59,5 +59,20 @@ public class AdminController {
 		
 		return "redirect:goAdmin.do";
 	}
+	@PostMapping("checkManusAd.do")
+	public String checkManusAd(AdminVO avo) {
+		
+		System.out.println("avo=="+avo);
+		
+		if (avo.getbSeq() != 0) {
+			boardService.updateManusPay(avo.getbSeq());
+		}else {
+			shortsService.updateManusPay(avo.getsSeq());
+		}
+		
+		adminService.updateManusAdmin(avo.getaSeq());
+		
+		return "redirect:goAdmin.do";
+	}
 	
 }

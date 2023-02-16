@@ -77,5 +77,11 @@ public class BoardServiceImpl implements BoardService {
 	public void updatePay(int bSeq) {
 		bDao.updatePay(bSeq);
 	}
+
+	@Override
+	public void updateManusPay(int bSeq) {
+		bDao.updateManusPay(bSeq);
+		
+	}
 	
 }

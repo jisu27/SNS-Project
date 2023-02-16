@@ -22,6 +22,12 @@
 		WHERE aSeq=#{aSeq}
 	</update>
 	<!-- ##################################################################################### -->
+	<update id="update-Admin">
+		UPDATE admin 
+		SET role=1 
+		WHERE aSeq=#{aSeq}
+	</update>
+	<!-- ##################################################################################### -->
 	<insert id="insertAd">
 		INSERT INTO admin(aSeq,bSeq,sSeq,id)
 		VALUES (admin_seq.NEXTVAL,#{bSeq},#{sSeq},#{id})

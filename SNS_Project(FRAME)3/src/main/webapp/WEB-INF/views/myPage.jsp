@@ -58,7 +58,7 @@
 						</div>
 					</a>
 				</h1>
-
+<!-- 
 				<div class="search_field">
 					<input type="text" placeholder="검색" tabindex="0">
 
@@ -66,17 +66,18 @@
 						<span class=sprite_small_search_icon></span> <span>검색</span>
 					</div>
 				</div>
+ -->
 
 				<input type="hidden" id="check" value="${sessionScope.user.id}">
 				<div class="right_icons">
 					<a id="goProfile1" href="goInsertBoard.do" onclick="check_id()"><div
-							class="sprite_camera_icon"></div></a> <a id="goProfile2"
-						href="login.html" onclick="check_id()"><div
-							class="sprite_compass_icon"></div></a> <a id="goProfile3"
-						href="follow.html" onclick="check_id()"><div
-							class="sprite_heart_icon_outline"></div></a> <a id="goProfile4"
-						href="profile.do?id=${sessionScope.user.id}" onclick="check_id()"><div
-							class="sprite_user_icon_outline"></div></a>
+							class="sprite_camera_icon"></div></a> <a id="goProfile2" href="/"
+						onclick="check_id()"><div class="sprite_compass_icon"></div></a> <a
+						id="goProfile3" href="getLikeList.do?id=${sessionScope.user.id}"
+						onclick="check_id()"><div class="sprite_heart_icon_outline"></div></a>
+					<a id="goProfile4" href="profile.do?id=${sessionScope.user.id}"
+						onclick="check_id()"><div class="sprite_user_icon_outline"></div></a>
+					<a href="insertShorts"><div class="sprite_short_icon"></div></a>
 				</div>
 			</section>
 		</header>

@@ -32,5 +32,10 @@ public class AdminServiceImpl implements AdminService {
 	public void insertAd(AdminVO vo) {
 		aDao.insertAd(vo);
 	}
+	@Override
+	public void updateManusAdmin(int aSeq) {
+		aDao.updateManusAdmin(aSeq);
+		
+	}
 
 }
