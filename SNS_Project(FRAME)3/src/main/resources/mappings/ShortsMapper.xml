@@ -30,7 +30,7 @@
   	order by sSeq DESC
   </select>
   
-  <select id="shortsCount" resultType="shorts">
+  <select id="shortsCount" resultType="Integer">
   	select count(*) from Shorts
   	where id =#{id}
   </select>

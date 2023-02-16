@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.ezen.dto.MemberVO;
 import com.ezen.dto.ShortsVO;
 import com.ezen.dto.ShortslikeVO;
+import com.ezen.service.MemberService;
 import com.ezen.service.ShortsService;
 
 @Controller
@@ -25,6 +26,9 @@ public class ShortsController {
 
 	@Autowired
 	private ShortsService shos;
+
+	@Autowired
+	private MemberService meb;
 
 	@RequestMapping("/getShorts")
 	public String getShorts(ShortslikeVO likevo, ShortsVO vo, Model model, HttpSession session) {
@@ -39,10 +43,22 @@ public class ShortsController {
 	}
 
 	@RequestMapping("/getShortsList")
-	public String getShortsList(HttpSession session, ShortsVO vo, Model model) {
+	public String getShortsList(MemberVO mvo, HttpSession session, ShortsVO vo, Model model) {
 		MemberVO user = (MemberVO) session.getAttribute("user");
-
-		// 검색기능
+		MemberVO member = meb.MemberCheck(mvo);
+		/*
+		 * // 검색기능 if (vo.getSearchKeyword() == null) vo.setSearchKeyword("");
+		 * 
+		 * List<ShortsVO> list = shos.getShortsList(vo);
+		 * 
+		 * int count = shos.shortsCount(vo); vo.setCount(count);
+		 * 
+		 * model.addAttribute("member", member); model.addAttribute("shorts", vo);
+		 * model.addAttribute("shortsList", list);
+		 * 
+		 * model.addAttribute("searchKeyword", vo.getSearchKeyword()); return
+		 * "getShortsList";
+		 */
 		if (vo.getSearchKeyword() == null)
 			vo.setSearchKeyword("");
 
@@ -96,7 +112,6 @@ public class ShortsController {
 
 			vo.setId(user.getId());
 			shos.insertShorts(vo);
-
 			return "redirect:getShortsList";
 		}
 
@@ -106,7 +121,7 @@ public class ShortsController {
 	public String updateShortsVeiws(ShortsVO vo, HttpSession session, Model model) {
 		MemberVO user = (MemberVO) session.getAttribute("user");
 
-		if (!session.getAttribute("user").equals(vo.getId())) {
+		if (user == null) {
 
 			return "index";
 		} else {
@@ -136,7 +151,7 @@ public class ShortsController {
 			return "updatetShorts";
 		}
 
-		if (!session.getAttribute("user").equals(vo.getId())) {
+		if (user == null) {
 			return "index";
 
 		} else {
@@ -149,14 +164,15 @@ public class ShortsController {
 	}
 
 	@RequestMapping("/deleteShorts")
-	public String deleteShorts(ShortsVO vo, HttpSession session) {
+	public String deleteShorts(ShortsVO vo, Model model, HttpSession session) {
 		MemberVO user = (MemberVO) session.getAttribute("user");
 
 		System.out.println("deleteShorts()..... vo=" + vo);
 
-		if (!session.getAttribute("user").equals(vo.getId())) {
+		if (user == null) {
 			return "index";
 		} else {
+
 			shos.deleteShorts(vo);
 			return "redirect:getShortsList";
 

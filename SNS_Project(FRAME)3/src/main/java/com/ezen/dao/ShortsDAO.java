@@ -38,7 +38,6 @@ public class ShortsDAO {
 
 	public int shortsCount(ShortsVO vo) {
 		return mybatis.selectOne("ShortsMapper.shortsCount", vo);
-
 	}
 
 	public void shortslikeUpdate(ShortsVO vo) {

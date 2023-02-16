@@ -29,6 +29,7 @@ public class ShortslikeServiceImpl implements ShortslikeService {
 	public int countlike(ShortslikeVO vo) {
 
 		return dao.countlike(vo);
+
 	}
 
 	@Override

@@ -32,7 +32,6 @@ public class ShortslikeController {
 		shorts.setsSeq(vo.getsSeq());
 		shorts.setCount(service.countlike(vo));
 		shortsService.shortslikeUpdate(shorts);
-
 		List<ShortslikeVO> shortslike = service.likeShorts(vo);
 
 		session.setAttribute("shortslike", shortslike);
@@ -64,6 +63,7 @@ public class ShortslikeController {
 	public String deletelike(ShortslikeVO vo, HttpSession session) {
 
 		service.deletelike(vo);
+
 		ShortsVO shorts = new ShortsVO();
 		shorts.setsSeq(vo.getsSeq());
 		shorts.setCount(service.countlike(vo));
@@ -75,7 +75,7 @@ public class ShortslikeController {
 		return "redirect:home.do";
 	}
 
-	@PostMapping("/getDeleteShorts")
+	@PostMapping("/getDeletelike")
 	public String getDeleteShorts(ShortslikeVO vo, HttpSession session) {
 
 		service.deletelike(vo);

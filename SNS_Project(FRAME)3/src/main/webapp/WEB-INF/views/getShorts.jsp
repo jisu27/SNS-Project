@@ -95,7 +95,7 @@
 
 
             <div class="right_icons">
-                <a href="new_post.html"><div class="sprite_camera_icon"></div></a>
+                <a href="insertShorts"><div class="sprite_camera_icon"></div></a>
                 <a href="login.html"><div class="sprite_compass_icon"></div></a>
                 <a href="follow.html"><div class="sprite_heart_icon_outline"></div></a>
                 <a href="profile.html"><div class="sprite_user_icon_outline"></div></a>
@@ -137,14 +137,28 @@
                                     <div class="country">Seoul, South Korea</div>
                                 </div>
                             </div>
-                            <div class="sprite_more_icon" data-name="more">
-                                <ul class="more_detail">
-                                    <li>팔로우</li>
-                                    <li>수정</li>
-                                    <li>삭제</li>
+                            <c:if test="${sessionScope.user.id == shorts.id}">
+                            <div class="sprite_more_icon" data-name="more"
+                            onclick="toggle(this.children[0])">
+                            
+               <!-- ----------------------------수정삭제 창 ------------------------- -->
+                              <!--   <ul class="more_detail">  --> 
+                                <ul class="toggle_box" id="toggle_box${status.count}">
+                                    <li><input type="botton" class="follow" value="팔로우"
+											data-name="follow"></li>
+											
+                                    <li><a href="updateShorts?sSeq=${shorts.sSeq}">
+                                   		<input type="button" value="수정"></a></li>
+                                    
+                                    <li><form action="deleteShorts?sSeq=${shorts.sSeq}" method="post">
+                                    	<c:if test="${sessionScope.user.id  == shorts.id}">
+                                    		<input type="submit" value="삭제">
+                                    	</c:if>
+                                    </form></li>
+                                    
                                 </ul>
                             </div>
-
+							</c:if>
                         </header>
                         
                         <!-- 작성자 내용 ---->
@@ -287,10 +301,18 @@ function like(){
 		alert("로그인 후 사용가능합니다")
 	}else {
 		$("#like").submit();
-		
 	}
-	
 }
+
+function toggle(element) {
+	var con = document.getElementById(element.getAttribute("id"));
+	if (con.style.display == 'none') {
+		con.style.display = 'block';
+	} else {
+		con.style.display = 'none';
+	}
+}
+
 
 
 //댓글 함수
@@ -391,6 +413,7 @@ function getCommentList() {
 		$.ajax({
 			type:'POST',
 			url :'comments/insertComment',
+			async: false,
 			data :	{"sSeq":sSeq, "content":content},		
 			success: function(data) {
 				if(data == 'success'){
@@ -400,7 +423,11 @@ function getCommentList() {
 					alert("등록실패");
 				}else if(data == 'not_login') {
 					alert('로그인이 필요합니다');
-				}else if(data == null) {
+				}else if(data == "") {
+					alert('내용을 입력하세요');
+				}else if(data == null){
+					alert('내용을 입력하세요');
+				}else if(data.value.length ==0 ){
 					alert('내용을 입력하세요');
 				}
 			},
