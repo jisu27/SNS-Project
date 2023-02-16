@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,7 +45,9 @@
 <style>
 #main_container {
 	/*height: 6000px;*/
+	
 }
+
 .contents .img_section .trans_inner video {
 	width: 100%;
 	height: 100%;
@@ -132,27 +135,27 @@
 							<section class="scroll_section">
 								<c:forEach items="${ShortsCommentList}" var="ShortsComment">
 									<div class="user_container-detail">
-									<div class="user">
-										<!--  <img src="imgs/thumb02.jpg" alt="user"> -->
-										프사
-									</div>
-									<div class="comment">
-										<span class="user_id">${ShortsComment.id}</span>
-										${ShortsComment.content}
-										<div class="time">
-										${ShortsComment.inDate}
-										  <!-- <span class="try_comment">ëµê¸ ë¬ê¸°</span>  -->
+										<div class="user">
+											<!--  <img src="imgs/thumb02.jpg" alt="user"> -->
+											프사
 										</div>
-										<div class="icon_wrap">
-											<div class="more_trigger">
-												<div class="sprite_more_icon"></div>
+										<div class="comment">
+											<span class="user_id">${ShortsComment.id}</span>
+											${ShortsComment.content}
+											<div class="time">
+												${ShortsComment.inDate}
+												<!-- <span class="try_comment">ëµê¸ ë¬ê¸°</span>  -->
 											</div>
-											<div>
-												<div class="sprite_small_heart_icon_outline"></div>
+											<div class="icon_wrap">
+												<div class="more_trigger">
+													<div class="sprite_more_icon"></div>
+												</div>
+												<div>
+													<div class="sprite_small_heart_icon_outline"></div>
+												</div>
 											</div>
 										</div>
 									</div>
-								</div>
 								</c:forEach>
 							</section>
 
@@ -171,43 +174,92 @@
 								</div>
 
 								<div class="right_icon">
-									<div class="sprite_bookmark_outline" data-name="book-mark"></div>
+									<c:choose>
+										<c:when
+											test="${fn:contains(sessionScope.shortsBookMarkNum, shorts.sSeq)}">
+											<div onclick="deleteShortsBookMark(deleteShortsBookMark)"
+												class="sprite_bookmark_outline" id="bookMark" data-name="bookMark"
+												style="background: url('../../imgs/background01.png') no-repeat -160px -286px;">
+												<form id="deleteShortsBookMark" method="post">
+													<input type="hidden" id="sSeq" name="sSeq"
+														value="${shorts.sSeq}"> <input type="hidden"
+														id="id" name="id" value="${sessionScope.user.id}">
+												</form>
+											</div>
+										</c:when>
+
+										<c:otherwise>
+											<div onclick="insertBookMark(insertBookMark)"
+												class="sprite_bookmark_outline" id="bookMark"data-name="bookMark"
+												style="background: url('../../imgs/background01.png') no-repeat -185px -286px;">
+												<form id="insertBookMark" method="post">
+													<input type="hidden" id="sSeq" name="sSeq"
+														value="${shorts.sSeq}"> <input type="hidden"
+														id="id" name="id" value="${sessionScope.user.id}">
+														<input type="hidden" id="bmTitle" name="bmTitle">
+												</form>
+											</div>
+										</c:otherwise>
+									</c:choose>
 								</div>
-							</div>
 
-							<div class="count_likes">
-								<!-- 좋아요 수<span class="count">{shorts.like}</span> -->
-							</div>
-							<div class="timer">2ìê°</div>
-
-							<div class="commit_field">
-								<form action="insertShortsComment" method="post">
-									<input type="hidden" name="sSeq" value="${shorts.sSeq}">
-									<input type="hidden" name="id" value="${sessionScope.user.id}">
-									<input type="text" name="content" placeholder="댓글을 입력하세요">
-									
-								<input type="submit" value="댓글 달기">
-								<div class="upload_btn"></div>
-								</form>
 							</div>
 						</div>
-					</article>
+
+						<div class="count_likes">
+							<!-- 좋아요 수<span class="count">{shorts.like}</span> -->
+							
+						</div>
+						<div class="timer">2ìê°</div>
+
+						<div class="commit_field">
+							<form action="insertShortsComment" method="post">
+								<input type="hidden" name="sSeq" value="${shorts.sSeq}">
+								<input type="hidden" name="id" value="${sessionScope.user.id}">
+								<input type="text" name="content" placeholder="댓글을 입력하세요">
+
+								<input type="submit" value="댓글 달기">
+								<div class="upload_btn"></div>
+							</form>
+						</div>
 				</div>
-			</section>
+				</article>
 		</div>
+	</section>
+	</div>
 
 
-		<div class="del_pop">
-			<div class="btn_box">
-				<div class="del">삭제</div>
-				<div class="cancel">취소</div>
-			</div>
+	<div class="del_pop">
+		<div class="btn_box">
+			<div class="del">삭제</div>
+			<div class="cancel">취소</div>
 		</div>
+	</div>
 
 	</section>
-
+	<script src="js/common.js"></script>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<!--<script src="js/detail.js"></script>-->
+	<script type="text/javascript">
+	function deleteShortsBookMark(delBookMark) {
+		  if (confirm("북마크를 삭제하시겠습니까?")) {
+		    $("#deleteShortsBookMark").attr("action", "deleteShortsBookMark").submit();
+		  }
+		}
+		
+	function insertBookMark(inBookMark) {
+		  var bmTitle = prompt("북마크 제목", "");
+		  if (bmTitle === null) {
+		    // User clicked "Cancel" in the prompt dialog
+		    return;
+		  } else if (bmTitle === "") {
+		    alert("북마크 제목을 입력해 주십시오.");
+		  } else {
+		    $("#bmTitle").val(bmTitle);
+		    $("#insertBookMark").attr("action", "insertBookMark").submit();
+		  }
+		}
+	</script>
 
 </body>
 </html>
