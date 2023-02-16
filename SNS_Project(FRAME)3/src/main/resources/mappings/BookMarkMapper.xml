@@ -33,11 +33,11 @@
 </delete>
 
 <select id="getBoardBookMarkList" resultType="bookMark">
-  SELECT * FROM bookMark WHERE id=#{id} AND bSeq IS NOT NULL
+    SELECT b.*, m.bmTitle FROM board b, bookMark m WHERE m.id=#{id} AND m.bSeq = b.bSeq
 </select>
 
 <select id="getShortsBookMarkList" resultType="bookMark">
-	SELECT * FROM bookMark WHERE id=#{id} AND sSeq IS NOT NULL
+	SELECT s.*, m.bmTitle FROM shorts s, bookMark m WHERE m.id=#{id} AND m.sSeq = s.sSeq
 </select>
 
 <select id="getBookMarkList" resultType="bookMark">
@@ -54,6 +54,14 @@
 
 <select id="getShortsBookMarkNums" resultType="Integer">
 	Select sSeq From bookMark WHERE id=#{id}
+</select>
+
+<select id="getBoardBookMarkTitle" resultType="String">
+	Select m.bmTitle From board b, bookMark m WHERE m.id=#{id} AND b.bSeq = m.bSeq
+</select>
+
+<select id="getShortsBookMarkTitle" resultType="String">
+	Select m.bmTitle From shorts s, bookMark m WHERE m.id=#{id} AND s.sSeq = m.sSeq
 </select>
 
 

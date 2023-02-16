@@ -122,7 +122,7 @@
 									<c:if test="${board.upload=='null'}">
 										<br>
 										<div class="con">
-											<pre>${board.content }</pre>
+											<pre>${board.content}</pre>
 										</div>
 									</c:if>
 									<c:if test="${board.upload!='null'}">

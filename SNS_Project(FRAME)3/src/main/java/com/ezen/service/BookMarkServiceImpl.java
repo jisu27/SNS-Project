@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ezen.dao.BookMarkDAO;
+import com.ezen.dto.BoardVO;
 import com.ezen.dto.BookMarkVO;
+import com.ezen.dto.ShortsVO;
 
 @Service
 public class BookMarkServiceImpl implements BookMarkService {
@@ -72,5 +74,17 @@ public class BookMarkServiceImpl implements BookMarkService {
 	@Override
 	public List<Integer> getShortsBookMarkNums(BookMarkVO vo) {
 		return bmDAO.getShortsBookMarkNums(vo);
+	}
+
+	@Override
+	public String getBoardBookMarkTitle(BookMarkVO vo) {
+
+		return bmDAO.getBoardBookMarkTitle(vo);
+	}
+
+	@Override
+	public String getShortsBookMarkTitle(BookMarkVO vo) {
+
+		return bmDAO.getShortsBookMarkTitle(vo);
 	}
 }

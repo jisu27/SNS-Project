@@ -32,33 +32,36 @@ public class BookMarkController {
 
 	@PostMapping(value = "insertBookMark")
 	public String insertBookMark(BookMarkVO vo, ShortsVO svo, BoardVO bvo, Model model, HttpServletRequest request) {
-		if(svo != null) vo.setsSeq(svo.getsSeq());
-		if(bvo != null) vo.setbSeq(bvo.getbSeq());
+		if (svo != null)
+			vo.setsSeq(svo.getsSeq());
+		if (bvo != null)
+			vo.setbSeq(bvo.getbSeq());
 		bookMarkService.insertBookMark(vo);
-	
 
 		return "redirect:" + (String) request.getHeader("Referer");
 	}
-	
+
 	@PostMapping(value = "deleteShortsBookMark")
-	public String deleteShortsBookMark(BookMarkVO vo,ShortsVO svo, Model model, HttpServletRequest request, HttpSession session) {
-		MemberVO user = (MemberVO)session.getAttribute("user");
+	public String deleteShortsBookMark(BookMarkVO vo, ShortsVO svo, Model model, HttpServletRequest request,
+			HttpSession session) {
+		MemberVO user = (MemberVO) session.getAttribute("user");
 		vo.setId(user.getId());
 		vo.setsSeq(svo.getsSeq());
-		
+
 		bookMarkService.deleteShortsBookMark(vo);
-		
+
 		return "redirect:" + (String) request.getHeader("Referer");
 	}
-	
+
 	@PostMapping(value = "deleteBoardBookMark")
-	public String deleteBoardBookMark(BookMarkVO vo, BoardVO bvo, Model model, HttpServletRequest request, HttpSession session) {
-		MemberVO user = (MemberVO)session.getAttribute("user");
+	public String deleteBoardBookMark(BookMarkVO vo, BoardVO bvo, Model model, HttpServletRequest request,
+			HttpSession session) {
+		MemberVO user = (MemberVO) session.getAttribute("user");
 		vo.setId(user.getId());
 		vo.setbSeq(bvo.getbSeq());
-		
+
 		bookMarkService.deleteBoardBookMark(vo);
-		
+
 		return "redirect:" + (String) request.getHeader("Referer");
 	}
 
@@ -75,7 +78,7 @@ public class BookMarkController {
 
 		return "updateBookMark.do";
 	}
-	
+
 	@PostMapping(value = "updateBookMark.do")
 	public String updateBookMark(BookMarkVO vo, Model model) {
 		bookMarkService.updateBookMark(vo);
@@ -86,41 +89,33 @@ public class BookMarkController {
 	@GetMapping(value = "getBookMarkList")
 	public String getBookMarkList(BookMarkVO bookMark, BoardVO board, ShortsVO shorts, Model model,
 			HttpSession session) {
-		
-		MemberVO member = (MemberVO)session.getAttribute("user");
-		
+
+		MemberVO member = (MemberVO) session.getAttribute("user");
+
 		bookMark.setId(member.getId());
-		System.out.println("BookMarkController: getBooardList() vo="+bookMark);
-		
+		System.out.println("BookMarkController: getBooardList() vo=" + bookMark);
+
 		List<BookMarkVO> bookMarkList = bookMarkService.getBookMarkList(bookMark);
-		List<BoardVO> boardList = new ArrayList<BoardVO>();
-		List<ShortsVO> shortsList = new ArrayList<ShortsVO>();
+		List<Integer> boardBookMarkNums = bookMarkService.getBoardBookMarkNums(bookMark);
+		List<Integer> shortsBookMarkNums = bookMarkService.getShortsBookMarkNums(bookMark);
+		List<BookMarkVO> boardBookMarkList = bookMarkService.getBoardBookMarkList(bookMark);
+		List<BookMarkVO> shortsBookMarkList = bookMarkService.getShortsBookMarkList(bookMark);
 
-		for (BookMarkVO BM : bookMarkList) {
-			if (BM.getbSeq() != 0) {
-				board.setbSeq(BM.getbSeq());
-				BoardVO board1 = boardService.myBoard(board);
-				boardList.add(board1);
-				System.out.println(board1);
-			}
-			if (BM.getsSeq() != 0) {
-				shorts.setsSeq(BM.getsSeq());
-				ShortsVO shorts1 = shortsService.getShorts(shorts);
-				shortsList.add(shorts1);
-				System.out.println(shorts1);
-			}
-
-		}
-
+		session.setAttribute("boardBookMarkNums", boardBookMarkNums);
+		session.setAttribute("shortsBookMarkNums", shortsBookMarkNums);
 		model.addAttribute("bookMarkList", bookMarkList);
-		model.addAttribute("boardList", boardList);
-		model.addAttribute("shortsList", shortsList);
+		model.addAttribute("boardBookMarkList", boardBookMarkList);
+		model.addAttribute("shortsBookMarkList", shortsBookMarkList);
 
 		return "bookMarkList";
 	}
 
 	@GetMapping(value = "getBoardBookMarkList")
 	public String getBoardBookMarkList(BookMarkVO bookMark, BoardVO board, Model model, HttpSession session) {
+
+		MemberVO member = (MemberVO) session.getAttribute("user");
+		bookMark.setId(member.getId());
+
 		List<BookMarkVO> boardBookMarkList = bookMarkService.getBoardBookMarkList(bookMark);
 
 		model.addAttribute("boardBookMarkList", boardBookMarkList);
@@ -130,6 +125,10 @@ public class BookMarkController {
 
 	@GetMapping(value = "getShortsBookMarkList")
 	public String getShortsBookMarkList(BookMarkVO bookMark, ShortsVO shorts, Model model, HttpSession session) {
+		
+		MemberVO member = (MemberVO) session.getAttribute("user");
+		bookMark.setId(member.getId());
+		
 		List<BookMarkVO> shortsBookMarkList = bookMarkService.getShortsBookMarkList(bookMark);
 
 		model.addAttribute("shortsBookMarkList", shortsBookMarkList);

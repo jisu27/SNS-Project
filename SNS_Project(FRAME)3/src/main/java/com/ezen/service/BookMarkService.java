@@ -2,7 +2,9 @@ package com.ezen.service;
 
 import java.util.List;
 
+import com.ezen.dto.BoardVO;
 import com.ezen.dto.BookMarkVO;
+import com.ezen.dto.ShortsVO;
 
 public interface BookMarkService {
 	void insertBookMark(BookMarkVO vo);
@@ -26,4 +28,8 @@ public interface BookMarkService {
 	List<Integer> getBoardBookMarkNums(BookMarkVO vo);
 	
 	List<Integer> getShortsBookMarkNums(BookMarkVO vo);
+	
+	String getBoardBookMarkTitle(BookMarkVO vo);
+	
+	String getShortsBookMarkTitle(BookMarkVO vo);
 }
