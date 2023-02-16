@@ -112,10 +112,10 @@
 							<header class="top">
 								<div class="user_container">
 									<div class="profile_img">
-										<img src="imgs/thumb.jpeg" alt="">
+										<img src="profile/${member.profile}" alt="">
 									</div>
 									<div class="user_name">
-										<div class="nick_name">KindTiger</div>
+										<div class="nick_name">${shorts.id}</div>
 										<div class="country">Seoul, South Korea</div>
 									</div>
 								</div>
@@ -130,11 +130,11 @@
 							</header>
 
 							<section class="scroll_section">
-								<c:forEach items="${ShortsCommentList}" var="ShortsComment">
 									<div class="user_container-detail">
+									<c:forEach items="${ShortsCommentList}" var="ShortsComment">
 									<div class="user">
-										<!--  <img src="imgs/thumb02.jpg" alt="user"> -->
-										프사
+										<img src="profile/${member.profile}" alt="user">
+										
 									</div>
 									<div class="comment">
 										<span class="user_id">${ShortsComment.id}</span>
@@ -152,8 +152,8 @@
 											</div>
 										</div>
 									</div>
-								</div>
 								</c:forEach>
+								</div>
 							</section>
 
 
