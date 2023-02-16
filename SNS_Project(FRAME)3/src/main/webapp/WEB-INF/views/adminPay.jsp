@@ -128,7 +128,7 @@ table, tr, th {
 						</c:choose>
 						<th><fmt:formatDate pattern="yyyy-MM-dd"
 								value="${demend.inDate}" /></th>
-						<th><input type="button" value="승인 취소" onclick="goForm2(end${status.index})"></th>
+						<th><input type="button" value="승인 취소" onclick="goDelete(end${status.index})"></th>
 
 					
 				</tr>
@@ -139,15 +139,32 @@ table, tr, th {
 	</section>
 	<script type="text/javascript">
 	 function goForm(tr){
-		let value =$("table").children($(tr));
-		console.log(value);
-		$("#wait").submit(value);
+		 console.log(tr);
+		 
+		let form = $("<form></form>");
+		form.attr("method","post");
+		form.attr("action","checkAd.do");
+		
+		form.appendTo("body");
+		form.append(tr);
+		
+		form.submit();
+		
 	 }
-	 function goForm2(tr){
-		let value =$("table").children($(tr));
-		console.log(value);
-		$("end").submit(value);
-	 }
+	 function goDelete(tr){
+			console.log(tr);
+			 
+			let form = $("<form></form>");
+			form.attr("method","post");
+			form.attr("action","checkManusAd.do");
+			
+			form.appendTo("body");
+			form.append(tr);
+			
+			form.submit();
+			
+	}
+		
 	</script>
 </body>
 </html>
