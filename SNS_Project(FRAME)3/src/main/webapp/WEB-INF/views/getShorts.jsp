@@ -81,11 +81,16 @@
 				</div>
 
 
+				<input type="hidden" id="check" value="${sessionScope.user.id}">
 				<div class="right_icons">
-					<a href="new_post.html"><div class="sprite_camera_icon"></div></a>
-					<a href="login.html"><div class="sprite_compass_icon"></div></a> <a
-						href="follow.html"><div class="sprite_heart_icon_outline"></div></a>
-					<a href="profile.html"><div class="sprite_user_icon_outline"></div></a>
+					<a id="goProfile1" href="goInsertBoard.do" onclick="check_id()"><div
+							class="sprite_camera_icon"></div></a> <a id="goProfile2" href="/"
+						onclick="check_id()"><div class="sprite_compass_icon"></div></a> <a
+						id="goProfile3" href="getLikeList.do?id=${sessionScope.user.id}"
+						onclick="check_id()"><div class="sprite_heart_icon_outline"></div></a>
+					<a id="goProfile4" href="profile.do?id=${sessionScope.user.id}"
+						onclick="check_id()"><div class="sprite_user_icon_outline"></div></a>
+					<a href="insertShorts"><div class="sprite_short_icon"></div></a>
 				</div>
 			</section>
 		</header>
@@ -123,13 +128,26 @@
 										<div class="country">Seoul, South Korea</div>
 									</div>
 								</div>
-								<div class="sprite_more_icon" data-name="more">
-									<ul class="more_detail">
-										<li>무엇을</li>
-										<li>무언가</li>
-										<li>넣을게</li>
-									</ul>
-								</div>
+								<c:if test="${sessionScope.user.id == shorts.id}">
+									<div class="sprite_more_icon" data-name="more"
+										onclick="toggle(this.children[0])">
+										<ul class="toggle_box" id="toggle_box${status.count}">
+											<li><input type="submit" class="follow" value="팔로우"
+												data-name="follow"></li>
+
+											<li><a href="goUpdateShorts.do?sSeq=${shorts.sSeq}"> <input
+													type="button" value="수정"></a></li>
+
+											<li><form action="deleteShorts.do?sSeq=${shorts.sSeq}"
+													method="post">
+													<c:if test="${sessionScope.user.id == shorts.id }">
+														<input type="submit" value="삭제">
+													</c:if>
+												</form></li>
+										</ul>
+
+									</div>
+								</c:if>
 
 							</header>
 
@@ -142,7 +160,7 @@
 										</div>
 										<div class="comment">
 											<span class="user_id">${ShortsComment.id}</span>
-											${ShortsComment.content}
+											<div class="word2">${ShortsComment.content}</div>
 											
 											<div class="time" style="font-size: small;">
 												<fmt:formatDate var="comDate" value="${ShortsComment.inDate}"
@@ -264,6 +282,15 @@
 			} else {
 				$("#bmTitle").val(bmTitle);
 				$("#insertBookMark").attr("action", "insertBookMark").submit();
+			}
+		}
+		
+		function toggle(element) {
+			var con = document.getElementById(element.getAttribute("id"));
+			if (con.style.display == 'none') {
+				con.style.display = 'block';
+			} else {
+				con.style.display = 'none';
 			}
 		}
 	</script>
