@@ -30,6 +30,7 @@ public class LoginController {
 
 	@Autowired
 	private HeartService heartService;
+	
 
 	@GetMapping("/")
 	public String goHome() {
@@ -126,12 +127,14 @@ public class LoginController {
 
 				List<HeartVO> heart = heartService.boardLike(hvo);
 				List<Integer> c_heart = heartService.commentLike(hvo);
+				List<Integer> s_heart = heartService.shortsLike(hvo);
 				List<String> follower = followService.getFollowList(fvo);
 
 				session.setAttribute("user", mvo);
 				session.setAttribute("follower", follower);
 				session.setAttribute("heart", heart);
 				session.setAttribute("c_heart", c_heart);
+				session.setAttribute("s_heart", s_heart);
 
 				if (mvo.getRole() == 1) {
 

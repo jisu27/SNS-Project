@@ -64,7 +64,7 @@ public class HeartServiceImpl implements HeartService {
 	}
 
 	@Override
-	public List<HeartVO> shortsLike(HeartVO vo) {
+	public List<Integer> shortsLike(HeartVO vo) {
 
 		return hDao.shortsLike(vo);
 	}
@@ -73,6 +73,12 @@ public class HeartServiceImpl implements HeartService {
 	public int likeShortsCount(HeartVO vo) {
 
 		return hDao.likeShortsCount(vo);
+	}
+
+	@Override
+	public void deleteLike_s(HeartVO vo) {
+		hDao.deleteLike_s(vo);
+		
 	}
 
 }

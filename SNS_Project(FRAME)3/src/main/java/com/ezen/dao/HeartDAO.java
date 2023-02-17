@@ -36,6 +36,9 @@ public class HeartDAO {
 	public void deleteLike_c(HeartVO vo) {
 		mybatis.selectOne("heartMapper.deleteLike_c", vo);
 	}
+	public void deleteLike_s(HeartVO vo) {
+		mybatis.selectOne("heartMapper.deleteLike_s", vo);
+	}
 
 	public int getLikeCount(HeartVO vo) {
 		return mybatis.selectOne("heartMapper.likeCount", vo);
@@ -52,10 +55,11 @@ public class HeartDAO {
 		return mybatis.selectOne("heartMapper.likeCommentCount", vo);
 	}
 
-	public List<HeartVO> shortsLike(HeartVO vo) {
+	public List<Integer> shortsLike(HeartVO vo) {
 
 		return mybatis.selectList("heartMapper.likeShorts", vo);
 	}
+
 
 	public int likeShortsCount(HeartVO vo) {
 		return mybatis.selectOne("heartMapper.likeShortsCount", vo);

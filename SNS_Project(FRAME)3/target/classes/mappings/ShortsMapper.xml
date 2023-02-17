@@ -21,6 +21,11 @@
 		id=#{id}, sContent=#{sContent}, upload=#{upload}
 		where sSeq=#{sSeq}
 	</update>
+	<update id="updateShortsCount" parameterType="shorts">
+		update Shorts set
+		count=#{count}
+		where sSeq=#{sSeq}
+	</update>
 
 	<delete id="deleteShorts" parameterType="shorts">
 		delete shorts where
