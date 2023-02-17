@@ -87,7 +87,16 @@
 									</div>
 									<div class="user_name">
 										<div class="nick_name">${board.id}</div>
-										<div class="country">Seoul, South Korea</div>
+										<div class="country">
+											<c:choose>
+												<c:when test="${board.pay != 1}">
+													<h1>게시물</h1>
+												</c:when>
+												<c:otherwise>
+													<h1>광고</h1>
+												</c:otherwise>
+											</c:choose>
+										</div>
 									</div>
 
 								</div>
@@ -290,7 +299,7 @@
 								</div>
 							</div>
 
-							<div class="heart_count" style="font-weight: 900">
+							<div class="heart_count" style="font-weight: 900;padding-left: 20px;">
 								좋아요${board.count}개</div>
 							<div class="timer">
 								<fmt:formatDate var="boDate" value="${board.inDate}"
@@ -302,7 +311,9 @@
 								<form action="insertComment.do" method="post">
 									<input type="hidden" name="id" value="${sessionScope.user.id}">
 									<input type="hidden" name="bSeq" value="${board.bSeq}">
-									<input type="text" name="ccontent" placeholder="댓글을 달아주세요 !">
+									<div style="width: 250px">
+										<input type="text" name="ccontent" placeholder="댓글을 달아주세요 !">
+									</div>
 									<div class="upload_btn m_text" data-name="comment">
 										<input type="submit" value="게시">
 									</div>

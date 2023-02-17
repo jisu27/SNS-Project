@@ -45,7 +45,7 @@
   <select id="getAdverList" resultType="board">
   	SELECT * FROM board
   	WHERE pay > 0 AND content LIKE '%'||#{keyWord}||'%'
-  	ORDER BY pay DESC
+  	ORDER BY INDATE DESC
   </select>
   
   <delete id="deleteBoard" >

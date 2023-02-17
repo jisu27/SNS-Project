@@ -56,4 +56,10 @@ public class ShortServiceImpl implements ShortsService {
 		
 	}
 
+	@Override
+	public void updateShortsCount(ShortsVO vo) {
+		sDAO.updateShortsCount(vo);
+		
+	}
+
 }

@@ -5,10 +5,19 @@ import java.util.Date;
 public class CommentVO {
 	private int cseq;
 	private int bSeq;
+	private int sSeq;
 	private String id;
 	private String ccontent;
 	private Date indate;
 	private int count;
+	
+	
+	public int getsSeq() {
+		return sSeq;
+	}
+	public void setsSeq(int sSeq) {
+		this.sSeq = sSeq;
+	}
 	public int getCseq() {
 		return cseq;
 	}
@@ -41,8 +50,9 @@ public class CommentVO {
 	}
 	@Override
 	public String toString() {
-		return "CommentVO [cseq=" + cseq + ", bSeq=" + bSeq + ", id=" + id + ", ccontent=" + ccontent + ", indate="
-				+ indate + ", count=" + count + "]";
+		return "CommentVO [cseq=" + cseq + ", bSeq=" + bSeq + ", sSeq=" + sSeq
+				+ ", id=" + id + ", ccontent=" + ccontent + ", indate=" + indate
+				+ ", count=" + count + "]";
 	}
 	public int getCount() {
 		return count;

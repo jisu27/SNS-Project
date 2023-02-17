@@ -71,21 +71,26 @@
 						</div>
 					</a>
 				</h1>
-
+				<!-- 
 				<div class="search_field">
-					<input type="text" placeholder="검색" tabindex="0">
+					<input type="text" placeholder="ê²ì" tabindex="0">
 
 					<div class="fake_field">
-						<span class=sprite_small_search_icon></span> <span>검색</span>
+						<span class=sprite_small_search_icon></span> <span>ê²ì</span>
 					</div>
 				</div>
+				 -->
 
-
+				<input type="hidden" id="check" value="${sessionScope.user.id}">
 				<div class="right_icons">
-					<a href="new_post.html"><div class="sprite_camera_icon"></div></a>
-					<a href="login.html"><div class="sprite_compass_icon"></div></a> <a
-						href="follow.html"><div class="sprite_heart_icon_outline"></div></a>
-					<a href="profile.html"><div class="sprite_user_icon_outline"></div></a>
+					<a id="goProfile1" href="goInsertBoard.do" onclick="check_id()"><div
+							class="sprite_camera_icon"></div></a> <a id="goProfile2" href="/"
+						onclick="check_id()"><div class="sprite_compass_icon"></div></a> <a
+						id="goProfile3" href="getLikeList.do?id=${sessionScope.user.id}"
+						onclick="check_id()"><div class="sprite_heart_icon_outline"></div></a>
+					<a id="goProfile4" href="profile.do?id=${sessionScope.user.id}"
+						onclick="check_id()"><div class="sprite_user_icon_outline"></div></a>
+					<a href="insertShorts"><div class="sprite_short_icon"></div></a>
 				</div>
 			</section>
 		</header>
@@ -120,55 +125,156 @@
 									</div>
 									<div class="user_name">
 										<div class="nick_name">${shorts.id}</div>
-										<div class="country">Seoul, South Korea</div>
+										<div class="country">동영상</div>
 									</div>
 								</div>
-								<div class="sprite_more_icon" data-name="more">
-									<ul class="more_detail">
-										<li>무엇을</li>
-										<li>무언가</li>
-										<li>넣을게</li>
-									</ul>
-								</div>
+								<c:if test="${sessionScope.user.id == shorts.id}">
+									<div class="sprite_more_icon" data-name="more"
+										onclick="toggle(this.children[0])">
+										<ul class="toggle_box" id="toggle_box${status.count}">
+
+											<li><a href="goUpdateShorts.do?sSeq=${shorts.sSeq}">
+													<input type="button" value="수정">
+											</a></li>
+
+											<li><form action="deleteShorts.do?sSeq=${shorts.sSeq}"
+													method="post">
+													<c:if test="${sessionScope.user.id == shorts.id }">
+														<input type="submit" value="삭제">
+													</c:if>
+												</form></li>
+										</ul>
+
+									</div>
+								</c:if>
 
 							</header>
 
 							<section class="scroll_section">
-									<c:forEach items="${ShortsCommentList}" var="ShortsComment">
-								<div class="user_container-detail">
-										<div class="user">
-											<img src="profile/${member.profile}" alt="user">
+								<c:forEach items="${commentList}" var="ShortsComment">
+									<c:if test="${ShortsComment.sSeq==shorts.sSeq}">
+										<div class="user_container-detail">
+											<div class="user">
+												<img src="profile/${member.profile}" alt="user">
 
-										</div>
-										<div class="comment">
-											<span class="user_id">${ShortsComment.id}</span>
-											${ShortsComment.content}
-											
-											<div class="time" style="font-size: small;">
-												<fmt:formatDate var="comDate" value="${ShortsComment.inDate}"
-												pattern="yyyy년MM월dd일HH시" />
-												${comDate}에 작성된 글입니다.
-												<!-- <span class="try_comment">ëµê¸ ë¬ê¸°</span>  -->
 											</div>
-											<div class="icon_wrap">
-												<div class="more_trigger">
-													<div class="sprite_more_icon"></div>
+											<div class="comment">
+												<span class="user_id">${ShortsComment.id}</span>
+												${ShortsComment.ccontent}
+
+												<div class="time" style="font-size: small;">
+													<fmt:formatDate var="comDate"
+														value="${ShortsComment.indate}" pattern="yyyy년MM월dd일HH시" />
+													${comDate}에 작성된 글입니다.
+													<!-- <span class="try_comment">ëµê¸ ë¬ê¸°</span>  -->
 												</div>
-												<div>
-													<div class="sprite_small_heart_icon_outline"></div>
+												<div class="icon_wrap">
+													<div class="more_trigger">
+														<div class="sprite_more_icon" data-name="more"
+															onclick="toggle(this.children[0])">
+															<ul class="toggle_box"
+																id="toggle_box${ShortsComment.cseq}">
+																<li><a
+																	href="goUpdateComment.do?cseq=${ShortsComment.cseq}">
+																		<input type="button" value="수정">
+																</a></li>
+																<li><form
+																		action="deleteComment.do?cseq=${ShortsComment.cseq}"
+																		method="post">
+																		<c:if
+																			test="${sessionScope.user.id == ShortsComment.id }">
+																			<input type="submit" value="삭제">
+																		</c:if>
+																	</form></li>
+															</ul>
+														</div>
+													</div>
+													<div>
+														<c:choose>
+															<c:when
+																test="${fn:contains(sessionScope.c_heart,ShortsComment.cseq)}">
+																<div
+																	onclick="deleteLike_c(deleteLike${ShortsComment.cseq})"
+																	data-ame="smallheart"
+																	class="sprite_small_heart_icon_outline"
+																	style="background: url('../../imgs/background01.png') no-repeat -323px -287px">
+																	<form id="deleteLike${ShortsComment.cseq}"
+																		method="post" action="getDeleteHeart_s.do">
+																		<input type="hidden" id="cseq" name="cseq"
+																			value="${ShortsComment.cseq}"> <input
+																			type="hidden" id="id" name="id"
+																			value="${sessionScope.user.id}"> <input
+																			type="hidden" id="sSeq" name="sSeq"
+																			value="${ShortsComment.sSeq}"> <input
+																			type="hidden" id="profile" name="profile"
+																			value="${profile}">
+																	</form>
+																</div>
+
+
+															</c:when>
+
+															<c:otherwise>
+																<div onclick="like_c(like${ShortsComment.cseq})"
+																	data-name="smallheart"
+																	class="sprite_small_heart_icon_outline">
+																	<form id="like${ShortsComment.cseq}" method="post"
+																		action="getHeart_s.do">
+																		<input type="hidden" id="cseq" name="cseq"
+																			value="${ShortsComment.cseq}"> <input
+																			type="hidden" id="id" name="id"
+																			value="${sessionScope.user.id}"> <input
+																			type="hidden" id="ccontent" name="ccontent"
+																			value="${ShortsComment.ccontent}"> <input
+																			type="hidden" id="sSeq" name="sSeq"
+																			value="${ShortsComment.sSeq}"> <input
+																			type="hidden" id="profile" name="profile"
+																			value="${profile}">
+
+																	</form>
+																</div>
+
+															</c:otherwise>
+														</c:choose>
+													</div>
 												</div>
 											</div>
 										</div>
-								</div>
-									</c:forEach>
+									</c:if>
+								</c:forEach>
 							</section>
 
 
 							<div class="bottom_icons">
 								<div class="left_icons">
-									<div class="heart_btn">
-										<div class="sprite_heart_icon_outline" data-name="heartbeat"></div>
-									</div>
+									<c:choose>
+										<c:when
+											test="${fn:contains(sessionScope.s_heart,shorts.sSeq)}">
+											<div onclick="deleteLike()" class="sprite_heart_icon_outline"
+												id="heart" name="39" data-name="heartbeat"
+												style="background: url('../../imgs/background01.png') no-repeat -26px -261px;">
+												<form id="deleteLike" method="post">
+													<input type="hidden" id="sseq" name="sSeq"
+														value="${shorts.sSeq}"> <input type="hidden"
+														id="id" name="id" value="${sessionScope.user.id}">
+												</form>
+											</div>
+
+										</c:when>
+
+										<c:otherwise>
+											<div onclick="like()" class="sprite_heart_icon_outline"
+												id="heart" name="39" data-name="heartbeat"
+												style="background: url('../../imgs/background01.png') no-repeat -52px -261px;">
+												<form id="like" method="post">
+													<input type="hidden" id="sseq" name="sSeq"
+														value="${shorts.sSeq}"> <input type="hidden"
+														id="id" name="id" value="${sessionScope.user.id}">
+
+												</form>
+											</div>
+										</c:otherwise>
+									</c:choose>
 									<div>
 										<div class="sprite_bubble_icon"></div>
 									</div>
@@ -182,7 +288,8 @@
 										<c:when
 											test="${fn:contains(sessionScope.shortsBookMarkNum, shorts.sSeq)}">
 											<div onclick="deleteShortsBookMark(deleteShortsBookMark)"
-												class="sprite_bookmark_outline" id="bookMark" data-name="bookMark"
+												class="sprite_bookmark_outline" id="bookMark"
+												data-name="bookMark"
 												style="background: url('../../imgs/background01.png') no-repeat -160px -286px;">
 												<form id="deleteShortsBookMark" method="post">
 													<input type="hidden" id="sSeq" name="sSeq"
@@ -194,38 +301,37 @@
 
 										<c:otherwise>
 											<div onclick="insertBookMark(insertBookMark)"
-												class="sprite_bookmark_outline" id="bookMark"data-name="bookMark"
+												class="sprite_bookmark_outline" id="bookMark"
+												data-name="bookMark"
 												style="background: url('../../imgs/background01.png') no-repeat -185px -286px;">
 												<form id="insertBookMark" method="post">
 													<input type="hidden" id="sSeq" name="sSeq"
 														value="${shorts.sSeq}"> <input type="hidden"
 														id="id" name="id" value="${sessionScope.user.id}">
-														<input type="hidden" id="bmTitle" name="bmTitle">
+													<input type="hidden" id="bmTitle" name="bmTitle">
 												</form>
 											</div>
 										</c:otherwise>
 									</c:choose>
 								</div>
 							</div>
-
-							<div class="count_likes">
-								<!-- 좋아요 수<span class="count">{shorts.like}</span> -->
-								
-							</div>
+							<div class="heart_count" style="font-weight: 900;padding-left: 20px;">
+								&nbsp;좋아요${shorts.count}개</div>
 							<div class="timer">
 								<fmt:formatDate var="comDate" value="${shorts.inDate}"
-												pattern="yyyy년MM월dd일HH시" />
-											${comDate}
+									pattern="yyyy년MM월dd일HH시" />
+								${comDate}
 							</div>
-
-							<div class="commit_field">
-								<form action="insertShortsComment" method="post">
-									<input type="hidden" name="sSeq" value="${shorts.sSeq}">
+							<div class="comment_field" id="add-comment-post37">
+								<form action="insertShortsComment.do" method="post">
 									<input type="hidden" name="id" value="${sessionScope.user.id}">
-									<input type="text" name="content" placeholder="댓글을 입력하세요">
-
-									<input type="submit" value="댓글 달기">
-									<div class="upload_btn"></div>
+									<input type="hidden" name="sSeq" value="${shorts.sSeq}">
+									<div style="width: 250px">
+										<input type="text" name="ccontent" placeholder="댓글을 달아주세요 !">
+									</div>
+									<div class="upload_btn m_text" data-name="comment">
+										<input type="submit" value="게시">
+									</div>
 								</form>
 							</div>
 						</div>
@@ -264,6 +370,28 @@
 			} else {
 				$("#bmTitle").val(bmTitle);
 				$("#insertBookMark").attr("action", "insertBookMark").submit();
+			}
+		}
+		
+		function like() {
+			$("#like").attr("action","heart_s.do").submit();
+		}
+		function deleteLike() {
+			$("#deleteLike").attr("action","deleteHeart_s.do").submit();
+			
+		}
+		function deleteLike_c(decomment) {
+			$(decomment).submit();
+		}
+		function like_c(comment) {
+			$(comment).submit();
+		}
+		function toggle(element) {
+			var con = document.getElementById(element.getAttribute("id"));
+			if (con.style.display == 'none') {
+				con.style.display = 'block';
+			} else {
+				con.style.display = 'none';
 			}
 		}
 	</script>
