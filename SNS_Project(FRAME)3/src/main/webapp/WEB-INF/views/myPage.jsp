@@ -184,37 +184,31 @@
 				<!-- BookMarks -->
 				<!-- Board BookMarks -->
 				<div class="bookmark_contents contents_container">
-					<c:if
-						test="${fn:contains(sessionScope.boardBookMarkNums, board.bSeq)}">
-						<c:forEach items="${boardBookMarkList}" var="board">
-							<div class="pic">
-								<a
-									href="getBoard.do?bSeq=${board.bSeq}&profile=${member.profile}"><img
-									src="images/${board.upload}" alt=""></a>
-							</div>
+					<c:forEach items="${boardBookMarkList}" var="board">
+						<div class="pic">
+							<a
+								href="getBoard.do?bSeq=${board.bSeq}&profile=${member.profile}"><img
+								src="images/${board.upload}" alt=""></a>
+						</div>
 								${board.bmTitle}
 								<br>
-						</c:forEach>
-					</c:if>
+					</c:forEach>
 				</div>
 				<!-- Shorts BookMarks -->
 				<div class="bookmark_contents contents_container">
-					
-					<c:if
-						test="${fn:contains(sessionScope.shortsBookMarkNums, shorts.sSeq)}">
-						<c:forEach items="${shortsBookMarkList}" var="shorts">
+					<c:forEach items="${shortsBookMarkList}" var="shorts">
 						<div class="content">
-								<a href="getShorts?sSeq=${shorts.sSeq}"> <video
-										id="video-player" onmouseover="this.play()"
-										onmouseout="this.pause()" preload="metadata" style="width: 400px">
-										<source src="shorts/${shorts.upload}#t=0.5">
-									</video>
-								</a>
+							<a href="getShorts?sSeq=${shorts.sSeq}"> <video
+									id="video-player" onmouseover="this.play()"
+									onmouseout="this.pause()" preload="metadata"
+									style="width: 400px">
+									<source src="shorts/${shorts.upload}#t=0.5">
+								</video>
+							</a>
 						</div>
 							${shorts.bmTitle}
 								<br>
-						</c:forEach>
-					</c:if>
+					</c:forEach>
 				</div>
 			</section>
 		</div>

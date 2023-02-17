@@ -112,7 +112,7 @@ public class BoardController {
 
 			newBoardList.add(i, vo);
 
-			if (newBoardList.size() > i + 4) {
+			if (newBoardList.size() >= i + 4) {
 				i = i + 3;
 			} else {
 
