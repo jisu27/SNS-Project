@@ -18,7 +18,7 @@
 		set sTitle=#{sTitle}, id=#{id}, upload=#{upload} where sSeq=#{sSeq} </update> -->
 	<update id="updateShorts" parameterType="shorts">
 		update Shorts set
-		id=#{id}, sContent=#{sContent}, upload=#{upload}
+		id=#{id}, sContent=#{sContent}, upload=#{upload},sTitle=#{sTitle}
 		where sSeq=#{sSeq}
 	</update>
 	<update id="updateShortsCount" parameterType="shorts">

@@ -158,11 +158,11 @@ public class ShortsController {
 
 		if (user == null) {
 
-			return "index";
+			return "redirect:/";
 		} else {
 			ShortsVO shorts = shos.getShorts(vo);
 
-			model.addAttribute("short", shorts);
+			model.addAttribute("shorts", shorts);
 			return "updateShorts";
 		}
 
@@ -172,27 +172,25 @@ public class ShortsController {
 	public String updateShorts(ShortsVO vo, HttpSession session) throws IOException {
 		MemberVO user = (MemberVO) session.getAttribute("user");
 
-		MultipartFile uploadFile = vo.getUploadFile();
-		if (!uploadFile.isEmpty()) {
-
-			String fileName = uploadFile.getOriginalFilename();
-
-			uploadFile.transferTo(new File("C:/shorts/" + fileName));
-			vo.setUpload(fileName);
-			System.out.println("�뙆�씪�씠由� :" + fileName);
-
-		} else {
-			System.out.println("�뙆�씪�씠 �뾾�뒿�땲�떎");
-			return "updatetShorts";
-		}
-
 		if (user == null) {
 			return "index";
 
 		} else {
+			MultipartFile uploadFile = vo.getUploadFile();
+			if (!uploadFile.isEmpty()) {
+	
+				String fileName = uploadFile.getOriginalFilename();
+	
+				uploadFile.transferTo(new File("C:/shorts/" + fileName));
+				vo.setUpload(fileName);
+				
+	
+			} else {
+				
+				return "updatetShorts";
+			}
 
 			shos.updateShorts(vo);
-			System.out.println("update controller �떎�뻾= " + "�젣紐�: " + vo.getsTitle() + " �궡�슜: " + vo.getsContent());
 			return "redirect:getShortsList";
 		}
 
