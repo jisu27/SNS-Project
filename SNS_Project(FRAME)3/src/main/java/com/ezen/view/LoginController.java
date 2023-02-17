@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.ezen.dto.BookMarkVO;
 import com.ezen.dto.FollowVO;
 import com.ezen.dto.HeartVO;
 import com.ezen.dto.MemberVO;
+import com.ezen.service.BookMarkService;
 import com.ezen.service.FollowService;
 import com.ezen.service.HeartService;
 import com.ezen.service.MemberService;
@@ -27,6 +29,8 @@ public class LoginController {
 	private MemberService memberService;
 	@Autowired
 	private FollowService followService;
+	@Autowired
+	private BookMarkService bookMarkService;
 
 	@Autowired
 	private HeartService heartService;
@@ -123,13 +127,16 @@ public class LoginController {
 				HeartVO hvo = new HeartVO();
 				hvo.setId(mvo.getId().toString());
 				
+				BookMarkVO bookMark = new BookMarkVO();
+				bookMark.setId(mvo.getId());
 				
-
 				List<HeartVO> heart = heartService.boardLike(hvo);
 				List<Integer> c_heart = heartService.commentLike(hvo);
 				List<Integer> s_heart = heartService.shortsLike(hvo);
 				List<String> follower = followService.getFollowList(fvo);
-
+				List<Integer> boardBookMarkNums = bookMarkService.getBoardBookMarkNums(bookMark);
+				
+				session.setAttribute("boardBookMarkNums", boardBookMarkNums);
 				session.setAttribute("user", mvo);
 				session.setAttribute("follower", follower);
 				session.setAttribute("heart", heart);
