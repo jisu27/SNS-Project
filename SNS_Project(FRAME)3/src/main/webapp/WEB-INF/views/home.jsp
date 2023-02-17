@@ -87,7 +87,16 @@
 									</div>
 									<div class="user_name">
 										<div class="nick_name m_text">${board.id}</div>
-										<div class="country s_text">Seoul, South Korea</div>
+										<div class="country s_text">
+											<c:choose>
+												<c:when test="${board.pay != 1}">
+													<h1>게시물</h1>
+												</c:when>
+												<c:otherwise>
+													<h1>광고</h1>
+												</c:otherwise>
+											</c:choose>
+										</div>
 									</div>
 
 								</div>

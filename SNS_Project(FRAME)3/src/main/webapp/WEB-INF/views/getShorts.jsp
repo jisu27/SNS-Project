@@ -125,7 +125,7 @@
 									</div>
 									<div class="user_name">
 										<div class="nick_name">${shorts.id}</div>
-										<div class="country">Seoul, South Korea</div>
+										<div class="country">동영상</div>
 									</div>
 								</div>
 								<c:if test="${sessionScope.user.id == shorts.id}">
@@ -186,9 +186,6 @@
 								<div class="left_icons">
 									<div class="heart_btn">
 										<div class="sprite_heart_icon_outline" data-name="heartbeat"></div>
-									</div>
-									<div>
-										<div class="sprite_bubble_icon"></div>
 									</div>
 									<div>
 										<div class="sprite_share_icon" data-name="share"></div>
