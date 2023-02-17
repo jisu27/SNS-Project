@@ -58,4 +58,7 @@ public class BoardDAO {
 	public void updatePay(int bSeq) {
 		mybatis.selectOne("boardMapper.updatePay",bSeq);
 	}
+	public void updateManusPay(int bSeq) {
+		mybatis.selectOne("boardMapper.update-Pay",bSeq);
+	}
 }

@@ -39,5 +39,8 @@ public class ShortsDAO {
 	public void updatePay(int sSeq) {
 		mybatis.selectOne("ShortsMapper.updatePay",sSeq);
 	}
+	public void updateManusPay(int sSeq) {
+		mybatis.selectOne("ShortsMapper.update-Pay",sSeq);
+	}
 
 }

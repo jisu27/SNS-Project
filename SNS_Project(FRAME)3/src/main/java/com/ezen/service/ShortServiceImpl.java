@@ -50,4 +50,10 @@ public class ShortServiceImpl implements ShortsService {
 		
 	}
 
+	@Override
+	public void updateManusPay(int sSeq) {
+		sDAO.updateManusPay(sSeq);
+		
+	}
+
 }

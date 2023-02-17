@@ -58,7 +58,7 @@
 						</div>
 					</a>
 				</h1>
-
+<!-- 
 				<div class="search_field">
 					<input type="text" placeholder="검색" tabindex="0">
 
@@ -66,6 +66,7 @@
 						<span class=sprite_small_search_icon></span> <span>검색</span>
 					</div>
 				</div>
+ -->
 
 				<input type="hidden" id="check" value="${sessionScope.user.id}">
 				<div class="right_icons">

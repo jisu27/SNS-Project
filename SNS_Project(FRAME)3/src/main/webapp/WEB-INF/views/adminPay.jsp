@@ -60,23 +60,25 @@ table, tr, th {
 
 			</section>
 		</header>
+			
+				
 		<section id="main_container">
+			<form action="checkAd.do" id="wait" method="post" >
+			<table>
+				<tr style="text-align: center;">
+					<h2 style="font-weight: 900">광고 요청 된 게시글</h2>
+				</tr>
+				<tr>
+					<th>순번</th>
+					<th>아이디</th>
+					<th>게시물 번호</th>
+					<th>요청일</th>
+					<th>광고 승인</th>
+				</tr>
 
-			<form action="checkAd.do" method="post" style="margin-right: 100px;">
-				<table>
-					<tr style="text-align: center;">
-						<h2 style="font-weight: 900">광고 요청 된 게시글</h2>
-					</tr>
-					<tr>
-						<th>순번</th>
-						<th>아이디</th>
-						<th>게시물 번호</th>
-						<th>요청일</th>
-						<th>광고 승인</th>
-					</tr>
-
-					<c:forEach var="demend" items="${deAd}">
-						<tr>
+				
+				<c:forEach var="demend" items="${deAd}" varStatus="status">
+						<tr id="wait${status.index}">
 							<th><input name="aSeq" type="hidden" value="${demend.aSeq}">${demend.aSeq}</th>
 							<th><input name="id" type="hidden" value="${demend.id}">${demend.id}</th>
 							<c:choose>
@@ -91,49 +93,78 @@ table, tr, th {
 							</c:choose>
 							<th><fmt:formatDate pattern="yyyy-MM-dd"
 									value="${demend.inDate}" /></th>
-							<th><input type="submit" value="승인"></th>
+							<th><input type="button" onclick="goForm(wait${status.index})" value="승인"></th>
 						</tr>
-					</c:forEach>
-				</table>
+					
+				</c:forEach>
+			</table>
 			</form>
+			<form action="checkManusAd.do" id="end" method="post">
+			<table>
+				<tr>
+					<h2 style="font-weight: 900">광고 요청 완료 게시글</h2>
+				</tr>
+				<tr>
+					<th>순번</th>
+					<th>아이디</th>
+					<th>게시물 번호</th>
+					<th>요청일</th>
+					<th>승인 취소</th>
 
-			<form action="checkAd.do" method="post">
-				<table>
-					<tr>
-						<h2 style="font-weight: 900">광고 요청 완료 게시글</h2>
-					</tr>
-					<tr>
-						<th>순번</th>
-						<th>아이디</th>
-						<th>게시물 번호</th>
-						<th>요청일</th>
-						<th>승인 취소</th>
+				</tr>
 
-					</tr>
+				
+				<c:forEach var="demend" items="${checkAd}" varStatus="status">
+					<tr id="end${status.index}">
+						<th><input name="aSeq" type="hidden" value="${demend.aSeq}">${demend.aSeq}</th>
+						<th><input name="id" type="hidden" value="${demend.id}">${demend.id}</th>
+						<c:choose>
+							<c:when test="${demend.bSeq!=null}">
+								<th><input name="bSeq" type="hidden" value="${demend.bSeq}">${demend.bSeq}</th>
+							</c:when>
+							<c:otherwise>
+								<th><input name="sSeq" type="hidden" value="${demend.sSeq}">${demend.sSeq}</th>
+							</c:otherwise>
+						</c:choose>
+						<th><fmt:formatDate pattern="yyyy-MM-dd"
+								value="${demend.inDate}" /></th>
+						<th><input type="button" value="승인 취소" onclick="goDelete(end${status.index})"></th>
 
-					<c:forEach var="demend" items="${checkAd}">
-						<tr>
-							<th><input name="aSeq" type="hidden" value="${demend.aSeq}">${demend.aSeq}</th>
-							<th><input name="id" type="hidden" value="${demend.id}">${demend.id}</th>
-							<c:choose>
-								<c:when test="${demend.bSeq!=null}">
-									<th><input name="bSeq" type="hidden"
-										value="${demend.bSeq}">${demend.bSeq}</th>
-								</c:when>
-								<c:otherwise>
-									<th><input name="sSeq" type="hidden"
-										value="${demend.sSeq}">${demend.sSeq}</th>
-								</c:otherwise>
-							</c:choose>
-							<th><fmt:formatDate pattern="yyyy-MM-dd"
-									value="${demend.inDate}" /></th>
-									<th><input type="submit" value="승인 취소"></th>
-									
-						</tr>
-					</c:forEach>
-				</table>
+					
+				</tr>
+				</c:forEach>
+			</table>
 			</form>
 		</section>
 	</section>
+	<script type="text/javascript">
+	 function goForm(tr){
+		 console.log(tr);
+		 
+		let form = $("<form></form>");
+		form.attr("method","post");
+		form.attr("action","checkAd.do");
+		
+		form.appendTo("body");
+		form.append(tr);
+		
+		form.submit();
+		
+	 }
+	 function goDelete(tr){
+			console.log(tr);
+			 
+			let form = $("<form></form>");
+			form.attr("method","post");
+			form.attr("action","checkManusAd.do");
+			
+			form.appendTo("body");
+			form.append(tr);
+			
+			form.submit();
+			
+	}
+		
+	</script>
 </body>
 </html>

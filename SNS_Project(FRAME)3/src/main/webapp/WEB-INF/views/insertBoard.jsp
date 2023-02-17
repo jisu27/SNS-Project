@@ -59,7 +59,7 @@
 						</div>
 					</a>
 				</h1>
-
+			<!-- 
 				<div class="search_field">
 					<input type="text" placeholder="검색" tabindex="0">
 
@@ -67,13 +67,19 @@
 						<span class=sprite_small_search_icon></span> <span>검색</span>
 					</div>
 				</div>
+			 -->
 
 
+				<input type="hidden" id="check" value="${sessionScope.user.id}">
 				<div class="right_icons">
-					<a href="new_post.html"><div class="sprite_camera_icon"></div></a>
-					<a href="login.html"><div class="sprite_compass_icon"></div></a> <a
-						href="follow.html"><div class="sprite_heart_icon_outline"></div></a>
-					<a href="profile.html"><div class="sprite_user_icon_outline"></div></a>
+					<a id="goProfile1" href="goInsertBoard.do" onclick="check_id()"><div
+							class="sprite_camera_icon"></div></a> <a id="goProfile2" href="/"
+						onclick="check_id()"><div class="sprite_compass_icon"></div></a> <a
+						id="goProfile3" href="getLikeList.do?id=${sessionScope.user.id}"
+						onclick="check_id()"><div class="sprite_heart_icon_outline"></div></a>
+					<a id="goProfile4" href="profile.do?id=${sessionScope.user.id}"
+						onclick="check_id()"><div class="sprite_user_icon_outline"></div></a>
+					<a href="insertShorts"><div class="sprite_short_icon"></div></a>
 				</div>
 			</section>
 		</header>
@@ -135,9 +141,6 @@
 			</div>
 
 		</div>
-
-
-
 		<input type="hidden" id="id" name="id" readonly="readonly"
 			value="${sessionScope.user.id}">
 		<c:if test="${empty sessionScope.user.pay}">
@@ -152,6 +155,11 @@
 
 		<input class="submit_btn" type="submit" value="저장">
 
+		</form>
+
+		</div>
+
+		</div>
 	</section>
 
 	<script src="js/insta.js"></script>
@@ -181,6 +189,17 @@
 				// canvas.height = img.height;
 			};
 			reader.readAsDataURL(e.target.files[0]);
+		}
+		
+		function check_id() {	
+			if ($("#check").val()=='' || $("#check").val()==null) {
+				alert("로그인을 해주세요");
+				$("#goProfile1").attr("href","/");
+				$("#goProfile2").attr("href","/");
+				$("#goProfile3").attr("href","/");
+				$("#goProfile4").attr("href","/");
+				$("#goProfile5").attr("href","/");
+			}
 		}
 	</script>
 </body>

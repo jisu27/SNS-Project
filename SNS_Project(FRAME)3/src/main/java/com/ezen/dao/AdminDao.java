@@ -23,6 +23,9 @@ public class AdminDao {
 	public void updateAdmin(int aSeq) {
 		mybatis.update("adminMapper.updateAdmin",aSeq);
 	}
+	public void updateManusAdmin(int aSeq) {
+		mybatis.update("adminMapper.update-Admin",aSeq);
+	}
 	public void insertAd(AdminVO vo) {
 		mybatis.insert("adminMapper.insertAd",vo);
 	}

@@ -183,6 +183,7 @@
 								</div>
 								<div class="right_icon">
 									<div class="sprite_bookmark_outline" data-name="bookmark"></div>
+									
 								</div>
 							</div>
 
@@ -409,7 +410,6 @@ function search() {
 	$(".search_box").attr("action","home.do").submit();
 
 }
-
 
 </script>
 

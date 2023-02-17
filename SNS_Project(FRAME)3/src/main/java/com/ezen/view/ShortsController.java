@@ -37,10 +37,14 @@ public class ShortsController {
 
 	@RequestMapping("/getShorts")
 	public String getShorts(ShortsVO vo, ShortsCommentVO scvo, Model model, HttpSession session) {
-		MemberVO user = (MemberVO) session.getAttribute("user");
 		ShortsVO shorts = shos.getShorts(vo);
 		model.addAttribute("shorts", shorts);
-
+		
+		MemberVO mVo =new MemberVO();
+		mVo.setId(shorts.getId());
+		MemberVO mvo= memberService.MemberCheck(mVo);
+		model.addAttribute("member",mvo);
+		
 		scvo.setsSeq(vo.getsSeq());
 		List<ShortsCommentVO> ShortsCommentList = ShortsCommentService.getShortsCommentList(scvo);
 		model.addAttribute("ShortsCommentList", ShortsCommentList);
@@ -48,6 +52,7 @@ public class ShortsController {
 		System.out.println("--getShorts controller �떎�뻾: " + shorts);
 		System.out.println("ShortsCommentVO =" + scvo);
 		System.out.println(ShortsCommentList);
+		
 		return "getShorts";
 
 	}
