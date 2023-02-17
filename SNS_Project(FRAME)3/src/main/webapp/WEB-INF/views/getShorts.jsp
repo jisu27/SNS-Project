@@ -151,11 +151,11 @@
 							</header>
 
 							<section class="scroll_section">
-								<c:forEach items="${commentList}" var="ShortsComment">
+								<c:forEach items="${commentList}" var="ShortsComment" varStatus="status">
 									<c:if test="${ShortsComment.sSeq==shorts.sSeq}">
 										<div class="user_container-detail">
 											<div class="user">
-												<img src="profile/${member.profile}" alt="user">
+												<img src="profile/${commentMemberList[status.index].profile}" alt="user">
 
 											</div>
 											<div class="comment">
