@@ -52,6 +52,8 @@ public class AdminController {
 		if (avo.getbSeq() != 0) {
 			boardService.updatePay(avo.getbSeq());
 		}else {
+			
+			avo.setbSeq(0);
 			shortsService.updatePay(avo.getsSeq());
 		}
 		
@@ -67,6 +69,7 @@ public class AdminController {
 		if (avo.getbSeq() != 0) {
 			boardService.updateManusPay(avo.getbSeq());
 		}else {
+			avo.setbSeq(0);
 			shortsService.updateManusPay(avo.getsSeq());
 		}
 		

@@ -23,6 +23,9 @@ public class ShortsDAO {
 	public List<ShortsVO> getShortsList(ShortsVO vo) {
 		return mybatis.selectList("ShortsMapper.getShortsList", vo);
 	}
+	public List<ShortsVO> getAdShortsList(ShortsVO vo) {
+		return mybatis.selectList("ShortsMapper.getAdShortsList", vo);
+	}
 
 	public void insertShorts(ShortsVO vo) {
 		mybatis.insert("ShortsMapper.insertShorts", vo);

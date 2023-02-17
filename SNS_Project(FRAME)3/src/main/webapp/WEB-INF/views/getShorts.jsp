@@ -131,8 +131,12 @@
 								<c:if test="${sessionScope.user.id == shorts.id}">
 									<div class="sprite_more_icon" data-name="more"
 										onclick="toggle(this.children[0])">
-										<ul class="toggle_box" id="toggle_box${status.count}">
-
+										<ul class="toggle_box" id="toggle_box${status.count}">										
+												<c:if test="${shorts.pay!=1}">
+													<li><a
+													href="insertAD.do?sSeq=${shorts.sSeq}&id=${sessionScope.user.id}"><input
+																				type="button" value="광고 요청"></a></li>
+												</c:if>
 											<li><a href="goUpdateShorts.do?sSeq=${shorts.sSeq}">
 													<input type="button" value="수정">
 											</a></li>
@@ -151,11 +155,11 @@
 							</header>
 
 							<section class="scroll_section">
-								<c:forEach items="${commentList}" var="ShortsComment">
+								<c:forEach items="${commentList}" var="ShortsComment" varStatus="status">
 									<c:if test="${ShortsComment.sSeq==shorts.sSeq}">
 										<div class="user_container-detail">
 											<div class="user">
-												<img src="profile/${member.profile}" alt="user">
+												<img src="profile/${commentMemberList[status.index].profile}" alt="user">
 
 											</div>
 											<div class="comment">
@@ -170,24 +174,24 @@
 												</div>
 												<div class="icon_wrap">
 													<div class="more_trigger">
-														<div class="sprite_more_icon" data-name="more"
-															onclick="toggle(this.children[0])">
-															<ul class="toggle_box"
-																id="toggle_box${ShortsComment.cseq}">
-																<li><a
-																	href="goUpdateComment.do?cseq=${ShortsComment.cseq}">
-																		<input type="button" value="수정">
-																</a></li>
-																<li><form
-																		action="deleteComment.do?cseq=${ShortsComment.cseq}"
-																		method="post">
-																		<c:if
-																			test="${sessionScope.user.id == ShortsComment.id }">
+														<c:if test="${sessionScope.user.id == ShortsComment.id }">
+															<div class="sprite_more_icon" data-name="more"
+																onclick="toggle(this.children[0])">
+																<ul class="toggle_box"
+																	id="toggle_box${ShortsComment.cseq}">
+																	
+																	<li><a
+																		href="goUpdateComment.do?cseq=${ShortsComment.cseq}">
+																			<input type="button" value="수정">
+																	</a></li>
+																	<li><form
+																			action="deleteComment.do?cseq=${ShortsComment.cseq}"
+																			method="post">
 																			<input type="submit" value="삭제">
-																		</c:if>
-																	</form></li>
-															</ul>
-														</div>
+																		</form></li>
+																</ul>
+															</div>
+														</c:if>
 													</div>
 													<div>
 														<c:choose>
@@ -315,7 +319,8 @@
 									</c:choose>
 								</div>
 							</div>
-							<div class="heart_count" style="font-weight: 900;padding-left: 20px;">
+							<div class="heart_count"
+								style="font-weight: 900; padding-left: 20px;">
 								&nbsp;좋아요${shorts.count}개</div>
 							<div class="timer">
 								<fmt:formatDate var="comDate" value="${shorts.inDate}"

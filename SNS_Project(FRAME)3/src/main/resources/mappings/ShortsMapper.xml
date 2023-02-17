@@ -18,7 +18,7 @@
 		set sTitle=#{sTitle}, id=#{id}, upload=#{upload} where sSeq=#{sSeq} </update> -->
 	<update id="updateShorts" parameterType="shorts">
 		update Shorts set
-		id=#{id}, sContent=#{sContent}, upload=#{upload}
+		id=#{id}, sContent=#{sContent}, upload=#{upload},sTitle=#{sTitle}
 		where sSeq=#{sSeq}
 	</update>
 	<update id="updateShortsCount" parameterType="shorts">
@@ -42,19 +42,26 @@
 	<select id="getShortsList" resultType="shorts">
 		select * 
 		from shorts
-		WHERE scontent LIKE '%'||#{searchKeyword}||'%' 
+		WHERE scontent LIKE '%'||#{searchKeyword}||'%' AND pay=0
+		ORDER BY sSeq DESC
+	</select>
+	
+	<select id="getAdShortsList" resultType="shorts">
+		select * 
+		from shorts
+		WHERE scontent LIKE '%'||#{searchKeyword}||'%'  AND pay>0
 		ORDER BY sSeq DESC
 	</select>
 	
 	<!-- #################################################################################################################### -->
 	<update id="updatePay" parameterType="shorts">
-		UPDATE board
+		UPDATE shorts
 		SET pay=pay+1
 		WHERE sSeq=#{sSeq}
 	</update>
 	<!-- #################################################################################################################### -->
 	<update id="update-Pay" parameterType="shorts">
-		UPDATE board
+		UPDATE shorts
 		SET pay=pay-1
 		WHERE sSeq=#{sSeq}
 	</update>
