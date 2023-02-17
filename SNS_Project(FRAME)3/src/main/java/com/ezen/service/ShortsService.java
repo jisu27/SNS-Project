@@ -12,6 +12,8 @@ public interface ShortsService {
 
 	void updateShorts(ShortsVO vo);
 
+	void updateShortsCount(ShortsVO vo);
+	
 	void deleteShorts(ShortsVO vo);
 	
 	List<ShortsVO> getShortsList(ShortsVO vo);
