@@ -17,6 +17,8 @@ public interface ShortsService {
 	void deleteShorts(ShortsVO vo);
 	
 	List<ShortsVO> getShortsList(ShortsVO vo);
+	
+	List<ShortsVO> getAdShortsList(ShortsVO vo);
 
 	void updatePay(int sSeq);
 	

@@ -15,6 +15,17 @@ public class ShortsVO {
 	private String sContent;
 	private String searchKeyword;
 	private int count;
+	private int pay;
+	
+	
+
+	public int getPay() {
+		return pay;
+	}
+
+	public void setPay(int pay) {
+		this.pay = pay;
+	}
 
 	public int getCount() {
 		return count;
@@ -90,7 +101,9 @@ public class ShortsVO {
 
 	@Override
 	public String toString() {
-		return "ShortsVO [sSeq=" + sSeq + ", sTitle=" + sTitle + ", id=" + id + ", upload=" + upload + ", inDate="
-				+ inDate + ", uploadFile=" + uploadFile + ", sContent=" + sContent + "]";
+		return "ShortsVO [sSeq=" + sSeq + ", sTitle=" + sTitle + ", id=" + id
+				+ ", upload=" + upload + ", inDate=" + inDate + ", uploadFile="
+				+ uploadFile + ", sContent=" + sContent + ", searchKeyword="
+				+ searchKeyword + ", count=" + count + ", pay=" + pay + "]";
 	}
 }

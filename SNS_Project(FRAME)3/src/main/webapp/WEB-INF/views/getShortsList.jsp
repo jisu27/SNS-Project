@@ -70,7 +70,9 @@
 }
 </style>
 
-
+<script src="https://code.jquery.com/jquery-3.6.3.js"
+	integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+	crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -147,8 +149,8 @@
 
 				<div class="mylist_contents contents_container active">
 					<c:forEach items="${shortsList}" var="shorts">
-
-						<div class="content">
+						
+						<div class="content" id="content${shorts.pay}">
 							<a href="getShorts?sSeq=${shorts.sSeq}"> <video
 									id="video-player" onmouseover="this.play()"
 									onmouseout="this.pause()" preload="metadata">
@@ -205,6 +207,10 @@
 	<!--<script src="js/insta.js"></script>-->
 	<script src="js/profile.js"></script>
 	<script>
+	$(function (){
+		$("#content1").attr("style","border:3px solid gold");
+	})
+	
 	function search() {
 		$(".search_box").attr("action","home.do").submit();
 	}

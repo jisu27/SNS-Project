@@ -96,8 +96,22 @@ public class ShortsController {
 
 		if (vo.getSearchKeyword() == null)
 			vo.setSearchKeyword("");
-
-		List<ShortsVO> list = shos.getShortsList(vo);
+		List<ShortsVO> list = new ArrayList<>();
+		List<ShortsVO> slist = shos.getShortsList(vo);
+		List<ShortsVO> adList = shos.getAdShortsList(vo);
+		
+		list.addAll(slist);
+		int i=0;
+		
+		for(ShortsVO svo : adList) {
+			list.add(i, svo);
+			
+			if (list.size() >= i+4) {
+				i=i+3;
+			}else {
+				i++;
+			}
+		}
 
 		model.addAttribute("shortsList", list);
 
