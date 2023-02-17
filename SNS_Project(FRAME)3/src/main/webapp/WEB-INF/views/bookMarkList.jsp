@@ -49,6 +49,7 @@
 		<!-- 보드 게시글 -->
 		<c:if
 			test="${fn:contains(sessionScope.boardBookMarkNums, board.bSeq)}">
+			<c:forEach items="${boardBookMarkList}" var="board"> 
 			<article class="contents">
 				<div class="img_section">
 					<div class="trans_inner">
@@ -72,6 +73,9 @@
 				</div>
 				<div class="timer">${time[status.index]}</div>
 			</article>
+				${board.bmTitle}
+				<br>
+			</c:forEach>
 		</c:if>
 
 		<!-- 쇼츠 게시글 -->

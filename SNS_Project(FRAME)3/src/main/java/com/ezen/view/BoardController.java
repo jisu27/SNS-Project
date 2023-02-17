@@ -47,6 +47,8 @@ public class BoardController {
 	@Autowired
 	private FollowService followService;
 
+	@Autowired
+	private BookMarkService bookMarkService;
 	// ##############################################################################################################--home
 	@RequestMapping("/")
 	public String goLogin() {
@@ -189,6 +191,13 @@ public class BoardController {
 		model.addAttribute("commentList", commentList);
 		model.addAttribute("shortsList", shortsList);
 		model.addAttribute("getshortsList", shortsMemberList);
+		
+		//BookMark 관련
+		BookMarkVO bookMark = new BookMarkVO();
+		bookMark.setId(mvo2.getId());
+		List<Integer> boardBookMarkNums = bookMarkService.getBoardBookMarkNums(bookMark);
+		
+		session.setAttribute("boardBookMarkNums", boardBookMarkNums);
 
 		return "home";
 	}
@@ -271,6 +280,14 @@ public class BoardController {
 
 		System.out.println("commentList :" + commentList);
 		System.out.println("cvo :" + cvo);
+		
+		// 북마크 관련
+		BookMarkVO bookMark = new BookMarkVO();
+		MemberVO user = (MemberVO) session.getAttribute("user");
+		bookMark.setId(user.getId());
+		List<Integer> boardBookMarkNums = bookMarkService.getBoardBookMarkNums(bookMark);
+		
+		session.setAttribute("boardBookMarkNums", boardBookMarkNums);
 
 		return "getBoard";
 	}
