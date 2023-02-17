@@ -48,7 +48,7 @@ public class ShortsCommentController {
 	public String updateComment(ShortsCommentVO vo, Model model, HttpSession session)throws IOException {
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		
-		if(!session.getAttribute("user").equals(vo.getId())) {
+		if(session.getAttribute("user") == null) {
 			return "not_login";
 			
 		//}else if (user.getId() != vo.getId()) {
@@ -68,7 +68,7 @@ public class ShortsCommentController {
 	public String deleteComment(ShortsCommentVO vo, HttpSession session) {
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		
-		if(!session.getAttribute("user").equals(vo.getId())) {
+		if(session.getAttribute("user") == null) {
 			return "not_login";
 		}else {		
 			service.deleteComment(vo);

@@ -143,7 +143,7 @@
                             
                <!-- ----------------------------수정삭제 창 ------------------------- -->
                               <!--   <ul class="more_detail">  --> 
-                                <ul class="toggle_box" id="toggle_box${status.count}">
+                                <ul class="toggle_box" id="toggle_box">
                                     <li><input type="button" class="follow" value="팔로우"
 											data-name="follow"></li>
 											
@@ -347,36 +347,42 @@ function getCommentList() {
 }
 
 	
-	function showHTML(commentList){
-		var html ="";
+function showHTML(commentList){
+	var html ="";
+	
+	if(commentList.length > 0) {	
+		$.each(commentList, function(key, value){
+			html += "<div class=\"user_container-detail\">";
+            html += "<div class=\"user\"><img src=\"imgs/thumb02.jpg\" alt=\"user\"></div>";
+            html += "<div class=\"comment\">";
+            html += "<span class=\"user_id\">" + value.id + "</span>" + value.content;
+            html += "<div class=\"time\">" + displayTime(value.indate);
+			html += "<div class=\"icon_wrap\">";
+            html += "<div class=\"more_trigger\">";
+            html += "<div class=\"sprite_more_icon\" data-name=\"more\" onclick=\"toggle(this.children[0])\">"  //
+            html += "<ul class=\"toggle_box\" id=\"toggle_box2\">"   
+            html += "<li><input type=\"button\" id=\"follow\" value=\"팔로우\"></li>"
+            html += "<li><input type=\"button\" id=\"updateComment\" value=\"댓글수정\"></li>"
+            html += "<li><input type=\"button\" id=\"deleteComment\" onclick=\"deleteComment()\" value=\"댓글삭제\"></li>"
+            html += "</ul>"        
+            html += "</div>"; //
+            html += "</div>";
+            html += "<div>";
+            html += "<div class=\"sprite_small_heart_icon_outline\"></div>";
+            html += "</div>";
+            html += "</div>";
+            html += "</div>";
+            html += "</div>";
+            html += "</div>";
+		});
 		
-		if(commentList.length > 0) {	
-			$.each(commentList, function(key, value){
-				html += "<div class=\"user_container-detail\">";
-                html += "<div class=\"user\"><img src=\"imgs/thumb02.jpg\" alt=\"user\"></div>";
-                html += "<div class=\"comment\">";
-                html += "<span class=\"user_id\">" + value.id + "</span>" + value.content;
-                html += "<div class=\"time\">" + displayTime(value.indate);
- 				html += "<div class=\"icon_wrap\">";
-                html += "<div class=\"more_trigger\">";
-                html += "<div class=\"sprite_more_icon\" data-name=\"more\" onclick=\"toggle(this.children[0])\"></div>";
-                html += "</div>";
-                html += "<div>";
-                html += "<div class=\"sprite_small_heart_icon_outline\"></div>";
-                html += "</div>";
-                html += "</div>";
-                html += "</div>";
-                html += "</div>";
-                html += "</div>";
-			});
-			
-		}else {
-			html += "<div>";
-			html += "<h5>댓글이 없습니다</h5>";
-			html += "</div>";
-		}
-		$('#commentList').html(html);
+	}else {
+		html += "<div>";
+		html += "<h5>댓글이 없습니다</h5>";
+		html += "</div>";
 	}
+	$('#commentList').html(html);
+}
 	
 	
 	function displayTime(timeValue){
@@ -436,8 +442,12 @@ function getCommentList() {
 				alert("error: " + error);
 			}				
 		});
-	}
 	
+	
+	
+
+	
+		
 
 </script>
 

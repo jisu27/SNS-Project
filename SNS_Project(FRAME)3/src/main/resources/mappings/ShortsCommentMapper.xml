@@ -13,7 +13,9 @@
 	</update>
 	
 	<delete id = "deleteShortsComment" parameterType="shortsComment">
-		delete Shorts_comment where scSeq = #{scSeq} and id = #{id};
+		delete Shorts_comment where scSeq = #{scSeq}
+		
+		<!--  delete Shorts_comment where scSeq = #{scSeq} and id = #{id}; -->
 	</delete>
 	
 	<select id = "getShortsComment" resultType="shortsComment">
