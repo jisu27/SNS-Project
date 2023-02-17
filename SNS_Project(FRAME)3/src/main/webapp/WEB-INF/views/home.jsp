@@ -33,6 +33,7 @@
 				</h1>
 
 				<form div class="search_box">
+
 					<input type="text" name="keyWord" placeholder="검색"
 						id="search-field">
 
@@ -196,11 +197,12 @@
 										<div class="comment" id="comment-list-ajax-post37">
 											<div class="comment-detail">
 												<div class="nick_name m_text">${comment.id}</div>
-												<div>${comment.ccontent}</div>
+												<div class="word1">${comment.ccontent}</div>
 											</div>
 										</div>
+										<div class="icon_wrap1">
 										<c:if test="${sessionScope.user.id == comment.id}">
-											<div class="sprite_more_icon" data-name="more"
+											<div class="sprite_more_icon" id="sprite_more_icon" data-name="more"
 												onclick="toggle(this.children[0])">
 												<ul class="toggle_box" id="toggle_box${comment.cseq}">
 													<li><a href="goUpdateComment.do?cseq=${comment.cseq}">
@@ -257,6 +259,7 @@
 												</c:otherwise>
 											</c:choose>
 										</div>
+										</div>
 									</div>
 								</c:if>
 							</c:forEach>
@@ -309,16 +312,18 @@
 								<div class="thumb_user">
 									<div class="profile_thumb">
 										<a href="getShorts?sSeq=${shorts.sSeq}"><img
+
 								src="profile/${getshortsList[status.index].profile}" alt="프로필사진"></a>
+
 									</div>
 									<div class="detail">
-									
-									
+
+
 										<div class="id">${shorts.id}</div>
 										<div class="time">${stime[status.index]}</div>
-									
+
 									</div>
-								</div>								
+								</div>
 							</c:forEach>
 						</div>
 					</article>
@@ -355,41 +360,42 @@
 	</section>
 	<script src="js/common.js"></script>
 	<script type="text/javascript">
-	var prev_element = null;
-	
-function check_id() {	
-	if ($("#check").val()=='' || $("#check").val()==null) {
-		alert("로그인을 해주세요");
-		$("#goProfile1").attr("href","/");
-		$("#goProfile2").attr("href","/");
-		$("#goProfile3").attr("href","/");
-		$("#goProfile4").attr("href","/");
-		$("#goProfile5").attr("href","/");
-	}
+   var prev_element = null;
+   
+function check_id() {   
+   if ($("#check").val()=='' || $("#check").val()==null) {
+      alert("로그인을 해주세요");
+      $("#goProfile1").attr("href","/");
+      $("#goProfile2").attr("href","/");
+      $("#goProfile3").attr("href","/");
+      $("#goProfile4").attr("href","/");
+      $("#goProfile5").attr("href","/");
+   }
 }
 function deleteLike(form_id) {
-	$(form_id).attr("action","deleteHeart.do").submit();
-	
+   $(form_id).attr("action","deleteHeart.do").submit();
+   
 }
 function like(form_id) {
-	$(form_id).attr("action","heart.do").submit();	
+   $(form_id).attr("action","heart.do").submit();   
 }
 function deleteLike_c(decomment) {
-	$(decomment).submit();
+   $(decomment).submit();
 }
 function like_c(comment) {
-	$(comment).submit();
+   $(comment).submit();
 }
 function toggle(element){
-	
-	var con = document.getElementById(element.getAttribute("id"));
-	if(con.style.display=='none'){
-		con.style.display = 'block';
-	}else{
-		con.style.display = 'none';
-	}
-	
+   
+   var con = document.getElementById(element.getAttribute("id"));
+   if(con.style.display=='none'){
+      con.style.display = 'block';
+   }else{
+      con.style.display = 'none';
+   }
+   
 }
+
 function showComment(commentId) {
 	if ($("#show").val()==0) {		
 		$(commentId).attr("style","display:flex");
@@ -399,8 +405,10 @@ function showComment(commentId) {
 		$("#show").val(0);
 	}
 }
+
 function search() {
 	$(".search_box").attr("action","home.do").submit();
+
 }
 
 </script>
