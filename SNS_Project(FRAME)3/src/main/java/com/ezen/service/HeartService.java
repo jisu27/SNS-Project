@@ -15,6 +15,8 @@ public interface HeartService {
 	void deleteLike(HeartVO vo);
 
 	void deleteLike_c(HeartVO vo);
+	
+	void deleteLike_s(HeartVO vo);
 
 	int likeCount(HeartVO vo);
 
@@ -22,7 +24,7 @@ public interface HeartService {
 
 	int likeCommentCount(HeartVO vo);
 
-	List<HeartVO> shortsLike(HeartVO vo);
+	List<Integer> shortsLike(HeartVO vo);
 
 	int likeShortsCount(HeartVO vo);
 }

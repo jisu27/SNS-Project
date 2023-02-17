@@ -15,10 +15,12 @@ import com.ezen.dto.BoardVO;
 import com.ezen.dto.CommentVO;
 import com.ezen.dto.HeartVO;
 import com.ezen.dto.MemberVO;
+import com.ezen.dto.ShortsVO;
 import com.ezen.service.BoardService;
 import com.ezen.service.CommentService;
 import com.ezen.service.HeartService;
 import com.ezen.service.MemberService;
+import com.ezen.service.ShortsService;
 
 @Controller
 public class HeartController {
@@ -31,6 +33,8 @@ public class HeartController {
 	private MemberService memberService;
 	@Autowired
 	private CommentService commentService;
+	@Autowired
+	private ShortsService shortsService;
 
 	@PostMapping("heart.do")
 	public String insertLike(HeartVO vo, Model model, HttpSession session) {
@@ -69,6 +73,23 @@ public class HeartController {
 		System.out.println("heartvo���엯�쓽 踰덊샇 !! =============" + vo);
 
 		return "redirect:home.do";
+	}
+	@PostMapping("heart_s.do")
+	public String insertLike_s(HeartVO vo, Model model, HttpSession session) {
+		
+		vo.setUse_like("y");
+		heartService.insertLike(vo);
+		
+		ShortsVO svo = new ShortsVO();
+		svo.setsSeq(vo.getsSeq());
+		svo.setCount(heartService.likeShortsCount(vo));
+		shortsService.updateShortsCount(svo);
+		
+		List<Integer> s_heart = heartService.shortsLike(vo);
+		session.setAttribute("s_heart", s_heart);
+		
+		
+		return "redirect:getShorts?sSeq="+vo.getsSeq();
 	}
 
 	@PostMapping("getHeart.do")
@@ -109,6 +130,24 @@ public class HeartController {
 
 		return "redirect:getBoard.do?bSeq=" + vo.getBseq() + "&profile=" + mvo.getProfile();
 	}
+	@PostMapping("getHeart_s.do")
+	public String getInsertLike_s(MemberVO mvo, HeartVO vo, Model model, HttpSession session) {
+		
+		vo.setUse_like("y");
+		heartService.insertLike(vo);
+		
+		CommentVO comment = new CommentVO();
+		comment.setCseq(vo.getCseq());
+		comment.setCount(heartService.likeCommentCount(vo));
+		commentService.updateCount(comment);
+		
+		List<Integer> c_heart = heartService.commentLike(vo);
+		
+		session.setAttribute("c_heart", c_heart);
+		
+		
+		return "redirect:getShorts?sSeq="+vo.getsSeq();
+	}
 
 	@PostMapping("deleteHeart.do")
 	public String deleteLike(HeartVO vo, HttpSession session) {
@@ -142,6 +181,21 @@ public class HeartController {
 		session.setAttribute("c_heart", c_heart);
 
 		return "redirect:home.do";
+	}
+	@PostMapping("deleteHeart_s.do")
+	public String deleteLike_s(HeartVO vo, HttpSession session) {
+		
+		heartService.deleteLike_s(vo);
+		
+		ShortsVO svo = new ShortsVO();
+		svo.setsSeq(vo.getsSeq());
+		svo.setCount(heartService.likeShortsCount(vo));
+		shortsService.updateShortsCount(svo);
+		
+		List<Integer> s_heart = heartService.shortsLike(vo);
+		session.setAttribute("s_heart", s_heart);
+		
+		return "redirect:getShorts?sSeq="+vo.getsSeq();
 	}
 
 	@PostMapping("getDeleteHeart.do")
@@ -177,7 +231,25 @@ public class HeartController {
 		List<Integer> c_heart = heartService.commentLike(vo);
 		session.setAttribute("c_heart", c_heart);
 
-		return "redirect:getBoard.do?bSeq=" + vo.getBseq() + "&profile=" + mvo.getProfile();
+		return "redirect:getBoard.do?bSeq="+vo.getBseq() + "&profile=" + mvo.getProfile();
+	}
+	
+	@PostMapping("getDeleteHeart_s.do")
+	public String getDeleteLike_(MemberVO mvo, HeartVO vo, HttpSession session) {
+		
+		heartService.deleteLike_c(vo);
+		
+		CommentVO comment = new CommentVO();
+		
+		comment.setCseq(vo.getCseq());
+		comment.setCount(heartService.likeCommentCount(vo));
+		
+		commentService.updateCount(comment);
+		
+		List<Integer> c_heart = heartService.commentLike(vo);
+		session.setAttribute("c_heart", c_heart);
+		
+		return "redirect:getShorts?sSeq="+vo.getsSeq();
 	}
 
 	@GetMapping("getLikeList.do")
