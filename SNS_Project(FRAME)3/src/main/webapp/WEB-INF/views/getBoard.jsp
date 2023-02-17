@@ -28,7 +28,8 @@
 			<section class="inner">
 
 				<h1 class="logo">
-					<a href="home.do" id="goProfile5" onclick="check_id()">
+					<a href="home.do" id="goProfile" onclick="check_id()">
+
 						<div class="sprite_insta_icon"></div>
 						<div class="sprite_write_logo"></div>
 					</a>
@@ -56,8 +57,6 @@
 				</div>
 
 			</section>
-
-		</header>
 
 
 		</header>
@@ -134,8 +133,8 @@
 										</div>
 										<div class="comment">
 											<span class="user_id">${comment.id}</span>
-											${comment.ccontent}
-
+											<div class="word2">${comment.ccontent}</div>
+                      
 											<div class="time" style="font-size: small;">
 												<fmt:formatDate var="comDate" value="${comment.indate}"
 													pattern="yyyy년MM월dd일HH시" />
@@ -206,6 +205,11 @@
 													</div>
 												</div>
 											</c:if>
+         <div class="time" style="font-size: small;">
+												<fmt:formatDate var="comDate" value="${comment.indate}"
+													pattern="yyyy년MM월dd일HH시" />
+												${comDate}에 작성된 글입니다. <span class="try_comment"></span>
+											</div>
 										</div>
 									</div>
 
@@ -270,13 +274,14 @@
 								${boDate}
 							</div>
 
-							<div class="commit_field">
-								<form id="commentForm" action="insertComment.do" method="post">
+							<div class="comment_field" id="add-comment-post37">
+								<form action="insertComment.do" method="post">
 									<input type="hidden" name="id" value="${sessionScope.user.id}">
 									<input type="hidden" name="bSeq" value="${board.bSeq}">
 									<input type="text" name="ccontent" placeholder="댓글을 달아주세요 !">
-
+                  <div class="upload_btn m_text" data-name="comment">
 									<input type="submit" value="게시">
+                  </div>
 								</form>
 							</div>
 

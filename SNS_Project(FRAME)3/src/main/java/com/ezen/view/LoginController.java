@@ -169,9 +169,9 @@ public class LoginController {
 		System.out.println(mvo);
 
 		if (mvo != null) {
-			model.addAttribute("id", "李얠쑝�떆�뒗 �븘�씠�뵒�뒗" + mvo.getId() + "�엯�땲�떎.");
+			model.addAttribute("id", "아이디는" + mvo.getId() + "입니다.");
 		} else {
-			model.addAttribute("id", "李얠쑝�떆�뒗 �븘�씠�뵒媛� �뾾�뒿�땲�떎.");
+			model.addAttribute("id", "정보가 다릅니다.");
 		}
 
 		return "findId";
