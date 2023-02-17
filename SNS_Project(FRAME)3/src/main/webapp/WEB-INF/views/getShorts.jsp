@@ -81,11 +81,16 @@
 				</div>
 
 
+				<input type="hidden" id="check" value="${sessionScope.user.id}">
 				<div class="right_icons">
-					<a href="new_post.html"><div class="sprite_camera_icon"></div></a>
-					<a href="login.html"><div class="sprite_compass_icon"></div></a> <a
-						href="follow.html"><div class="sprite_heart_icon_outline"></div></a>
-					<a href="profile.html"><div class="sprite_user_icon_outline"></div></a>
+					<a id="goProfile1" href="goInsertBoard.do" onclick="check_id()"><div
+							class="sprite_camera_icon"></div></a> <a id="goProfile2" href="/"
+						onclick="check_id()"><div class="sprite_compass_icon"></div></a> <a
+						id="goProfile3" href="getLikeList.do?id=${sessionScope.user.id}"
+						onclick="check_id()"><div class="sprite_heart_icon_outline"></div></a>
+					<a id="goProfile4" href="profile.do?id=${sessionScope.user.id}"
+						onclick="check_id()"><div class="sprite_user_icon_outline"></div></a>
+					<a href="insertShorts"><div class="sprite_short_icon"></div></a>
 				</div>
 			</section>
 		</header>
@@ -120,7 +125,7 @@
 									</div>
 									<div class="user_name">
 										<div class="nick_name">${shorts.id}</div>
-										<div class="country">Seoul, South Korea</div>
+										<div class="country">동영상</div>
 									</div>
 								</div>
 								<div class="sprite_more_icon" data-name="more">
@@ -168,9 +173,6 @@
 								<div class="left_icons">
 									<div class="heart_btn">
 										<div class="sprite_heart_icon_outline" data-name="heartbeat"></div>
-									</div>
-									<div>
-										<div class="sprite_bubble_icon"></div>
 									</div>
 									<div>
 										<div class="sprite_share_icon" data-name="share"></div>

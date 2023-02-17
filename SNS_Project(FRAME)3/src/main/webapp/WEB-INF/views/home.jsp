@@ -87,7 +87,16 @@
 									</div>
 									<div class="user_name">
 										<div class="nick_name m_text">${board.id}</div>
-										<div class="country s_text">Seoul, South Korea</div>
+										<div class="country s_text">
+											<c:choose>
+												<c:when test="${board.pay != 1}">
+													<h1>게시물</h1>
+												</c:when>
+												<c:otherwise>
+													<h1>광고</h1>
+												</c:otherwise>
+											</c:choose>
+										</div>
 									</div>
 
 								</div>
@@ -182,8 +191,10 @@
 									<c:choose>
 										<c:when
 											test="${fn:contains(sessionScope.boardBookMarkNums, board.bSeq)}">
-											<div onclick="deleteBoardBookMark(deleteBoardBookMark${status.index})"
-												class="sprite_bookmark_outline" id="bookMark" data-name="bookMark"
+											<div
+												onclick="deleteBoardBookMark(deleteBoardBookMark${status.index})"
+												class="sprite_bookmark_outline" id="bookMark"
+												data-name="bookMark"
 												style="background: url('../../imgs/background01.png') no-repeat -160px -286px;">
 												<form id="deleteBoardBookMark${status.index}" method="post">
 													<input type="hidden" id="bSeq" name="bSeq"
@@ -194,21 +205,23 @@
 										</c:when>
 
 										<c:otherwise>
-											<div onclick="insertBoardBookMark(insertBookMark${status.index})"
-												class="sprite_bookmark_outline" id="bookMark"data-name="bookMark"
+											<div
+												onclick="insertBoardBookMark(insertBookMark${status.index})"
+												class="sprite_bookmark_outline" id="bookMark"
+												data-name="bookMark"
 												style="background: url('../../imgs/background01.png') no-repeat -185px -286px;">
 												<form id="insertBookMark${status.index}" method="post">
 													<input type="hidden" id="bSeq" name="bSeq"
 														value="${board.bSeq}"> <input type="hidden"
 														id="id" name="id" value="${sessionScope.user.id}">
-														<input type="hidden" id="bmTitle" name="bmTitle">
+													<input type="hidden" id="bmTitle" name="bmTitle">
 												</form>
 											</div>
 										</c:otherwise>
 									</c:choose>
-								
+
+								</div>
 							</div>
-</div>
 							<div class="likes m_text">
 								좋아요 <span id="like-count-39">${board.count}</span> 개
 							</div>
