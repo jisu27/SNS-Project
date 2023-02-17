@@ -107,7 +107,6 @@
 
 .contents_container.active{
     display: flex;
-    display: inline-block;
 }
 
 .contents_container .pic{

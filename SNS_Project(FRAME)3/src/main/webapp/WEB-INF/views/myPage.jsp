@@ -170,13 +170,108 @@
 					</div>
 				</div>
 
-				<div class="mylist_contents contents_container active">
+				<div class="mylist_contents contents_container active" >
 					<c:forEach var="board" items="${boardList}">
-						<div class="pic">
-							<a
-								href="getBoard.do?bSeq=${board.bSeq}&profile=${member.profile}"><img
-								src="images/${board.upload}" alt=""></a>
+						<article class="contents cont01" style="width: 300px;height: 400px">
+						<div class="img_section">
+							<div class="trans_inner">
+								<div>
+									<img alt="" src="images/${board.upload}"
+										style="width: 300px; height: 300px;">
+								</div>
+							</div>
 						</div>
+
+
+						<div class="detail--right_box">						
+							<div class="bottom_icons">
+								<div class="left_icons">
+									<div class="heart_btn">
+										<c:choose>
+											<c:when
+												test="${fn:contains(sessionScope.heart , board.bSeq)}">
+												<div onclick="deleteLike()"
+													class="sprite_heart_icon_outline" id="heart" name="39"
+													data-name="heartbeat"
+													style="background: url('../../imgs/background01.png') no-repeat -26px -261px;">
+													<form id="deleteLike" action="getDeleteHeart.do"
+														method="post">
+														<input type="hidden" id="bseq" name="bseq"
+															value="${board.bSeq}"> <input type="hidden"
+															id="id" name="id" value="${sessionScope.user.id}">
+														<input type="hidden" id="profile" name="profile"
+															value="${profile}">
+													</form>
+												</div>
+											</c:when>
+
+											<c:otherwise>
+												<div onclick="like()" class="sprite_heart_icon_outline"
+													id="heart" name="39" data-name="heartbeat"
+													style="background: url('../../imgs/background01.png') no-repeat -52px -261px;">
+													<form id="like" action="getHeart.do" method="post">
+														<input type="hidden" id="bSeq" name="bSeq"
+															value="${board.bSeq}"> <input type="hidden"
+															id="id" name="id" value="${sessionScope.user.id}">
+														<input type="hidden" id="profile" name="profile"
+															value="${profile}">
+													</form>
+												</div>
+											</c:otherwise>
+										</c:choose>
+									</div>
+
+									<div>
+										<div class="sprite_share_icon" data-name="share"></div>
+									</div>
+								</div>
+
+
+								<div class="right_icon">
+									<div class="sprite_bookmark_outline" data-name="book-mark">
+										<c:choose>
+											<c:when
+												test="${fn:contains(sessionScope.boardBookMarkNums, board.bSeq)}">
+												<div onclick="deleteBoardBookMark(deleteBoardBookMark)"
+													class="sprite_bookmark_outline" id="bookMark"
+													data-name="bookMark"
+													style="background: url('../../imgs/background01.png') no-repeat -160px -286px;">
+													<form id="deleteBoardBookMark" method="post">
+														<input type="hidden" id="bSeq" name="bSeq"
+															value="${board.bSeq}"> <input type="hidden"
+															id="id" name="id" value="${sessionScope.user.id}">
+													</form>
+												</div>
+											</c:when>
+
+											<c:otherwise>
+												<div onclick="insertBoardBookMark(insertBookMark)"
+													class="sprite_bookmark_outline" id="bookMark"
+													data-name="bookMark"
+													style="background: url('../../imgs/background01.png') no-repeat -185px -286px;">
+													<form id="insertBookMark" method="post">
+														<input type="hidden" id="bSeq" name="bSeq"
+															value="${board.bSeq}"> <input type="hidden"
+															id="id" name="id" value="${sessionScope.user.id}">
+														<input type="hidden" id="bmTitle" name="bmTitle">
+													</form>
+												</div>
+											</c:otherwise>
+										</c:choose>
+									</div>
+								</div>
+							</div>
+
+							<div class="heart_count" style="font-weight: 900;padding-left: 20px;">
+								좋아요${board.count}개</div>
+							
+
+
+
+						</div>
+
+
+					</article>
 					</c:forEach>
 				</div>
 
