@@ -322,7 +322,6 @@
 									pattern="yyyy년MM월dd일HH시" />
 								${comDate}
 							</div>
-
 							<div class="comment_field" id="add-comment-post37">
 								<form action="insertShortsComment.do" method="post">
 									<input type="hidden" name="id" value="${sessionScope.user.id}">
