@@ -19,12 +19,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ezen.dto.BoardVO;
+import com.ezen.dto.BookMarkVO;
 import com.ezen.dto.CommentVO;
 import com.ezen.dto.FollowVO;
 import com.ezen.dto.HeartVO;
 import com.ezen.dto.MemberVO;
 import com.ezen.dto.ShortsVO;
 import com.ezen.service.BoardService;
+import com.ezen.service.BookMarkService;
 import com.ezen.service.CommentService;
 import com.ezen.service.FollowService;
 import com.ezen.service.HeartService;
@@ -49,6 +51,7 @@ public class BoardController {
 
 	@Autowired
 	private BookMarkService bookMarkService;
+
 	// ##############################################################################################################--home
 	@RequestMapping("/")
 	public String goLogin() {
@@ -102,23 +105,21 @@ public class BoardController {
 		List<BoardVO> getboardList = boardService.getBoardList(bVo);
 		List<BoardVO> getadverList = boardService.getAdverList(bVo);
 
-
-		newBoardList.addAll(getboardList);		
+		newBoardList.addAll(getboardList);
 		int i = 0;
-		
+
 		for (BoardVO vo : getadverList) {
 
 			newBoardList.add(i, vo);
-			
-			if (newBoardList.size()>i+4) {
-				i= i+3;				
-			}else {
+
+			if (newBoardList.size() > i + 4) {
+				i = i + 3;
+			} else {
 
 				i++;
 			}
 		}
-		
-		
+
 		List<MemberVO> memberList = new ArrayList<>();
 		List<CommentVO> commentList = new ArrayList<CommentVO>();
 
@@ -191,12 +192,12 @@ public class BoardController {
 		model.addAttribute("commentList", commentList);
 		model.addAttribute("shortsList", shortsList);
 		model.addAttribute("getshortsList", shortsMemberList);
-		
-		//BookMark 관련
+
+		// BookMark 관련
 		BookMarkVO bookMark = new BookMarkVO();
 		bookMark.setId(mvo2.getId());
 		List<Integer> boardBookMarkNums = bookMarkService.getBoardBookMarkNums(bookMark);
-		
+
 		session.setAttribute("boardBookMarkNums", boardBookMarkNums);
 
 		return "home";
@@ -280,13 +281,13 @@ public class BoardController {
 
 		System.out.println("commentList :" + commentList);
 		System.out.println("cvo :" + cvo);
-		
+
 		// 북마크 관련
 		BookMarkVO bookMark = new BookMarkVO();
 		MemberVO user = (MemberVO) session.getAttribute("user");
 		bookMark.setId(user.getId());
 		List<Integer> boardBookMarkNums = bookMarkService.getBoardBookMarkNums(bookMark);
-		
+
 		session.setAttribute("boardBookMarkNums", boardBookMarkNums);
 
 		return "getBoard";

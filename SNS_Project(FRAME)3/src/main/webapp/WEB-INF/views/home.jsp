@@ -179,9 +179,6 @@
 									<div class="sprite_share_icon" data-name="share"></div>
 								</div>
 								<div class="right_icon">
-									<div class="sprite_bookmark_outline" data-name="bookmark"></div>
-
-													<div class="right_icon">
 									<c:choose>
 										<c:when
 											test="${fn:contains(sessionScope.boardBookMarkNums, board.bSeq)}">
@@ -209,9 +206,9 @@
 											</div>
 										</c:otherwise>
 									</c:choose>
-								</div>
+								
 							</div>
-
+</div>
 							<div class="likes m_text">
 								좋아요 <span id="like-count-39">${board.count}</span> 개
 							</div>
