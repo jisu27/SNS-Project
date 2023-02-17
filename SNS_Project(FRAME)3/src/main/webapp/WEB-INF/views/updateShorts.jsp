@@ -79,7 +79,7 @@
         <div class="post_form_container">
             <form action="updateShorts" class="post_form" method="post" enctype="multipart/form-data">
             <input type="hidden" id="id" name="id" value = "${sessionScope.user.id}"> 
-            <input type="hidden" name="upload"   value="${shorts.upload}">
+            <input type="hidden" name="nonvideo"   value="${shortsvo.upload}">
             <input type="hidden" name="sSeq" value="${shortsvo.sSeq}">
                 <div class="title">
                     UPDATE SHORTS
@@ -89,7 +89,7 @@
                         <div class="post_btn" >
                             <!--  <p>포스트 동영상 추가</p>  -->
                             <video controls id="video-tag" style="width: 300px; height: 250px; object-fit: cover">
-								  <source id="video-source" src="shorts/${shorts.upload}">
+								  <source id="video-source" src="shorts/${shortsvo.upload}">
 								  Your browser does not support the video tag.
 							</video>
                             
@@ -98,7 +98,7 @@
                     </div>
                 </div>
                 <p>
-                    <input type="file" name="uploadFile" id="id_photo" required="required" value="${shortsvo.uploadFile}">
+                    <input type="file" name="uploadFile" id="id_photo" required="required" value="${shortsvo.upload}">
                 </p>
                 <p>
                 	<input type ="text" name="sTitle" placeholder="제목을 입력하세요" maxlength="28" value="${shortsvo.sTitle}">

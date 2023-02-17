@@ -144,7 +144,7 @@
                <!-- ----------------------------수정삭제 창 ------------------------- -->
                               <!--   <ul class="more_detail">  --> 
                                 <ul class="toggle_box" id="toggle_box${status.count}">
-                                    <li><input type="botton" class="follow" value="팔로우"
+                                    <li><input type="button" class="follow" value="팔로우"
 											data-name="follow"></li>
 											
                                     <li><a href="updateShorts?sSeq=${shorts.sSeq}">
@@ -157,6 +157,7 @@
                                     </form></li>
                                     
                                 </ul>
+                  <!-- ------------------------------------------------------------ -->              
                             </div>
 							</c:if>
                         </header>
@@ -255,7 +256,7 @@
                             	<!--  <input type="button" value="게시" onclick="insertComment();">  -->
                             </div>
                         </div>
-                       <input type="button" id="button" value="전송" onclick="insertComment();"> 
+                       <input type="button" id="button" value="전송" onclick="return insertComment();"> 
                         </form>
                     </div>
 
@@ -358,7 +359,7 @@ function getCommentList() {
                 html += "<div class=\"time\">" + displayTime(value.indate);
  				html += "<div class=\"icon_wrap\">";
                 html += "<div class=\"more_trigger\">";
-                html += "<div class=\"sprite_more_icon\"></div>";
+                html += "<div class=\"sprite_more_icon\" data-name=\"more\" onclick=\"toggle(this.children[0])\"></div>";
                 html += "</div>";
                 html += "<div>";
                 html += "<div class=\"sprite_small_heart_icon_outline\"></div>";
@@ -408,6 +409,12 @@ function getCommentList() {
 		var content = document.getElementById("content").value;
 		var sSeq = document.getElementById("sSeq").value;
 		
+		if(content == "") {
+			alert('내용을 입력하세요');
+			document.getElementById("content").focus();
+			return false;
+		}
+		
 		console.log("sSeq=", sSeq);
 		console.log("content=", content);
 		$.ajax({
@@ -423,12 +430,6 @@ function getCommentList() {
 					alert("등록실패");
 				}else if(data == 'not_login') {
 					alert('로그인이 필요합니다');
-				}else if(data == "") {
-					alert('내용을 입력하세요');
-				}else if(data == null){
-					alert('내용을 입력하세요');
-				}else if(data.value.length ==0 ){
-					alert('내용을 입력하세요');
 				}
 			},
 			error: function(request, status, error){
