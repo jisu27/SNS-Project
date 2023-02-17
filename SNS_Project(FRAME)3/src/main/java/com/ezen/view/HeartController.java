@@ -49,7 +49,7 @@ public class HeartController {
 		board.setCount(heartService.likeCount(vo));
 		boardService.updateCount(board);
 
-		List<HeartVO> heart = heartService.boardLike(vo);
+		List<Integer> heart = heartService.boardLike(vo);
 		session.setAttribute("heart", heart);
 
 		return "redirect:home.do";
@@ -103,7 +103,7 @@ public class HeartController {
 		board.setCount(heartService.likeCount(vo));
 		boardService.updateCount(board);
 
-		List<HeartVO> heart = heartService.boardLike(vo);
+		List<Integer> heart = heartService.boardLike(vo);
 		session.setAttribute("heart", heart);
 
 		System.out.println("heartvo���엯�쓽 踰덊샇 !! =============" + vo);
@@ -160,7 +160,7 @@ public class HeartController {
 		board.setCount(heartService.likeCount(vo));
 		boardService.updateCount(board);
 
-		List<HeartVO> heart = heartService.boardLike(vo);
+		List<Integer> heart = heartService.boardLike(vo);
 		session.setAttribute("heart", heart);
 
 		return "redirect:home.do";
@@ -210,7 +210,7 @@ public class HeartController {
 
 		boardService.updateCount(board);
 
-		List<HeartVO> heart = heartService.boardLike(vo);
+		List<Integer> heart = heartService.boardLike(vo);
 		session.setAttribute("heart", heart);
 
 		return "redirect:getBoard.do?bSeq=" + vo.getBseq() + "&profile=" + mvo.getProfile();
@@ -252,14 +252,14 @@ public class HeartController {
 		return "redirect:getShorts?sSeq="+vo.getsSeq();
 	}
 
-	@GetMapping("getLikeList.do")
+	/* @GetMapping("getLikeList.do")
 	public String goLikeList(HeartVO hvo, HttpSession session, Model model) {
 
 		BoardVO bvo = new BoardVO();
 		CommentVO cvo = new CommentVO();
 
 		List<BoardVO> boardList = new ArrayList<>();
-		List<HeartVO> heartList = heartService.boardLike(hvo);
+		List<Integer> heartList = heartService.boardLike(hvo);
 
 		MemberVO mvo = new MemberVO();
 
@@ -274,6 +274,6 @@ public class HeartController {
 
 		return "likeList";
 
-	}
+	}*/
 
 }

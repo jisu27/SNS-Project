@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.ezen.dto.BoardVO;
 import com.ezen.dto.BookMarkVO;
 import com.ezen.dto.FollowVO;
+import com.ezen.dto.HeartVO;
 import com.ezen.dto.MemberVO;
 import com.ezen.service.BoardService;
 import com.ezen.service.BookMarkService;
 import com.ezen.service.FollowService;
+import com.ezen.service.HeartService;
 import com.ezen.service.MemberService;
 
 @Controller
@@ -29,9 +31,11 @@ public class profileController {
 	private FollowService followService;
 	@Autowired
 	private BookMarkService bookMarkService;
+	@Autowired
+	private HeartService heartService;
 	
 	@GetMapping("profile.do")
-	public String goProfile(MemberVO mvo, BoardVO bvo, BookMarkVO bookMark, Model model, HttpSession session) {
+	public String goProfile(MemberVO mvo, BoardVO bvo, HeartVO heart, BookMarkVO bookMark, Model model, HttpSession session) {
 		
 		MemberVO member = memberService.MemberCheck(mvo);
 		List<BoardVO> list= boardService.myBoardList(bvo);
@@ -59,6 +63,12 @@ public class profileController {
 		model.addAttribute("member",member);
 		model.addAttribute("follower",follower);
 		model.addAttribute("following",following);
+		
+		//하트 관련
+		heart.setId(member.getId());
+		// List<Integer> likeBoard = heartService.boardLike(heart);
+		// List<Integer> likeShorts = heartService.shortsLike(heart);
+		
 		
 		// 북마크 관련
 		bookMark.setId(member.getId());

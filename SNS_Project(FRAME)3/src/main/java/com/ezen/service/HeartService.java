@@ -10,7 +10,7 @@ public interface HeartService {
 
 	void insertLike(HeartVO vo);
 
-	List<HeartVO> boardLike(HeartVO vo);
+	List<Integer> boardLike(HeartVO vo);
 
 	void deleteLike(HeartVO vo);
 

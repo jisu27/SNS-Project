@@ -163,8 +163,8 @@
 						</ul>
 						<p class="about">
 							<span class="nick_name">${sessionScope.user.name}</span> <span
-								class="boardBookMark">게시판 북마크</span> <span
-								class="shortsBookMark">쇼츠 북마크</span>
+								class="boardBookMark">게시판 북마크 </span> <span
+								class="shortsBookMark"> 쇼츠 북마크</span>
 						</p>
 
 					</div>

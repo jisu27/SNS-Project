@@ -8,7 +8,7 @@
 		WHERE id=#{id},bseq=#{bSeq}
 	</select>
 	<!-- ###################################################################################################################### -->
-	<select id="likeBoard" resultType="heart">
+	<select id="likeBoard" resultType="Integer">
 		SELECT bseq
 		FROM heart
 		WHERE id=#{id} AND cseq=0 AND sseq=0

@@ -130,7 +130,7 @@ public class LoginController {
 				BookMarkVO bookMark = new BookMarkVO();
 				bookMark.setId(mvo.getId());
 				
-				List<HeartVO> heart = heartService.boardLike(hvo);
+				List<Integer> heart = heartService.boardLike(hvo);
 				List<Integer> c_heart = heartService.commentLike(hvo);
 				List<Integer> s_heart = heartService.shortsLike(hvo);
 				List<String> follower = followService.getFollowList(fvo);

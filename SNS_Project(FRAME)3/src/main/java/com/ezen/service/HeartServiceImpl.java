@@ -28,7 +28,7 @@ public class HeartServiceImpl implements HeartService {
 	}
 
 	@Override
-	public List<HeartVO> boardLike(HeartVO vo) {
+	public List<Integer> boardLike(HeartVO vo) {
 
 		return hDao.boardLike(vo);
 	}

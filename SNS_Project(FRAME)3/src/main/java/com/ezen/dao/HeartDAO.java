@@ -24,7 +24,7 @@ public class HeartDAO {
 		return mybatis.selectOne("heartMapper.insertLike", vo);
 	}
 
-	public List<HeartVO> boardLike(HeartVO vo) {
+	public List<Integer> boardLike(HeartVO vo) {
 
 		return mybatis.selectList("heartMapper.likeBoard", vo);
 	}
