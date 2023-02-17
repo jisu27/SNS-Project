@@ -175,9 +175,9 @@
 						<article class="contents cont01" style="width: 300px;height: 400px">
 						<div class="img_section">
 							<div class="trans_inner">
-								<div>
+								<div><a href="getBoard.do?bSeq=${board.bSeq}&profile=${member.profile}">
 									<img alt="" src="images/${board.upload}"
-										style="width: 300px; height: 300px;">
+										style="width: 300px; height: 300px;"></a>
 								</div>
 							</div>
 						</div>
