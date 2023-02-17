@@ -1,77 +1,153 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+    pageEncoding="UTF-8" %>
+    
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Shorts</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 
-<style>
-#container {	
-	height : 20cm;
-	width : 40cm;
-	padding:20px 50px;
+    <!-- Facebook Meta Tags / 페이스북 오픈 그래프 -->
+    <meta property="og:url" content="http://kindtiger.dothome.co.kr/insta">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="instagram">
+    <meta property="og:description" content="instagram clone">
+    <meta property="og:image" content="http://kindtiger.dothome.co.kr/insta/imgs/instagram.jpeg">
+    .
+    <!-- Twitter Meta Tags / 트위터 -->
+    <meta name="twitter:card" content="instagram clone">
+    <meta name="twitter:title" content="instagram">
+    <meta name="twitter:description" content="instagram clone">
+    <meta name="twitter:image" content="http://kindtiger.dothome.co.kr/insta/imgs/instagram.jpeg">
 
-}
-#text{
-	text-align:center;
-	
-}
+    <!-- Google / Search Engine Tags / 구글 검색 엔진 -->
+    <meta itemprop="name" content="instagram">
+    <meta itemprop="description" content="instagram clone">
+    <meta itemprop="image" content="http://kindtiger.dothome.co.kr/insta/imgs/instagram.jpeg">
 
 
-</style>
+    <title>instagram</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/new_post.css">
+    <link rel="shortcut icon" href="imgs/instagram.png">
 
 </head>
 <body>
-<form action="updateShorts" method="post" enctype="multipart/form-data">
+
+
+<section id="container">
+
+
+    <header id="header">
+        <section class="h_inner">
+
+            <h1 class="logo">
+                <a href="index.html">
+                    <div class="sprite_insta_icon"></div>
+                    <div>
+                        <div class="sprite_write_logo"></div>
+                    </div>
+                </a>
+            </h1>
+
+            <div class="search_field">
+                <input type="text" placeholder="검색" tabindex="0">
+
+                <div class="fake_field">
+                    <span class=sprite_small_search_icon></span>
+                    <span>검색</span>
+                </div>
+            </div>
+
+
+            <div class="right_icons">
+                <a href="new_post.html"><div class="sprite_camera_icon"></div></a>
+                <a href="login.html"><div class="sprite_compass_icon"></div></a>
+                <a href="follow.html"><div class="sprite_heart_icon_outline"></div></a>
+                <a href="profile.html"><div class="sprite_user_icon_outline"></div></a>
+            </div>
+        </section>
+    </header>
+
+
+
+    <div id="main_container">
+
+        <div class="post_form_container">
+            <form action="updateShorts.do" class="post_form" method="post" enctype="multipart/form-data">
+            <input type="hidden" id="id" name="id" value = "${sessionScope.user.id}"> 
+            <input type="hidden" name="nonvideo"   value="${shorts.upload}">
+            <input type="hidden" name="sSeq" value="${shorts.sSeq}">
+                <div class="title">
+                    UPDATE SHORTS
+                </div>
+                <div class="preview">
+                    <div class="upload">
+                        <div class="post_btn" >
+                            <!--  <p>포스트 동영상 추가</p>  -->
+                            <video controls id="video-tag" style="width: 300px; height: 250px; object-fit: cover">
+								  <source id="video-source" src="shorts/${shorts.upload}">
+								  Your browser does not support the video tag.
+							</video>
+                            
+                            <!--<p><img id="img_id" src="#" style="width: 300px; height: 300px; object-fit: cover" alt="thumbnail"></p>-->
+                        </div>
+                    </div>
+                </div>
+                <p>
+                    <input type="file" name="uploadFile" id="id_photo" required="required" value="${shorts.upload}">
+                </p>
+                <p>
+                	<input type ="text" name="sTitle" placeholder="제목을 입력하세요" maxlength="28" value="${shorts.sTitle}">
+                    <textarea name="sContent" id="text_field" cols="50" rows="5" placeholder="140자 까지 등록 가능합니다.">${shorts.sContent}</textarea>
+
+                </p>
+                <input class="submit_btn" type="submit" value="저장">
+            </form>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+<script src="js/insta.js"></script>
+
+<script>
+	var fileInput  = document.querySelector( "#id_photo" ),
+	button     = document.querySelector( ".input-file-trigger" ),
+	the_return = document.querySelector(".file-return");
+	const videoSrc = document.querySelector("#video-source");
+	const videoTag = document.querySelector("#video-tag")
 	
-<div id = "container">
+	// window.onload => HTML이 브라우저에 표시 완료되었을 때 실행
+	window.onload = function() {
+       // Show image
+       fileInput.addEventListener('change', handleVideo, false);
+     
+       //var canvas = document.getElementById('imageCanvas');
+       //var ctx = canvas.getContext('2d');
+	}
 
- <c:choose>
- 	<c:when test= "${empty sessionScope.user}">
- 		<a href="http://localhost:8080/">로그인</a>
- 	</c:when>
- 	<c:otherwise>
- 		 ${sessionScope.user.name} 님 로그인 중
-  </c:otherwise>
-  </c:choose>  
-
-	
-		<h2>동영상을 수정하세요</h2><br><br>
-		<input type="hidden" name="sSeq" value = "${shortsvo.sSeq}">	
-		<table border="1" >
-			<tr>
-				<th id="text" width="100">제목: </th>
-					<td><input type ="text" name="sTitle" value = "${shortsvo.sTitle} "></td>
-			</tr>
-			
-			<tr>
-				<th id="text">내용: </th>
-				<td>
-				<!--  <pre><textarea id="textarea"  rows="10" cols="40" name="sContent" >${shortsvo.sContent}</textarea></pre> -->
-				<textarea id="textarea"  rows="10" cols="40" name="sContent" >${shortsvo.sContent}</textarea>
-				</td>
-			</tr>
-			
-			<tr>
-				<td colspan="2">
-				동영상 선택(동영상 파일만 업로드 할 수 있습니다)<br>
-				<input type="file" name="uploadFile" id ="uploadFile" accept="video/*" value="동영상 파일"></td>
-			</tr>
-
-	</table>
+    function handleVideo(event){
+    	console.log(event.target.files);
 		
-			<br>
-			<input type="submit" value="동영상 업로드" onclick="check_file()">
-
-	<br><hr>
-		<a href="getShortsList">되돌아가기</a>	
-	 
-</div>	
-
-</form>
-<script type="text/javascript" src="views/shorts.js"></script>
-
+        if (event.target.files && event.target.files[0]) {
+            var reader = new FileReader();
+            
+            reader.onload = function(e) {
+            	console.log('loaded');
+            	videoSrc.src = e.target.result;
+            	videoTag.load()
+            }.bind(this)
+            
+            reader.readAsDataURL(event.target.files[0]);
+        }
+   }
+</script>
 </body>
 </html>

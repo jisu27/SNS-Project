@@ -62,4 +62,10 @@ public class ShortServiceImpl implements ShortsService {
 		
 	}
 
+	@Override
+	public List<ShortsVO> getAdShortsList(ShortsVO vo) {
+		
+		return sDAO.getAdShortsList(vo);
+	}
+
 }
