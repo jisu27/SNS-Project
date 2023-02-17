@@ -73,10 +73,10 @@
 				</h1>
 
 				<div class="search_field">
-					<input type="text" placeholder="ê²ì" tabindex="0">
+					<input type="text" placeholder="검색" tabindex="0">
 
 					<div class="fake_field">
-						<span class=sprite_small_search_icon></span> <span>ê²ì</span>
+						<span class=sprite_small_search_icon></span> <span>검색</span>
 					</div>
 				</div>
 

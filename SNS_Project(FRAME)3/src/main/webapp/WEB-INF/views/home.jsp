@@ -96,11 +96,11 @@
 									<div class="sprite_more_icon" data-name="more"
 										onclick="toggle(this.children[0])">
 										<ul class="toggle_box" id="toggle_box${status.count}">
-										<c:if test="${board.pay!=1}">
-											<li>
-												<a href="insertAD.do?bSeq=${board.bSeq}&id=${sessionScope.user.id}"><input type="button" value="광고 요청"></a>
-			                                </li>    
-										</c:if>
+											<c:if test="${board.pay!=1}">
+												<li><a
+													href="insertAD.do?bSeq=${board.bSeq}&id=${sessionScope.user.id}"><input
+														type="button" value="광고 요청"></a></li>
+											</c:if>
 
 											<li><a href="goUpdateBoard.do?bSeq=${board.bSeq}"> <input
 													type="button" value="수정"></a></li>
@@ -155,9 +155,7 @@
 															id="id" name="id" value="${sessionScope.user.id}">
 													</form>
 												</div>
-
 											</c:when>
-
 											<c:otherwise>
 												<div onclick="like(like${status.count})"
 													class="sprite_heart_icon_outline" id="heart" name="39"
@@ -167,7 +165,6 @@
 														<input type="hidden" id="bseq" name="bSeq"
 															value="${board.bSeq}"> <input type="hidden"
 															id="id" name="id" value="${sessionScope.user.id}">
-
 													</form>
 												</div>
 											</c:otherwise>
@@ -183,7 +180,7 @@
 								</div>
 								<div class="right_icon">
 									<div class="sprite_bookmark_outline" data-name="bookmark"></div>
-									
+
 								</div>
 							</div>
 
@@ -193,7 +190,8 @@
 
 							<c:forEach items="${commentList}" var="comment">
 								<c:if test="${comment.bseq == board.bSeq }">
-									<div class="comment_container" id="comment_container${status.index}">
+									<div class="comment_container"
+										id="comment_container${status.index}">
 										<div class="comment" id="comment-list-ajax-post37">
 											<div class="comment-detail">
 												<div class="nick_name m_text">${comment.id}</div>
@@ -201,64 +199,64 @@
 											</div>
 										</div>
 										<div class="icon_wrap1">
-										<c:if test="${sessionScope.user.id == comment.id}">
-											<div class="sprite_more_icon" id="sprite_more_icon" data-name="more"
-												onclick="toggle(this.children[0])">
-												<ul class="toggle_box" id="toggle_box${comment.cseq}">
-													<li><a href="goUpdateComment.do?cseq=${comment.cseq}">
-															<input type="button" value="수정">
-													</a></li>
-													<li><form
-															action="deleteComment.do?cseq=${comment.cseq}"
-															method="post">
-															<input type="submit" value="삭제">
-														</form></li>
-												</ul>
+											<c:if test="${sessionScope.user.id == comment.id}">
+												<div class="sprite_more_icon" id="sprite_more_icon"
+													data-name="more" onclick="toggle(this.children[0])">
+													<ul class="toggle_box" id="toggle_box${comment.cseq}">
+														<li><a href="goUpdateComment.do?cseq=${comment.cseq}">
+																<input type="button" value="수정">
+														</a></li>
+														<li><form
+																action="deleteComment.do?cseq=${comment.cseq}"
+																method="post">
+																<input type="submit" value="삭제">
+															</form></li>
+													</ul>
+												</div>
+											</c:if>
+											<div class="small_heart">
+												<c:choose>
+													<c:when
+														test="${fn:contains(sessionScope.c_heart,comment.cseq)}">
+														<div onclick="deleteLike_c(deleteLike${comment.cseq})"
+															data-name="smallheart"
+															class="sprite_small_heart_icon_outline"
+															style="background: url('../../imgs/background01.png') no-repeat -323px -287px">
+															<form id="deleteLike${comment.cseq}" method="post"
+																action="deleteHeart_c.do">
+																<input type="hidden" id="cseq" name="cseq"
+																	value="${comment.cseq}"> <input type="hidden"
+																	id="id" name="id" value="${sessionScope.user.id}">
+																<input type="hidden" id="bSeq" name="bSeq"
+																	value="${comment.bSeq}"> <input type="hidden"
+																	id="profile" name="profile" value="${profile}">
+															</form>
+														</div>
+
+
+													</c:when>
+
+													<c:otherwise>
+														<div onclick="like_c(like${comment.cseq})"
+															data-name="smallheart"
+															class="sprite_small_heart_icon_outline">
+															<form id="like${comment.cseq}" method="post"
+																action="heart_c.do">
+																<input type="hidden" id="cseq" name="cseq"
+																	value="${comment.cseq}"> <input type="hidden"
+																	id="id" name="id" value="${sessionScope.user.id}">
+																<input type="hidden" id="ccontent" name="ccontent"
+																	value="${comment.ccontent}"> <input
+																	type="hidden" id="bSeq" name="bSeq"
+																	value="${comment.bSeq}"> <input type="hidden"
+																	id="profile" name="profile" value="${profile}">
+
+															</form>
+														</div>
+
+													</c:otherwise>
+												</c:choose>
 											</div>
-										</c:if>
-										<div class="small_heart">
-											<c:choose>
-												<c:when
-													test="${fn:contains(sessionScope.c_heart,comment.cseq)}">
-													<div onclick="deleteLike_c(deleteLike${comment.cseq})"
-														data-name="smallheart"
-														class="sprite_small_heart_icon_outline"
-														style="background: url('../../imgs/background01.png') no-repeat -323px -287px">
-														<form id="deleteLike${comment.cseq}" method="post"
-															action="deleteHeart_c.do">
-															<input type="hidden" id="cseq" name="cseq"
-																value="${comment.cseq}"> <input type="hidden"
-																id="id" name="id" value="${sessionScope.user.id}">
-															<input type="hidden" id="bSeq" name="bSeq"
-																value="${comment.bSeq}"> <input type="hidden"
-																id="profile" name="profile" value="${profile}">
-														</form>
-													</div>
-
-
-												</c:when>
-
-												<c:otherwise>
-													<div onclick="like_c(like${comment.cseq})"
-														data-name="smallheart"
-														class="sprite_small_heart_icon_outline">
-														<form id="like${comment.cseq}" method="post"
-															action="heart_c.do">
-															<input type="hidden" id="cseq" name="cseq"
-																value="${comment.cseq}"> <input type="hidden"
-																id="id" name="id" value="${sessionScope.user.id}">
-															<input type="hidden" id="ccontent" name="ccontent"
-																value="${comment.ccontent}"> <input
-																type="hidden" id="bSeq" name="bSeq"
-																value="${comment.bSeq}"> <input type="hidden"
-																id="profile" name="profile" value="${profile}">
-
-														</form>
-													</div>
-
-												</c:otherwise>
-											</c:choose>
-										</div>
 										</div>
 									</div>
 								</c:if>
@@ -312,8 +310,8 @@
 								<div class="thumb_user">
 									<div class="profile_thumb">
 										<a href="getShorts?sSeq=${shorts.sSeq}"><img
-
-								src="profile/${getshortsList[status.index].profile}" alt="프로필사진"></a>
+											src="profile/${getshortsList[status.index].profile}"
+											alt="프로필사진"></a>
 
 									</div>
 									<div class="detail">
@@ -332,20 +330,20 @@
 						<header class="reco_header">
 							<div>회원님을 위한 추천</div>
 						</header>
-						<div class="scroll_inner"> 
-						<c:forEach var="reco" items="${recoMember}">
-							<div class="thumb_user">
+						<div class="scroll_inner">
+							<c:forEach var="reco" items="${recoMember}">
+								<div class="thumb_user">
 
-								<div class="profile_thumb">
-									<a href="profile.do?id=${reco.id}"><img
-										src="profile/${reco.profile}" alt=""></a>
+									<div class="profile_thumb">
+										<a href="profile.do?id=${reco.id}"><img
+											src="profile/${reco.profile}" alt=""></a>
+									</div>
+									<div class="detail">
+										<div class="id">${reco.id}</div>
+										<div class="time"></div>
+									</div>
 								</div>
-								<div class="detail">
-									<div class="id">${reco.id}</div>
-									<div class="time"></div>
-								</div>
-							</div>
-						</c:forEach>
+							</c:forEach>
 						</div>
 
 					</article>

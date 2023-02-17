@@ -124,7 +124,8 @@
 									</div>
 								</div>
 
-								<c:forEach var="comment" items="${commentList}" varStatus="status">
+								<c:forEach var="comment" items="${commentList}"
+									varStatus="status">
 									<div class="user_container-detail">
 										<div class="user">
 											<img src="profile/${commentMemberList[status.index].profile}"
@@ -133,7 +134,7 @@
 										<div class="comment">
 											<span class="user_id">${comment.id}</span>
 											<div class="word2">${comment.ccontent}</div>
-                      
+
 											<div class="time" style="font-size: small;">
 												<fmt:formatDate var="comDate" value="${comment.indate}"
 													pattern="yyyy년MM월dd일HH시" />
@@ -177,8 +178,6 @@
 																			id="profile" name="profile" value="${profile}">
 																	</form>
 																</div>
-
-
 															</c:when>
 
 															<c:otherwise>
@@ -204,11 +203,6 @@
 													</div>
 												</div>
 											</c:if>
-         <div class="time" style="font-size: small;">
-												<fmt:formatDate var="comDate" value="${comment.indate}"
-													pattern="yyyy년MM월dd일HH시" />
-												${comDate}에 작성된 글입니다. <span class="try_comment"></span>
-											</div>
 										</div>
 									</div>
 
@@ -278,9 +272,9 @@
 									<input type="hidden" name="id" value="${sessionScope.user.id}">
 									<input type="hidden" name="bSeq" value="${board.bSeq}">
 									<input type="text" name="ccontent" placeholder="댓글을 달아주세요 !">
-                  <div class="upload_btn m_text" data-name="comment">
-									<input type="submit" value="게시">
-                  </div>
+									<div class="upload_btn m_text" data-name="comment">
+										<input type="submit" value="게시">
+									</div>
 								</form>
 							</div>
 
