@@ -308,8 +308,10 @@
 								<form action="insertComment.do" method="post">
 									<input type="hidden" name="id" value="${sessionScope.user.id}">
 									<input type="hidden" name="bseq" value="${board.bSeq}">
-									<input type="text" name="ccontent" id="ccontent"
-										placeholder="댓글달기...">
+									<div style="width: 500px">
+										<input type="text" name="ccontent" id="ccontent"
+											placeholder="댓글달기...">
+									</div>
 									<div class="upload_btn m_text" data-name="comment">
 										<input type="submit" value="게시">
 									</div>
