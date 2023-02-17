@@ -45,13 +45,23 @@ public class CommentController {
 	}
 
 	@PostMapping(value = "/updateComment.do")
-	public String updateReview(CommentVO vo, HttpSession session) throws IllegalStateException, IOException {
+	   public String updateReview(CommentVO vo, HttpSession session) throws IllegalStateException, IOException {
+	         
+	      if (vo.getbSeq()!=0) {
+	         
+	         System.out.println("updateComment: " + vo);
+	         commentService.updateComment(vo);
+	         
+	         return "redirect:home.do";
+	      }else {
+	      
+	         vo.setbSeq(0);
+	         commentService.updateComment(vo);
+	         return "redirect:getShorts?sSeq="+vo.getsSeq();
+	      }
+	      
 
-		System.out.println("updateComment: " + vo);
-		commentService.updateComment(vo);
-
-		return "redirect:home.do";
-	}
+	   }
 
 	@RequestMapping(value = "/deleteComment.do")
 	public String deleteReview(CommentVO vo, HttpServletRequest request) throws IllegalStateException, IOException {
