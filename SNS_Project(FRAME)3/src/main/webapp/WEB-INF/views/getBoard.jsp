@@ -257,8 +257,39 @@
 									</div>
 								</div>
 
+
 								<div class="right_icon">
-									<div class="sprite_bookmark_outline" data-name="book-mark"></div>
+									<div class="sprite_bookmark_outline" data-name="book-mark">
+										<c:choose>
+											<c:when
+												test="${fn:contains(sessionScope.boardBookMarkNums, board.bSeq)}">
+												<div onclick="deleteBoardBookMark(deleteBoardBookMark)"
+													class="sprite_bookmark_outline" id="bookMark"
+													data-name="bookMark"
+													style="background: url('../../imgs/background01.png') no-repeat -160px -286px;">
+													<form id="deleteBoardBookMark" method="post">
+														<input type="hidden" id="bSeq" name="bSeq"
+															value="${board.bSeq}"> <input type="hidden"
+															id="id" name="id" value="${sessionScope.user.id}">
+													</form>
+												</div>
+											</c:when>
+
+											<c:otherwise>
+												<div onclick="insertBoardBookMark(insertBookMark)"
+													class="sprite_bookmark_outline" id="bookMark"
+													data-name="bookMark"
+													style="background: url('../../imgs/background01.png') no-repeat -185px -286px;">
+													<form id="insertBookMark" method="post">
+														<input type="hidden" id="bSeq" name="bSeq"
+															value="${board.bSeq}"> <input type="hidden"
+															id="id" name="id" value="${sessionScope.user.id}">
+														<input type="hidden" id="bmTitle" name="bmTitle">
+													</form>
+												</div>
+											</c:otherwise>
+										</c:choose>
+									</div>
 								</div>
 							</div>
 
@@ -330,6 +361,25 @@
 				con.style.display = 'block';
 			} else {
 				con.style.display = 'none';
+			}
+		}
+		function deleteBoardBookMark(delBookMark) {
+			if (confirm("북마크를 삭제하시겠습니까?")) {
+				$("#deleteBoardBookMark").attr("action",
+						"deleteBoardBookMark").submit();
+			}
+		}
+
+		function insertBoardBookMark(inBookMark) {
+			var bmTitle = prompt("북마크 제목", "");
+			if (bmTitle === null) {
+				// User clicked "Cancel" in the prompt dialog
+				return;
+			} else if (bmTitle === "") {
+				alert("북마크 제목을 입력해 주십시오.");
+			} else {
+				$("#bmTitle").val(bmTitle);
+				$("#insertBookMark").attr("action", "insertBoardBookMark").submit();
 			}
 		}
 	</script>

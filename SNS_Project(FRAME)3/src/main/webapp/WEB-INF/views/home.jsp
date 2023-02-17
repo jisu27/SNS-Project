@@ -180,9 +180,34 @@
 									</div>
 									<div class="sprite_share_icon" data-name="share"></div>
 								</div>
-								<div class="right_icon">
-									<div class="sprite_bookmark_outline" data-name="bookmark"></div>
-									
+													<div class="right_icon">
+									<c:choose>
+										<c:when
+											test="${fn:contains(sessionScope.boardBookMarkNums, board.bSeq)}">
+											<div onclick="deleteBoardBookMark(deleteBoardBookMark${status.index})"
+												class="sprite_bookmark_outline" id="bookMark" data-name="bookMark"
+												style="background: url('../../imgs/background01.png') no-repeat -160px -286px;">
+												<form id="deleteBoardBookMark${status.index}" method="post">
+													<input type="hidden" id="bSeq" name="bSeq"
+														value="${board.bSeq}"> <input type="hidden"
+														id="id" name="id" value="${sessionScope.user.id}">
+												</form>
+											</div>
+										</c:when>
+
+										<c:otherwise>
+											<div onclick="insertBoardBookMark(insertBookMark${status.index})"
+												class="sprite_bookmark_outline" id="bookMark"data-name="bookMark"
+												style="background: url('../../imgs/background01.png') no-repeat -185px -286px;">
+												<form id="insertBookMark${status.index}" method="post">
+													<input type="hidden" id="bSeq" name="bSeq"
+														value="${board.bSeq}"> <input type="hidden"
+														id="id" name="id" value="${sessionScope.user.id}">
+														<input type="hidden" id="bmTitle" name="bmTitle">
+												</form>
+											</div>
+										</c:otherwise>
+									</c:choose>
 								</div>
 							</div>
 
@@ -191,7 +216,7 @@
 							</div>
 
 							<c:forEach items="${commentList}" var="comment">
-								<c:if test="${comment.bseq == board.bSeq }">
+								<c:if test="${comment.bseq == board.bSeq}">
 									<div class="comment_container" id="comment_container${status.index}">
 										<div class="comment" id="comment-list-ajax-post37">
 											<div class="comment-detail">
@@ -401,6 +426,26 @@ function showComment(commentId) {
 }
 function search() {
 	$(".search_box").attr("action","home.do").submit();
+}
+
+function deleteBoardBookMark(delBookMark) {
+	if (confirm("북마크를 삭제하시겠습니까?")) {
+		$(delBookMark).attr("action",
+				"deleteBoardBookMark").submit();
+	}
+}
+
+function insertBoardBookMark(inBookMark) {
+	var bmTitle = prompt("북마크 제목", "");
+	if (bmTitle === null) {
+		// User clicked "Cancel" in the prompt dialog
+		return;
+	} else if (bmTitle === "") {
+		alert("북마크 제목을 입력해 주십시오.");
+	} else {
+		$("#bmTitle").val(bmTitle);
+		$(inBookMark).attr("action", "insertBoardBookMark").submit();
+	}
 }
 
 </script>
