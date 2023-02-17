@@ -48,6 +48,14 @@ public class BookMarkController {
 		
 		return "redirect:" + (String) request.getHeader("Referer");
 	}
+	
+	@PostMapping(value= "insertShortsBookMark")
+	public String insertShortsBookMark(BookMarkVO vo, ShortsVO svo, Model model, HttpServletRequest request) {
+		vo.setbSeq(svo.getsSeq());
+		bookMarkService.insertBookMark(vo);
+		
+		return "redirect:" + (String) request.getHeader("Referer");
+	}
 
 	@PostMapping(value = "deleteShortsBookMark")
 	public String deleteShortsBookMark(BookMarkVO vo, ShortsVO svo, Model model, HttpServletRequest request,
