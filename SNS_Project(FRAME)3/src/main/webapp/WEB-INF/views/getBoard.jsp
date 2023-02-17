@@ -299,7 +299,7 @@
 								</div>
 							</div>
 
-							<div class="heart_count" style="font-weight: 900">
+							<div class="heart_count" style="font-weight: 900;padding-left: 20px;">
 								좋아요${board.count}개</div>
 							<div class="timer">
 								<fmt:formatDate var="boDate" value="${board.inDate}"

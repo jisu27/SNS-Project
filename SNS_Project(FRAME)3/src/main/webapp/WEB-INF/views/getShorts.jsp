@@ -132,8 +132,6 @@
 									<div class="sprite_more_icon" data-name="more"
 										onclick="toggle(this.children[0])">
 										<ul class="toggle_box" id="toggle_box${status.count}">
-											<li><input type="submit" class="follow" value="팔로우"
-												data-name="follow"></li>
 
 											<li><a href="goUpdateShorts.do?sSeq=${shorts.sSeq}">
 													<input type="button" value="수정">
@@ -317,23 +315,21 @@
 									</c:choose>
 								</div>
 							</div>
-
-							<div class="count_likes">
-								<!-- 좋아요 수<span class="count">{shorts.like}</span> -->
-								
-							</div>
+							<div class="heart_count" style="font-weight: 900;padding-left: 20px;">
+								&nbsp;좋아요${shorts.count}개</div>
 							<div class="timer">
 								<fmt:formatDate var="comDate" value="${shorts.inDate}"
 									pattern="yyyy년MM월dd일HH시" />
 								${comDate}
 							</div>
 
-							<div class="commit_field">
-								<form action="insertShortsComment" method="post">
-									<input type="hidden" name="sSeq" value="${shorts.sSeq}">
+							<div class="comment_field" id="add-comment-post37">
+								<form action="insertShortsComment.do" method="post">
 									<input type="hidden" name="id" value="${sessionScope.user.id}">
-									<input type="text" name="ccontent" placeholder="댓글을 입력하세요">
-
+									<input type="hidden" name="sSeq" value="${shorts.sSeq}">
+									<div style="width: 250px">
+										<input type="text" name="ccontent" placeholder="댓글을 달아주세요 !">
+									</div>
 									<div class="upload_btn m_text" data-name="comment">
 										<input type="submit" value="게시">
 									</div>

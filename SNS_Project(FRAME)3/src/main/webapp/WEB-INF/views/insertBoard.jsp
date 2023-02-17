@@ -115,12 +115,9 @@
 						<input type="text" id="title" name="title" placeholder="title"><br>
 						<input type="file" name="uploadfile" id="id_photo" value="">
 					</p>
-
 					<p>
-						<textarea name="content" id="content" cols="50" rows="5"
-							placeholder="140자 까지 등록 가능합니다.
-					#태그명 을 통해서 검색 태그를 등록할 수 있습니다.
-					예시 : I # love # insta!">
+						<textarea name="content" cols="50" rows="5"
+							placeholder="140자 까지 등록 가능합니다.">
 					</textarea>
 					</p>
 					<input type="hidden" id="id" name="id" readonly="readonly"
