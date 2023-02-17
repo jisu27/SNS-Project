@@ -174,7 +174,10 @@
 					<c:forEach var="board" items="${boardList}">
 						<article class="contents cont01" style="width: 300px;height: 400px">
 						<div class="img_section">
-							<div class="trans_inner">
+							<div class="trans_inner" id="${board.upload}">
+							<c:if test="${board.upload=='no-background.png'}">
+								${board.content}
+							</c:if>
 								<div><a href="getBoard.do?bSeq=${board.bSeq}&profile=${member.profile}">
 									<img alt="" src="images/${board.upload}"
 										style="width: 300px; height: 300px;"></a>
@@ -473,7 +476,7 @@
 								</div>
 							</div>
 
-							<div class="heart_count" style="font-weight: 900;padding-left: 20px;">
+							<div class="heart_count" style="font-weight: 900;padding-left: 20px; ">
 								좋아요${shorts.count}개</div>
 
 						</div>
@@ -490,6 +493,10 @@
 	<script src="js/profile.js"></script>
 	<script src="js/common.js"></script>
 	<script>
+	$(function () {
+		$("#no-background.png").attr("style","background:url('../../images/no-background.png')");
+	})
+	
 		function check_id() {
 			if ($("#check").val() == '' || $("#check").val() == null) {
 				alert("로그인을 해주세요");
