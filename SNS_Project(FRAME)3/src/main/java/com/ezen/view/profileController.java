@@ -10,9 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.ezen.dto.BoardVO;
+import com.ezen.dto.BookMarkVO;
 import com.ezen.dto.FollowVO;
 import com.ezen.dto.MemberVO;
 import com.ezen.service.BoardService;
+import com.ezen.service.BookMarkService;
 import com.ezen.service.FollowService;
 import com.ezen.service.MemberService;
 
@@ -25,9 +27,11 @@ public class profileController {
 	private MemberService memberService;
 	@Autowired
 	private FollowService followService;
+	@Autowired
+	private BookMarkService bookMarkService;
 	
 	@GetMapping("profile.do")
-	public String goProfile(MemberVO mvo,BoardVO bvo,Model model,HttpSession session) {
+	public String goProfile(MemberVO mvo, BoardVO bvo, BookMarkVO bookMark, Model model, HttpSession session) {
 		
 		MemberVO member = memberService.MemberCheck(mvo);
 		List<BoardVO> list= boardService.myBoardList(bvo);
@@ -55,6 +59,22 @@ public class profileController {
 		model.addAttribute("member",member);
 		model.addAttribute("follower",follower);
 		model.addAttribute("following",following);
+		
+		// ºÏ¸¶Å© °ü·Ã
+		bookMark.setId(member.getId());
+		System.out.println("BookMarkController: getBooardList() vo=" + bookMark);
+
+		List<BookMarkVO> bookMarkList = bookMarkService.getBookMarkList(bookMark);
+		List<Integer> boardBookMarkNums = bookMarkService.getBoardBookMarkNums(bookMark);
+		List<Integer> shortsBookMarkNums = bookMarkService.getShortsBookMarkNums(bookMark);
+		List<BookMarkVO> boardBookMarkList = bookMarkService.getBoardBookMarkList(bookMark);
+		List<BookMarkVO> shortsBookMarkList = bookMarkService.getShortsBookMarkList(bookMark);
+
+		session.setAttribute("boardBookMarkNums", boardBookMarkNums);
+		session.setAttribute("shortsBookMarkNums", shortsBookMarkNums);
+		model.addAttribute("bookMarkList", bookMarkList);
+		model.addAttribute("boardBookMarkList", boardBookMarkList);
+		model.addAttribute("shortsBookMarkList", shortsBookMarkList);
 		
 		return "myPage";
 	}

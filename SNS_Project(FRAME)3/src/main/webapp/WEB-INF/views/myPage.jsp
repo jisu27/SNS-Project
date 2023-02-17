@@ -41,6 +41,39 @@
 <script src="https://code.jquery.com/jquery-3.6.3.js"
 	integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
 	crossorigin="anonymous"></script>
+<style>
+.scontents_container {
+	/*display: flex; */
+	flex-wrap: wrap;
+	justify-content: space-between;
+	display: none;
+}
+
+.scontents_container.active {
+	display: flex;
+}
+
+.scontents_container .content {
+	max-width: 300px;
+	max-height: 300px;
+	overflow: hidden;
+	margin-bottom: 18px;
+}
+
+.scontents_container .content video {
+	width: 100%;
+	height: 100%;
+}
+
+@media screen and (max-width:1000px) {
+	.scontents_container {
+		justify-content: center;
+	}
+	.scontents_container .scontent {
+		margin: 10px;
+	}
+}
+</style>
 </head>
 <body>
 
@@ -58,7 +91,7 @@
 						</div>
 					</a>
 				</h1>
-<!-- 
+				<!-- 
 				<div class="search_field">
 					<input type="text" placeholder="검색" tabindex="0">
 
@@ -84,7 +117,6 @@
 
 
 		<div id="main_container">
-
 			<section class="b_inner">
 
 				<div class="hori_cont">
@@ -93,92 +125,114 @@
 							<img src="profile/${member.profile}" alt="profile">
 						</div>
 					</div>
-                <div class="detail">
-                    <div class="top">
-                        <div class="user_name">${member.name}</div>
-                        <c:choose>
-                        	<c:when test="${sessionScope.user.id==member.id}">
-	    	                    <a href="profile_edit.do?id=${sessionScope.user.id}" class="profile_edit">프로필편집</a>
-		                        <a href="logout.do" class="logout">로그아웃</a>
-                        	</c:when>
-                        	<c:otherwise>
-                        				<c:choose>
-		                        		<c:when test="${fn:contains(sessionScope.follower,member.id)}">
-			                        		<a href="deleteFollow.do?id1=${sessionScope.user.id}&id2=${member.id}">언 팔로우</a>
-		    	                    		<a href="#">메시지</a>
-		                        		</c:when>
-		                        		<c:otherwise>
-			                        		<a href="follow.do?id1=${sessionScope.user.id}&id2=${member.id}">팔로우</a>
-		    	                    		<a href="#">메시지</a>
-		                        		</c:otherwise>
-	                        			</c:choose>                       		                      			
-                        	</c:otherwise>
-                        </c:choose>
-                    </div>
+					<div class="detail">
+						<div class="top">
+							<div class="user_name">${member.name}</div>
+							<c:choose>
+								<c:when test="${sessionScope.user.id==member.id}">
+									<a href="profile_edit.do?id=${sessionScope.user.id}"
+										class="profile_edit">프로필편집</a>
+									<a href="logout.do" class="logout">로그아웃</a>
+								</c:when>
+								<c:otherwise>
+									<c:choose>
+										<c:when test="${fn:contains(sessionScope.follower,member.id)}">
+											<a
+												href="deleteFollow.do?id1=${sessionScope.user.id}&id2=${member.id}">언
+												팔로우</a>
+											<a href="#">메시지</a>
+										</c:when>
+										<c:otherwise>
+											<a
+												href="follow.do?id1=${sessionScope.user.id}&id2=${member.id}">팔로우</a>
+											<a href="#">메시지</a>
+										</c:otherwise>
+									</c:choose>
+								</c:otherwise>
+							</c:choose>
+						</div>
 
-                    <ul class="middle">
-                        <li>     
-                            <span>게시물 : ${board.count}</span>
-                            
-                        </li>
-                        <li>
-                            <span onclick="window.open('followList.do?id2=${member.id}','_blank','width:500px; height: 150px;')">팔로워</span>
-                            ${follower}
-                        </li>
-                        <li>
-                            <span onclick="window.open('followList.do?id1=${member.id}','_blank','width:500px; height: 150px;')">팔로우</span>
-                            ${following}
-                        </li>
-                    </ul>
-                    <p class="about">
-                        <span class="nick_name">${sessionScope.user.name}</span>
-                        <span class="book_mark">bookmark</span>
-                    </p>
+						<ul class="middle">
+							<li><span>게시물 : ${board.count}</span></li>
+							<li><span
+								onclick="window.open('followList.do?id2=${member.id}','_blank','width:500px; height: 150px;')">팔로워</span>
+								${follower}</li>
+							<li><span
+								onclick="window.open('followList.do?id1=${member.id}','_blank','width:500px; height: 150px;')">팔로우</span>
+								${following}</li>
+						</ul>
+						<p class="about">
+							<span class="nick_name">${sessionScope.user.name}</span> <span
+								class="boardBookMark">게시판 북마크</span> <span
+								class="shortsBookMark">쇼츠 북마크</span>
+						</p>
 
 					</div>
 				</div>
-				<c:forEach var="board" items="${boardList}">
-					<div class="mylist_contents contents_container active">
+
+				<div class="mylist_contents contents_container active">
+					<c:forEach var="board" items="${boardList}">
 						<div class="pic">
 							<a
 								href="getBoard.do?bSeq=${board.bSeq}&profile=${member.profile}"><img
 								src="images/${board.upload}" alt=""></a>
 						</div>
-					</div>
-				</c:forEach>
-
-
-
-				<div class="bookmark_contents contents_container">
-					<div class="pic">
-						<a href="#"><img src="imgs/img_section/img03.jpg" alt=""></a>
-					</div>
+					</c:forEach>
 				</div>
 
 
-
-
+				<!-- BookMarks -->
+				<!-- Board BookMarks -->
+				<div class="bookmark_contents contents_container">
+					<c:if
+						test="${fn:contains(sessionScope.boardBookMarkNums, board.bSeq)}">
+						<c:forEach items="${boardBookMarkList}" var="board">
+							<div class="pic">
+								<a
+									href="getBoard.do?bSeq=${board.bSeq}&profile=${member.profile}"><img
+									src="images/${board.upload}" alt=""></a>
+							</div>
+								${board.bmTitle}
+								<br>
+						</c:forEach>
+					</c:if>
+				</div>
+				<!-- Shorts BookMarks -->
+				<div class="bookmark_contents contents_container">
+					
+					<c:if
+						test="${fn:contains(sessionScope.shortsBookMarkNums, shorts.sSeq)}">
+						<c:forEach items="${shortsBookMarkList}" var="shorts">
+						<div class="content">
+								<a href="getShorts?sSeq=${shorts.sSeq}"> <video
+										id="video-player" onmouseover="this.play()"
+										onmouseout="this.pause()" preload="metadata" style="width: 400px">
+										<source src="shorts/${shorts.upload}#t=0.5">
+									</video>
+								</a>
+						</div>
+							${shorts.bmTitle}
+								<br>
+						</c:forEach>
+					</c:if>
+				</div>
 			</section>
 		</div>
-
-
 	</section>
-<!--<script src="js/insta.js"></script>-->
-<script src="js/profile.js"></script>
-<script src="js/common.js"></script>
-<script>
-function check_id() {	
-	if ($("#check").val()=='' || $("#check").val()==null) {
-		alert("로그인을 해주세요");
-		$("#goProfile1").attr("href","/");
-		$("#goProfile2").attr("href","/");
-		$("#goProfile3").attr("href","/");
-		$("#goProfile4").attr("href","/");
-		$("#goProfile5").attr("href","/");
-	}
-}
-
-
-</script>
+	<!--<script src="js/insta.js"></script>-->
+	<script src="js/profile.js"></script>
+	<script src="js/common.js"></script>
+	<script>
+		function check_id() {
+			if ($("#check").val() == '' || $("#check").val() == null) {
+				alert("로그인을 해주세요");
+				$("#goProfile1").attr("href", "/");
+				$("#goProfile2").attr("href", "/");
+				$("#goProfile3").attr("href", "/");
+				$("#goProfile4").attr("href", "/");
+				$("#goProfile5").attr("href", "/");
+			}
+		}
+	</script>
 </body>
 </html>

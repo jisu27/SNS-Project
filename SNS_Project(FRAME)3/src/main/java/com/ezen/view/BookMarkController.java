@@ -103,8 +103,7 @@ public class BookMarkController {
 	}
 
 	@GetMapping(value = "getBookMarkList")
-	public String getBookMarkList(BookMarkVO bookMark, BoardVO board, ShortsVO shorts, Model model,
-			HttpSession session) {
+	public String getBookMarkList(BookMarkVO bookMark, Model model, HttpSession session) {
 
 		MemberVO member = (MemberVO) session.getAttribute("user");
 
