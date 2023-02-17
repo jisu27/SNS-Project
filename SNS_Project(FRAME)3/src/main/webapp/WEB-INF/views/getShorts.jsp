@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -133,8 +134,8 @@
 							</header>
 
 							<section class="scroll_section">
-								<div class="user_container-detail">
 									<c:forEach items="${ShortsCommentList}" var="ShortsComment">
+								<div class="user_container-detail">
 										<div class="user">
 											<img src="profile/${member.profile}" alt="user">
 
@@ -142,8 +143,11 @@
 										<div class="comment">
 											<span class="user_id">${ShortsComment.id}</span>
 											${ShortsComment.content}
-											<div class="time">
-												${ShortsComment.inDate}
+											
+											<div class="time" style="font-size: small;">
+												<fmt:formatDate var="comDate" value="${ShortsComment.inDate}"
+												pattern="yyyy년MM월dd일HH시" />
+												${comDate}에 작성된 글입니다.
 												<!-- <span class="try_comment">ëµê¸ ë¬ê¸°</span>  -->
 											</div>
 											<div class="icon_wrap">
@@ -155,8 +159,8 @@
 												</div>
 											</div>
 										</div>
-									</c:forEach>
 								</div>
+									</c:forEach>
 							</section>
 
 
@@ -208,7 +212,11 @@
 								<!-- 좋아요 수<span class="count">{shorts.like}</span> -->
 								
 							</div>
-							<div class="timer">2ìê°</div>
+							<div class="timer">
+								<fmt:formatDate var="comDate" value="${shorts.inDate}"
+												pattern="yyyy년MM월dd일HH시" />
+											${comDate}
+							</div>
 
 							<div class="commit_field">
 								<form action="insertShortsComment" method="post">

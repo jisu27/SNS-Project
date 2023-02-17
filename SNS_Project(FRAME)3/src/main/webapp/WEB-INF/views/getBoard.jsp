@@ -125,8 +125,7 @@
 									</div>
 								</div>
 
-								<c:forEach var="comment" items="${commentList}"
-									varStatus="status">
+								<c:forEach var="comment" items="${commentList}" varStatus="status">
 									<div class="user_container-detail">
 										<div class="user">
 											<img src="profile/${commentMemberList[status.index].profile}"
