@@ -175,7 +175,7 @@
 						<article class="contents cont01"
 							style="width: 300px; height: 400px">
 							<div class="img_section">
-								<div class="trans_inner">
+								<div class="trans_inner" style="width: 300px; height: 300px;">
 									<c:if test="${board.upload=='no-background.png'}">
 								${board.content}
 							</c:if>
