@@ -397,7 +397,8 @@
 
 	</section>
 	<script src="js/common.js"></script>
-	<script type="text/javascript">
+	<script type="text/javascript">	
+	
    var prev_element = null;
    
 function check_id() {   

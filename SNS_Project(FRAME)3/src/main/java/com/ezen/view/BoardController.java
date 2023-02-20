@@ -194,11 +194,14 @@ public class BoardController {
 		model.addAttribute("getshortsList", shortsMemberList);
 
 		// BookMark 관련
+		if (session.getAttribute("user")!=null) {
+			
 		BookMarkVO bookMark = new BookMarkVO();
 		bookMark.setId(mvo2.getId());
 		List<Integer> boardBookMarkNums = bookMarkService.getBoardBookMarkNums(bookMark);
 
 		session.setAttribute("boardBookMarkNums", boardBookMarkNums);
+		}
 
 		return "home";
 	}
