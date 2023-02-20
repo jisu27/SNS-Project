@@ -265,11 +265,7 @@
 										</c:choose>
 									</div>
 
-									<div>
-										<div class="sprite_share_icon" data-name="share"></div>
-									</div>
 								</div>
-
 
 								<div class="right_icon">
 									<div class="sprite_bookmark_outline" data-name="book-mark">
@@ -306,7 +302,8 @@
 								</div>
 							</div>
 
-							<div class="heart_count" style="font-weight: 900;padding-left: 20px;">
+							<div class="heart_count"
+								style="font-weight: 900; padding-left: 20px;">
 								좋아요${board.count}개</div>
 							<div class="timer">
 								<fmt:formatDate var="boDate" value="${board.inDate}"

@@ -183,7 +183,6 @@
 										onclick="showComment(comment_container${status.index})">
 										<input id="show" type="hidden" value="0">
 									</div>
-									<div class="sprite_share_icon" data-name="share"></div>
 								</div>
 								<div class="right_icon">
 									<c:choose>
