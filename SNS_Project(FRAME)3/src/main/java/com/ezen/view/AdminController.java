@@ -2,6 +2,8 @@ package com.ezen.view;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,7 +38,7 @@ public class AdminController {
 	}
 	
 	@GetMapping("cancleAD.do")
-	public String cancleAD(AdminVO avo) {
+	public String cancleAD(AdminVO avo,HttpServletRequest request) {
 		
 		
 		if (avo.getbSeq() != 0) {
@@ -47,11 +49,11 @@ public class AdminController {
 			shortsService.updateManusPay(avo.getsSeq());
 			adminService.deleteAd(avo);
 		}
-		return "redirect:home.do";
+		return "redirect:" + (String) request.getHeader("Referer");
 	}
 	
 	@GetMapping("insertAD.do")
-	public String insertAD(AdminVO vo) {
+	public String insertAD(AdminVO vo,HttpServletRequest request) {
 		System.out.println(vo);
 		
 		adminService.insertAd(vo);
@@ -62,7 +64,7 @@ public class AdminController {
 			shortsService.updatePay(vo.getsSeq());
 		}
 		
-		return "redirect:home.do";
+		return "redirect:" + (String) request.getHeader("Referer");
 	}
 	
 	@PostMapping("checkAd.do")

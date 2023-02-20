@@ -46,23 +46,13 @@
         <section class="h_inner">
 
             <h1 class="logo">
-                <a href="/">
+                <a href="home.do">
                     <div class="sprite_insta_icon"></div>
                     <div>
                         <div class="sprite_write_logo"></div>
                     </div>
                 </a>
             </h1>
-
-            <div class="search_field">
-                <input type="text" placeholder="검색" tabindex="0">
-
-                <div class="fake_field">
-                    <span class=sprite_small_search_icon></span>
-                    <span>검색</span>
-                </div>
-            </div>
-
 
            <input type="hidden" id="check" value="${sessionScope.user.id}">
 				<div class="right_icons">

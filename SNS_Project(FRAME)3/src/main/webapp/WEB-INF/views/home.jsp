@@ -77,7 +77,7 @@
 
 					<c:forEach items="${newBoardList}" var="board" varStatus="status">
 
-						<article class="contents">
+						<article class="contents" style="width: 614px;">
 							<header class="top">
 								<div class="user_container">
 									<div class="profile_img">

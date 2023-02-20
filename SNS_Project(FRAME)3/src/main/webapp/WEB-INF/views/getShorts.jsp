@@ -132,10 +132,15 @@
 									<div class="sprite_more_icon" data-name="more"
 										onclick="toggle(this.children[0])">
 										<ul class="toggle_box" id="toggle_box${status.count}">
-											<c:if test="${shorts.pay!=1}">
+										<c:if test="${shorts.pay==0}">
 												<li><a
 													href="insertAD.do?sSeq=${shorts.sSeq}&id=${sessionScope.user.id}"><input
 														type="button" value="광고 요청"></a></li>
+											</c:if>
+											<c:if test="${shorts.pay==1}">
+												<li><a
+													href="cancleAD.do?sSeq=${shorts.sSeq}&id=${sessionScope.user.id}"><input
+														type="button" value="광고 요청 취소"></a></li>
 											</c:if>
 											<li><a href="goUpdateShorts.do?sSeq=${shorts.sSeq}">
 													<input type="button" value="수정">

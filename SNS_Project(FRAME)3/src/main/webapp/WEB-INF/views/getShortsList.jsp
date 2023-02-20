@@ -147,18 +147,32 @@
 
 
 
-				<div class="mylist_contents contents_container active">
+				<div class="mylist_contents contents_container active" style="width: 1000px; justify-content:unset;">
 					<c:forEach items="${shortsList}" var="shorts">
-						
-						<div class="content" id="content${shorts.pay}" style="padding-left: 5px;">
-							<a href="getShorts?sSeq=${shorts.sSeq}"> <video
-									id="video-player" onmouseover="this.play()"
-									onmouseout="this.pause()" preload="metadata">
-									<source src="shorts/${shorts.upload}#t=0.5">
-								</video>
-							</a>
-
-						</div>
+						<c:choose>
+							<c:when test="${shorts.pay==2}">
+								<div class="content" id="content${shorts.pay}" style="margin: 5px; border: 3px solid gold;">
+									<a href="getShorts?sSeq=${shorts.sSeq}"> <video
+											id="video-player" onmouseover="this.play()"
+											onmouseout="this.pause()" preload="metadata">
+											<source src="shorts/${shorts.upload}#t=0.5">
+										</video>
+									</a>
+		
+								</div>
+							</c:when>
+							<c:otherwise >
+								<div class="content" id="content${shorts.pay}" style="margin: 5px;">
+									<a href="getShorts?sSeq=${shorts.sSeq}"> <video
+											id="video-player" onmouseover="this.play()"
+											onmouseout="this.pause()" preload="metadata">
+											<source src="shorts/${shorts.upload}#t=0.5">
+										</video>
+									</a>
+		
+								</div>
+							</c:otherwise>
+						</c:choose>
 					</c:forEach>
 				</div>
 
@@ -207,10 +221,7 @@
 	<!--<script src="js/insta.js"></script>-->
 	<script src="js/profile.js"></script>
 	<script>
-	$(function (){
-		$("#content1").attr("style","border:3px solid gold");
-	})
-	
+
 	function search() {
 		$(".search_box").attr("action","home.do").submit();
 	}
