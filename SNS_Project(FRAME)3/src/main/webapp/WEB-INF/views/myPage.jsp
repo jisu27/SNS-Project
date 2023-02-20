@@ -423,7 +423,7 @@
 
 												<c:otherwise>
 													<div onclick="likeShorts(likeShorts${status.index})"
-														class="sprite_heart_icon_outline" id="heart" name="39"
+														class="sprite_heart_icon_outline" id="heart"
 														data-name="heartbeat"
 														style="background: url('../../imgs/background01.png') no-repeat -52px -261px;">
 														<form id="likeShorts${status.index}" action="getHeart.do"
