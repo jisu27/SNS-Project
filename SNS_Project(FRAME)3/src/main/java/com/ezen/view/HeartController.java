@@ -1,5 +1,6 @@
 package com.ezen.view;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.ezen.dto.BoardVO;
@@ -252,28 +254,38 @@ public class HeartController {
 		return "redirect:" + (String) request.getHeader("Referer");
 	}
 
-	/* @GetMapping("getLikeList.do")
+	@GetMapping("getLikeList.do")
 	public String goLikeList(HeartVO hvo, HttpSession session, Model model) {
 
 		BoardVO bvo = new BoardVO();
 		CommentVO cvo = new CommentVO();
 
 		List<BoardVO> boardList = new ArrayList<>();
+		List<MemberVO> memberList = new ArrayList<>();
 		List<Integer> heartList = heartService.boardLike(hvo);
-
+		
 		MemberVO mvo = new MemberVO();
 
-		for (HeartVO vo : heartList) {
+		for (Integer vo : heartList) {
 
-			bvo.setbSeq(vo.getbSeq());
+			bvo.setbSeq(vo);
 			BoardVO board = boardService.myBoard(bvo);
-			boardList.add(board);
-
+			if (board!=null) {
+				
+				boardList.add(board);
+				
+				MemberVO member = new MemberVO();
+				member.setId(board.getId());
+				MemberVO member2 = memberService.MemberCheck(member);
+				
+				memberList.add(member2);
+			}
 		}
 		model.addAttribute("boardList", boardList);
+		model.addAttribute("memberList", memberList);
 
 		return "likeList";
 
-	}*/
+	}
 
 }

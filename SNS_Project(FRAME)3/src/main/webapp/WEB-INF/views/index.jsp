@@ -55,20 +55,6 @@
                 </a>
             </h1>
 
-				<div class="search_field">
-					<input type="text" placeholder="검색" tabindex="0">
-
-					<div class="fake_field">
-						<span class=sprite_small_search_icon></span> <span>검색</span>
-					</div>
-				</div>
-            <input type="hidden" id="check" value="${sessionScope.user.id}">
-            <div class="right_icons" onclick="check_id()">
-                <a id="goProfile1" href="goInsertBoard.do" onclick="check_id()"><div  class="sprite_camera_icon"></div></a>
-                <a id="goProfile2" href="/" onclick="check_id()"><div class="sprite_compass_icon"></div></a>
-                <a id="goProfile3" href="getLikeList.do?id=${sessionScope.user.id}" onclick="check_id()"><div  class="sprite_heart_icon_outline"></div></a>
-                <a id="goProfile4" href="profile.do?id=${sessionScope.user.id}" onclick="check_id()"><div  class="sprite_user_icon_outline"></div></a>
-            </div>
         </section>
     </header>
 

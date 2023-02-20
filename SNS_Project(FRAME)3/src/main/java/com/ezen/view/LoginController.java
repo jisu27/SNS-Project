@@ -70,12 +70,12 @@ public class LoginController {
 
 		if (mvo == null) {
 
-			model.addAttribute("msg", "�궗�슜媛��뒫�븳 �븘�씠�뵒 �엯�땲�떎.");
+			model.addAttribute("msg", "는 사용할수 있는 아이디입니다.");
 			model.addAttribute("id", vo.getId());
 			model.addAttribute("check", 1);
 
 		} else {
-			model.addAttribute("msg", "�씠誘� �궗�슜以묒씤 �븘�씠�뵒 �엯�땲�떎.");
+			model.addAttribute("msg", "는 이미 사용중인 아이디 입니다.");
 			model.addAttribute("id", vo.getId());
 			model.addAttribute("check", 0);
 		}
@@ -195,9 +195,9 @@ public class LoginController {
 		System.out.println(mvo);
 
 		if (mvo != null) {
-			model.addAttribute("pwd", "李얠쑝�떆�뒗 鍮꾨�踰덊샇�뒗" + mvo.getPwd() + "�엯�땲�떎.");
+			model.addAttribute("pwd", "비밀번호는" + mvo.getPwd() + "입니다.");
 		} else {
-			model.addAttribute("pwd", "李얠쑝�떆�뒗 鍮꾨�踰덊샇媛� �뾾�뒿�땲�떎.");
+			model.addAttribute("pwd", "입력하신 정보가 일치하지 않습니다.");
 		}
 
 		return "findId";
