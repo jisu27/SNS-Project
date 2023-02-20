@@ -32,6 +32,10 @@
 		INSERT INTO admin(aSeq,bSeq,sSeq,id)
 		VALUES (admin_seq.NEXTVAL,#{bSeq},#{sSeq},#{id})
 	</insert>	
+	<!-- ##################################################################################### -->
+	<insert id="deleteAd">
+		DELETE admin WHERE bseq=${bSeq} AND sseq=${sSeq} 
+	</insert>	
 
 </mapper>
 

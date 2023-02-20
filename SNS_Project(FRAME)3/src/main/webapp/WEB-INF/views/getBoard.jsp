@@ -104,9 +104,16 @@
 									<div class="sprite_more_icon" data-name="more"
 										onclick="toggle(this.children[0])">
 										<ul class="toggle_box" id="toggle_box${status.count}">
-											<li><input type="submit" class="follow" value="팔로우"
-												data-name="follow"></li>
-
+											<c:if test="${board.pay==0}">
+												<li><a
+													href="insertAD.do?bSeq=${board.bSeq}&id=${sessionScope.user.id}"><input
+														type="button" value="광고 요청"></a></li>
+											</c:if>
+											<c:if test="${board.pay==1}">
+												<li><a
+													href="cancleAD.do?bSeq=${board.bSeq}&id=${sessionScope.user.id}"><input
+														type="button" value="광고 요청 취소"></a></li>
+											</c:if>
 											<li><a href="goUpdateBoard.do?bSeq=${board.bSeq}"> <input
 													type="button" value="수정"></a></li>
 

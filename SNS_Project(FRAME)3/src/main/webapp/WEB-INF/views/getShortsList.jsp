@@ -150,7 +150,7 @@
 				<div class="mylist_contents contents_container active">
 					<c:forEach items="${shortsList}" var="shorts">
 						
-						<div class="content" id="content${shorts.pay}">
+						<div class="content" id="content${shorts.pay}" style="padding-left: 5px;">
 							<a href="getShorts?sSeq=${shorts.sSeq}"> <video
 									id="video-player" onmouseover="this.play()"
 									onmouseout="this.pause()" preload="metadata">
