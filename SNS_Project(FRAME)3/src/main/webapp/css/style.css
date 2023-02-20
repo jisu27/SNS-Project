@@ -178,7 +178,7 @@ body{
 
 
 .contents{
-    max-width: 614px;
+    width: 614px;
     border: 1px solid rgba(0,0,0,0.09);
     border-radius: 3px;
     margin-bottom: 60px;
@@ -285,7 +285,7 @@ display: inline-block;
     
 }
 
-/* 占쎌뵠沃섎챷占  餓λ쵐釉곤옙 젟占쎌졊*/
+/* �뜝�럩逾졿쾬�꼶梨룟뜝  繞벿살탳�뇡怨ㅼ삕 �젧�뜝�럩議�*/
 .contents .trans_inner{
    text-align: center;
 }

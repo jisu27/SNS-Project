@@ -175,16 +175,21 @@
 						<article class="contents cont01"
 							style="width: 300px; height: 400px">
 							<div class="img_section">
-								<div class="trans_inner" style="width: 300px; height: 300px;">
-									<c:if test="${board.upload=='no-background.png'}">
-								${board.content}
-							</c:if>
-								<div><a href="getBoard.do?bSeq=${board.bSeq}&profile=${member.profile}">
-									<img alt="" src="images/${board.upload}"
-										style="width: 300px; height: 300px;"></a>
+								<div class="trans_inner" style="width: 300px; height: 300px; position: relative;">
+									<a
+										href="getBoard.do?bSeq=${board.bSeq}&profile=${member.profile}">
+										<img alt="" src="images/${board.upload}"
+										style="width: 300px; height: 300px;"> <c:if
+											test="${board.upload=='no-background.png'}">
+											<div class="con"
+												style="left: 0px; top: 0px; position: absolute">
+												<pre>${board.content}</pre>
+											</div>
+										</c:if>
+									</a>
+
 								</div>
 							</div>
-						</div>
 
 							<div class="detail--right_box">
 								<div class="bottom_icons">
@@ -282,7 +287,6 @@
 				</div>
 
 
-				<!-- BookMarks -->
 				<!-- Board BookMarks -->
 				<div class="bookmark_contents contents_container">
 					<c:forEach var="boardBm" items="${boardBookMarkList}"
@@ -290,11 +294,17 @@
 						<article class="contents cont01"
 							style="width: 300px; height: 400px">
 							<div class="img_section">
-								<div class="trans_inner">
-									<div>
+								<div class="trans_inner" style="width: 300px; height: 300px; position: relative;">
+									<a href="getBoard.do?bSeq=${boardBm.bSeq}">
 										<img alt="" src="images/${boardBm.upload}"
 											style="width: 300px; height: 300px;">
-									</div>
+										<c:if test="${boardBm.upload=='no-background.png'}">
+											<div class="con" style="left: 0px; top: 0px; position: absolute">
+												<pre>${boardBm.content}</pre>
+											</div>
+										</c:if>
+										</a>
+									
 									<div>${boardBm.bmTitle}</div>
 								</div>
 							</div>
@@ -371,7 +381,7 @@
 
 								<div class="heart_count"
 									style="font-weight: 900; padding-left: 20px;">
-									좋아요${board.count}개</div>
+									좋아요${boardBm.count}개</div>
 
 							</div>
 
@@ -407,7 +417,8 @@
 											<c:choose>
 												<c:when
 													test="${fn:contains(sessionScope.s_heart , shorts.sSeq)}">
-													<div onclick="deleteShortsLike(deleteShortsLike${status.index})"
+													<div
+														onclick="deleteShortsLike(deleteShortsLike${status.index})"
 														data-name="heartbeat" class="sprite_heart_icon_outline"
 														id="heart" name="39"
 														style="background: url('../../imgs/background01.png') no-repeat -26px -261px;">

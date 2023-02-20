@@ -133,22 +133,15 @@
 							<!-- 이미지 upload가 있는지 없는지 -->
 							<c:if test="${board.upload=='no-background.png'}">
 								<div class="img_section"
-									style="max-width: 100%; height: 100px; max-height: 600px;">
-									<div class="trans_inner">
-										<a
-											href="getBoard.do?bSeq=${board.bSeq}&profile=${memberList[status.index].profile}&time=${time[status.index]}"><img
-											src="images/${board.upload}" alt="${board.id}의 이미지"></a> <br>
-										<div class="con">
+									style="max-width: 100%; height: 150px; max-height: 600px; position: relative;">
+									<div class="trans_inner"
+										style="max-width: 100%; height: 150px; max-height: 600px;">
+										<a href="getBoard.do?bSeq=${board.bSeq}&profile=${memberList[status.index].profile}&time=${time[status.index]}"><img
+											src="images/${board.upload}" alt="${board.id}의 이미지"> <br>
+										<div class="con" style="left: 0px; top: 0px;position: absolute">
 											<pre>${board.content}</pre>
 										</div>
-									</div>
-									<div class="trans_inner">
-										<a
-											href="getBoard.do?bSeq=${board.bSeq}&profile=${memberList[status.index].profile}&time=${time[status.index]}"><img
-											src="images/${board.upload}" alt="${board.id}의 이미지"></a> <br>
-										<div class="con">
-											<pre>${board.content}</pre>
-										</div>
+										</a>
 									</div>
 								</div>
 							</c:if>

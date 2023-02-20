@@ -64,7 +64,7 @@ public class profileController {
 		model.addAttribute("follower",follower);
 		model.addAttribute("following",following);
 		
-		//하트 관련
+		//하트
 		heart.setId(member.getId());
 		List<Integer> Shorts = heartService.shortsLike(heart);
 		
@@ -81,7 +81,6 @@ public class profileController {
 		List<BookMarkVO> boardBookMarkList = bookMarkService.getBoardBookMarkList(bookMark);
 		List<BookMarkVO> shortsBookMarkList = bookMarkService.getShortsBookMarkList(bookMark);
 		System.out.println(shortsBookMarkList);
-		
 		
 		session.setAttribute("boardBookMarkNums", boardBookMarkNums);
 		session.setAttribute("shortsBookMarkNums", shortsBookMarkNums);

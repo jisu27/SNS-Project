@@ -43,8 +43,6 @@
 
 
 <section id="container">
-
-
     <header id="header">
         <section class="h_inner">
 

@@ -150,11 +150,7 @@
 
 		<input class="submit_btn" type="submit" value="저장">
 
-		</form>
-
-		</div>
-
-		</div>
+		
 	</section>
 
 	<script src="js/insta.js"></script>
