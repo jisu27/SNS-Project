@@ -86,13 +86,14 @@
                 </div>
                 <div class="preview">
                     <div class="upload">
-                    
+                    	<canvas id="imageCanvas"></canvas>
+                                        
                         <img src="images/${board.upload}" style="width: 300px; height: 300px;">
                     </div>
                 </div>
-                <p>
                 	<input type="text" id="title" name="title" placeholder="title" value="${board.title}"><br>
-                    <input type="file" name="uploadfile" id="uploadfile" >
+                <p>
+                    <input type="file" name="uploadfile" id="id_photo" >
                 </p>
                 <p>
                     <textarea name="content" id="content" cols="50" rows="5" placeholder="140자 까지 등록 가능합니다.

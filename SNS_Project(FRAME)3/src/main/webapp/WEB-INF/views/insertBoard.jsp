@@ -101,13 +101,6 @@
 								<p>포스트 이미지 추가</p>
 								<canvas id="imageCanvas"></canvas>
 
-
-								<p>
-									<img id="" src="images/${board.upload}"
-										style="width: 300px; height: 300px; object-fit: cover"
-										alt="thumbnail">
-								</p>
-
 							</div>
 						</div>
 					</div>
