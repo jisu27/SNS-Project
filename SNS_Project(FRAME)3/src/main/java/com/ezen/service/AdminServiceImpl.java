@@ -37,5 +37,10 @@ public class AdminServiceImpl implements AdminService {
 		aDao.updateManusAdmin(aSeq);
 		
 	}
+	@Override
+	public void deleteAd(AdminVO vo) {
+		aDao.deleteAd(vo);
+		
+	}
 
 }

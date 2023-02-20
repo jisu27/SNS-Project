@@ -119,7 +119,7 @@ table, tr, th {
 						<th><input name="aSeq" type="hidden" value="${demend.aSeq}">${demend.aSeq}</th>
 						<th><input name="id" type="hidden" value="${demend.id}">${demend.id}</th>
 						<c:choose>
-							<c:when test="${demend.bSeq!=null}">
+							<c:when test="${demend.bSeq!=0}">
 								<th><input name="bSeq" type="hidden" value="${demend.bSeq}">${demend.bSeq}</th>
 							</c:when>
 							<c:otherwise>

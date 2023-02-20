@@ -35,11 +35,32 @@ public class AdminController {
 		return "adminPay";
 	}
 	
+	@GetMapping("cancleAD.do")
+	public String cancleAD(AdminVO avo) {
+		
+		
+		if (avo.getbSeq() != 0) {
+			boardService.updateManusPay(avo.getbSeq());
+			adminService.deleteAd(avo);
+		}else {
+			avo.setbSeq(0);
+			shortsService.updateManusPay(avo.getsSeq());
+			adminService.deleteAd(avo);
+		}
+		return "redirect:home.do";
+	}
+	
 	@GetMapping("insertAD.do")
 	public String insertAD(AdminVO vo) {
 		System.out.println(vo);
 		
 		adminService.insertAd(vo);
+		
+		if (vo.getbSeq()!=0) {
+			boardService.updatePay(vo.getbSeq());			
+		}else {
+			shortsService.updatePay(vo.getsSeq());
+		}
 		
 		return "redirect:home.do";
 	}
@@ -61,6 +82,7 @@ public class AdminController {
 		
 		return "redirect:goAdmin.do";
 	}
+	
 	@PostMapping("checkManusAd.do")
 	public String checkManusAd(AdminVO avo) {
 		

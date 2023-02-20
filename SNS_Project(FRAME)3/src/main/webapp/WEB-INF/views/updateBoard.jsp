@@ -86,7 +86,7 @@
                 </div>
                 <div class="preview">
                     <div class="upload">
-                        <img src="images/${board.upload}">
+                        <img src="images/${board.upload}" style="width: 300px; height: 300px;">
                     </div>
                 </div>
                 <p>

@@ -10,14 +10,14 @@
 </head>
 <body>
 <h1>내가 좋아한 게시글들 </h1>
-		
-			<c:forEach var="board" items="${boardList}" varStatus="status">
-	            <div class="mylist_contents contents_container active">
-    	            <div class="pic">
-        	            	<a href="getBoard.do?bSeq=${board.bSeq}&profile=${memberList[status.index].profile}"><img src="images/${board.upload}" alt=""></a>
-            	    </div>
-            	</div>
-			</c:forEach>
-			
+      
+         <c:forEach var="board" items="${boardList}" varStatus="status">
+               <div class="mylist_contents contents_container active">
+                   <div class="pic">
+                          <a href="getBoard.do?bSeq=${board.bSeq}&profile=${memberList[status.index].profile}"><img src="images/${board.upload}" style=" width:300px; height:300px;  alt=""></a>
+                   </div>
+               </div>
+         </c:forEach>
+         
 </body>
 </html>

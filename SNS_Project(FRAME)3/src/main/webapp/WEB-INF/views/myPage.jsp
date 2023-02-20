@@ -162,7 +162,7 @@
 								${following}</li>
 						</ul>
 						<p class="about">
-							<span class="nick_name on">${sessionScope.user.name}</span> <span
+							<span class="nick_name on">${member.name}</span> <span
 								class="boardBookMark">게시판 북마크 </span> <span
 								class="shortsBookMark"> 쇼츠 북마크</span>
 						</p>
@@ -175,17 +175,16 @@
 						<article class="contents cont01"
 							style="width: 300px; height: 400px">
 							<div class="img_section">
-								<div class="trans_inner">
-									<div>
-										<a
-											href="getBoard.do?bSeq=${board.bSeq}&profile=${member.profile}">
-											<img alt="" src="images/${board.upload}"
-											style="width: 300px; height: 300px;">
-										</a>
-									</div>
+								<div class="trans_inner" style="width: 300px; height: 300px;">
+									<c:if test="${board.upload=='no-background.png'}">
+								${board.content}
+							</c:if>
+								<div><a href="getBoard.do?bSeq=${board.bSeq}&profile=${member.profile}">
+									<img alt="" src="images/${board.upload}"
+										style="width: 300px; height: 300px;"></a>
 								</div>
 							</div>
-
+						</div>
 
 							<div class="detail--right_box">
 								<div class="bottom_icons">
@@ -487,6 +486,10 @@
 	<script src="js/profile.js"></script>
 	<script src="js/common.js"></script>
 	<script>
+	$(function () {
+		$("#no-background.png").attr("style","background:url('../../images/no-background.png')");
+	})
+	
 		function check_id() {
 			if ($("#check").val() == '' || $("#check").val() == null) {
 				alert("로그인을 해주세요");

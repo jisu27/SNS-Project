@@ -29,4 +29,7 @@ public class AdminDao {
 	public void insertAd(AdminVO vo) {
 		mybatis.insert("adminMapper.insertAd",vo);
 	}
+	public void deleteAd(AdminVO vo) {
+		mybatis.delete("adminMapper.deleteAd",vo);
+	}
 }
