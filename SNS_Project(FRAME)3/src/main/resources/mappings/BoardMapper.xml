@@ -35,17 +35,21 @@
   </update>
   <!-- get 게시물  -->
   <select id="getBoardList" resultType="board">
+  <![CDATA[
   	SELECT * 
   	FROM board
-  	WHERE pay=0 or pay=1 AND content LIKE '%'||#{keyWord}||'%'
+  	WHERE pay < 2 AND content LIKE '%'||#{keyWord}||'%'
   	ORDER BY INDATE DESC
+  ]]>
   </select>
   <!-- get 광고  -->
   
   <select id="getAdverList" resultType="board">
+  <![CDATA[
   	SELECT * FROM board
   	WHERE pay = 2 AND content LIKE '%'||#{keyWord}||'%'
   	ORDER BY INDATE DESC
+  ]]>
   </select>
   
   <delete id="deleteBoard" >

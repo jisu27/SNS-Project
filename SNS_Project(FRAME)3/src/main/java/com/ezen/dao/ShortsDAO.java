@@ -23,6 +23,7 @@ public class ShortsDAO {
 	public List<ShortsVO> getShortsList(ShortsVO vo) {
 		return mybatis.selectList("ShortsMapper.getShortsList", vo);
 	}
+
 	public List<ShortsVO> getAdShortsList(ShortsVO vo) {
 		return mybatis.selectList("ShortsMapper.getAdShortsList", vo);
 	}
@@ -34,6 +35,7 @@ public class ShortsDAO {
 	public void updateShorts(ShortsVO vo) {
 		mybatis.update("ShortsMapper.updateShorts", vo);
 	}
+
 	public void updateShortsCount(ShortsVO vo) {
 		mybatis.update("ShortsMapper.updateShortsCount", vo);
 	}
@@ -41,11 +43,17 @@ public class ShortsDAO {
 	public void deleteShorts(ShortsVO vo) {
 		mybatis.delete("ShortsMapper.deleteShorts", vo);
 	}
+
 	public void updatePay(int sSeq) {
-		mybatis.selectOne("ShortsMapper.updatePay",sSeq);
+		mybatis.selectOne("ShortsMapper.updatePay", sSeq);
 	}
+
 	public void updateManusPay(int sSeq) {
-		mybatis.selectOne("ShortsMapper.update-Pay",sSeq);
+		mybatis.selectOne("ShortsMapper.update-Pay", sSeq);
+	}
+
+	public List<ShortsVO> getStoryShortsList(ShortsVO vo) {
+		return mybatis.selectList("ShortsMapper.getStoryShortsList", vo);
 	}
 
 }

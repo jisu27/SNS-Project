@@ -47,25 +47,31 @@ public class ShortServiceImpl implements ShortsService {
 	@Override
 	public void updatePay(int sSeq) {
 		sDAO.updatePay(sSeq);
-		
+
 	}
 
 	@Override
 	public void updateManusPay(int sSeq) {
 		sDAO.updateManusPay(sSeq);
-		
+
 	}
 
 	@Override
 	public void updateShortsCount(ShortsVO vo) {
 		sDAO.updateShortsCount(vo);
-		
+
 	}
 
 	@Override
 	public List<ShortsVO> getAdShortsList(ShortsVO vo) {
-		
+
 		return sDAO.getAdShortsList(vo);
+	}
+
+	@Override
+	public List<ShortsVO> getStoryShortsList(ShortsVO vo) {
+
+		return sDAO.getStoryShortsList(vo);
 	}
 
 }

@@ -53,6 +53,13 @@
 		ORDER BY sSeq DESC
 	</select>
 	
+	<select id ="getStoryShortsList" resultType="shorts">
+		select *
+		from shorts
+		WHERE scontent LIKE '%'||#{searchKeyword}||'%'
+		ORDER BY sSeq DESC
+	</select>
+	
 	<!-- #################################################################################################################### -->
 	<update id="updatePay" parameterType="shorts">
 		UPDATE shorts

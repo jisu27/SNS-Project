@@ -126,7 +126,7 @@ public class BoardController {
 		List<String> time = new ArrayList<>();
 		List<String> stime = new ArrayList<>();
 
-		List<ShortsVO> shortsList = shortsService.getShortsList(sVo);
+		List<ShortsVO> shortsList = shortsService.getStoryShortsList(sVo);
 		List<MemberVO> shortsMemberList = new ArrayList<>();
 
 		for (BoardVO vo : newBoardList) {
@@ -194,13 +194,13 @@ public class BoardController {
 		model.addAttribute("getshortsList", shortsMemberList);
 
 		// BookMark 관련
-		if (session.getAttribute("user")!=null) {
-			
-		BookMarkVO bookMark = new BookMarkVO();
-		bookMark.setId(mvo2.getId());
-		List<Integer> boardBookMarkNums = bookMarkService.getBoardBookMarkNums(bookMark);
+		if (session.getAttribute("user") != null) {
 
-		session.setAttribute("boardBookMarkNums", boardBookMarkNums);
+			BookMarkVO bookMark = new BookMarkVO();
+			bookMark.setId(mvo2.getId());
+			List<Integer> boardBookMarkNums = bookMarkService.getBoardBookMarkNums(bookMark);
+
+			session.setAttribute("boardBookMarkNums", boardBookMarkNums);
 		}
 
 		return "home";
@@ -232,10 +232,8 @@ public class BoardController {
 		if (!vo.getUploadfile().isEmpty()) {
 			fileName = vo.getUploadfile().getOriginalFilename();
 
-			
-
 			String realPath = session.getServletContext().getRealPath("/images/");
-			
+
 			vo.setUpload(fileName);
 			vo.getUploadfile().transferTo(new File(realPath + fileName));
 		} else {
@@ -287,14 +285,14 @@ public class BoardController {
 		System.out.println("cvo :" + cvo);
 
 		// 북마크 관련
-		if (session.getAttribute("user")!=null) {
-			
-		BookMarkVO bookMark = new BookMarkVO();
-		MemberVO user = (MemberVO) session.getAttribute("user");
-		bookMark.setId(user.getId());
-		List<Integer> boardBookMarkNums = bookMarkService.getBoardBookMarkNums(bookMark);
+		if (session.getAttribute("user") != null) {
 
-		session.setAttribute("boardBookMarkNums", boardBookMarkNums);
+			BookMarkVO bookMark = new BookMarkVO();
+			MemberVO user = (MemberVO) session.getAttribute("user");
+			bookMark.setId(user.getId());
+			List<Integer> boardBookMarkNums = bookMarkService.getBoardBookMarkNums(bookMark);
+
+			session.setAttribute("boardBookMarkNums", boardBookMarkNums);
 		}
 
 		return "getBoard";
