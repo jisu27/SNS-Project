@@ -162,7 +162,7 @@
 								${following}</li>
 						</ul>
 						<p class="about">
-							<span class="nick_name">${sessionScope.user.name}</span> <span
+							<span class="nick_name on">${sessionScope.user.name}</span> <span
 								class="boardBookMark">게시판 북마크 </span> <span
 								class="shortsBookMark"> 쇼츠 북마크</span>
 						</p>
@@ -170,322 +170,317 @@
 					</div>
 				</div>
 
-				<div class="mylist_contents contents_container active" >
-					<c:forEach var="board" items="${boardList}">
-						<article class="contents cont01" style="width: 300px;height: 400px">
-						<div class="img_section">
-							<div class="trans_inner">
-								<div><a href="getBoard.do?bSeq=${board.bSeq}&profile=${member.profile}">
-									<img alt="" src="images/${board.upload}"
-										style="width: 300px; height: 300px;"></a>
-								</div>
-							</div>
-						</div>
-
-
-						<div class="detail--right_box">						
-							<div class="bottom_icons">
-								<div class="left_icons">
-									<div class="heart_btn">
-										<c:choose>
-											<c:when
-												test="${fn:contains(sessionScope.heart , board.bSeq)}">
-												<div onclick="deleteLike()"
-													class="sprite_heart_icon_outline" id="heart" name="39"
-													data-name="heartbeat"
-													style="background: url('../../imgs/background01.png') no-repeat -26px -261px;">
-													<form id="deleteLike" action="getDeleteHeart.do"
-														method="post">
-														<input type="hidden" id="bseq" name="bseq"
-															value="${board.bSeq}"> <input type="hidden"
-															id="id" name="id" value="${sessionScope.user.id}">
-														<input type="hidden" id="profile" name="profile"
-															value="${profile}">
-													</form>
-												</div>
-											</c:when>
-
-											<c:otherwise>
-												<div onclick="like()" class="sprite_heart_icon_outline"
-													id="heart" name="39" data-name="heartbeat"
-													style="background: url('../../imgs/background01.png') no-repeat -52px -261px;">
-													<form id="like" action="getHeart.do" method="post">
-														<input type="hidden" id="bSeq" name="bSeq"
-															value="${board.bSeq}"> <input type="hidden"
-															id="id" name="id" value="${sessionScope.user.id}">
-														<input type="hidden" id="profile" name="profile"
-															value="${profile}">
-													</form>
-												</div>
-											</c:otherwise>
-										</c:choose>
-									</div>
-
+				<div class="mylist_contents contents_container active">
+					<c:forEach var="board" items="${boardList}" varStatus="status">
+						<article class="contents cont01"
+							style="width: 300px; height: 400px">
+							<div class="img_section">
+								<div class="trans_inner">
 									<div>
-										<div class="sprite_share_icon" data-name="share"></div>
-									</div>
-								</div>
-
-
-								<div class="right_icon">
-									<div class="sprite_bookmark_outline" data-name="book-mark">
-										<c:choose>
-											<c:when
-												test="${fn:contains(sessionScope.boardBookMarkNums, board.bSeq)}">
-												<div onclick="deleteBoardBookMark(deleteBoardBookMark)"
-													class="sprite_bookmark_outline" id="bookMark"
-													data-name="bookMark"
-													style="background: url('../../imgs/background01.png') no-repeat -160px -286px;">
-													<form id="deleteBoardBookMark" method="post">
-														<input type="hidden" id="bSeq" name="bSeq"
-															value="${board.bSeq}"> <input type="hidden"
-															id="id" name="id" value="${sessionScope.user.id}">
-													</form>
-												</div>
-											</c:when>
-
-											<c:otherwise>
-												<div onclick="insertBoardBookMark(insertBookMark)"
-													class="sprite_bookmark_outline" id="bookMark"
-													data-name="bookMark"
-													style="background: url('../../imgs/background01.png') no-repeat -185px -286px;">
-													<form id="insertBookMark" method="post">
-														<input type="hidden" id="bSeq" name="bSeq"
-															value="${board.bSeq}"> <input type="hidden"
-															id="id" name="id" value="${sessionScope.user.id}">
-														<input type="hidden" id="bmTitle" name="bmTitle">
-													</form>
-												</div>
-											</c:otherwise>
-										</c:choose>
+										<a
+											href="getBoard.do?bSeq=${board.bSeq}&profile=${member.profile}">
+											<img alt="" src="images/${board.upload}"
+											style="width: 300px; height: 300px;">
+										</a>
 									</div>
 								</div>
 							</div>
 
-							<div class="heart_count" style="font-weight: 900;padding-left: 20px;">
-								좋아요${board.count}개</div>
 
-						</div>
+							<div class="detail--right_box">
+								<div class="bottom_icons">
+									<div class="left_icons">
+										<div class="heart_btn">
+											<c:choose>
+												<c:when
+													test="${fn:contains(sessionScope.heart , board.bSeq)}">
+													<div onclick="deleteLike(deleteLike${status.index})"
+														class="sprite_heart_icon_outline" id="heart" name="39"
+														data-name="heartbeat"
+														style="background: url('../../imgs/background01.png') no-repeat -26px -261px;">
+														<form id="deleteLike${status.index}"
+															action="getDeleteHeart.do" method="post">
+															<input type="hidden" id="bseq" name="bseq"
+																value="${board.bSeq}"> <input type="hidden"
+																id="id" name="id" value="${sessionScope.user.id}">
+															<input type="hidden" id="profile" name="profile"
+																value="${profile}">
+														</form>
+													</div>
+												</c:when>
+
+												<c:otherwise>
+													<div onclick="like(like${status.index})"
+														class="sprite_heart_icon_outline" id="heart" name="39"
+														data-name="heartbeat"
+														style="background: url('../../imgs/background01.png') no-repeat -52px -261px;">
+														<form id="like${status.index}" action="getHeart.do"
+															method="post">
+															<input type="hidden" id="bSeq" name="bSeq"
+																value="${board.bSeq}"> <input type="hidden"
+																id="id" name="id" value="${sessionScope.user.id}">
+															<input type="hidden" id="profile" name="profile"
+																value="${profile}">
+														</form>
+													</div>
+												</c:otherwise>
+											</c:choose>
+										</div>
+
+										<div>
+											<div class="sprite_share_icon" data-name="share"></div>
+										</div>
+									</div>
 
 
-					</article>
+									<div class="right_icon">
+										<div class="sprite_bookmark_outline" data-name="book-mark">
+											<c:choose>
+												<c:when
+													test="${fn:contains(sessionScope.boardBookMarkNums, board.bSeq)}">
+													<div
+														onclick="deleteBoardBookMark(deleteBoardBookMark${status.index})"
+														class="sprite_bookmark_outline" id="bookMark"
+														data-name="bookMark"
+														style="background: url('../../imgs/background01.png') no-repeat -160px -286px;">
+														<form id="deleteBoardBookMark${status.index}"
+															method="post">
+															<input type="hidden" id="bSeq" name="bSeq"
+																value="${board.bSeq}"> <input type="hidden"
+																id="id" name="id" value="${sessionScope.user.id}">
+														</form>
+													</div>
+												</c:when>
+
+												<c:otherwise>
+													<div
+														onclick="insertBoardBookMark(insertBookMark${status.index})"
+														class="sprite_bookmark_outline" id="bookMark"
+														data-name="bookMark"
+														style="background: url('../../imgs/background01.png') no-repeat -185px -286px;">
+														<form id="insertBookMark${status.index}" method="post">
+															<input type="hidden" id="bSeq" name="bSeq"
+																value="${board.bSeq}"> <input type="hidden"
+																id="id" name="id" value="${sessionScope.user.id}">
+															<input type="hidden" id="bmTitle" name="bmTitle">
+														</form>
+													</div>
+												</c:otherwise>
+											</c:choose>
+										</div>
+									</div>
+								</div>
+
+								<div class="heart_count"
+									style="font-weight: 900; padding-left: 20px;">
+									좋아요${board.count}개</div>
+
+							</div>
+
+
+						</article>
 					</c:forEach>
 				</div>
 
 
 				<!-- BookMarks -->
 				<!-- Board BookMarks -->
-				<div class="bookmark_contents contents_container active" >
-					<c:forEach var="board" items="${boardBookMarkList}">
-						<article class="contents cont01" style="width: 300px;height: 400px">
-						<div class="img_section">
-							<div class="trans_inner">
-								<div>
-									<img alt="" src="images/${board.upload}"
-										style="width: 300px; height: 300px;">
-								</div>
-							</div>
-						</div>
-
-
-						<div class="detail--right_box">						
-							<div class="bottom_icons">
-								<div class="left_icons">
-									<div class="heart_btn">
-										<c:choose>
-											<c:when
-												test="${fn:contains(sessionScope.heart , board.bSeq)}">
-												<div onclick="deleteLike()"
-													data-name="heartbeat"
-													class="sprite_heart_icon_outline" id="heart" name="39"
-													style="background: url('../../imgs/background01.png') no-repeat -26px -261px;">
-													<form id="deleteLike" action="getDeleteHeart.do"
-														method="post">
-														<input type="hidden" id="bseq" name="bseq"
-															value="${board.bSeq}"> <input type="hidden"
-															id="id" name="id" value="${sessionScope.user.id}">
-														<input type="hidden" id="profile" name="profile"
-															value="${profile}">
-													</form>
-												</div>
-											</c:when>
-
-											<c:otherwise>
-												<div onclick="like()" class="sprite_heart_icon_outline"
-													id="heart" name="39" data-name="heartbeat"
-													style="background: url('../../imgs/background01.png') no-repeat -52px -261px;">
-													<form id="like" action="getHeart.do" method="post">
-														<input type="hidden" id="bSeq" name="bSeq"
-															value="${board.bSeq}"> <input type="hidden"
-															id="id" name="id" value="${sessionScope.user.id}">
-														<input type="hidden" id="profile" name="profile"
-															value="${profile}">
-													</form>
-												</div>
-											</c:otherwise>
-										</c:choose>
-									</div>
-
+				<div class="bookmark_contents contents_container active">
+					<c:forEach var="board" items="${boardBookMarkList}"
+						varStatus="status">
+						<article class="contents cont01"
+							style="width: 300px; height: 400px">
+							<div class="img_section">
+								<div class="trans_inner">
 									<div>
-										<div class="sprite_share_icon" data-name="share"></div>
-									</div>
-								</div>
-
-
-								<div class="right_icon">
-									<div class="sprite_bookmark_outline" data-name="book-mark">
-										<c:choose>
-											<c:when
-												test="${fn:contains(sessionScope.boardBookMarkNums, board.bSeq)}">
-												<div onclick="deleteBoardBookMark(deleteBoardBookMark)"
-													class="sprite_bookmark_outline" id="bookMark"
-													data-name="bookMark"
-													style="background: url('../../imgs/background01.png') no-repeat -160px -286px;">
-													<form id="deleteBoardBookMark" method="post">
-														<input type="hidden" id="bSeq" name="bSeq"
-															value="${board.bSeq}"> <input type="hidden"
-															id="id" name="id" value="${sessionScope.user.id}">
-													</form>
-												</div>
-											</c:when>
-
-											<c:otherwise>
-												<div onclick="insertBoardBookMark(insertBookMark)"
-													class="sprite_bookmark_outline" id="bookMark"
-													data-name="bookMark"
-													style="background: url('../../imgs/background01.png') no-repeat -185px -286px;">
-													<form id="insertBookMark" method="post">
-														<input type="hidden" id="bSeq" name="bSeq"
-															value="${board.bSeq}"> <input type="hidden"
-															id="id" name="id" value="${sessionScope.user.id}">
-														<input type="hidden" id="bmTitle" name="bmTitle">
-													</form>
-												</div>
-											</c:otherwise>
-										</c:choose>
+										<img alt="" src="images/${board.upload}"
+											style="width: 300px; height: 300px;">
 									</div>
 								</div>
 							</div>
 
-							<div class="heart_count" style="font-weight: 900;padding-left: 20px;">
-								좋아요${board.count}개</div>
 
-						</div>
+							<div class="detail--right_box">
+								<div class="bottom_icons">
+									<div class="left_icons">
+										<div class="heart_btn">
+											<c:choose>
+												<c:when
+													test="${fn:contains(sessionScope.heart , board.bSeq)}">
+													<div onclick="deleteLike(deleteBoardLike${status.index})"
+														data-name="heartbeat" class="sprite_heart_icon_outline"
+														id="heart" name="39"
+														style="background: url('../../imgs/background01.png') no-repeat -26px -261px;">
+														<form id="deleteBoardLike${status.index}"
+															action="getDeleteHeart.do" method="post">
+															<input type="hidden" id="bseq" name="bseq"
+																value="${board.bSeq}"> <input type="hidden"
+																id="id" name="id" value="${sessionScope.user.id}">
+															<input type="hidden" id="profile" name="profile"
+																value="${profile}">
+														</form>
+													</div>
+												</c:when>
+
+												<c:otherwise>
+													<div onclick="like(insertBoardLike${status.index})"
+														class="sprite_heart_icon_outline" id="heart" name="39"
+														data-name="heartbeat"
+														style="background: url('../../imgs/background01.png') no-repeat -52px -261px;">
+														<form id="insertBoardLike${status.index}"
+															action="getHeart.do" method="post">
+															<input type="hidden" id="bSeq" name="bSeq"
+																value="${board.bSeq}"> <input type="hidden"
+																id="id" name="id" value="${sessionScope.user.id}">
+															<input type="hidden" id="profile" name="profile"
+																value="${profile}">
+														</form>
+													</div>
+												</c:otherwise>
+											</c:choose>
+										</div>
+
+										<div>
+											<div class="sprite_share_icon" data-name="share"></div>
+										</div>
+									</div>
 
 
-					</article>
+									<div class="right_icon">
+										<div class="sprite_bookmark_outline" data-name="book-mark">
+											<c:choose>
+												<c:when
+													test="${fn:contains(sessionScope.boardBookMarkNums, board.bSeq)}">
+													<div
+														onclick="deleteBoardBookMark(DeleteBoardBookMark${status.index})"
+														class="sprite_bookmark_outline" id="bookMark"
+														data-name="bookMark"
+														style="background: url('../../imgs/background01.png') no-repeat -160px -286px;">
+														<form id="DeleteBoardBookMark${status.index}"
+															method="post">
+															<input type="hidden" id="bSeq" name="bSeq"
+																value="${board.bSeq}"> <input type="hidden"
+																id="id" name="id" value="${sessionScope.user.id}">
+														</form>
+													</div>
+												</c:when>
+											</c:choose>
+										</div>
+									</div>
+								</div>
+
+								<div class="heart_count"
+									style="font-weight: 900; padding-left: 20px;">
+									좋아요${board.count}개</div>
+
+							</div>
+
+
+						</article>
 					</c:forEach>
 				</div>
-				
+
 				<!-- Shorts BookMarks -->
-				<div class="bookmark_contents contents_container active" >
-					<c:forEach var="shorts" items="${shortsBookMarkList}">
-						<article class="contents cont01" style="width: 400px;height: 300px">
-						<div class="img_section">
-							<div class="trans_inner">
-								<a href="getShorts?sSeq=${shorts.sSeq}"> <video
-									id="video-player" onmouseover="this.play()"
-									onmouseout="this.pause()" preload="metadata"
-									style="width: 400px">
-									<source src="shorts/${shorts.upload}#t=0.5">
-								</video>
-							</a>
-							</div>
-						</div>
-
-
-						<div class="detail--right_box">						
-							<div class="bottom_icons">
-								<div class="left_icons">
-									<div class="heart_btn">
-										<c:choose>
-											<c:when
-												test="${fn:contains(sessionScope.heart , shorts.sSeq)}">
-												<div onclick="deleteLike()"
-													data-name="heartbeat"
-													class="sprite_heart_icon_outline" id="heart" name="39"
-													style="background: url('../../imgs/background01.png') no-repeat -26px -261px;">
-													<form id="deleteLike" action="getDeleteHeart.do"
-														method="post">
-														<input type="hidden" id="bseq" name="bseq"
-															value="${shorts.sSeq}"> <input type="hidden"
-															id="id" name="id" value="${sessionScope.user.id}">
-														<input type="hidden" id="profile" name="profile"
-															value="${profile}">
-													</form>
-												</div>
-											</c:when>
-
-											<c:otherwise>
-												<div onclick="like()" class="sprite_heart_icon_outline"
-													id="heart" name="39" data-name="heartbeat"
-													style="background: url('../../imgs/background01.png') no-repeat -52px -261px;">
-													<form id="like" action="getHeart.do" method="post">
-														<input type="hidden" id="bSeq" name="bSeq"
-															value="${shorts.sSeq}"> <input type="hidden"
-															id="id" name="id" value="${sessionScope.user.id}">
-														<input type="hidden" id="profile" name="profile"
-															value="${profile}">
-													</form>
-												</div>
-											</c:otherwise>
-										</c:choose>
-									</div>
-
-									<div>
-										<div class="sprite_share_icon" data-name="share"></div>
-									</div>
-								</div>
-
-
-								<div class="right_icon">
-									<div class="sprite_bookmark_outline" data-name="book-mark">
-										<c:choose>
-											<c:when
-												test="${fn:contains(sessionScope.shortsBookMarkNum, shorts.sSeq)}">
-												<div onclick="deleteShortsBookMark(deleteShortsBoardBookMark)"
-													class="sprite_bookmark_outline" id="bookMark"
-													data-name="bookMark"
-													style="background: url('../../imgs/background01.png') no-repeat -160px -286px;">
-													<form id="deleteBoardBookMark" method="post">
-														<input type="hidden" id="sSeq" name="sSeq"
-															value="${shorts.sSeq}"> <input type="hidden"
-															id="id" name="id" value="${sessionScope.user.id}">
-													</form>
-												</div>
-											</c:when>
-
-											<c:otherwise>
-												<div onclick="insertShortsBookMark(insertShortsBookMark)"
-													class="sprite_bookmark_outline" id="bookMark"
-													data-name="bookMark"
-													style="background: url('../../imgs/background01.png') no-repeat -185px -286px;">
-													<form id="insertBookMark" method="post">
-														<input type="hidden" id="bSeq" name="bSeq"
-															value="${shorts.sSeq}"> <input type="hidden"
-															id="id" name="id" value="${sessionScope.user.id}">
-														<input type="hidden" id="bmTitle" name="bmTitle">
-													</form>
-												</div>
-											</c:otherwise>
-										</c:choose>
-									</div>
+				<div class="bookmark_contents contents_container active">
+					<c:forEach var="shorts" items="${shortsBookMarkList}"
+						varStatus="status">
+						<article class="contents cont01"
+							style="width: 400px; height: 300px">
+							<div class="img_section">
+								<div class="trans_inner">
+									<a href="getShorts?sSeq=${shorts.sSeq}"> <video
+											id="video-player" onmouseover="this.play()"
+											onmouseout="this.pause()" preload="metadata"
+											style="width: 400px">
+											<source src="shorts/${shorts.upload}#t=0.5">
+										</video>
+									</a>
 								</div>
 							</div>
 
-							<div class="heart_count" style="font-weight: 900;padding-left: 20px;">
-								좋아요${shorts.count}개</div>
 
-						</div>
+							<div class="detail--right_box">
+								<div class="bottom_icons">
+									<div class="left_icons">
+										<div class="heart_btn">
+											<c:choose>
+												<c:when
+													test="${fn:contains(sessionScope.s_heart , shorts.sSeq)}">
+													<div onclick="deleteShortsLike(deleteShortsLike${status.index})"
+														data-name="heartbeat" class="sprite_heart_icon_outline"
+														id="heart" name="39"
+														style="background: url('../../imgs/background01.png') no-repeat -26px -261px;">
+														<form id="deleteShortsLike${status.index}" method="post">
+															<input type="hidden" id="sSeq" name="sSeq"
+																value="${shorts.sSeq}"> <input type="hidden"
+																id="id" name="id" value="${sessionScope.user.id}">
+															<input type="hidden" id="profile" name="profile"
+																value="${profile}">
+														</form>
+													</div>
+												</c:when>
+
+												<c:otherwise>
+													<div onclick="likeShorts(likeShorts${status.index})"
+														class="sprite_heart_icon_outline" id="heart" name="39"
+														data-name="heartbeat"
+														style="background: url('../../imgs/background01.png') no-repeat -52px -261px;">
+														<form id="likeShorts${status.index}" action="getHeart.do"
+															method="post">
+															<input type="hidden" id="sSeq" name="sSeq"
+																value="${shorts.sSeq}"> <input type="hidden"
+																id="id" name="id" value="${sessionScope.user.id}">
+															<input type="hidden" id="profile" name="profile"
+																value="${profile}">
+														</form>
+													</div>
+												</c:otherwise>
+											</c:choose>
+										</div>
+
+										<div>
+											<div class="sprite_share_icon" data-name="share"></div>
+										</div>
+									</div>
 
 
-					</article>
+									<div class="right_icon">
+										<div class="sprite_bookmark_outline" data-name="book-mark">
+											<c:choose>
+												<c:when
+													test="${fn:contains(sessionScope.shortsBookMarkNums, shorts.sSeq)}">
+													<div
+														onclick="deleteShortsBookMark(DeleteShortsBookMark${status.index})"
+														class="sprite_bookmark_outline" id="bookMark"
+														data-name="bookMark"
+														style="background: url('../../imgs/background01.png') no-repeat -160px -286px;">
+														<form id="DeleteShortsBookMark${status.index}"
+															method="post">
+															<input type="hidden" id="sSeq" name="sSeq"
+																value="${shorts.sSeq}"> <input type="hidden"
+																id="id" name="id" value="${sessionScope.user.id}">
+														</form>
+													</div>
+												</c:when>
+											</c:choose>
+										</div>
+									</div>
+								</div>
+
+								<div class="heart_count"
+									style="font-weight: 900; padding-left: 20px;">
+									좋아요${shorts.count}개</div>
+
+							</div>
+
+
+						</article>
 					</c:forEach>
 				</div>
 			</section>
 		</div>
 	</section>
-	
+
 	<!--<script src="js/insta.js"></script>-->
 	<script src="js/profile.js"></script>
 	<script src="js/common.js"></script>
@@ -500,6 +495,62 @@
 				$("#goProfile5").attr("href", "/");
 			}
 		}
+		
+		function deleteBoardBookMark(delBookMark) {
+			if (confirm("북마크를 삭제하시겠습니까?")) {
+				$(delBookMark).attr("action",
+						"deleteBoardBookMark").submit();
+			}
+		}
+
+		function insertBoardBookMark(inBookMark) {
+			var bmTitle = prompt("북마크 제목", "");
+			if (bmTitle === null) {
+				// User clicked "Cancel" in the prompt dialog
+				return;
+			} else if (bmTitle === "") {
+				alert("북마크 제목을 입력해 주십시오.");
+			} else {
+				$("#bmTitle").val(bmTitle);
+				$(inBookMark).attr("action", "insertBoardBookMark").submit();
+			}
+		}
+		
+		function deleteShortsBookMark(delBookMark) {
+			if (confirm("북마크를 삭제하시겠습니까?")) {
+				$(delBookMark).attr("action",
+						"deleteShortsBookMark").submit();
+			}
+		}
+
+		function insertShortsBookMark(inBookMark) {
+			var bmTitle = prompt("북마크 제목", "");
+			if (bmTitle === null) {
+				// User clicked "Cancel" in the prompt dialog
+				return;
+			} else if (bmTitle === "") {
+				alert("북마크 제목을 입력해 주십시오.");
+			} else {
+				$("#bmTitle").val(bmTitle);
+				$(inBookMark).attr("action", "insertShortsBookMark").submit();
+			}
+		}
+		
+		function deleteLike(form_id) {
+			   $(form_id).attr("action","deleteHeart.do").submit();
+			   
+			}
+			function like(form_id) {
+			   $(form_id).attr("action","heart.do").submit();   
+			}
+			
+			function deleteShortsLike(form_id) {
+				   $(form_id).attr("action","deleteHeart_s.do").submit();
+				   
+				}
+			function likeShorts(form_id) {
+				   $(form_id).attr("action","heart_s.do").submit();   
+				}
 	</script>
 </body>
 </html>

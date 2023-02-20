@@ -87,4 +87,8 @@ public class BookMarkServiceImpl implements BookMarkService {
 
 		return bmDAO.getShortsBookMarkTitle(vo);
 	}
+	@Override
+	public List<BookMarkVO> getMyBoardList(BookMarkVO vo) {
+		return bmDAO.getMyBoardList(vo);
+	}
 }

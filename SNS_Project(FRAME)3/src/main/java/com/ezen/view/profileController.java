@@ -66,22 +66,27 @@ public class profileController {
 		
 		//하트 관련
 		heart.setId(member.getId());
-		// List<Integer> likeBoard = heartService.boardLike(heart);
-		// List<Integer> likeShorts = heartService.shortsLike(heart);
+		List<Integer> Shorts = heartService.shortsLike(heart);
+		
+		
 		
 		
 		// 북마크 관련
 		bookMark.setId(member.getId());
 		System.out.println("BookMarkController: getBooardList() vo=" + bookMark);
-
+		
+		List<BookMarkVO> myBoardList = bookMarkService.getMyBoardList(bookMark);
 		List<BookMarkVO> bookMarkList = bookMarkService.getBookMarkList(bookMark);
 		List<Integer> boardBookMarkNums = bookMarkService.getBoardBookMarkNums(bookMark);
 		List<Integer> shortsBookMarkNums = bookMarkService.getShortsBookMarkNums(bookMark);
 		List<BookMarkVO> boardBookMarkList = bookMarkService.getBoardBookMarkList(bookMark);
 		List<BookMarkVO> shortsBookMarkList = bookMarkService.getShortsBookMarkList(bookMark);
-
+		System.out.println(shortsBookMarkList);
+		
+		
 		session.setAttribute("boardBookMarkNums", boardBookMarkNums);
 		session.setAttribute("shortsBookMarkNums", shortsBookMarkNums);
+		model.addAttribute("myBoardList", myBoardList);
 		model.addAttribute("bookMarkList", bookMarkList);
 		model.addAttribute("boardBookMarkList", boardBookMarkList);
 		model.addAttribute("shortsBookMarkList", shortsBookMarkList);

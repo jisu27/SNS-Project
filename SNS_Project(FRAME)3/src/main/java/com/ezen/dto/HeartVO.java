@@ -59,8 +59,8 @@ public class HeartVO {
 
 	@Override
 	public String toString() {
-		return "HeartVO [hSeq=" + hSeq + ", bSeq=" + bSeq + ", cseq=" + cseq + ", id=" + id + ", use_like=" + use_like
-				+ "]";
+		return "HeartVO [hSeq=" + hSeq + ", bSeq=" + bSeq + ", cseq=" + cseq + ", sSeq=" + sSeq + ", id=" + id
+				+ ", use_like=" + use_like + "]";
 	}
 
 	public int getCseq() {

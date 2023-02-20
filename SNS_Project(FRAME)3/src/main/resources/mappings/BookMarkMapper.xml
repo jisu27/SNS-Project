@@ -66,6 +66,9 @@
 	Select m.bmTitle From shorts s, bookMark m WHERE m.id=#{id} AND s.sSeq = m.sSeq
 </select>
 
+<select id="getMyBoardList" resultType="bookMark">
+	Select * From board Where id=#{id}
+</select>
 
 </mapper>
 

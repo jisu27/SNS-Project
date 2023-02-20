@@ -32,4 +32,6 @@ public interface BookMarkService {
 	String getBoardBookMarkTitle(BookMarkVO vo);
 	
 	String getShortsBookMarkTitle(BookMarkVO vo);
+	
+	List<BookMarkVO> getMyBoardList(BookMarkVO vo);
 }

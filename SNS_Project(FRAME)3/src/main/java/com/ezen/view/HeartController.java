@@ -1,14 +1,13 @@
 package com.ezen.view;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.ezen.dto.BoardVO;
@@ -37,7 +36,7 @@ public class HeartController {
 	private ShortsService shortsService;
 
 	@PostMapping("heart.do")
-	public String insertLike(HeartVO vo, Model model, HttpSession session) {
+	public String insertLike(HeartVO vo, Model model, HttpSession session, HttpServletRequest request) {
 
 		System.out.println("heartvo���엯�쓽 踰덊샇 !! =============" + vo);
 
@@ -52,11 +51,11 @@ public class HeartController {
 		List<Integer> heart = heartService.boardLike(vo);
 		session.setAttribute("heart", heart);
 
-		return "redirect:home.do";
+		return "redirect:" + (String) request.getHeader("Referer");
 	}
 
 	@PostMapping("heart_c.do")
-	public String insertLike_c(HeartVO vo, Model model, HttpSession session) {
+	public String insertLike_c(HeartVO vo, Model model, HttpSession session, HttpServletRequest request) {
 
 		vo.setUse_like("y");
 		heartService.insertLike(vo);
@@ -72,10 +71,10 @@ public class HeartController {
 
 		System.out.println("heartvo���엯�쓽 踰덊샇 !! =============" + vo);
 
-		return "redirect:home.do";
+		return "redirect:" + (String) request.getHeader("Referer");
 	}
 	@PostMapping("heart_s.do")
-	public String insertLike_s(HeartVO vo, Model model, HttpSession session) {
+	public String insertLike_s(HeartVO vo, Model model, HttpSession session, HttpServletRequest request) {
 		
 		vo.setUse_like("y");
 		heartService.insertLike(vo);
@@ -89,7 +88,7 @@ public class HeartController {
 		session.setAttribute("s_heart", s_heart);
 		
 		
-		return "redirect:getShorts?sSeq="+vo.getsSeq();
+		return "redirect:" + (String) request.getHeader("Referer");
 	}
 
 	@PostMapping("getHeart.do")
@@ -150,7 +149,7 @@ public class HeartController {
 	}
 
 	@PostMapping("deleteHeart.do")
-	public String deleteLike(HeartVO vo, HttpSession session) {
+	public String deleteLike(HeartVO vo, HttpSession session, HttpServletRequest request) {
 
 		System.out.println("heartvo���엯�쓽 踰덊샇 !! =============" + vo);
 		heartService.deleteLike(vo);
@@ -163,7 +162,7 @@ public class HeartController {
 		List<Integer> heart = heartService.boardLike(vo);
 		session.setAttribute("heart", heart);
 
-		return "redirect:home.do";
+		return "redirect:" + (String) request.getHeader("Referer");
 	}
 
 	@PostMapping("deleteHeart_c.do")
@@ -183,9 +182,10 @@ public class HeartController {
 		return "redirect:home.do";
 	}
 	@PostMapping("deleteHeart_s.do")
-	public String deleteLike_s(HeartVO vo, HttpSession session) {
+	public String deleteLike_s(HeartVO vo, HttpSession session, HttpServletRequest request) {
 		
 		heartService.deleteLike_s(vo);
+		System.out.println(vo);
 		
 		ShortsVO svo = new ShortsVO();
 		svo.setsSeq(vo.getsSeq());
@@ -195,7 +195,7 @@ public class HeartController {
 		List<Integer> s_heart = heartService.shortsLike(vo);
 		session.setAttribute("s_heart", s_heart);
 		
-		return "redirect:getShorts?sSeq="+vo.getsSeq();
+		return "redirect:" + (String) request.getHeader("Referer");
 	}
 
 	@PostMapping("getDeleteHeart.do")
@@ -235,7 +235,7 @@ public class HeartController {
 	}
 	
 	@PostMapping("getDeleteHeart_s.do")
-	public String getDeleteLike_(MemberVO mvo, HeartVO vo, HttpSession session) {
+	public String getDeleteLike_(MemberVO mvo, HeartVO vo, HttpSession session, HttpServletRequest request) {
 		
 		heartService.deleteLike_c(vo);
 		
@@ -249,7 +249,7 @@ public class HeartController {
 		List<Integer> c_heart = heartService.commentLike(vo);
 		session.setAttribute("c_heart", c_heart);
 		
-		return "redirect:getShorts?sSeq="+vo.getsSeq();
+		return "redirect:" + (String) request.getHeader("Referer");
 	}
 
 	/* @GetMapping("getLikeList.do")
