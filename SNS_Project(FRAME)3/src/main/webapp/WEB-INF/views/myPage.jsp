@@ -284,7 +284,7 @@
 
 				<!-- BookMarks -->
 				<!-- Board BookMarks -->
-				<div class="bookmark_contents contents_container active">
+				<div class="bookmark_contents contents_container">
 					<c:forEach var="board" items="${boardBookMarkList}"
 						varStatus="status">
 						<article class="contents cont01"
@@ -380,7 +380,7 @@
 				</div>
 
 				<!-- Shorts BookMarks -->
-				<div class="bookmark_contents contents_container active">
+				<div class="bookmark_contents contents_container">
 					<c:forEach var="shorts" items="${shortsBookMarkList}"
 						varStatus="status">
 						<article class="contents cont01"
