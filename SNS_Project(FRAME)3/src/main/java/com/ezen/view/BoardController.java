@@ -228,13 +228,14 @@ public class BoardController {
 			throws IllegalStateException, IOException {
 
 		String fileName = "";
-		System.out.println("UpdateBoard()=vo" + vo);
+
 		if (!vo.getUploadfile().isEmpty()) {
 			fileName = vo.getUploadfile().getOriginalFilename();
 
-			System.out.println("filename=" + fileName);
+			
 
 			String realPath = session.getServletContext().getRealPath("/images/");
+			
 			vo.setUpload(fileName);
 			vo.getUploadfile().transferTo(new File(realPath + fileName));
 		} else {

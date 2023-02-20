@@ -46,7 +46,7 @@
         <section class="h_inner">
 
             <h1 class="logo">
-                <a href="home.do">
+                <a href="/">
                     <div class="sprite_insta_icon"></div>
                     <div>
                         <div class="sprite_write_logo"></div>
@@ -86,6 +86,7 @@
                 </div>
                 <div class="preview">
                     <div class="upload">
+                    
                         <img src="images/${board.upload}" style="width: 300px; height: 300px;">
                     </div>
                 </div>
@@ -114,7 +115,31 @@
 </section>
 
 <script>
+var fileInput = document.querySelector("#id_photo"), button = document
+.querySelector(".input-file-trigger"), the_return = document
+.querySelector(".file-return");
 
+// Show image
+fileInput.addEventListener('change', handleImage, false);
+var canvas = document.getElementById('imageCanvas');
+var ctx = canvas.getContext('2d');
+
+function handleImage(e) {
+var reader = new FileReader();
+reader.onload = function(event) {
+var img = new Image();
+// var imgWidth =
+img.onload = function() {
+	canvas.width = 300;
+	canvas.height = 300;
+	ctx.drawImage(img, 0, 0, 300, 300);
+};
+img.src = event.target.result;
+// img.width = img.width*0.5
+// canvas.height = img.height;
+};
+reader.readAsDataURL(e.target.files[0]);
+}
 </script>
 </body>
 </html>
