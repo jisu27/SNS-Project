@@ -286,12 +286,15 @@ public class BoardController {
 		System.out.println("cvo :" + cvo);
 
 		// 북마크 관련
+		if (session.getAttribute("user")!=null) {
+			
 		BookMarkVO bookMark = new BookMarkVO();
 		MemberVO user = (MemberVO) session.getAttribute("user");
 		bookMark.setId(user.getId());
 		List<Integer> boardBookMarkNums = bookMarkService.getBoardBookMarkNums(bookMark);
 
 		session.setAttribute("boardBookMarkNums", boardBookMarkNums);
+		}
 
 		return "getBoard";
 	}

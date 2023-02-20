@@ -268,13 +268,16 @@ public class HeartController {
 
 			bvo.setbSeq(vo);
 			BoardVO board = boardService.myBoard(bvo);
-			boardList.add(board);
-			
-			MemberVO member = new MemberVO();
-			member.setId(board.getId());
-			MemberVO member2 = memberService.MemberCheck(member);
-			
-			memberList.add(member2);
+			if (board!=null) {
+				
+				boardList.add(board);
+				
+				MemberVO member = new MemberVO();
+				member.setId(board.getId());
+				MemberVO member2 = memberService.MemberCheck(member);
+				
+				memberList.add(member2);
+			}
 		}
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("memberList", memberList);
