@@ -73,7 +73,6 @@ public class profileController {
 		
 		// ºÏ¸¶Å© °ü·Ã
 		bookMark.setId(member.getId());
-		System.out.println("BookMarkController: getBooardList() vo=" + bookMark);
 		
 		List<BookMarkVO> myBoardList = bookMarkService.getMyBoardList(bookMark);
 		List<BookMarkVO> bookMarkList = bookMarkService.getBookMarkList(bookMark);

@@ -285,17 +285,18 @@
 
 				<!-- BookMarks -->
 				<!-- Board BookMarks -->
-				<div class="bookmark_contents contents_container active">
-					<c:forEach var="board" items="${boardBookMarkList}"
+				<div class="bookmark_contents contents_container">
+					<c:forEach var="boardBm" items="${boardBookMarkList}"
 						varStatus="status">
 						<article class="contents cont01"
 							style="width: 300px; height: 400px">
 							<div class="img_section">
 								<div class="trans_inner">
 									<div>
-										<img alt="" src="images/${board.upload}"
+										<img alt="" src="images/${boardBm.upload}"
 											style="width: 300px; height: 300px;">
 									</div>
+									<div>${boardBm.bmTitle}</div>
 								</div>
 							</div>
 
@@ -306,7 +307,7 @@
 										<div class="heart_btn">
 											<c:choose>
 												<c:when
-													test="${fn:contains(sessionScope.heart , board.bSeq)}">
+													test="${fn:contains(sessionScope.heart , boardBm.bSeq)}">
 													<div onclick="deleteLike(deleteBoardLike${status.index})"
 														data-name="heartbeat" class="sprite_heart_icon_outline"
 														id="heart" name="39"
@@ -314,7 +315,7 @@
 														<form id="deleteBoardLike${status.index}"
 															action="getDeleteHeart.do" method="post">
 															<input type="hidden" id="bseq" name="bseq"
-																value="${board.bSeq}"> <input type="hidden"
+																value="${boardBm.bSeq}"> <input type="hidden"
 																id="id" name="id" value="${sessionScope.user.id}">
 															<input type="hidden" id="profile" name="profile"
 																value="${profile}">
@@ -330,7 +331,7 @@
 														<form id="insertBoardLike${status.index}"
 															action="getHeart.do" method="post">
 															<input type="hidden" id="bSeq" name="bSeq"
-																value="${board.bSeq}"> <input type="hidden"
+																value="${boardBm.bSeq}"> <input type="hidden"
 																id="id" name="id" value="${sessionScope.user.id}">
 															<input type="hidden" id="profile" name="profile"
 																value="${profile}">
@@ -350,7 +351,7 @@
 										<div class="sprite_bookmark_outline" data-name="book-mark">
 											<c:choose>
 												<c:when
-													test="${fn:contains(sessionScope.boardBookMarkNums, board.bSeq)}">
+													test="${fn:contains(sessionScope.boardBookMarkNums, boardBm.bSeq)}">
 													<div
 														onclick="deleteBoardBookMark(DeleteBoardBookMark${status.index})"
 														class="sprite_bookmark_outline" id="bookMark"
@@ -359,7 +360,7 @@
 														<form id="DeleteBoardBookMark${status.index}"
 															method="post">
 															<input type="hidden" id="bSeq" name="bSeq"
-																value="${board.bSeq}"> <input type="hidden"
+																value="${boardBm.bSeq}"> <input type="hidden"
 																id="id" name="id" value="${sessionScope.user.id}">
 														</form>
 													</div>
@@ -381,7 +382,7 @@
 				</div>
 
 				<!-- Shorts BookMarks -->
-				<div class="bookmark_contents contents_container active">
+				<div class="bookmark_contents contents_container">
 					<c:forEach var="shorts" items="${shortsBookMarkList}"
 						varStatus="status">
 						<article class="contents cont01"
@@ -395,6 +396,7 @@
 											<source src="shorts/${shorts.upload}#t=0.5">
 										</video>
 									</a>
+									<div>${shorts.bmTitle}</div>
 								</div>
 							</div>
 

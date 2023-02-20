@@ -125,29 +125,40 @@
 								</c:if>
 
 							</header>
-
-							<div class="img_section">
-								<div class="trans_inner">
-									<!-- 이미지 upload가 있는지 없는지 -->
-									<c:if test="${board.upload=='null'}">
-										<br>
-										<div class="con">
-											<pre>${board.content}</pre>
-										</div>
-									</c:if>
-									<c:if test="${board.upload!='null'}">
+							<!-- 이미지 upload가 있는지 없는지 -->
+							<c:if test="${board.upload=='no-background.png'}">
+								<div class="img_section"
+									style="max-width: 100%; height: 100px; max-height: 600px;">
+									<div class="trans_inner">
 										<a
 											href="getBoard.do?bSeq=${board.bSeq}&profile=${memberList[status.index].profile}&time=${time[status.index]}"><img
-											src="images/${board.upload}" alt="${board.id}의 이미지"></a>
-										<br>
+											src="images/${board.upload}" alt="${board.id}의 이미지"></a> <br>
 										<div class="con">
 											<pre>${board.content}</pre>
 										</div>
-									</c:if>
-
-
+									</div>
+									<div class="trans_inner">
+										<a
+											href="getBoard.do?bSeq=${board.bSeq}&profile=${memberList[status.index].profile}&time=${time[status.index]}"><img
+											src="images/${board.upload}" alt="${board.id}의 이미지"></a> <br>
+										<div class="con">
+											<pre>${board.content}</pre>
+										</div>
+									</div>
 								</div>
-							</div>
+							</c:if>
+							<c:if test="${board.upload!='no-background.png'}">
+								<div class="img_section">
+									<div class="trans_inner">
+										<a
+											href="getBoard.do?bSeq=${board.bSeq}&profile=${memberList[status.index].profile}&time=${time[status.index]}"><img
+											src="images/${board.upload}" alt="${board.id}의 이미지"></a> <br>
+										<div class="con">
+											<pre>${board.content}</pre>
+										</div>
+									</div>
+								</div>
+							</c:if>
 
 							<div class="bottom_icons">
 								<div class="left_icons">
