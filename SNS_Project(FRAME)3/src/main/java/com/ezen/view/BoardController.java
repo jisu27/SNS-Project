@@ -113,7 +113,7 @@ public class BoardController {
 			if (i == 4 * n && n < getadverList.size()) {
 				newBoardList.add(i, getadverList.get(n));
 				n++;
-			} else if (i == newBoardList.size() - 1 && n <= getadverList.size()-1) {
+			} else if (i == newBoardList.size() - 1 && n <= getadverList.size()-1) { // 마지막까지 출력되지 않은 광고가 있을 경우
 				newBoardList.add(i, getadverList.get(n));
 				i++; // 무한루프 방지
 			}
