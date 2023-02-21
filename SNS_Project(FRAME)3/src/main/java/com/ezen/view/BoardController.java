@@ -6,7 +6,9 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 import javax.servlet.http.HttpSession;
 
@@ -106,19 +108,27 @@ public class BoardController {
 		List<BoardVO> getadverList = boardService.getAdverList(bVo);
 
 		newBoardList.addAll(getboardList);
-		int i = 0;
 
-		for (BoardVO vo : getadverList) {
-
-			newBoardList.add(i, vo);
-
-			if (newBoardList.size() >= i + 4) {
-				i = i + 3;
-			} else {
-
-				i++;
+		int n = 0;
+		for (int i = 0; i < newBoardList.size(); i++) {
+			if (i == 4 * n && n < getadverList.size()) {
+				newBoardList.add(i, getadverList.get(n));
+				n++;
+			} else if (i == newBoardList.size()) {
+				for (BoardVO vo : getadverList) {
+					newBoardList.add(vo);
+				} i = newBoardList.size() + 1; // 루프를 깨기위함
 			}
 		}
+		/*
+		 * for (BoardVO vo : getadverList) {
+		 * 
+		 * newBoardList.add(i, vo);
+		 * 
+		 * if (newBoardList.size() >= i + 4) { i = i + 3; } else {
+		 * 
+		 * i++; } }
+		 */
 
 		List<MemberVO> memberList = new ArrayList<>();
 		List<CommentVO> commentList = new ArrayList<CommentVO>();
