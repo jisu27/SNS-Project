@@ -133,7 +133,7 @@
 							<!-- 이미지 upload가 있는지 없는지 -->
 							<c:if test="${board.upload=='no-background.png'}">
 								<div class="img_section"
-									style="max-width: 100%; height: 150px; max-height: 600px; position: relative;">
+									style="max-width: 100%; height: 100px; max-height: 600px; position: relative;">
 									<div class="trans_inner"
 										style="max-width: 100%; height: 150px; max-height: 600px;">
 										<a href="getBoard.do?bSeq=${board.bSeq}&profile=${memberList[status.index].profile}&time=${time[status.index]}"><img

@@ -110,7 +110,7 @@ public class BoardController {
 
 		int n = 0;
 		for (int i = 0; i < newBoardList.size(); i++) {
-			if (i == 4 * n && n < getadverList.size()) {
+			if (i == 3 * n && n < getadverList.size()) {
 				newBoardList.add(i, getadverList.get(n));
 				n++;
 			} else if (i == newBoardList.size() - 1 && n <= getadverList.size()-1) { // 마지막까지 출력되지 않은 광고가 있을 경우
@@ -127,7 +127,7 @@ public class BoardController {
 		 * if (newBoardList.size() >= i + 4) { i = i + 3; } else {
 		 * 
 		 * i++; 
-		 * 게시글의 사이즈 6,7 9,10등 4로 나누어떨어지지 않을때, 광고중 일부는 게시글에 포함되지 않는다. 
+		 * 게시글의 사이즈 ex)6,7 9,10등 4로 나누어떨어지지 않을때, 광고중 일부는 게시글에 포함되지 않는다. 
 		 */ 
 
 		List<MemberVO> memberList = new ArrayList<>();

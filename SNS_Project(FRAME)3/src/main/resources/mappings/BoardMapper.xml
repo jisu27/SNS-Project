@@ -52,7 +52,7 @@
   <![CDATA[
      SELECT * FROM board
      WHERE pay = 2 AND content LIKE '%'||#{keyWord}||'%'
-     ORDER BY INDATE DESC
+     ORDER BY dbms_random.value
   ]]>
 	</select>
 	<delete id="deleteBoard">
