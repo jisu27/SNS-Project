@@ -53,6 +53,12 @@
      SELECT * FROM board
      WHERE pay = 2 AND content LIKE '%'||#{keyWord}||'%'
      ORDER BY dbms_random.value
+  ]]></select>
+  	<select id="getAdverListX" resultType="board">
+  <![CDATA[
+     SELECT * FROM board
+     WHERE pay = 2 AND content LIKE '%'||#{keyWord}||'%'
+     ORDER BY INDATE DESC
   ]]>
 	</select>
 	<delete id="deleteBoard">

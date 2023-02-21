@@ -36,29 +36,37 @@ public class BoardDAO {
 	public void updateCount(BoardVO vo) {
 		mybatis.update("boardMapper.updateCount", vo);
 	}
-	// get 게시물
+
+	// get 寃뚯떆臾�
 	public List<BoardVO> getBoardList(BoardVO vo) {
 		return mybatis.selectList("boardMapper.getBoardList", vo);
 	}
 
-	// get 愿묎퀬
+	// get �꽴臾롰��
 	public List<BoardVO> getAdverList(BoardVO vo) {
 		return mybatis.selectList("boardMapper.getAdverList", vo);
 	}
 
-	// �궘�젣
+	public List<BoardVO> getAdverListX(BoardVO vo) {
+		return mybatis.selectList("boardMapper.getAdverListX", vo);
+	}
+
+	// 占쎄텣占쎌젫
 	public void deleteBoard(BoardVO vo) {
 
 		mybatis.delete("boardMapper.deleteBoard", vo);
 	}
-	// 게시물 갯수
+
+	// 寃뚯떆臾� 媛��닔
 	public int boardCount(BoardVO vo) {
 		return mybatis.selectOne("boardMapper.boardCount", vo);
 	}
+
 	public void updatePay(int bSeq) {
-		mybatis.selectOne("boardMapper.updatePay",bSeq);
+		mybatis.selectOne("boardMapper.updatePay", bSeq);
 	}
+
 	public void updateManusPay(int bSeq) {
-		mybatis.selectOne("boardMapper.update-Pay",bSeq);
+		mybatis.selectOne("boardMapper.update-Pay", bSeq);
 	}
 }

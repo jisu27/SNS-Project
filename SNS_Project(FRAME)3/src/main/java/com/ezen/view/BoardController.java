@@ -53,15 +53,21 @@ public class BoardController {
 	@Autowired
 	private BookMarkService bookMarkService;
 
+	int x = 0;
+	List<BoardVO> timeBoardList;
+
 	// ##############################################################################################################--home
 	@RequestMapping("/")
 	public String goLogin() {
-
+		x = 0;
+		
+		System.out.println(x);
 		return "index";
 	}
 
 	@RequestMapping(value = "/home.do")
 	public String BoardList(BoardVO bVo, CommentVO cVo, Model model, HttpSession session, ShortsVO sVo) {
+		if (x >= 10) x = x - 10; 
 
 		FollowVO fvo = new FollowVO();
 		List<MemberVO> recoMemberList = new ArrayList<>();
@@ -102,33 +108,42 @@ public class BoardController {
 		}
 
 		List<BoardVO> newBoardList = new ArrayList<>();
-
 		List<BoardVO> getboardList = boardService.getBoardList(bVo);
-		List<BoardVO> getadverList = boardService.getAdverList(bVo);
+		List<BoardVO> randomList = boardService.getAdverList(bVo);
+		List<BoardVO> pastList = new ArrayList<>();
+		if (x == 0) {
+			List<BoardVO> getadverList = randomList;
 
-		newBoardList.addAll(getboardList);
+			newBoardList.addAll(getboardList);
 
-		int n = 0;
-		for (int i = 0; i < newBoardList.size(); i++) {
-			if (i == 3 * n && n < getadverList.size()) {
-				newBoardList.add(i, getadverList.get(n));
-				n++;
-			} else if (i == newBoardList.size() - 1 && n <= getadverList.size()-1) { // 마지막까지 출력되지 않은 광고가 있을 경우
-				newBoardList.add(i, getadverList.get(n));
-				i++; // 무한루프 방지
+			int n = 0;
+
+			for (int i = 0; i < newBoardList.size(); i++) {
+				if (i == 3 * n && n < getadverList.size()) {
+					newBoardList.add(i, getadverList.get(n));
+					n++;
+				} else if (i == newBoardList.size() - 1 && n <= getadverList.size() - 1) { // 마지막까지 출력되지 않은 광고가 있을 경우
+					newBoardList.add(i, getadverList.get(n));
+					i++; // 무한루프 방지
+				}
+				
 			}
+			model.addAttribute("newBoardList", newBoardList);
+			timeBoardList = newBoardList; // 불러온 보드리스트를 다음에 다시불러오도록 저장한다.
+		} else {
+			pastList = timeBoardList;
+			model.addAttribute("newBoardList", pastList);
 		}
 
-		/* 원본
-		 * for (BoardVO vo : getadverList) {
+		/*
+		 * 원본 for (BoardVO vo : getadverList) {
 		 * 
 		 * newBoardList.add(i, vo);
 		 * 
 		 * if (newBoardList.size() >= i + 4) { i = i + 3; } else {
 		 * 
-		 * i++; 
-		 * 게시글의 사이즈 ex)6,7 9,10등 4로 나누어떨어지지 않을때, 광고중 일부는 게시글에 포함되지 않는다. 
-		 */ 
+		 * i++;
+		 */
 
 		List<MemberVO> memberList = new ArrayList<>();
 		List<CommentVO> commentList = new ArrayList<CommentVO>();
@@ -138,7 +153,9 @@ public class BoardController {
 
 		List<ShortsVO> shortsList = shortsService.getShortsList(sVo);
 		List<MemberVO> shortsMemberList = new ArrayList<>();
-
+		
+		// 첫 로드
+		if (x == 0) { x++; // x는 처음에 게시글을 불러왔는지, 나중에 불러왔는지 구분하는데 사용한다.
 		for (BoardVO vo : newBoardList) {
 
 			LocalDate boarDate = vo.getInDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -171,9 +188,45 @@ public class BoardController {
 			List<CommentVO> cvo = commentService.getCommentList(cVo);
 			commentList.addAll(cvo);
 		}
-		System.out.println("commentList==================" + commentList);
+		// 이외의 로드
+		} else {
+			for (BoardVO vo : pastList) {
 
-		for (ShortsVO vo : shortsList) {
+				LocalDate boarDate = vo.getInDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+				Period btn = Period.between(boarDate, LocalDate.now());
+				String btnTime;
+
+				if (btn.getYears() != 0) {
+					btnTime = btn.getYears() + "년" + btn.getMonths() + "월" + btn.getDays() + "일 전";
+				} else if (btn.getMonths() != 0) {
+					btnTime = btn.getMonths() + "월" + btn.getDays() + "일 전";
+				} else {
+					btnTime = btn.getDays() + "일 전";
+				}
+
+				time.add(btnTime);
+
+				MemberVO mvo = new MemberVO();
+				mvo.setId(vo.getId());
+
+				MemberVO v1 = memberService.MemberCheck(mvo);
+				memberList.add(v1);
+
+				HeartVO hvo = new HeartVO();
+				hvo.setBseq(vo.getbSeq());
+
+				int like = heartService.likeCount(hvo);
+				vo.setCount(like);
+
+				cVo.setBseq(vo.getbSeq());
+				List<CommentVO> cvo = commentService.getCommentList(cVo);
+				commentList.addAll(cvo);
+			}
+		}
+
+		for (
+
+		ShortsVO vo : shortsList) {
 			LocalDate shortsDate = vo.getInDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 			Period stn = Period.between(shortsDate, LocalDate.now());
 			String stnTime;
@@ -194,7 +247,6 @@ public class BoardController {
 			stime.add(stnTime);
 		}
 
-		model.addAttribute("newBoardList", newBoardList);
 		model.addAttribute("time", time);
 		model.addAttribute("stime", stime);
 		model.addAttribute("memberList", memberList);
@@ -212,6 +264,8 @@ public class BoardController {
 
 			session.setAttribute("boardBookMarkNums", boardBookMarkNums);
 		}
+		System.out.println(x);
+		
 
 		return "home";
 	}
@@ -242,10 +296,8 @@ public class BoardController {
 		if (!vo.getUploadfile().isEmpty()) {
 			fileName = vo.getUploadfile().getOriginalFilename();
 
-			
-
 			String realPath = session.getServletContext().getRealPath("/images/");
-			
+
 			vo.setUpload(fileName);
 			vo.getUploadfile().transferTo(new File(realPath + fileName));
 		} else {
@@ -306,7 +358,7 @@ public class BoardController {
 
 			session.setAttribute("boardBookMarkNums", boardBookMarkNums);
 		}
-
+		x = 0;
 		return "getBoard";
 	}
 
