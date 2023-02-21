@@ -43,8 +43,10 @@ public class BookMarkController {
 	
 	@PostMapping(value= "insertBoardBookMark")
 	public String insertBoardBookMark(BookMarkVO vo, BoardVO bvo, Model model, HttpServletRequest request) {
+		System.out.println(vo);
 		vo.setbSeq(bvo.getbSeq());
 		bookMarkService.insertBookMark(vo);
+		
 		
 		return "redirect:" + (String) request.getHeader("Referer");
 	}

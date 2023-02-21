@@ -6,9 +6,8 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
+import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
@@ -114,21 +113,22 @@ public class BoardController {
 			if (i == 4 * n && n < getadverList.size()) {
 				newBoardList.add(i, getadverList.get(n));
 				n++;
-			} else if (i == newBoardList.size()) {
-				for (BoardVO vo : getadverList) {
-					newBoardList.add(vo);
-				} i = newBoardList.size() + 1; // 루프를 깨기위함
+			} else if (i == newBoardList.size() - 1 && n <= getadverList.size()-1) {
+				newBoardList.add(i, getadverList.get(n));
+				i++; // 무한루프 방지
 			}
 		}
-		/*
+
+		/* 원본
 		 * for (BoardVO vo : getadverList) {
 		 * 
 		 * newBoardList.add(i, vo);
 		 * 
 		 * if (newBoardList.size() >= i + 4) { i = i + 3; } else {
 		 * 
-		 * i++; } }
-		 */
+		 * i++; 
+		 * 게시글의 사이즈 6,7 9,10등 4로 나누어떨어지지 않을때, 광고중 일부는 게시글에 포함되지 않는다. 
+		 */ 
 
 		List<MemberVO> memberList = new ArrayList<>();
 		List<CommentVO> commentList = new ArrayList<CommentVO>();
@@ -204,13 +204,13 @@ public class BoardController {
 		model.addAttribute("getshortsList", shortsMemberList);
 
 		// BookMark 관련
-		if (session.getAttribute("user")!=null) {
-			
-		BookMarkVO bookMark = new BookMarkVO();
-		bookMark.setId(mvo2.getId());
-		List<Integer> boardBookMarkNums = bookMarkService.getBoardBookMarkNums(bookMark);
+		if (session.getAttribute("user") != null) {
 
-		session.setAttribute("boardBookMarkNums", boardBookMarkNums);
+			BookMarkVO bookMark = new BookMarkVO();
+			bookMark.setId(mvo2.getId());
+			List<Integer> boardBookMarkNums = bookMarkService.getBoardBookMarkNums(bookMark);
+
+			session.setAttribute("boardBookMarkNums", boardBookMarkNums);
 		}
 
 		return "home";
@@ -296,14 +296,14 @@ public class BoardController {
 		System.out.println("cvo :" + cvo);
 
 		// 북마크 관련
-		if (session.getAttribute("user")!=null) {
-			
-		BookMarkVO bookMark = new BookMarkVO();
-		MemberVO user = (MemberVO) session.getAttribute("user");
-		bookMark.setId(user.getId());
-		List<Integer> boardBookMarkNums = bookMarkService.getBoardBookMarkNums(bookMark);
+		if (session.getAttribute("user") != null) {
 
-		session.setAttribute("boardBookMarkNums", boardBookMarkNums);
+			BookMarkVO bookMark = new BookMarkVO();
+			MemberVO user = (MemberVO) session.getAttribute("user");
+			bookMark.setId(user.getId());
+			List<Integer> boardBookMarkNums = bookMarkService.getBoardBookMarkNums(bookMark);
+
+			session.setAttribute("boardBookMarkNums", boardBookMarkNums);
 		}
 
 		return "getBoard";

@@ -304,10 +304,9 @@
 											</div>
 										</c:if>
 										</a>
-									
-									<div>${boardBm.bmTitle}</div>
 								</div>
-							</div>
+							</div><br>
+							<div align="center">${boardBm.bmTitle}</div>
 
 
 							<div class="detail--right_box">
