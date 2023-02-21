@@ -289,6 +289,7 @@
 
 				<!-- Board BookMarks -->
 				<div class="bookmark_contents contents_container">
+
 					<c:forEach var="boardBm" items="${boardBookMarkList}"
 						varStatus="status">
 						<article class="contents cont01"

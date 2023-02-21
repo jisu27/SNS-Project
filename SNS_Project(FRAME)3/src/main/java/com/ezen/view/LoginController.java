@@ -216,15 +216,17 @@ public class LoginController {
 				throws IllegalStateException, IOException {
 
 			String fileName = "";
-
 			if (!vo.getFile().isEmpty()) {
 
 				fileName = vo.getFile().getOriginalFilename();
+				
+				
 				String realPath = session.getServletContext()
 						.getRealPath("/profile/");
-				vo.getFile().transferTo(new File(fileName + realPath));
-
+				
+				vo.getFile().transferTo(new File(realPath + fileName));
 				vo.setProfile(vo.getFile().getOriginalFilename());
+
 			} else {
 				vo.setProfile("no-image.png");
 			}

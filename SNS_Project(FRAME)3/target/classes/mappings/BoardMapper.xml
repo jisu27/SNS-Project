@@ -5,20 +5,23 @@
 	<select id="boardList" resultType="board">
 		SELECT *
 		FROM board
-		ORDER BY INDATE DESC
+		ORDER BY
+		INDATE DESC
 	</select>
 
 	<select id="myBoard" resultType="board">
 		SELECT *
 		FROM board
-		WHERE bSeq=#{bSeq}
+		WHERE
+		bSeq=#{bSeq}
 		ORDER BY INDATE DESC
 	</select>
 
 	<!-- #################################################################################################################### -->
 	<select id="myBoardList" resultType="board">
 		SELECT * FROM board
-		WHERE id=#{id}
+		WHERE
+		id=#{id}
 		AND upload != 'null'
 		ORDER BY INDATE DESC
 	</select>
@@ -31,31 +34,35 @@
 	<!-- #################################################################################################################### -->
 	<update id="updateBoard" parameterType="board">
 		UPDATE board
-		SET title=#{title},content=#{content},upload=#{upload}
+		SET
+		title=#{title},content=#{content},upload=#{upload}
 		WHERE bSeq=#{bSeq}
 	</update>
 	<!-- get 게시물 -->
 	<select id="getBoardList" resultType="board">
-		SELECT *
-		FROM board
-		WHERE pay=0 or pay=1 AND content LIKE '%'||#{keyWord}||'%'
-		ORDER BY INDATE DESC
+  <![CDATA[
+     SELECT * 
+     FROM board
+     WHERE pay < 2 AND content LIKE '%'||#{keyWord}||'%'
+     ORDER BY INDATE DESC
+  ]]>
 	</select>
 	<!-- get 광고 -->
-
 	<select id="getAdverList" resultType="board">
-		SELECT * FROM board
-		WHERE pay = 2 AND content LIKE '%'||#{keyWord}||'%'
-		ORDER BY dbms_random.value
+  <![CDATA[
+     SELECT * FROM board
+     WHERE pay = 2 AND content LIKE '%'||#{keyWord}||'%'
+     ORDER BY INDATE DESC
+  ]]>
 	</select>
-
 	<delete id="deleteBoard">
 		DELETE board WHERE bSeq=#{bSeq}
 	</delete>
 
 	<update id="updateCount" parameterType="board">
 		UPDATE board
-		SET count=#{count}
+		SET
+		count=#{count}
 		WHERE bSeq=#{bSeq}
 	</update>
 

@@ -86,6 +86,8 @@
                 </div>
                 <div class="preview">
                     <div class="upload">
+                    <canvas id="imageCanvas"></canvas>
+                
                         <img src="profile/${member.profile}" style="width: 300px ; height: 300px;">
                     </div>
                 </div>

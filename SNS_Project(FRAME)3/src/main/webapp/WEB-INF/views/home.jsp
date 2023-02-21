@@ -194,7 +194,6 @@
 										onclick="showComment(comment_container${status.index})">
 										<input id="show" type="hidden" value="0">
 									</div>
-									<div class="sprite_share_icon" data-name="share"></div>
 								</div>
 								<div class="right_icon">
 									<c:choose>
@@ -379,20 +378,21 @@
 							<div>회원님을 위한 추천</div>
 						</header>
 						<div class="scroll_inner">
-							<c:forEach var="reco" items="${recoMember}">
-								<div class="thumb_user">
-
-									<div class="profile_thumb">
-										<a href="profile.do?id=${reco.id}"><img
-											src="profile/${reco.profile}" alt=""></a>
-									</div>
-									<div class="detail">
-										<div class="id">${reco.id}</div>
-										<div class="time"></div>
-									</div>
-								</div>
-							</c:forEach>
-						</div>
+                     <c:forEach var="reco" items="${recoMember}">
+                        <c:if test="${ reco.role != '0'}">
+                           <div class="thumb_user">
+                              <div class="profile_thumb">
+                                 <a href="profile.do?id=${reco.id}"><img
+                                    src="profile/${reco.profile}" alt=""></a>
+                              </div>
+                              <div class="detail">
+                                 <div class="id">${reco.id}</div>
+                                 <div class="time"></div>
+                              </div>
+                           </div>
+                        </c:if>
+                     </c:forEach>
+                  </div>
 
 					</article>
 				</div>

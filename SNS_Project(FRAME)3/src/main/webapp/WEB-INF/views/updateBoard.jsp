@@ -46,7 +46,7 @@
         <section class="h_inner">
 
             <h1 class="logo">
-                <a href="home.do">
+                <a href="/">
                     <div class="sprite_insta_icon"></div>
                     <div>
                         <div class="sprite_write_logo"></div>
@@ -64,12 +64,17 @@
             </div>
 
 
-            <div class="right_icons">
-                <a href="new_post.html"><div class="sprite_camera_icon"></div></a>
-                <a href="login.html"><div class="sprite_compass_icon"></div></a>
-                <a href="follow.html"><div class="sprite_heart_icon_outline"></div></a>
-                <a href="profile.html"><div class="sprite_user_icon_outline"></div></a>
-            </div>
+           <input type="hidden" id="check" value="${sessionScope.user.id}">
+				<div class="right_icons">
+					<a id="goProfile1" href="goInsertBoard.do" onclick="check_id()"><div
+							class="sprite_camera_icon"></div></a> <a id="goProfile2" href="/"
+						onclick="check_id()"><div class="sprite_compass_icon"></div></a> <a
+						id="goProfile3" href="getLikeList.do?id=${sessionScope.user.id}"
+						onclick="check_id()"><div class="sprite_heart_icon_outline"></div></a>
+					<a id="goProfile4" href="profile.do?id=${sessionScope.user.id}"
+						onclick="check_id()"><div class="sprite_user_icon_outline"></div></a>
+					<a href="insertShorts"><div class="sprite_short_icon"></div></a>
+				</div>
         </section>
     </header>
 
@@ -86,12 +91,14 @@
                 </div>
                 <div class="preview">
                     <div class="upload">
+                    	<canvas id="imageCanvas"></canvas>
+                                        
                         <img src="images/${board.upload}" style="width: 300px; height: 300px;">
                     </div>
                 </div>
-                <p>
                 	<input type="text" id="title" name="title" placeholder="title" value="${board.title}"><br>
-                    <input type="file" name="uploadfile" id="uploadfile" >
+                <p>
+                    <input type="file" name="uploadfile" id="id_photo" >
                 </p>
                 <p>
                     <textarea name="content" id="content" cols="50" rows="5" placeholder="140자 까지 등록 가능합니다.
@@ -112,9 +119,33 @@
 
 
 </section>
-
+<script type="text/javascript" src="js/common.js"></script>
 <script>
+var fileInput = document.querySelector("#id_photo"), button = document
+.querySelector(".input-file-trigger"), the_return = document
+.querySelector(".file-return");
 
+// Show image
+fileInput.addEventListener('change', handleImage, false);
+var canvas = document.getElementById('imageCanvas');
+var ctx = canvas.getContext('2d');
+
+function handleImage(e) {
+var reader = new FileReader();
+reader.onload = function(event) {
+var img = new Image();
+// var imgWidth =
+img.onload = function() {
+	canvas.width = 300;
+	canvas.height = 300;
+	ctx.drawImage(img, 0, 0, 300, 300);
+};
+img.src = event.target.result;
+// img.width = img.width*0.5
+// canvas.height = img.height;
+};
+reader.readAsDataURL(e.target.files[0]);
+}
 </script>
 </body>
 </html>
