@@ -47,10 +47,6 @@ public class BoardDAO {
 		return mybatis.selectList("boardMapper.getAdverList", vo);
 	}
 
-	public List<BoardVO> getAdverListX(BoardVO vo) {
-		return mybatis.selectList("boardMapper.getAdverListX", vo);
-	}
-
 	// 占쎄텣占쎌젫
 	public void deleteBoard(BoardVO vo) {
 

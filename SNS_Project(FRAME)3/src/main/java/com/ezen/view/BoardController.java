@@ -60,14 +60,14 @@ public class BoardController {
 	@RequestMapping("/")
 	public String goLogin() {
 		x = 0;
-		
+
 		System.out.println(x);
 		return "index";
 	}
 
 	@RequestMapping(value = "/home.do")
 	public String BoardList(BoardVO bVo, CommentVO cVo, Model model, HttpSession session, ShortsVO sVo) {
-		if (x >= 10) x = x - 10; 
+		if (x >= 10) x = 0;
 
 		FollowVO fvo = new FollowVO();
 		List<MemberVO> recoMemberList = new ArrayList<>();
@@ -126,7 +126,7 @@ public class BoardController {
 					newBoardList.add(i, getadverList.get(n));
 					i++; // 무한루프 방지
 				}
-				
+
 			}
 			model.addAttribute("newBoardList", newBoardList);
 			timeBoardList = newBoardList; // 불러온 보드리스트를 다음에 다시불러오도록 저장한다.
@@ -153,10 +153,14 @@ public class BoardController {
 
 		List<ShortsVO> shortsList = shortsService.getShortsList(sVo);
 		List<MemberVO> shortsMemberList = new ArrayList<>();
-		
+		List<BoardVO> xBoardList;
 		// 첫 로드
-		if (x == 0) { x++; // x는 처음에 게시글을 불러왔는지, 나중에 불러왔는지 구분하는데 사용한다.
-		for (BoardVO vo : newBoardList) {
+		if (x == 0) {
+			xBoardList = newBoardList;
+		} else {
+			xBoardList = pastList;// x는 처음에 게시글을 불러왔는지, 나중에 불러왔는지 구분하는데 사용한다.
+		}
+		for (BoardVO vo : xBoardList) {
 
 			LocalDate boarDate = vo.getInDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 			Period btn = Period.between(boarDate, LocalDate.now());
@@ -187,41 +191,6 @@ public class BoardController {
 			cVo.setBseq(vo.getbSeq());
 			List<CommentVO> cvo = commentService.getCommentList(cVo);
 			commentList.addAll(cvo);
-		}
-		// 이외의 로드
-		} else {
-			for (BoardVO vo : pastList) {
-
-				LocalDate boarDate = vo.getInDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-				Period btn = Period.between(boarDate, LocalDate.now());
-				String btnTime;
-
-				if (btn.getYears() != 0) {
-					btnTime = btn.getYears() + "년" + btn.getMonths() + "월" + btn.getDays() + "일 전";
-				} else if (btn.getMonths() != 0) {
-					btnTime = btn.getMonths() + "월" + btn.getDays() + "일 전";
-				} else {
-					btnTime = btn.getDays() + "일 전";
-				}
-
-				time.add(btnTime);
-
-				MemberVO mvo = new MemberVO();
-				mvo.setId(vo.getId());
-
-				MemberVO v1 = memberService.MemberCheck(mvo);
-				memberList.add(v1);
-
-				HeartVO hvo = new HeartVO();
-				hvo.setBseq(vo.getbSeq());
-
-				int like = heartService.likeCount(hvo);
-				vo.setCount(like);
-
-				cVo.setBseq(vo.getbSeq());
-				List<CommentVO> cvo = commentService.getCommentList(cVo);
-				commentList.addAll(cvo);
-			}
 		}
 
 		for (
@@ -264,8 +233,8 @@ public class BoardController {
 
 			session.setAttribute("boardBookMarkNums", boardBookMarkNums);
 		}
+		x++;
 		System.out.println(x);
-		
 
 		return "home";
 	}
