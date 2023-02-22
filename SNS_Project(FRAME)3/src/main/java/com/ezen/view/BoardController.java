@@ -67,7 +67,7 @@ public class BoardController {
 
 	@RequestMapping(value = "/home.do")
 	public String BoardList(BoardVO bVo, CommentVO cVo, Model model, HttpSession session, ShortsVO sVo) {
-		if (x >= 10) x = 0;
+		
 
 		FollowVO fvo = new FollowVO();
 		List<MemberVO> recoMemberList = new ArrayList<>();
@@ -233,8 +233,9 @@ public class BoardController {
 
 			session.setAttribute("boardBookMarkNums", boardBookMarkNums);
 		}
-		x++;
 		System.out.println(x);
+		x++;
+		if (x >= 10) x = 0;
 
 		return "home";
 	}
